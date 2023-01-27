@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!--  code product  -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Code Product:" />
+
+        <EditText
+            android:id="@+id/et_code_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="6"
+            android:hint="Enter code product" />
+
+        <!--  Name  -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Product name:" />
+
+        <EditText
+            android:id="@+id/et_name_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter product name" />
+
+        <!--  category  -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Category product:" />
+
+        <EditText
+            android:id="@+id/et_category_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter category product" />
+
+        <!--  Sub Category  -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sub category:" />
+
+        <EditText
+            android:id="@+id/et_sub_category_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter sub category product" />
+
+        <!--  image  -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Image:" />
+
+        <ImageView
+            android:id="@+id/iv_choose_image"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="null"/>
+
+        <!--  Spec  -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Spec product:" />
+
+
+        <EditText
+            android:id="@+id/et_spec_product"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:inputType="text|textMultiLine"
+            android:gravity="top"
+            android:hint="Enter spec product"/>
+
+        <!--  Price  -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Price product:" />
+
+        <EditText
+            android:id="@+id/et_price_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Price product"/>
+
+        <!--  Location  -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Location product:" />
+
+        <EditText
+            android:id="@+id/et_location_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Enter Location product"/>
+
+        <!--  Status  -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Status product:" />
+
+        <EditText
+            android:id="@+id/et_status_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Enter status product"/>
+
+        <!--  Model  -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Model product:" />
+
+        <EditText
+            android:id="@+id/et_model_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Enter model product"/>
+
+        <!--  code_oracle  -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Code_oracle product:" />
+
+        <EditText
+            android:id="@+id/et_code_oracle_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Enter Code_Oracle product"/>
+
+        <!--  Desc Oracle  -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Description_Oracle product:" />
+
+        <EditText
+            android:id="@+id/et_desc_oracle_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Enter Descript_Oracle product"/>
+
+        <Button
+            android:id="@+id/submit_button_add_product"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Submit"
+            android:layout_marginTop="16dp" />
+
+    </LinearLayout>
+
+</ScrollView>
