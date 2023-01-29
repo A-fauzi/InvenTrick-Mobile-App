@@ -140,8 +140,12 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
         }
     }
 
+
+
     override fun storeToDatabase() {
-        Log.d("MainActivity", "data fillpath to store database: $fillPath")
+//        TODO: Belum handle input gambar jika tidak memasang gambar akan tampil lateinit has not
+
+        presenter.uploadImageToStorage(firebaseStorage, fillPath)
 //        val product = ModelRequestAddProduct(
 //            binding.etCodeProduct.text.toString(),
 //            binding.etNameProduct.text.toString(),
@@ -177,7 +181,7 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
 
     private fun validateCheckInput(request: ModelRequestAddProduct) {
         try {
-            presenter.validateAddProduct(request, firebaseStorage, fillPath)
+            presenter.validateAddProduct(request)
         }catch (e: Exception) {
             Log.d("MainActivity","Validate Check Error: ${e.message}")
             Toast.makeText(this, "Validate Check Error: ${e.message}", Toast.LENGTH_SHORT).show()

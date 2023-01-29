@@ -8,12 +8,13 @@ import com.google.firebase.storage.FirebaseStorage
 class AddProductPresenter(var addProductView: AddProductView?, val addProductInteractor: AddProductInteractor): AddProductInteractor.OnAddProductFinishedListener {
 
 
-    fun validateAddProduct(inputFormAddProduct: ModelRequestAddProduct, firebaseStorage: FirebaseStorage, uri: Uri) {
+    fun validateAddProduct(inputFormAddProduct: ModelRequestAddProduct) {
         addProductView?.showProgress()
         addProductInteractor.addProduct(inputFormAddProduct, this)
+    }
 
-//        This bug
-//        addProductInteractor.uploadImageToStorage(firebaseStorage, uri)
+    fun uploadImageToStorage(firebaseStorage: FirebaseStorage, uri: Uri) {
+        addProductInteractor.uploadImageToStorage(firebaseStorage, uri)
     }
 
     fun resultImageFromGallery(requestCode: Int, resultCode: Int, getFile: () -> Unit?) {
