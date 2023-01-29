@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:id="@+id/container_view">
 
         <!--  code product  -->
         <TextView
@@ -65,11 +68,48 @@
             android:layout_height="wrap_content"
             android:text="Image:" />
 
-        <ImageView
-            android:id="@+id/iv_choose_image"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:contentDescription="null"/>
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:cardCornerRadius="16dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="300dp">
+
+                <ImageView
+                    android:id="@+id/iv_choose_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="null"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img_example" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:gravity="center">
+
+                    <Button
+                        android:id="@+id/btn_get_capture"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Get capture"/>
+
+                    <Button
+                        android:id="@+id/btn_choose_galery"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Choose an galery"/>
+                </LinearLayout>
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
 
         <!--  Spec  -->
         <TextView
@@ -96,7 +136,7 @@
             android:id="@+id/et_price_product"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="text"
             android:hint="Price product"/>
 
         <!--  Location  -->
@@ -109,7 +149,7 @@
             android:id="@+id/et_location_product"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="text"
             android:hint="Enter Location product"/>
 
         <!--  Status  -->
@@ -122,7 +162,7 @@
             android:id="@+id/et_status_product"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="text"
             android:hint="Enter status product"/>
 
         <!--  Model  -->
@@ -135,7 +175,7 @@
             android:id="@+id/et_model_product"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="text"
             android:hint="Enter model product"/>
 
         <!--  code_oracle  -->
@@ -148,7 +188,8 @@
             android:id="@+id/et_code_oracle_product"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="text"
+            android:maxLength="6"
             android:hint="Enter Code_Oracle product"/>
 
         <!--  Desc Oracle  -->
@@ -161,7 +202,7 @@
             android:id="@+id/et_desc_oracle_product"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="text"
             android:hint="Enter Descript_Oracle product"/>
 
         <Button
