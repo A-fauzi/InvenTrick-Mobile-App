@@ -1,7 +1,6 @@
 package com.example.warehouseproject.core.product.add_product
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.net.Uri
 import android.util.Log
 import android.widget.Toast
@@ -29,6 +28,7 @@ class AddProductInteractor {
         when {
             input.code_items.isEmpty()  -> listener.onInputError()
             input.name.isEmpty()  -> listener.onInputError()
+            input.qty.toString().isEmpty() -> listener.onInputError()
             input.category.isEmpty()  -> listener.onInputError()
             input.sub_category.isEmpty()  -> listener.onInputError()
             input.image.isEmpty()  -> listener.onInputError()

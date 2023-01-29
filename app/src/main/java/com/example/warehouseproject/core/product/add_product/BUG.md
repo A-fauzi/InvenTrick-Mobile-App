@@ -2,6 +2,7 @@
 
 #### In Progress
 - handle view jika request gagal dan block pengiriman gambar ke firebase
+- Jika request berhasil hapus data pada shared preference
 
 #### Solved
 - handle jika gambar pada form tidak di inisialisasi -> status(solved)

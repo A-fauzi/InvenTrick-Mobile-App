@@ -4,6 +4,7 @@ data class ModelRequestAddProduct(
     var image: String,
     val code_items: String,
     val name: String,
+    val qty: Int,
     val category: String,
     val sub_category: String,
     val specification: String,
