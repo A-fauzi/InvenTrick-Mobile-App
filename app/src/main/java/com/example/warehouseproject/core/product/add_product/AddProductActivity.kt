@@ -15,7 +15,7 @@ import com.example.warehouseproject.databinding.ActivityAddProductBinding
 import com.google.firebase.storage.FirebaseStorage
 
 class AddProductActivity : AppCompatActivity(), AddProductView {
-    private lateinit var modelRequestAddProduct: ModelRequestAddProduct
+    private lateinit var modelRequestAddProduct: ModelProduct
 
 //    View
     private lateinit var code: EditText
@@ -66,7 +66,7 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
         firebaseStorage = FirebaseStorage.getInstance()
 
         binding.submitButtonAddProduct.setOnClickListener {
-            modelRequestAddProduct = ModelRequestAddProduct(
+            modelRequestAddProduct = ModelProduct(
                 "${code.text}",
                 "${name.text}",
                 "${category.text}",
@@ -151,7 +151,7 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
         // Retrieving Preference data
         val imgUri = PreferenceHelper.loadData(this)
 
-        val product = ModelRequestAddProduct(
+        val product = ModelProduct(
             image = "$imgUri",
             code_items = binding.etCodeProduct.text.toString(),
             name =  binding.etNameProduct.text.toString(),
@@ -170,7 +170,7 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
         presenter.requestApiDataProduct(product, this)
     }
 
-    private fun validateCheckInput(request: ModelRequestAddProduct) {
+    private fun validateCheckInput(request: ModelProduct) {
         try {
             presenter.validateAddProduct(request)
         }catch (e: Exception) {
@@ -178,7 +178,7 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
         }
     }
 
-    private fun checkInitializedView(request: ModelRequestAddProduct) {
+    private fun checkInitializedView(request: ModelProduct) {
         if (this::fillPath.isInitialized) {
             validateCheckInput(request)
         } else {

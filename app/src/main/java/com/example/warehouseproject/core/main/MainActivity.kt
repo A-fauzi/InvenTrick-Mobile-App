@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.product.add_product.AddProductActivity
+import com.example.warehouseproject.core.service.product.ProductApiService
 import com.example.warehouseproject.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), MainView {
@@ -15,6 +16,10 @@ class MainActivity : AppCompatActivity(), MainView {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        ProductApiService().getDataProduct(this) {
+            binding.tvCountProducts.text = it
+        }
 
         binding.btnToAddProduct.setOnClickListener {
             navigateToAddProduct()

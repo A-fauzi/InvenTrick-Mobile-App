@@ -121,7 +121,7 @@
         <EditText
             android:id="@+id/et_spec_product"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="100dp"
             android:inputType="text|textMultiLine"
             android:gravity="top"
             android:hint="Enter spec product"/>
@@ -201,8 +201,9 @@
         <EditText
             android:id="@+id/et_desc_oracle_product"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
+            android:layout_height="100dp"
+            android:inputType="text|textMultiLine"
+            android:gravity="top"
             android:hint="Enter Descript_Oracle product"/>
 
         <Button

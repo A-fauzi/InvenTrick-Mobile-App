@@ -1,6 +1,6 @@
 package com.example.warehouseproject.core.product.add_product
 
-data class ModelRequestAddProduct(
+data class ModelProduct(
     var image: String,
     val code_items: String,
     val name: String,
@@ -14,4 +14,10 @@ data class ModelRequestAddProduct(
     val model: String,
     val code_oracle: String,
     val description_oracle: String,
-)
+) {
+    data class ProductResponse(
+        val message: String,
+        val count: String,
+        val data: List<ModelProduct>
+    )
+}

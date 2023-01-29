@@ -9,7 +9,7 @@ import com.google.firebase.storage.FirebaseStorage
 class AddProductPresenter(var addProductView: AddProductView?, val addProductInteractor: AddProductInteractor): AddProductInteractor.OnAddProductFinishedListener {
 
 
-    fun validateAddProduct(inputFormAddProduct: ModelRequestAddProduct) {
+    fun validateAddProduct(inputFormAddProduct: ModelProduct) {
         addProductView?.showProgress()
         addProductInteractor.addProduct(inputFormAddProduct, this)
     }
@@ -18,7 +18,7 @@ class AddProductPresenter(var addProductView: AddProductView?, val addProductInt
         addProductInteractor.uploadImageToFirebaseStorage( firebaseStorage, uri, context)
     }
 
-    fun requestApiDataProduct(requestAddProduct: ModelRequestAddProduct, context: Context) {
+    fun requestApiDataProduct(requestAddProduct: ModelProduct, context: Context) {
         addProductInteractor.requestApiDataProduct(requestAddProduct, context)
     }
 
