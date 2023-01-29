@@ -8,15 +8,11 @@ import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
-import com.example.warehouseproject.core.config.NetworkConfig
-import com.example.warehouseproject.core.constant.Constant
 import com.example.warehouseproject.core.main.MainActivity
 import com.example.warehouseproject.core.constant.Constant.REQUEST_CODE
+import com.example.warehouseproject.core.helper.PreferenceHelper
 import com.example.warehouseproject.databinding.ActivityAddProductBinding
 import com.google.firebase.storage.FirebaseStorage
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class AddProductActivity : AppCompatActivity(), AddProductView {
     private lateinit var modelRequestAddProduct: ModelRequestAddProduct
@@ -77,14 +73,14 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
                 "${subCategory.text}",
                 "https://ibb.co/XZ8hcVm",
                 "${spec.text}",
-                "${price.text}",
+                price.text.toString().toInt(),
                 "${location.text}",
                 "${status.text}",
                 "${model.text}",
                 "${codeOracle.text}",
                 "${descOracle.text}",
             )
-            validateCheckInput(modelRequestAddProduct)
+            checkInitializedView(modelRequestAddProduct)
         }
 
         binding.btnChooseGalery.setOnClickListener {
@@ -135,7 +131,6 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
                    binding.btnGetCapture.visibility = View.GONE
                }
            }catch (e: Exception) {
-
            }
         }
     }
@@ -143,40 +138,34 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
 
 
     override fun storeToDatabase() {
-//        TODO: Belum handle input gambar jika tidak memasang gambar akan tampil lateinit has not
 
-        presenter.uploadImageToStorage(firebaseStorage, fillPath)
-//        val product = ModelRequestAddProduct(
-//            binding.etCodeProduct.text.toString(),
-//            binding.etNameProduct.text.toString(),
-//            binding.etCategoryProduct.text.toString(),
-//            binding.etSubCategoryProduct.text.toString(),
-////         binding.ivChooseImage.text.toString(),
-//            binding.etSpecProduct.text.toString(),
-//            binding.etPriceProduct.text.toString(),
-//            binding.etLocationProduct.text.toString(),
-//            binding.etStatusProduct.text.toString(),
-//            binding.etModelProduct.text.toString(),
-//            binding.etCodeOracleProduct.text.toString(),
-//            binding.etDescOracleProduct.text.toString(),
-//        )
-//
-//        NetworkConfig(Constant.BASE_URL)
-//            .productService()
-//            .addProduct(product)
-//            .enqueue(object : Callback<ModelRequestAddProduct>{
-//                override fun onResponse(
-//                    call: Call<ModelRequestAddProduct>,
-//                    response: Response<ModelRequestAddProduct>
-//                ) {
-//                    TODO("Not yet implemented")
-//                }
-//
-//                override fun onFailure(call: Call<ModelRequestAddProduct>, t: Throwable) {
-//                    TODO("Not yet implemented")
-//                }
-//
-//            })
+//        // Retrieving Preference data
+//        val imgUri = PreferenceHelper.loadData(this)
+//        Log.d("MainActivity", "Pref retrieve data uri: $imgUri")
+
+
+
+        presenter.uploadImageToFirebase(firebaseStorage, fillPath,this)
+
+        // Retrieving Preference data
+        val imgUri = PreferenceHelper.loadData(this)
+
+        val product = ModelRequestAddProduct(
+            image = "$imgUri",
+            code_items = binding.etCodeProduct.text.toString(),
+            name =  binding.etNameProduct.text.toString(),
+            category = binding.etCategoryProduct.text.toString(),
+            sub_category = binding.etSubCategoryProduct.text.toString(),
+            specification = binding.etSpecProduct.text.toString(),
+            price = binding.etPriceProduct.text.toString().toInt(),
+            location = binding.etLocationProduct.text.toString(),
+            status =  binding.etStatusProduct.text.toString(),
+            model = binding.etModelProduct.text.toString(),
+            code_oracle = binding.etCodeOracleProduct.text.toString(),
+            description_oracle =  binding.etDescOracleProduct.text.toString(),
+        )
+
+        presenter.requestApiDataProduct(product, this)
     }
 
     private fun validateCheckInput(request: ModelRequestAddProduct) {
@@ -184,7 +173,14 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
             presenter.validateAddProduct(request)
         }catch (e: Exception) {
             Log.d("MainActivity","Validate Check Error: ${e.message}")
-            Toast.makeText(this, "Validate Check Error: ${e.message}", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun checkInitializedView(request: ModelRequestAddProduct) {
+        if (this::fillPath.isInitialized) {
+            validateCheckInput(request)
+        } else {
+            Toast.makeText(this, "Validate Error: Image is required!", Toast.LENGTH_SHORT).show()
         }
     }
 }

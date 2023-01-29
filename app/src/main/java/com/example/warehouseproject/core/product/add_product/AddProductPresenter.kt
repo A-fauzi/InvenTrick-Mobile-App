@@ -1,6 +1,7 @@
 package com.example.warehouseproject.core.product.add_product
 
 import android.app.Activity
+import android.content.Context
 import android.net.Uri
 import com.example.warehouseproject.core.constant.Constant
 import com.google.firebase.storage.FirebaseStorage
@@ -13,8 +14,12 @@ class AddProductPresenter(var addProductView: AddProductView?, val addProductInt
         addProductInteractor.addProduct(inputFormAddProduct, this)
     }
 
-    fun uploadImageToStorage(firebaseStorage: FirebaseStorage, uri: Uri) {
-        addProductInteractor.uploadImageToStorage(firebaseStorage, uri)
+    fun uploadImageToFirebase(firebaseStorage: FirebaseStorage, uri: Uri, context: Context) {
+        addProductInteractor.uploadImageToFirebaseStorage( firebaseStorage, uri, context)
+    }
+
+    fun requestApiDataProduct(requestAddProduct: ModelRequestAddProduct, context: Context) {
+        addProductInteractor.requestApiDataProduct(requestAddProduct, context)
     }
 
     fun resultImageFromGallery(requestCode: Int, resultCode: Int, getFile: () -> Unit?) {
