@@ -10,6 +10,7 @@ interface AddProductView {
     fun navigateToHome()
 
     fun storeToDatabase()
+
     fun getImageCapture()
     fun getImageFromGallery()
 }
