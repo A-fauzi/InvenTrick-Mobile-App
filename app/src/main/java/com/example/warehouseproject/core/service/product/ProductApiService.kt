@@ -6,6 +6,7 @@ import android.widget.Toast
 import com.example.warehouseproject.core.config.NetworkConfig
 import com.example.warehouseproject.core.constant.Constant
 import com.example.warehouseproject.core.view.product.ModelProduct
+import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -14,8 +15,9 @@ import java.net.SocketTimeoutException
 class ProductApiService {
 
     interface OnSuccessRequest {
-        fun onSuccessRequest()
-        fun onFailureRequest()
+        fun onSuccessResponse()
+        fun onSuccessResponseFailInRequest()
+        fun onFailureResponse()
     }
 
     fun addProductApiService(requestAddProduct: ModelProduct, context: Context, listener: OnSuccessRequest) {
@@ -23,19 +25,29 @@ class ProductApiService {
         NetworkConfig(Constant.BASE_URL)
             .productService()
             .addProduct(requestAddProduct)
-            .enqueue(object : Callback<ModelProduct> {
+            .enqueue(object : Callback<ModelProduct.ProductSingleResponse> {
                 override fun onResponse(
-                    call: Call<ModelProduct>,
-                    response: Response<ModelProduct>
+                    call: Call<ModelProduct.ProductSingleResponse>,
+                    response: Response<ModelProduct.ProductSingleResponse>
                 ) {
-                    Toast.makeText(context, "REQUEST SUCCESS: ${response.message()}", Toast.LENGTH_SHORT).show()
-                    listener.onSuccessRequest()
+                   if (response.isSuccessful) {
+                       listener.onSuccessResponse()
+                       Toast.makeText(context, "${response.body()?.message}", Toast.LENGTH_SHORT).show()
+                   } else {
+                       listener.onSuccessResponseFailInRequest()
+
+                       // convert json to String
+                       val gson = Gson()
+                       val mNanu = gson.fromJson(response.errorBody()?.string(), ModelProduct.ProductResponse::class.java)
+                       Log.d("ProdActivity", mNanu.message)
+                       Toast.makeText(context, mNanu.message, Toast.LENGTH_SHORT).show()
+                   }
                 }
 
-                override fun onFailure(call: Call<ModelProduct>, t: Throwable) {
+                override fun onFailure(call: Call<ModelProduct.ProductSingleResponse>, t: Throwable) {
                     if(t is SocketTimeoutException) {
-                        Toast.makeText(context, "REQUEST FAILURE: ${t.message}", Toast.LENGTH_SHORT).show()
-                        listener.onFailureRequest()
+                        Toast.makeText(context, "RESPONSE FAILURE: ${t.message}", Toast.LENGTH_SHORT).show()
+                        listener.onFailureResponse()
                     }
                 }
 

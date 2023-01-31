@@ -79,13 +79,18 @@ class AddProductPresenter(var addProductView: AddProductView?, val addProductInt
         addProductView?.showProgressbar()
     }
 
-    override fun onSuccessRequest() {
+    override fun onSuccessResponse() {
         addProductView?.navigateToHome()
         addProductView?.hideProgressbar()
     }
 
-    override fun onFailureRequest() {
+    override fun onSuccessResponseFailInRequest() {
         addProductView?.hideProgressbar()
-        addProductView?.hideButton()
+        addProductView?.showButton()
+    }
+
+    override fun onFailureResponse() {
+        addProductView?.hideProgressbar()
+        addProductView?.showButton()
     }
 }

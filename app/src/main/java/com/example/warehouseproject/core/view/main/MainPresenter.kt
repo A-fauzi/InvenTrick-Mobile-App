@@ -19,6 +19,19 @@ class MainPresenter {
         binding.chipCodeItemDetail.text = data.code_items
         binding.tvNameProductDetail.text = data.name
 
+        "quantity: ${data.qty}".also { binding.tvQtyDetail.text = it }
+        "price: ${data.price}".also { binding.tvPriceDetail.text = it }
+        "location: ${data.location}".also { binding.tvLocationDetail.text = it }
+
+        binding.tvCreatedAtDetail.text = data.created_at
+        binding.tvUpdatedAtDetail.text = data.updated_at
+        binding.chipCatgory.text = data.category
+        binding.chipSubCategory.text = data.sub_category
+        binding.tvSpecProductDetail.text = data.specification
+        binding.tvCodeOracleDetail.text = data.code_oracle
+        binding.tvModelDetail.text = data.model
+        binding.tvDescOracleDetail.text = data.description_oracle
+
         dialog.setContentView(binding.root)
         dialog.setCancelable(true)
         dialog.show()

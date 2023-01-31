@@ -14,10 +14,16 @@ data class ModelProduct(
     val model: String,
     val code_oracle: String,
     val description_oracle: String,
+    val created_at: String? = null,
+    val updated_at: String? = null
 ) {
     data class ProductResponse(
         val message: String,
         val count: String,
         val data: List<ModelProduct>
+    )
+    data class ProductSingleResponse(
+        val message: String,
+        val data: ModelProduct
     )
 }

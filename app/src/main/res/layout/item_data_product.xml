@@ -51,7 +51,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    android:text="In publishing and graphic design, "
+                    android:text="@string/lorem"
+                    android:ellipsize="end"
+                    android:maxLines="1"
                     android:textSize="18sp" />
 
                 <RelativeLayout

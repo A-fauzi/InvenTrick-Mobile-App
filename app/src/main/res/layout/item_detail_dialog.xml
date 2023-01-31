@@ -99,6 +99,35 @@
                       android:textColor="@color/black"/>
               </LinearLayout>
 
+              <TextView
+                  android:id="@+id/tv_location_detail"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_below="@id/tv_name_product_detail"
+                  android:layout_marginTop="8dp"
+                  android:text="Location"/>
+
+              <LinearLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:layout_below="@id/tv_location_detail"
+                  android:layout_marginTop="24dp">
+
+                  <TextView
+                      android:id="@+id/tv_created_at_detail"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="Created_at" />
+
+                  <TextView
+                      android:id="@+id/tv_updated_at_detail"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="8dp"
+                      android:text="Update_at" />
+              </LinearLayout>
+
           </RelativeLayout>
 
           <RelativeLayout
@@ -111,15 +140,15 @@
                   android:id="@+id/chip_catgory"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="category"/>
+                  android:text="category" />
 
               <com.google.android.material.chip.Chip
                   android:id="@+id/chip_sub_category"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="sub category"
+                  android:layout_marginStart="8dp"
                   android:layout_toRightOf="@id/chip_catgory"
-                  android:layout_marginStart="8dp"/>
+                  android:text="sub category" />
           </RelativeLayout>
 
           <RelativeLayout
@@ -140,9 +169,10 @@
                       android:padding="16dp">
 
                       <TextView
+                          android:id="@+id/tv_spec_product_detail"
                           android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
-                          android:text="@string/lorem"/>
+                          android:text="@string/lorem" />
                   </RelativeLayout>
               </androidx.cardview.widget.CardView>
 
@@ -158,15 +188,17 @@
                       android:layout_height="wrap_content">
 
                       <TextView
+                          android:id="@+id/tv_code_oracle_detail"
                           android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
-                          android:text="code oracle"/>
+                          android:text="code oracle" />
 
                       <TextView
+                          android:id="@+id/tv_model_detail"
                           android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
-                          android:text="model"
-                          android:layout_alignParentEnd="true"/>
+                          android:layout_alignParentEnd="true"
+                          android:text="model" />
 
 
                   </RelativeLayout>
@@ -183,9 +215,10 @@
                           android:padding="16dp">
 
                           <TextView
+                              android:id="@+id/tv_desc_oracle_detail"
                               android:layout_width="wrap_content"
                               android:layout_height="wrap_content"
-                              android:text="@string/lorem"/>
+                              android:text="@string/lorem" />
                       </RelativeLayout>
 
                   </androidx.cardview.widget.CardView>
@@ -193,20 +226,6 @@
 
           </RelativeLayout>
 
-          <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="Location"/>
-
-          <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="Created_at"/>
-
-          <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="Update_at"/>
       </LinearLayout>
 
     </LinearLayout>

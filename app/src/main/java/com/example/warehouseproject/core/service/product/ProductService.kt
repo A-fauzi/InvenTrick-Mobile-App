@@ -9,7 +9,7 @@ import retrofit2.http.POST
 interface ProductService {
 
     @POST("product/create")
-    fun addProduct(@Body productRequest: ModelProduct): Call<ModelProduct>
+    fun addProduct(@Body productRequest: ModelProduct): Call<ModelProduct.ProductSingleResponse>
 
     @GET("product/all")
     fun getProducts(): Call<ModelProduct.ProductResponse>
