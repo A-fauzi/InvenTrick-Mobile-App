@@ -72,7 +72,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:text="detail"
-                        android:textColor="@color/blue"/>
+                        android:textColor="@color/blue" />
                 </RelativeLayout>
 
             </LinearLayout>

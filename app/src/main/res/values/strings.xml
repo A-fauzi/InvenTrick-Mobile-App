@@ -10,6 +10,7 @@
     <string name="password_error">Password cannot be empty</string>
     <string name="product_count">Product Count %s</string>
     <string name="product_qty">Quantity: %s</string>
+    <string name="lorem">In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available. Wikipedia</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="image">image</string>

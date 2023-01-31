@@ -9,7 +9,10 @@ import com.example.warehouseproject.core.view.product.ModelProduct
 import com.example.warehouseproject.databinding.ItemDataProductBinding
 import com.squareup.picasso.Picasso
 
-class MainAdapter(private val items: ArrayList<ModelProduct>): RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
+class MainAdapter(
+    private val items: ArrayList<ModelProduct>,
+    private val callClickListener: CallClickListener
+    ): RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
     class MainViewHolder( val binding: ItemDataProductBinding): RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
@@ -30,7 +33,7 @@ class MainAdapter(private val items: ArrayList<ModelProduct>): RecyclerView.Adap
                 binding.tvSpecProduct.text = specification
                 "Quantity: ${qty.toInt()}".also { binding.tvQuantityProduct.text = it }
                 binding.tvDetailProduct.setOnClickListener {
-
+                    callClickListener.onClickListener(items[position])
                 }
             }
         }
