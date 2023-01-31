@@ -27,8 +27,11 @@
                      android:id="@+id/iv_item_detail"
                      android:layout_width="match_parent"
                      android:layout_height="match_parent"
+                     android:layout_centerHorizontal="true"
+                     android:layout_centerVertical="true"
+                     android:adjustViewBounds="true"
                      android:contentDescription="@string/image"
-                     android:scaleType="center"
+                     android:scaleType="centerCrop"
                      android:src="@drawable/ic_people" />
 
                  <com.google.android.material.chip.Chip

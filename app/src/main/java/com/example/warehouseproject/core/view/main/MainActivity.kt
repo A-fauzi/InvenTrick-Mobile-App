@@ -24,10 +24,14 @@ class MainActivity : AppCompatActivity(), MainAdapter.CallClickListener {
 
     private lateinit var mainAdapter: MainAdapter
 
+    private lateinit var presenter: MainPresenter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        presenter = MainPresenter()
 
         binding.btnToAddProduct.setOnClickListener {
             startActivity(Intent(this, AddProductActivity::class.java))
@@ -55,8 +59,6 @@ class MainActivity : AppCompatActivity(), MainAdapter.CallClickListener {
 
     private fun getData() {
         ProductApiService().getDataProduct(this, ) {data, count ->
-            Log.d("MainActivity", "Data: $data")
-            Log.d("MainActivity", "Count: $count")
             showDataProduct(data)
             binding.tvCountProducts.text = resources.getString(R.string.product_count, count )
         }
@@ -67,20 +69,6 @@ class MainActivity : AppCompatActivity(), MainAdapter.CallClickListener {
     }
 
     override fun onClickListener(data: ModelProduct) {
-
-        val binding = ItemDetailDialogBinding.inflate(layoutInflater)
-
-        val dialog = BottomSheetDialog(this)
-
-        Picasso.get().load(data.image).placeholder(R.drawable.ic_people).error(R.drawable.img_example).into(binding.ivItemDetail)
-        binding.statusDetail.text = data.status
-        binding.chipCodeItemDetail.text = data.code_items
-        binding.tvNameProductDetail.text = data.name
-
-
-        dialog.setContentView(binding.root)
-        dialog.setCancelable(true)
-        dialog.show()
-
+        presenter.showDetailDialog(layoutInflater, this, data)
     }
 }
