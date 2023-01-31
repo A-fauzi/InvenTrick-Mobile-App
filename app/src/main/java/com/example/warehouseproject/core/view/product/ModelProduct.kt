@@ -1,4 +1,4 @@
-package com.example.warehouseproject.core.product
+package com.example.warehouseproject.core.view.product
 
 data class ModelProduct(
     var image: String,

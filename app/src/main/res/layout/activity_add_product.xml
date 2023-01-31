@@ -13,55 +13,6 @@
         android:padding="16dp"
         android:id="@+id/container_view">
 
-        <!--  code product  -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Code Product:" />
-
-        <EditText
-            android:id="@+id/et_code_product"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxLength="6"
-            android:hint="Enter code product" />
-
-        <!--  Name  -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Product name:" />
-
-        <EditText
-            android:id="@+id/et_name_product"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter product name" />
-
-        <!--  category  -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Category product:" />
-
-        <EditText
-            android:id="@+id/et_category_product"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter category product" />
-
-        <!--  Sub Category  -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Sub category:" />
-
-        <EditText
-            android:id="@+id/et_sub_category_product"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter sub category product" />
-
         <!--  image  -->
         <TextView
             android:layout_width="match_parent"
@@ -110,6 +61,68 @@
 
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
+
+        <!--  code product  -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Code Product:" />
+
+        <EditText
+            android:id="@+id/et_code_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="6"
+            android:hint="Enter code product" />
+
+        <!--  Name  -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Product name:" />
+
+        <EditText
+            android:id="@+id/et_name_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter product name" />
+
+        <!--  Qty  -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Product quantity:" />
+
+        <EditText
+            android:id="@+id/et_qty_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter product name"
+            android:inputType="number"/>
+
+        <!--  category  -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Category product:" />
+
+        <EditText
+            android:id="@+id/et_category_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter category product" />
+
+        <!--  Sub Category  -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sub category:" />
+
+        <EditText
+            android:id="@+id/et_sub_category_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter sub category product" />
 
         <!--  Spec  -->
         <TextView
@@ -206,13 +219,30 @@
             android:gravity="top"
             android:hint="Enter Descript_Oracle product"/>
 
-        <Button
-            android:id="@+id/submit_button_add_product"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Submit"
-            android:layout_marginTop="16dp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/submit_button_add_product"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Submit"
+                android:layout_marginTop="16dp"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"/>
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:visibility="invisible"/>
+        </RelativeLayout>
+
+
 
     </LinearLayout>
 

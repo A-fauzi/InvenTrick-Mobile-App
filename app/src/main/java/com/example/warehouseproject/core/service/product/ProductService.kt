@@ -1,6 +1,6 @@
 package com.example.warehouseproject.core.service.product
 
-import com.example.warehouseproject.core.product.ModelProduct
+import com.example.warehouseproject.core.view.product.ModelProduct
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET

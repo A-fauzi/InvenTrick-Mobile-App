@@ -19,4 +19,10 @@ object PreferenceHelper {
 
         return sharedPreferences.getString(getStrKey, null)
     }
+
+    fun removeData() {
+        sharedPreferences.edit().apply {
+            clear()
+        }.apply()
+    }
 }

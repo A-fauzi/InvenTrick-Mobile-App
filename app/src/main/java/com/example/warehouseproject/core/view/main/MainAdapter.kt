@@ -1,12 +1,11 @@
-package com.example.warehouseproject.core.main
+package com.example.warehouseproject.core.view.main
 
 import android.annotation.SuppressLint
-import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.warehouseproject.R
-import com.example.warehouseproject.core.product.ModelProduct
+import com.example.warehouseproject.core.view.product.ModelProduct
 import com.example.warehouseproject.databinding.ItemDataProductBinding
 import com.squareup.picasso.Picasso
 

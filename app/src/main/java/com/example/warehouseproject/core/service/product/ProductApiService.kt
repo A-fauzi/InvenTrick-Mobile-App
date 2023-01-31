@@ -1,13 +1,11 @@
 package com.example.warehouseproject.core.service.product
 
 import android.content.Context
-import android.content.Intent
 import android.util.Log
 import android.widget.Toast
 import com.example.warehouseproject.core.config.NetworkConfig
 import com.example.warehouseproject.core.constant.Constant
-import com.example.warehouseproject.core.main.MainActivity
-import com.example.warehouseproject.core.product.ModelProduct
+import com.example.warehouseproject.core.view.product.ModelProduct
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -15,7 +13,12 @@ import java.net.SocketTimeoutException
 
 class ProductApiService {
 
-    fun addProductApiService(requestAddProduct: ModelProduct, context: Context) {
+    interface OnSuccessRequest {
+        fun onSuccessRequest()
+        fun onFailureRequest()
+    }
+
+    fun addProductApiService(requestAddProduct: ModelProduct, context: Context, listener: OnSuccessRequest) {
         // request api
         NetworkConfig(Constant.BASE_URL)
             .productService()
@@ -25,12 +28,14 @@ class ProductApiService {
                     call: Call<ModelProduct>,
                     response: Response<ModelProduct>
                 ) {
-                    Toast.makeText(context, "request success: ${response.message()}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "REQUEST SUCCESS: ${response.message()}", Toast.LENGTH_SHORT).show()
+                    listener.onSuccessRequest()
                 }
 
                 override fun onFailure(call: Call<ModelProduct>, t: Throwable) {
                     if(t is SocketTimeoutException) {
-                        Toast.makeText(context, "request failure: ${t.message}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "REQUEST FAILURE: ${t.message}", Toast.LENGTH_SHORT).show()
+                        listener.onFailureRequest()
                     }
                 }
 
