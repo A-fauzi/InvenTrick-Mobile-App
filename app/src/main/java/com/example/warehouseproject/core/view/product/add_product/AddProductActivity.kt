@@ -91,6 +91,10 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
             getImageFromGallery()
         }
 
+        binding.btnChooseGaleryChange.setOnClickListener {
+            getImageFromGallery()
+        }
+
         binding.btnGetCapture.setOnClickListener {
             getImageCapture()
         }
@@ -117,6 +121,7 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
                     binding.ivChooseImage.setImageURI(fillPath)
                     binding.btnChooseGalery.visibility = View.GONE
                     binding.btnGetCapture.visibility = View.GONE
+                    binding.btnChooseGaleryChange.visibility = View.VISIBLE
                 }
             }catch (e: Exception) {
             }
