@@ -1,16 +1,18 @@
 package com.example.warehouseproject.core.service.product
 
-import com.example.warehouseproject.core.view.product.ModelProduct
+import com.example.warehouseproject.core.model.product.ProductRequest
+import com.example.warehouseproject.core.model.product.ProductResponses
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface ProductService {
 
     @POST("product/create")
-    fun addProduct(@Body productRequest: ModelProduct): Call<ModelProduct.ProductSingleResponse>
+    fun addProduct(@Body productRequest: ProductRequest): Call<ProductResponses.SingleResponse>
 
     @GET("product/all")
-    fun getProducts(): Call<ModelProduct.ProductResponse>
+    fun getProducts(): Call<ProductResponses>
+
+    @DELETE("product/{id}")
+    fun deleteProduct(@Path("id") productId: String): Call<ProductResponses.SingleResponse>
 }

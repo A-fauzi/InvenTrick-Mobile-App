@@ -1,6 +1,6 @@
 package com.example.warehouseproject.core.view.product.add_product
 
-import com.example.warehouseproject.core.view.product.ModelProduct
+import com.example.warehouseproject.core.model.product.ProductRequest
 
 class AddProductInteractor {
 
@@ -21,7 +21,7 @@ class AddProductInteractor {
         fun onSuccessValidationInput()
     }
 
-    fun addProduct(input: ModelProduct, listener: OnAddProductFinishedListener) {
+    fun addProduct(input: ProductRequest, listener: OnAddProductFinishedListener) {
         when {
             input.code_items.isEmpty()  -> listener.onInputErrorCode()
             input.name.isEmpty()  -> listener.onInputErrorName()

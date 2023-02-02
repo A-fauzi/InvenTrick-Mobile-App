@@ -1,8 +1,5 @@
 package com.example.warehouseproject.core.view.product.add_product
 
-import android.net.Uri
-import com.example.warehouseproject.core.view.product.ModelProduct
-
 interface AddProductView {
     fun showInputErrorCode()
     fun showInputErrorName()

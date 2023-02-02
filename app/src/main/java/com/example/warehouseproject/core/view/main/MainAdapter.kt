@@ -1,16 +1,23 @@
 package com.example.warehouseproject.core.view.main
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.res.Resources
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.warehouseproject.R
-import com.example.warehouseproject.core.view.product.ModelProduct
+import com.example.warehouseproject.core.model.product.Product
+import com.example.warehouseproject.core.model.product.ProductRequest
 import com.example.warehouseproject.databinding.ItemDataProductBinding
 import com.squareup.picasso.Picasso
 
 class MainAdapter(
-    private val items: ArrayList<ModelProduct>,
+    private val context: Context,
+    private val items: ArrayList<Product>,
     private val callClickListener: CallClickListener
     ): RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
     class MainViewHolder( val binding: ItemDataProductBinding): RecyclerView.ViewHolder(binding.root)
@@ -30,10 +37,23 @@ class MainAdapter(
                     .error(R.drawable.img_example)
                     .into(binding.ivItemProduct)
                 binding.tvNameProduct.text = name
+
+                binding.chipStatus.text = status
+                when(status) {
+                    "active" -> {
+                        binding.chipStatus.chipBackgroundColor = context.getColorStateList(R.color.green_cendol)
+                    }
+                    "sold" -> {
+                        binding.chipStatus.chipBackgroundColor = context.getColorStateList(R.color.red_smooth)
+                    }
+                    else -> {
+                        binding.chipStatus.chipBackgroundColor = context.getColorStateList(R.color.blue)
+                    }
+                }
                 binding.tvSpecProduct.text = specification
                 "Quantity: ${qty.toInt()}".also { binding.tvQuantityProduct.text = it }
                 binding.tvDetailProduct.setOnClickListener {
-                    callClickListener.onClickListener(items[position])
+                    callClickListener.onClickListenerDialog(items[position])
                 }
             }
         }
@@ -42,14 +62,14 @@ class MainAdapter(
     override fun getItemCount(): Int = items.size
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setData(data: List<ModelProduct>) {
+    fun setData(data: List<Product>) {
         items.clear()
         items.addAll(data)
         notifyDataSetChanged()
     }
 
     interface CallClickListener{
-        fun onClickListener(data: ModelProduct)
+        fun onClickListenerDialog(data: Product)
     }
 
 }

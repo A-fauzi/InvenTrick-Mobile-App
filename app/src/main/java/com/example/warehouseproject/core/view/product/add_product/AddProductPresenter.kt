@@ -2,20 +2,18 @@ package com.example.warehouseproject.core.view.product.add_product
 
 import android.app.Activity
 import android.content.Context
-import android.net.Uri
 import com.example.warehouseproject.core.constant.Constant
 import com.example.warehouseproject.core.service.product.ProductApiService
-import com.example.warehouseproject.core.view.product.ModelProduct
-import com.google.firebase.storage.FirebaseStorage
+import com.example.warehouseproject.core.model.product.ProductRequest
 
 class AddProductPresenter(var addProductView: AddProductView?, val addProductInteractor: AddProductInteractor): AddProductInteractor.OnAddProductFinishedListener, ProductApiService.OnSuccessRequest {
 
 
-    fun validateAddProduct(inputFormAddProduct: ModelProduct) {
+    fun validateAddProduct(inputFormAddProduct: ProductRequest) {
         addProductInteractor.addProduct(inputFormAddProduct, this)
     }
 
-    fun requestApiDataProduct(requestAddProduct: ModelProduct, context: Context) {
+    fun requestApiDataProduct(requestAddProduct: ProductRequest, context: Context) {
         ProductApiService().addProductApiService(requestAddProduct, context, this)
     }
 
@@ -92,5 +90,9 @@ class AddProductPresenter(var addProductView: AddProductView?, val addProductInt
     override fun onFailureResponse() {
         addProductView?.hideProgressbar()
         addProductView?.showButton()
+    }
+
+    override fun onSuccessDeleteProduct() {
+
     }
 }

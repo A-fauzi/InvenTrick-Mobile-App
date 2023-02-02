@@ -9,13 +9,13 @@ import android.widget.EditText
 import android.widget.Toast
 import com.example.warehouseproject.core.constant.Constant.REQUEST_CODE
 import com.example.warehouseproject.core.helper.HideKeyboardHelper
-import com.example.warehouseproject.core.view.product.ModelProduct
+import com.example.warehouseproject.core.model.product.ProductRequest
 import com.example.warehouseproject.databinding.ActivityAddProductBinding
 import com.google.firebase.storage.FirebaseStorage
 import java.util.*
 
 class AddProductActivity : AppCompatActivity(), AddProductView {
-    private lateinit var modelRequestAddProduct: ModelProduct
+    private lateinit var modelRequestAddProduct: ProductRequest
 
 
 //    View
@@ -68,7 +68,7 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
         firebaseStorage = FirebaseStorage.getInstance()
 
         binding.submitButtonAddProduct.setOnClickListener {
-            modelRequestAddProduct = ModelProduct(
+            modelRequestAddProduct = ProductRequest(
                 "Kosong",
                 "${code.text}",
                 "${name.text}",
@@ -231,7 +231,7 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
         Toast.makeText(this, "get Image capture", Toast.LENGTH_SHORT).show()
     }
 
-    private fun checkInitializedView(request: ModelProduct) {
+    private fun checkInitializedView(request: ProductRequest) {
         if (this::fillPath.isInitialized) {
             presenter.validateAddProduct(request)
         } else {

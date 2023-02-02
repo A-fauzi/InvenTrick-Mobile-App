@@ -13,6 +13,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="active"
+                android:textColor="@color/white"/>
+
            <RelativeLayout
                android:id="@+id/ll_image"
                android:layout_width="100dp"
@@ -26,6 +34,7 @@
                    android:scaleType="centerCrop"
                    android:src="@drawable/ic_people" />
            </RelativeLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -42,18 +51,18 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:text="Susu Beruang"
+                    android:textColor="@color/black"
                     android:textSize="24sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_spec_product"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    android:text="@string/lorem"
                     android:ellipsize="end"
                     android:maxLines="1"
+                    android:text="@string/lorem"
                     android:textSize="18sp" />
 
                 <RelativeLayout
@@ -66,7 +75,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="quantity: 200"
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/black" />
 
                     <TextView
                         android:id="@+id/tv_detail_product"

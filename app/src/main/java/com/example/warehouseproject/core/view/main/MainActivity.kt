@@ -4,21 +4,18 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
+import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.helper.RandomColor
-import com.example.warehouseproject.core.view.product.ModelProduct
+import com.example.warehouseproject.core.model.product.Product
+import com.example.warehouseproject.core.model.product.ProductRequest
 import com.example.warehouseproject.core.view.product.add_product.AddProductActivity
 import com.example.warehouseproject.core.service.product.ProductApiService
 import com.example.warehouseproject.databinding.ActivityMainBinding
-import com.example.warehouseproject.databinding.ItemDetailDialogBinding
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.squareup.picasso.Picasso
 
-class MainActivity : AppCompatActivity(), MainAdapter.CallClickListener {
+class MainActivity : AppCompatActivity(), MainAdapter.CallClickListener, MainView {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -31,7 +28,7 @@ class MainActivity : AppCompatActivity(), MainAdapter.CallClickListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        presenter = MainPresenter()
+        presenter = MainPresenter(this)
 
         binding.btnToAddProduct.setOnClickListener {
             startActivity(Intent(this, AddProductActivity::class.java))
@@ -49,7 +46,7 @@ class MainActivity : AppCompatActivity(), MainAdapter.CallClickListener {
     }
 
     private fun setupRecyclerView() {
-        mainAdapter = MainAdapter(arrayListOf(), this)
+        mainAdapter = MainAdapter(this, arrayListOf(), this)
         binding.rvProduct.apply {
             layoutManager =
                 LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL, false)
@@ -58,17 +55,32 @@ class MainActivity : AppCompatActivity(), MainAdapter.CallClickListener {
     }
 
     private fun getData() {
-        ProductApiService().getDataProduct(this, ) {data, count ->
+        ProductApiService().getDataProduct(this, {data, count ->
             showDataProduct(data)
             binding.tvCountProducts.text = resources.getString(R.string.product_count, count )
-        }
+            if (count == "0") {
+                binding.tvDataIsEmpty.visibility = View.VISIBLE
+                binding.rvProduct.visibility = View.GONE
+            } else {
+                binding.tvDataIsEmpty.visibility = View.GONE
+                binding.rvProduct.visibility = View.VISIBLE
+            }
+        }, {
+            binding.llFullContainer.visibility = View.VISIBLE
+            binding.progressBar.visibility = View.GONE
+        })
     }
 
-    private fun showDataProduct(product: List<ModelProduct>) {
+    private fun showDataProduct(product: List<Product>) {
         mainAdapter.setData(product)
     }
 
-    override fun onClickListener(data: ModelProduct) {
+    override fun onClickListenerDialog(data: Product) {
         presenter.showDetailDialog(layoutInflater, this, data)
+    }
+
+    override fun moveMainActivity() {
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
 }
