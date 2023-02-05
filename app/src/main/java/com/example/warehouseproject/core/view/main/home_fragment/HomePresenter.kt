@@ -1,4 +1,4 @@
-package com.example.warehouseproject.core.view.main.account_fragment
+package com.example.warehouseproject.core.view.main.home_fragment
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -10,7 +10,7 @@ import com.example.warehouseproject.databinding.ItemDetailDialogBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.squareup.picasso.Picasso
 
-class MainPresenter(private val mainView: MainView?): ProductApiService.OnSuccessRequest {
+class HomePresenter(private val mainView: HomeView?): ProductApiService.OnSuccessRequest {
     fun showDetailDialog(layoutInflater: LayoutInflater, context: Context, data: Product) {
         val binding = ItemDetailDialogBinding.inflate(layoutInflater)
 

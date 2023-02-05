@@ -1,4 +1,4 @@
-package com.example.warehouseproject.core.view.main.account_fragment
+package com.example.warehouseproject.core.view.main.home_fragment
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -10,11 +10,11 @@ import com.example.warehouseproject.core.model.product.Product
 import com.example.warehouseproject.databinding.ItemDataProductBinding
 import com.squareup.picasso.Picasso
 
-class MainAdapter(
+class HomeAdapter(
     private val context: Context,
     private val items: ArrayList<Product>,
     private val callClickListener: CallClickListener
-    ): RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
+    ): RecyclerView.Adapter<HomeAdapter.MainViewHolder>() {
     class MainViewHolder( val binding: ItemDataProductBinding): RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
