@@ -15,8 +15,8 @@ class AddProductInteractor {
         fun onInputErrorLocation()
         fun onInputErrorStatus()
         fun onInputErrorModel()
-        fun onInputErrorCodeOracle()
-        fun onInputErrorDescOracle()
+        fun onInputErrorLot()
+        fun onInputErrorExp()
 
         fun onSuccessValidationInput()
     }
@@ -33,8 +33,8 @@ class AddProductInteractor {
             input.location.isEmpty()  -> listener.onInputErrorLocation()
             input.status.isEmpty()  -> listener.onInputErrorStatus()
             input.model.isEmpty()  -> listener.onInputErrorModel()
-            input.code_oracle.isEmpty()  -> listener.onInputErrorCodeOracle()
-            input.description_oracle.isEmpty()  -> listener.onInputErrorDescOracle()
+            input.lot.isEmpty()  -> listener.onInputErrorLot()
+            input.exp.isEmpty()  -> listener.onInputErrorExp()
             else -> listener.onSuccessValidationInput()
         }
     }

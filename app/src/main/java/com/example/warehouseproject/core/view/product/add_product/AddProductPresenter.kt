@@ -63,12 +63,12 @@ class AddProductPresenter(var addProductView: AddProductView?, val addProductInt
         addProductView?.showInputErrorModel()
     }
 
-    override fun onInputErrorCodeOracle() {
-        addProductView?.showInputErrorCodeOracle()
+    override fun onInputErrorLot() {
+        addProductView?.showInputErrorLot()
     }
 
-    override fun onInputErrorDescOracle() {
-        addProductView?.showInputErrorDescOracle()
+    override fun onInputErrorExp() {
+        addProductView?.showInputErrorExp()
     }
 
     override fun onSuccessValidationInput() {
@@ -80,6 +80,7 @@ class AddProductPresenter(var addProductView: AddProductView?, val addProductInt
     override fun onSuccessResponse() {
         addProductView?.navigateToHome()
         addProductView?.hideProgressbar()
+        addProductView?.showAnimateSuccessAdd()
     }
 
     override fun onSuccessResponseFailInRequest() {

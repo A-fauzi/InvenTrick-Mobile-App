@@ -1,16 +1,14 @@
-package com.example.warehouseproject.core.view.main
+package com.example.warehouseproject.core.view.main.account_fragment
 
 import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.helper.RandomColor
 import com.example.warehouseproject.core.model.product.Product
-import com.example.warehouseproject.core.model.product.ProductRequest
 import com.example.warehouseproject.core.view.product.add_product.AddProductActivity
 import com.example.warehouseproject.core.service.product.ProductApiService
 import com.example.warehouseproject.databinding.ActivityMainBinding

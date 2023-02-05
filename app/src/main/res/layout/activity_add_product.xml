@@ -49,8 +49,8 @@
                         android:id="@+id/btn_get_capture"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Get capture"
-                        android:layout_centerHorizontal="true"/>
+                        android:layout_centerHorizontal="true"
+                        android:text="Get image capture" />
 
                     <Button
                         android:id="@+id/btn_choose_galery"
@@ -73,162 +73,218 @@
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
 
-        <!--  code product  -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Code Product:" />
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/et_code_product"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxLength="6"
-            android:hint="Enter code product" />
+           <!--  code product  -->
+           <com.google.android.material.textfield.TextInputLayout
+               android:id="@+id/outlinedTextFieldCodeProduct"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:hint="code product"
+               android:layout_marginEnd="8dp"
+               style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-        <!--  Name  -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Product name:" />
 
-        <EditText
-            android:id="@+id/et_name_product"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter product name" />
+               <com.google.android.material.textfield.TextInputEditText
+                   android:id="@+id/et_code_product"
+                   android:layout_width="100dp"
+                   android:layout_height="wrap_content"
+                   android:inputType="text"/>
+
+           </com.google.android.material.textfield.TextInputLayout>
+
+           <!--  Name  -->
+           <com.google.android.material.textfield.TextInputLayout
+               android:id="@+id/outlinedTextFieldNameProduct"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:hint="name product"
+               style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+
+               <com.google.android.material.textfield.TextInputEditText
+                   android:id="@+id/et_name_product"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:inputType="text" />
+
+           </com.google.android.material.textfield.TextInputLayout>
+       </LinearLayout>
 
         <!--  Qty  -->
-        <TextView
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/outlinedTextFieldQtyProduct"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Product quantity:" />
+            android:hint="quantity product"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-        <EditText
-            android:id="@+id/et_qty_product"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter product name"
-            android:inputType="number"/>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_qty_product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <!--  category  -->
-        <TextView
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/outlinedTextFieldCategoryProduct"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Category product:" />
+            android:hint="category product"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-        <EditText
-            android:id="@+id/et_category_product"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter category product" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_category_product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <!--  Sub Category  -->
-        <TextView
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/outlinedTextFieldSubCategoryProduct"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sub category:" />
+            android:hint="sub category product"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-        <EditText
-            android:id="@+id/et_sub_category_product"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter sub category product" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_sub_category_product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <!--  Spec  -->
-        <TextView
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/outlinedTextFieldSpecProduct"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Spec product:" />
+            android:hint="specification product"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
 
-        <EditText
-            android:id="@+id/et_spec_product"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:inputType="text|textMultiLine"
-            android:gravity="top"
-            android:hint="Enter spec product"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_spec_product"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:gravity="top"
+                android:inputType="text|textMultiLine" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <!--  Price  -->
-        <TextView
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/outlinedTextFieldPriceProduct"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Price product:" />
+            android:hint="price product"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-        <EditText
-            android:id="@+id/et_price_product"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="Price product"/>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_price_product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <!--  Location  -->
-        <TextView
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/outlinedTextFieldLocationProduct"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Location product:" />
+            android:hint="location product"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-        <EditText
-            android:id="@+id/et_location_product"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:hint="Enter Location product"/>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_location_product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <!--  Status  -->
-        <TextView
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/outlinedTextFieldStatusProduct"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Status product:" />
+            android:hint="status product"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-        <EditText
-            android:id="@+id/et_status_product"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:hint="Enter status product"/>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_status_product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <!--  Model  -->
-        <TextView
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/outlinedTextFieldModelProduct"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Model product:" />
+            android:hint="model product"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-        <EditText
-            android:id="@+id/et_model_product"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:hint="Enter model product"/>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_model_product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <!--  code_oracle  -->
-        <TextView
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/outlinedTextFieldLotProduct"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Code_oracle product:" />
+            android:hint="lot product"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-        <EditText
-            android:id="@+id/et_code_oracle_product"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:maxLength="6"
-            android:hint="Enter Code_Oracle product"/>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_lot_product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <!--  Desc Oracle  -->
-        <TextView
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/outlinedTextFieldExpProduct"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Description_Oracle product:" />
+            android:hint="exp product"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-        <EditText
-            android:id="@+id/et_desc_oracle_product"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:inputType="text|textMultiLine"
-            android:gravity="top"
-            android:hint="Enter Descript_Oracle product"/>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_exp_product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <RelativeLayout
             android:layout_width="match_parent"

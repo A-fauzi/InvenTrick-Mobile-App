@@ -11,14 +11,16 @@ interface AddProductView {
     fun showInputErrorLocation()
     fun showInputErrorStatus()
     fun showInputErrorModel()
-    fun showInputErrorCodeOracle()
-    fun showInputErrorDescOracle()
+    fun showInputErrorLot()
+    fun showInputErrorExp()
 
     fun showButton()
     fun hideButton()
 
     fun showProgressbar()
     fun hideProgressbar()
+
+    fun showAnimateSuccessAdd()
 
     fun showSuccessValidation()
 

@@ -1,17 +1,12 @@
-package com.example.warehouseproject.core.view.main
+package com.example.warehouseproject.core.view.main.account_fragment
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.res.Resources
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.model.product.Product
-import com.example.warehouseproject.core.model.product.ProductRequest
 import com.example.warehouseproject.databinding.ItemDataProductBinding
 import com.squareup.picasso.Picasso
 

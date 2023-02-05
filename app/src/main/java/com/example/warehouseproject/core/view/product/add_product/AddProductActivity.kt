@@ -7,11 +7,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
+import com.example.warehouseproject.R
 import com.example.warehouseproject.core.constant.Constant.REQUEST_CODE
 import com.example.warehouseproject.core.helper.HideKeyboardHelper
 import com.example.warehouseproject.core.model.product.ProductRequest
 import com.example.warehouseproject.databinding.ActivityAddProductBinding
 import com.google.firebase.storage.FirebaseStorage
+import com.tapadoo.alerter.Alerter
 import java.util.*
 
 class AddProductActivity : AppCompatActivity(), AddProductView {
@@ -29,8 +31,8 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
     private lateinit var location: EditText
     private lateinit var status: EditText
     private lateinit var model: EditText
-    private lateinit var codeOracle: EditText
-    private lateinit var descOracle: EditText
+    private lateinit var lot: EditText
+    private lateinit var exp: EditText
 
     private lateinit var fillPath: Uri
 
@@ -53,8 +55,8 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
        location =  binding.etLocationProduct
        status = binding.etStatusProduct
        model = binding.etModelProduct
-       codeOracle = binding.etCodeOracleProduct
-       descOracle = binding.etDescOracleProduct
+       lot = binding.etLotProduct
+       exp = binding.etExpProduct
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -80,8 +82,8 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
                 "${location.text}",
                 "${status.text}",
                 "${model.text}",
-                "${codeOracle.text}",
-                "${descOracle.text}",
+                "${lot.text}",
+                "${exp.text}",
             )
             checkInitializedView(modelRequestAddProduct)
             HideKeyboardHelper.hideSoftKeyBoard(this, binding.root)
@@ -178,14 +180,14 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
         model.requestFocus()
     }
 
-    override fun showInputErrorCodeOracle() {
-       codeOracle.error = "Code Oracle product harus di isi"
-        codeOracle.requestFocus()
+    override fun showInputErrorLot() {
+       lot.error = "Code Oracle product harus di isi"
+        lot.requestFocus()
     }
 
-    override fun showInputErrorDescOracle() {
-      descOracle.error = "Desc Oracle product harus di isi"
-        descOracle.requestFocus()
+    override fun showInputErrorExp() {
+      exp.error = "Desc Oracle product harus di isi"
+        exp.requestFocus()
     }
 
     override fun showButton() {
@@ -204,13 +206,15 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
         binding.progressBar.visibility = View.GONE
     }
 
+    override fun showAnimateSuccessAdd() {
+//        binding.animationViewSuccess.visibility = View.VISIBLE
+    }
+
     override fun showSuccessValidation() {
-        Toast.makeText(this, "VALIDASI INPUT SUKSES", Toast.LENGTH_SHORT).show()
-        Toast.makeText(this, "SEDANG UPLOAD DATA TO DATABASE", Toast.LENGTH_SHORT).show()
 
         val nameFile = UUID.randomUUID()
 
-        val refStorage = firebaseStorage.reference.child("/image_product/${codeOracle.text}_${nameFile}.jpg")
+        val refStorage = firebaseStorage.reference.child("/image_product/${lot.text}_${nameFile}.jpg")
         refStorage.putFile(fillPath).addOnSuccessListener { uploadTask ->
 
             // Mendapatkan uri image yang telah di upload
@@ -235,7 +239,11 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
         if (this::fillPath.isInitialized) {
             presenter.validateAddProduct(request)
         } else {
-            Toast.makeText(this, "Validate Error: Gambar harus dilampirkan!", Toast.LENGTH_SHORT).show()
+            Alerter.create(this@AddProductActivity)
+                .setText("Gambar harus dilampirkan!")
+                .setIcon(R.drawable.ic_baseline_warning_amber_24)
+                .setBackgroundColorRes(R.color.yellow)
+                .show()
         }
     }
 }

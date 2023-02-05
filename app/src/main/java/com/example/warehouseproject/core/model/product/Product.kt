@@ -13,8 +13,8 @@ data class Product(
     val location: String,
     val status: String,
     val model: String,
-    val code_oracle: String,
-    val description_oracle: String,
+    val lot: String,
+    val exp: String,
     val created_at: String? = null,
     val updated_at: String? = null
 )

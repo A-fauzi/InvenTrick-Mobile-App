@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-android'
     id 'com.google.gms.google-services'
 }
 
@@ -65,9 +66,21 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.14.2'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
 
+    // alert
+    implementation 'com.github.tapadoo:alerter:7.2.4'
+
+    // Lottie
+    def lottieVersion = "3.4.0"
+    implementation "com.airbnb.android:lottie:$lottieVersion"
+
+    // QRcode
+    implementation 'com.google.zxing:core:3.2.0'
+    implementation 'com.github.androidmads:QRGenerator:1.0.1'
+
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
 
 }
