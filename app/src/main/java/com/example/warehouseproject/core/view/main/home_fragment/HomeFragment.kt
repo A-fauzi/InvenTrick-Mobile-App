@@ -2,12 +2,13 @@ package com.example.warehouseproject.core.view.main.home_fragment
 
 import android.content.Intent
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
+import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.example.warehouseproject.R
@@ -17,10 +18,7 @@ import com.example.warehouseproject.core.room.db.ProductDB
 import com.example.warehouseproject.core.service.product.ProductApiService
 import com.example.warehouseproject.core.view.main.MainActivity
 import com.example.warehouseproject.core.view.product.add_product.AddProductActivity
-import com.example.warehouseproject.databinding.ActivityMainBinding
 import com.example.warehouseproject.databinding.FragmentHomeBinding
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment(), HomeAdapter.CallClickListener, HomeView {
 
@@ -32,6 +30,8 @@ class HomeFragment : Fragment(), HomeAdapter.CallClickListener, HomeView {
 
     private lateinit var db: ProductDB
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,7 +42,7 @@ class HomeFragment : Fragment(), HomeAdapter.CallClickListener, HomeView {
         // Init db
         db = Room.databaseBuilder(requireActivity().applicationContext, ProductDB::class.java, "Warehouse").build()
 
-        presenter = HomePresenter(this)
+        presenter = HomePresenter(this, HomeInteractor())
         setupRecyclerView()
         getData()
 
@@ -115,7 +115,7 @@ class HomeFragment : Fragment(), HomeAdapter.CallClickListener, HomeView {
     }
 
     override fun onClickListenerDialog(data: Product) {
-        presenter.showDetailDialog(layoutInflater, requireActivity(), data)
+        presenter.showDetailDialog(requireActivity(), layoutInflater, data)
     }
 
     override fun moveMainActivity() {

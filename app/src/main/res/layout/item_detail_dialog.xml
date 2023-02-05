@@ -6,229 +6,250 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
-       <RelativeLayout
-           android:layout_width="match_parent"
-           android:layout_height="250dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="250dp">
 
-           <androidx.cardview.widget.CardView
-               android:layout_width="match_parent"
-               android:layout_height="match_parent"
-               android:layout_margin="8dp"
-               app:cardCornerRadius="25dp">
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                app:cardCornerRadius="25dp">
 
-             <RelativeLayout
-                 android:layout_width="match_parent"
-                 android:layout_height="match_parent">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                 <ImageView
-                     android:id="@+id/iv_item_detail"
-                     android:layout_width="match_parent"
-                     android:layout_height="match_parent"
-                     android:layout_centerHorizontal="true"
-                     android:layout_centerVertical="true"
-                     android:adjustViewBounds="true"
-                     android:contentDescription="@string/image"
-                     android:scaleType="centerCrop"
-                     android:src="@drawable/ic_people" />
+                    <ImageView
+                        android:id="@+id/iv_item_detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/image"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_people" />
 
-                 <com.google.android.material.chip.Chip
-                     android:id="@+id/status_detail"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:layout_alignParentEnd="true"
-                     android:layout_alignParentBottom="true"
-                     android:layout_marginEnd="8dp"
-                     android:backgroundTint="@color/green_cendol"
-                     android:text="actived"
-                     android:textColor="@color/white" />
-             </RelativeLayout>
-           </androidx.cardview.widget.CardView>
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/status_detail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginEnd="8dp"
+                        android:backgroundTint="@color/green_cendol"
+                        android:text="actived"
+                        android:textColor="@color/white" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
 
-       </RelativeLayout>
+        </RelativeLayout>
 
-      <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:orientation="vertical"
-          android:padding="16dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-          <com.google.android.material.chip.Chip
-              android:id="@+id/chip_code_item_detail"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="PX0001"/>
+            <LinearLayout
+                android:id="@+id/ll_full_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
 
-          <TextView
-              android:id="@+id/tv_exp_detail"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="exp"
-              android:layout_alignParentBottom="true"
-              android:layout_margin="8dp"/>
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_code_item_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PX0001"/>
 
-          <RelativeLayout
-              android:id="@+id/content_1"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:padding="16dp">
+                <TextView
+                    android:id="@+id/tv_exp_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="exp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_margin="8dp"/>
 
-              <TextView
-                  android:id="@+id/tv_name_product_detail"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="Susu beruang"
-                  android:textColor="@color/black"
-                  android:textSize="24sp"
-                  android:textStyle="bold" />
+                <RelativeLayout
+                    android:id="@+id/content_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
 
-              <LinearLayout
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:orientation="vertical"
-                  android:layout_alignParentEnd="true">
+                    <TextView
+                        android:id="@+id/tv_name_product_detail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Susu beruang"
+                        android:textColor="@color/black"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
 
-                  <TextView
-                      android:id="@+id/tv_qty_detail"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:text="quantity: 100"
-                      android:textColor="@color/black"/>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_alignParentEnd="true">
 
-                  <TextView
-                      android:id="@+id/tv_price_detail"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:text="Rp 250.000"
-                      android:textStyle="bold"
-                      android:layout_marginTop="8dp"
-                      android:textColor="@color/black"/>
-              </LinearLayout>
+                        <TextView
+                            android:id="@+id/tv_qty_detail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="quantity: 100"
+                            android:textColor="@color/black"/>
 
-              <TextView
-                  android:id="@+id/tv_location_detail"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:layout_below="@id/tv_name_product_detail"
-                  android:layout_marginTop="8dp"
-                  android:text="Location"/>
+                        <TextView
+                            android:id="@+id/tv_price_detail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rp 250.000"
+                            android:textStyle="bold"
+                            android:layout_marginTop="8dp"
+                            android:textColor="@color/black"/>
+                    </LinearLayout>
 
-              <LinearLayout
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:orientation="vertical"
-                  android:layout_below="@id/tv_location_detail"
-                  android:layout_marginTop="24dp">
+                    <TextView
+                        android:id="@+id/tv_location_detail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_name_product_detail"
+                        android:layout_marginTop="8dp"
+                        android:text="Location"/>
 
-                  <TextView
-                      android:id="@+id/tv_created_at_detail"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:text="Created_at" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_below="@id/tv_location_detail"
+                        android:layout_marginTop="24dp">
 
-                  <TextView
-                      android:id="@+id/tv_updated_at_detail"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:layout_marginTop="8dp"
-                      android:text="Update_at" />
-              </LinearLayout>
+                        <TextView
+                            android:id="@+id/tv_created_at_detail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Created_at" />
 
-          </RelativeLayout>
+                        <TextView
+                            android:id="@+id/tv_updated_at_detail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Update_at" />
+                    </LinearLayout>
 
-          <RelativeLayout
-              android:id="@+id/content_2"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content">
+                </RelativeLayout>
 
-
-              <com.google.android.material.chip.Chip
-                  android:id="@+id/chip_catgory"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="category" />
-
-              <com.google.android.material.chip.Chip
-                  android:id="@+id/chip_sub_category"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:layout_marginStart="8dp"
-                  android:layout_toRightOf="@id/chip_catgory"
-                  android:text="sub category" />
-          </RelativeLayout>
-
-          <RelativeLayout
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content">
-
-              <androidx.cardview.widget.CardView
-                  android:id="@+id/cv_spec_product"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:layout_margin="8dp"
-                  app:cardCornerRadius="25dp">
+                <RelativeLayout
+                    android:id="@+id/content_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
 
-                  <RelativeLayout
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:padding="16dp">
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_catgory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="category" />
 
-                      <TextView
-                          android:id="@+id/tv_spec_product_detail"
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:text="@string/lorem" />
-                  </RelativeLayout>
-              </androidx.cardview.widget.CardView>
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_sub_category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_toRightOf="@id/chip_catgory"
+                        android:text="sub category" />
+                </RelativeLayout>
 
-              <LinearLayout
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:orientation="vertical"
-                  android:layout_below="@id/cv_spec_product"
-                  android:padding="16dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                  <RelativeLayout
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content">
-
-                      <TextView
-                          android:id="@+id/tv_lot_detail"
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:text="lot" />
-
-                      <TextView
-                          android:id="@+id/tv_model_detail"
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:layout_alignParentEnd="true"
-                          android:text="model" />
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cv_spec_product"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        app:cardCornerRadius="25dp">
 
 
-                  </RelativeLayout>
-              </LinearLayout>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="16dp">
 
-          </RelativeLayout>
+                            <TextView
+                                android:id="@+id/tv_spec_product_detail"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/lorem" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
 
-          <ImageView
-              android:id="@+id/iv_btn_trash"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:src="@drawable/trash_24"
-              android:layout_marginTop="16dp"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_below="@id/cv_spec_product"
+                        android:padding="16dp">
 
-          <ImageView
-              android:id="@+id/ivQrCode"
-              android:layout_width="300dp"
-              android:layout_height="300dp"
-              android:layout_gravity="center"
-              android:layout_marginTop="8dp"/>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
 
-      </LinearLayout>
+                            <TextView
+                                android:id="@+id/tv_lot_detail"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="lot" />
+
+                            <TextView
+                                android:id="@+id/tv_model_detail"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:text="model" />
+
+
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/ivQrCode"
+                    android:layout_width="300dp"
+                    android:layout_height="300dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"/>
+
+                <Button
+                    android:id="@+id/btn_save_barcode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="save barcode"
+                    android:layout_gravity="center"/>
+
+                <ImageView
+                    android:id="@+id/iv_btn_trash"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/trash_24"
+                    android:layout_marginTop="16dp"/>
+
+            </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/progress_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:visibility="gone"/>
+        </RelativeLayout>
 
     </LinearLayout>
 </ScrollView>

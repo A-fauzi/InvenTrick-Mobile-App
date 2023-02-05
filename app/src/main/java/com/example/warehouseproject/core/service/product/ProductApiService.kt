@@ -2,7 +2,6 @@ package com.example.warehouseproject.core.service.product
 
 import android.content.Context
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import com.example.warehouseproject.core.config.NetworkConfig
 import com.example.warehouseproject.core.constant.Constant
@@ -17,15 +16,7 @@ import java.net.SocketTimeoutException
 
 class ProductApiService {
 
-    interface OnSuccessRequest {
-        fun onSuccessResponse()
-        fun onSuccessResponseFailInRequest()
-        fun onFailureResponse()
-
-        fun onSuccessDeleteProduct()
-    }
-
-    fun addProductApiService(requestAddProduct: ProductRequest, context: Context, listener: OnSuccessRequest) {
+    fun addProductApiService(requestAddProduct: ProductRequest, onResponseSuccessBody: (msg: String, data: Product? ) -> Unit, onResponseErrorBody: (msg: String) -> Unit, onFailure: (msg: String) -> Unit) {
         // request api
         NetworkConfig(Constant.BASE_URL)
             .productService()
@@ -36,23 +27,20 @@ class ProductApiService {
                     response: Response<ProductResponses.SingleResponse>
                 ) {
                    if (response.isSuccessful) {
-                       listener.onSuccessResponse()
-                       Toast.makeText(context, "${response.body()?.message}", Toast.LENGTH_SHORT).show()
+                       response.body()?.let {
+                           onResponseSuccessBody(it.message, it.data)
+                       }
                    } else {
-                       listener.onSuccessResponseFailInRequest()
-
                        // convert json to String
                        val gson = Gson()
                        val mNanu = gson.fromJson(response.errorBody()?.string(), ProductResponses.SingleResponse::class.java)
-                       Log.d("ProdActivity", mNanu.message)
-                       Toast.makeText(context, mNanu.message, Toast.LENGTH_SHORT).show()
+                       onResponseErrorBody(mNanu.message)
                    }
                 }
 
                 override fun onFailure(call: Call<ProductResponses.SingleResponse>, t: Throwable) {
                     if(t is SocketTimeoutException) {
-                        Toast.makeText(context, "RESPONSE FAILURE: ${t.message}", Toast.LENGTH_SHORT).show()
-                        listener.onFailureResponse()
+                        onFailure(t.message.toString())
                     }
                 }
 
@@ -87,7 +75,7 @@ class ProductApiService {
             })
     }
 
-    fun deleteProductApiService(id: String, context: Context, listener: OnSuccessRequest) {
+    fun deleteProductApiService(id: String, onResponseSuccessBody: (msg: String, data: Product? ) -> Unit, onResponseErrorBody: (msg: String) -> Unit, onFailure: (msg: String) -> Unit) {
         NetworkConfig(Constant.BASE_URL)
             .productService()
             .deleteProduct(id)
@@ -97,15 +85,18 @@ class ProductApiService {
                     response: Response<ProductResponses.SingleResponse>
                 ) {
                     if (response.isSuccessful) {
-                        Toast.makeText(context, "Success deleted", Toast.LENGTH_SHORT).show()
-                        listener.onSuccessDeleteProduct()
+                        response.body()?.let {
+                            onResponseSuccessBody(it.message, it.data)
+                        }
                     } else {
-                        Toast.makeText(context, "Failed deleted", Toast.LENGTH_SHORT).show()
+                        response.body()?.let {
+                            onResponseErrorBody(it.message)
+                        }
                     }
                 }
 
                 override fun onFailure(call: Call<ProductResponses.SingleResponse>, t: Throwable) {
-                    Toast.makeText(context, "Failed Response", Toast.LENGTH_SHORT).show()
+                    onFailure(t.message.toString())
                 }
 
             })

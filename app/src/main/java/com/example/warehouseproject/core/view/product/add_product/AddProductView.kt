@@ -14,18 +14,12 @@ interface AddProductView {
     fun showInputErrorLot()
     fun showInputErrorExp()
 
-    fun showButton()
     fun hideButton()
 
     fun showProgressbar()
-    fun hideProgressbar()
-
-    fun showAnimateSuccessAdd()
 
     fun showSuccessValidation()
 
     fun getImageCapture()
     fun getImageFromGallery()
-
-    fun navigateToHome()
 }

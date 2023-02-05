@@ -110,11 +110,6 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
         startActivityForResult(intent, REQUEST_CODE)
     }
 
-    override fun navigateToHome() {
-        startActivity(Intent(this, MainActivity::class.java))
-        finish()
-    }
-
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -192,24 +187,12 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
         exp.requestFocus()
     }
 
-    override fun showButton() {
-        binding.submitButtonAddProduct.visibility = View.VISIBLE
-    }
-
     override fun hideButton() {
         binding.submitButtonAddProduct.visibility = View.GONE
     }
 
     override fun showProgressbar() {
         binding.progressBar.visibility = View.VISIBLE
-    }
-
-    override fun hideProgressbar() {
-        binding.progressBar.visibility = View.GONE
-    }
-
-    override fun showAnimateSuccessAdd() {
-//        binding.animationViewSuccess.visibility = View.VISIBLE
     }
 
     override fun showSuccessValidation() {
@@ -223,7 +206,20 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
             uploadTask.storage.downloadUrl.addOnSuccessListener { uri ->
 
                 modelRequestAddProduct.image = uri.toString()
-                presenter.requestApiDataProduct(modelRequestAddProduct, this)
+                presenter.requestApiDataProduct(modelRequestAddProduct, {msg, data ->
+                    Toast.makeText(this, "$msg ${data?.name}", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this, MainActivity::class.java))
+                    finish()
+                }, { msg ->
+                    Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+                    binding.progressBar.visibility = View.GONE
+                    binding.submitButtonAddProduct.visibility = View.VISIBLE
+                },
+                    { msg ->
+                        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+                        binding.progressBar.visibility = View.GONE
+                        binding.submitButtonAddProduct.visibility = View.VISIBLE
+                })
 
             }.addOnFailureListener {
                 Toast.makeText(this, "DOWNLOAD PHOTO GAGAL!", Toast.LENGTH_SHORT).show()

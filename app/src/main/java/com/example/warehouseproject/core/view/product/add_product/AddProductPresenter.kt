@@ -1,20 +1,20 @@
 package com.example.warehouseproject.core.view.product.add_product
 
 import android.app.Activity
-import android.content.Context
 import com.example.warehouseproject.core.constant.Constant
+import com.example.warehouseproject.core.model.product.Product
 import com.example.warehouseproject.core.service.product.ProductApiService
 import com.example.warehouseproject.core.model.product.ProductRequest
 
-class AddProductPresenter(var addProductView: AddProductView?, val addProductInteractor: AddProductInteractor): AddProductInteractor.OnAddProductFinishedListener, ProductApiService.OnSuccessRequest {
+class AddProductPresenter(var addProductView: AddProductView?, val addProductInteractor: AddProductInteractor): AddProductInteractor.OnAddProductFinishedListener {
 
 
     fun validateAddProduct(inputFormAddProduct: ProductRequest) {
         addProductInteractor.addProduct(inputFormAddProduct, this)
     }
 
-    fun requestApiDataProduct(requestAddProduct: ProductRequest, context: Context) {
-        ProductApiService().addProductApiService(requestAddProduct, context, this)
+    fun requestApiDataProduct(requestAddProduct: ProductRequest, onResponseSuccessBody: (msg: String, data: Product?) -> Unit, onResponseErrorBody: (msg: String) -> Unit, onFailure: (msg: String) -> Unit) {
+        ProductApiService().addProductApiService(requestAddProduct, onResponseSuccessBody, onResponseErrorBody, onFailure)
     }
 
     fun resultImageFromGallery(requestCode: Int, resultCode: Int, getFile: () -> Unit?) {
@@ -75,25 +75,5 @@ class AddProductPresenter(var addProductView: AddProductView?, val addProductInt
         addProductView?.showSuccessValidation()
         addProductView?.hideButton()
         addProductView?.showProgressbar()
-    }
-
-    override fun onSuccessResponse() {
-        addProductView?.navigateToHome()
-        addProductView?.hideProgressbar()
-        addProductView?.showAnimateSuccessAdd()
-    }
-
-    override fun onSuccessResponseFailInRequest() {
-        addProductView?.hideProgressbar()
-        addProductView?.showButton()
-    }
-
-    override fun onFailureResponse() {
-        addProductView?.hideProgressbar()
-        addProductView?.showButton()
-    }
-
-    override fun onSuccessDeleteProduct() {
-
     }
 }
