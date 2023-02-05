@@ -3,19 +3,24 @@ package com.example.warehouseproject.core.view.main.home_fragment
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.room.Room
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.helper.RandomColor
 import com.example.warehouseproject.core.model.product.Product
+import com.example.warehouseproject.core.room.db.ProductDB
 import com.example.warehouseproject.core.service.product.ProductApiService
 import com.example.warehouseproject.core.view.main.MainActivity
 import com.example.warehouseproject.core.view.product.add_product.AddProductActivity
 import com.example.warehouseproject.databinding.ActivityMainBinding
 import com.example.warehouseproject.databinding.FragmentHomeBinding
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment(), HomeAdapter.CallClickListener, HomeView {
 
@@ -25,15 +30,22 @@ class HomeFragment : Fragment(), HomeAdapter.CallClickListener, HomeView {
 
     private lateinit var presenter: HomePresenter
 
+    private lateinit var db: ProductDB
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
+
+        // Init db
+        db = Room.databaseBuilder(requireActivity().applicationContext, ProductDB::class.java, "Warehouse").build()
+
         presenter = HomePresenter(this)
         setupRecyclerView()
         getData()
+
         return binding.root
     }
 
@@ -56,7 +68,34 @@ class HomeFragment : Fragment(), HomeAdapter.CallClickListener, HomeView {
 
     private fun getData() {
         ProductApiService().getDataProduct(requireActivity(), { data, count ->
+
+//            GlobalScope.launch {
+//                val dao = db.productDao()
+//                for (i in data) {
+//                    dao.insertAll(
+//                        Product(
+//                            i._id,
+//                            i.code_items,
+//                            i.name,
+//                            i.qty,
+//                            i.category,
+//                            i.sub_category,
+//                            i.image,
+//                            i.specification,
+//                            i.price,
+//                            i.location,
+//                            i.status,
+//                            i.model,
+//                            i.lot,
+//                            i.exp,
+//                            i.created_at,
+//                            i.updated_at))
+//                }
+//                val product: List<Product> = dao.getAll()
+//                Log.d("HomeFragment", product.toString())
+//            }
             showDataProduct(data)
+
             binding.tvCountProducts.text = context?.getString(R.string.product_count, count )
             if (count == "0") {
                 binding.tvDataIsEmpty.visibility = View.VISIBLE

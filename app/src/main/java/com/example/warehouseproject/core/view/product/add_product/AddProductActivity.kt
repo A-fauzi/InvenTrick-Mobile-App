@@ -11,6 +11,7 @@ import com.example.warehouseproject.R
 import com.example.warehouseproject.core.constant.Constant.REQUEST_CODE
 import com.example.warehouseproject.core.helper.HideKeyboardHelper
 import com.example.warehouseproject.core.model.product.ProductRequest
+import com.example.warehouseproject.core.view.main.MainActivity
 import com.example.warehouseproject.databinding.ActivityAddProductBinding
 import com.google.firebase.storage.FirebaseStorage
 import com.tapadoo.alerter.Alerter
@@ -110,6 +111,7 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
     }
 
     override fun navigateToHome() {
+        startActivity(Intent(this, MainActivity::class.java))
         finish()
     }
 
