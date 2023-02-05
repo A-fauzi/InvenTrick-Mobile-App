@@ -77,6 +77,7 @@ dependencies {
     // QRcode
     implementation 'com.google.zxing:core:3.2.0'
     implementation 'com.github.androidmads:QRGenerator:1.0.1'
+    implementation('com.journeyapps:zxing-android-embedded:4.2.0') { transitive = false }
 
     // Room
     implementation "androidx.lifecycle:lifecycle-extensions:2.0.0-alpha1"
