@@ -57,7 +57,7 @@ class HomeFragment : Fragment(), HomeAdapter.CallClickListener, HomeView {
     private fun getData() {
         ProductApiService().getDataProduct(requireActivity(), { data, count ->
             showDataProduct(data)
-            binding.tvCountProducts.text = resources.getString(R.string.product_count, count )
+            binding.tvCountProducts.text = context?.getString(R.string.product_count, count )
             if (count == "0") {
                 binding.tvDataIsEmpty.visibility = View.VISIBLE
                 binding.rvProduct.visibility = View.GONE

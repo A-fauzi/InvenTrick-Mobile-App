@@ -13,10 +13,12 @@ import com.example.warehouseproject.core.helper.RandomColor
 import com.example.warehouseproject.core.model.product.Product
 import com.example.warehouseproject.core.view.product.add_product.AddProductActivity
 import com.example.warehouseproject.core.service.product.ProductApiService
+import com.example.warehouseproject.core.view.main.account_fragment.AccountFragment
 import com.example.warehouseproject.core.view.main.home_fragment.HomeAdapter
 import com.example.warehouseproject.core.view.main.home_fragment.HomeFragment
 import com.example.warehouseproject.core.view.main.home_fragment.HomePresenter
 import com.example.warehouseproject.core.view.main.home_fragment.HomeView
+import com.example.warehouseproject.core.view.main.scan_fragment.ScanFragment
 import com.example.warehouseproject.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -39,11 +41,11 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.scan -> {
-                    Toast.makeText(this, "Scan Fragment", Toast.LENGTH_SHORT).show()
+                    loadFragment(ScanFragment())
                     true
                 }
                 R.id.account -> {
-                    Toast.makeText(this, "Account Fragment", Toast.LENGTH_SHORT).show()
+                    loadFragment(AccountFragment())
                     true
                 }
                 else -> false
