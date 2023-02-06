@@ -29,4 +29,6 @@
         parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/dialog_round_corner</item>
     </style>
+
+
 </resources>

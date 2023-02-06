@@ -1,9 +1,12 @@
 package com.example.warehouseproject.core.view.main.home_fragment
 
 import android.content.Context
+import android.content.DialogInterface
+import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.helper.QrCode
 import com.example.warehouseproject.core.model.product.Product
@@ -43,21 +46,36 @@ class HomeInteractor {
 
         binding.ivBtnTrash.setOnClickListener {
 
-            binding.progressDelete.visibility = View.VISIBLE
-            binding.llFullContainer.visibility = View.GONE
+            val builder = AlertDialog.Builder(context)
+            with(builder) {
+                fun deleteItem(){
+                    binding.progressDelete.visibility = View.VISIBLE
+                    binding.llFullContainer.visibility = View.GONE
 
-            ProductApiService().deleteProductApiService(data._id, {msg, data ->
-                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
-                listener.onSuccessDeleted()
-            }, { msg ->
-                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
-                binding.progressDelete.visibility = View.GONE
-                binding.llFullContainer.visibility = View.VISIBLE
-            }, { msg ->
-                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
-                binding.progressDelete.visibility = View.GONE
-                binding.llFullContainer.visibility = View.VISIBLE
-            })
+                    ProductApiService().deleteProductApiService(data._id, {msg, data ->
+                        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+                        listener.onSuccessDeleted()
+                    }, { msg ->
+                        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+                        binding.progressDelete.visibility = View.GONE
+                        binding.llFullContainer.visibility = View.VISIBLE
+                    }, { msg ->
+                        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+                        binding.progressDelete.visibility = View.GONE
+                        binding.llFullContainer.visibility = View.VISIBLE
+                    })
+                }
+                setTitle("Delete item")
+                setMessage("are u sure this delete item?")
+                setPositiveButton("OK", DialogInterface.OnClickListener { dialog, id ->
+                    deleteItem()
+                })
+                setNegativeButton(android.R.string.no, DialogInterface.OnClickListener { dialogInterface, i ->
+                    dialog.cancel()
+                })
+                show()
+            }
+
         }
 
         // Encoder qrcode
