@@ -27,6 +27,9 @@ class StockInActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
+        val codeItemBundle = intent.extras?.getString("code_items_key")
+            binding.etInputCodeProduct.setText(codeItemBundle)
+
         binding.btnSearchProduct.setOnClickListener {
 
             binding.progressBar.visibility = View.VISIBLE

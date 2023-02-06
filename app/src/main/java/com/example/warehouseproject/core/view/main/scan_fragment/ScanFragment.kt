@@ -17,6 +17,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import com.example.warehouseproject.R
+import com.example.warehouseproject.core.view.main.home_fragment.stock_in_product.StockInActivity
 import com.example.warehouseproject.databinding.FragmentScanBinding
 import com.google.zxing.*
 import com.google.zxing.common.HybridBinarizer
@@ -84,6 +85,14 @@ class ScanFragment : Fragment() {
                     val contents = result.contents
 
                     binding.tvResult.text = contents
+
+                    val bundle = Bundle()
+                    bundle.putString("code_items_key", contents)
+
+                    val intent = Intent(requireActivity(), StockInActivity::class.java)
+                    intent.putExtras(bundle)
+                    startActivity(intent)
+                    requireActivity().finish()
 
                 }
                 catch (e: JSONException) {

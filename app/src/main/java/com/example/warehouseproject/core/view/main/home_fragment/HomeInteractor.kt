@@ -91,11 +91,7 @@ class HomeInteractor {
         }
 
         // Encoder qrcode
-        val text = """
-            code_items: ${data.code_items}
-            name: ${data.name}
-            quantity: ${data.qty}
-        """.trimIndent()
+        val text = data.code_items
         QrCode.generate(text, binding.ivQrCode)
 
         binding.btnSaveBarcode.setOnClickListener {
