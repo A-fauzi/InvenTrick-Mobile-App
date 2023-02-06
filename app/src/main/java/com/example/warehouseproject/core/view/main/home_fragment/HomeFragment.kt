@@ -8,6 +8,7 @@ import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
@@ -17,6 +18,7 @@ import com.example.warehouseproject.core.model.product.Product
 import com.example.warehouseproject.core.room.db.ProductDB
 import com.example.warehouseproject.core.service.product.ProductApiService
 import com.example.warehouseproject.core.view.main.MainActivity
+import com.example.warehouseproject.core.view.main.home_fragment.stock_in_product.StockInActivity
 import com.example.warehouseproject.core.view.product.add_product.AddProductActivity
 import com.example.warehouseproject.databinding.FragmentHomeBinding
 
@@ -52,6 +54,19 @@ class HomeFragment : Fragment(), HomeAdapter.CallClickListener, HomeView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.btnToAddProduct.setOnClickListener {
             startActivity(Intent(requireActivity(), AddProductActivity::class.java))
+        }
+
+        binding.cvStockIn.setOnClickListener {
+            startActivity(Intent(requireActivity(), StockInActivity::class.java))
+        }
+        binding.cvStockOut.setOnClickListener {
+            Toast.makeText(requireActivity(), "Fitur sedang dalam pengembangan", Toast.LENGTH_SHORT).show()
+        }
+        binding.cvStockHistory.setOnClickListener {
+            Toast.makeText(requireActivity(), "Fitur sedang dalam pengembangan", Toast.LENGTH_SHORT).show()
+        }
+        binding.cvProductCategory.setOnClickListener {
+            Toast.makeText(requireActivity(), "Fitur sedang dalam pengembangan", Toast.LENGTH_SHORT).show()
         }
 
         binding.rlTotalProduct.setBackgroundColor(Color.parseColor(RandomColor.generate()))
@@ -100,9 +115,11 @@ class HomeFragment : Fragment(), HomeAdapter.CallClickListener, HomeView {
             if (count == "0") {
                 binding.tvDataIsEmpty.visibility = View.VISIBLE
                 binding.rvProduct.visibility = View.GONE
+                binding.tvListProduct.visibility = View.GONE
             } else {
                 binding.tvDataIsEmpty.visibility = View.GONE
                 binding.rvProduct.visibility = View.VISIBLE
+                binding.tvListProduct.visibility = View.VISIBLE
             }
         }, {
             binding.llFullContainer.visibility = View.VISIBLE

@@ -101,4 +101,52 @@ class ProductApiService {
 
             })
     }
+
+    fun getProductByCode(context: Context, codeProduct: String, getResultData: (product: Product) -> Unit, onResponseSuccessBody: () -> Unit) {
+        NetworkConfig(Constant.BASE_URL)
+            .productService()
+            .getProductByCode(codeProduct)
+            .enqueue(object : Callback<Product> {
+                override fun onResponse(call: Call<Product>, response: Response<Product>) {
+                   if (response.isSuccessful) {
+                       response.body()?.let {
+                           getResultData(it)
+                       }
+                       onResponseSuccessBody()
+                   } else {
+                       Toast.makeText(context, response.message(), Toast.LENGTH_SHORT).show()
+                   }
+                }
+
+                override fun onFailure(call: Call<Product>, t: Throwable) {
+                    Log.d("StockInActivity", t.message.toString())
+                }
+
+            })
+    }
+
+    fun updateProductQty(context: Context, id: String, qtyOnly: ProductRequest.RequestQtyOnly, onResponseSuccessBody: (msg: String) -> Unit) {
+        NetworkConfig(Constant.BASE_URL)
+            .productService()
+            .updateProductQty(id, qtyOnly)
+            .enqueue(object : Callback<ProductResponses.SingleResponse> {
+                override fun onResponse(
+                    call: Call<ProductResponses.SingleResponse>,
+                    response: Response<ProductResponses.SingleResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        response.body()?.let {
+                            onResponseSuccessBody(it.message)
+                        }
+                    } else {
+                        Toast.makeText(context, response.message(), Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<ProductResponses.SingleResponse>, t: Throwable) {
+                    Toast.makeText(context, t.message, Toast.LENGTH_SHORT).show()
+                }
+
+            })
+    }
 }

@@ -16,4 +16,9 @@ data class ProductRequest(
     val exp: String,
     val created_at: String? = null,
     val updated_at: String? = null
-)
+) {
+    data class RequestQtyOnly(
+        val qty: String
+    )
+}
+

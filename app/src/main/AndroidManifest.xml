@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-        package="com.example.warehouseproject">
+    package="com.example.warehouseproject">
+
+    <uses-sdk tools:overrideLibrary="com.google.zxing.client.android" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-sdk tools:overrideLibrary="com.google.zxing.client.android" />
 
     <application
         android:allowBackup="true"
@@ -16,12 +17,15 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:largeHeap="true"
         android:theme="@style/Theme.WarehouseProject"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".core.view.main.home_fragment.stock_in_product.StockInActivity"
+            android:exported="false" />
         <activity
             android:name="com.example.warehouseproject.core.view.product.add_product.AddProductActivity"
             android:exported="false" />
@@ -30,18 +34,16 @@
             android:exported="false" />
         <activity
             android:name=".example_mvp.login.LoginActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name="com.example.warehouseproject.core.view.main.MainActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="fullSensor"

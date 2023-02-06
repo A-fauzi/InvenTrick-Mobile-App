@@ -99,6 +99,7 @@
                 android:rowCount="2">
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_stock_in"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_rowWeight="1"
@@ -135,6 +136,7 @@
 
                 </androidx.cardview.widget.CardView>
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_stock_out"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_rowWeight="1"
@@ -171,6 +173,7 @@
 
                 </androidx.cardview.widget.CardView>
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_stock_history"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_rowWeight="1"
@@ -207,6 +210,7 @@
 
                 </androidx.cardview.widget.CardView>
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_product_category"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_rowWeight="1"
@@ -282,7 +286,8 @@
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:visibility="gone"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black"
+                    android:layout_below="@id/divider"/>
             </RelativeLayout>
         </LinearLayout>
 

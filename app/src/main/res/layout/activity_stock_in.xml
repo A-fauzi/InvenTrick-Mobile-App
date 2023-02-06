@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".core.view.main.home_fragment.stock_in_product.StockInActivity">
+
+<!--Jangan lupa di hide lagi-->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_full_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="16dp"
+        android:visibility="invisible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="25dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/iv_item_product"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_people"
+                        android:scaleType="centerCrop"
+                        android:adjustViewBounds="true"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="active"
+                        android:layout_alignParentEnd="true"
+                        android:layout_margin="8dp"/>
+
+                    <TextView
+                        android:id="@+id/tv_id_product"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="id"
+                        android:visibility="gone"/>
+                </RelativeLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tv_code_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="code_item"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"
+                android:textSize="24sp"/>
+
+            <TextView
+                android:id="@+id/tv_name_product"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="name product"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/outlinedTextFieldQtyProduct"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="quantity product"
+                android:layout_marginTop="8dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_qty_product"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_submit_stock_in"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Submit"
+                android:layout_gravity="center"
+                app:cornerRadius="25dp"
+                android:layout_marginTop="8dp"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tv_data_is_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="This view result data."/>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_full_content"
+        android:visibility="invisible"/>
+
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       app:layout_constraintLeft_toLeftOf="parent"
+       app:layout_constraintRight_toRightOf="parent"
+       app:layout_constraintBottom_toBottomOf="parent">
+
+       <com.google.android.material.textfield.TextInputLayout
+           android:id="@+id/text_input_layout_code_product"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_toStartOf="@id/btn_search_product"
+           android:layout_marginEnd="8dp">
+
+           <com.google.android.material.textfield.TextInputEditText
+               android:id="@+id/et_input_code_product"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:hint="Your Text Here"/>
+
+       </com.google.android.material.textfield.TextInputLayout>
+
+
+       <Button
+           android:id="@+id/btn_search_product"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Go"
+           android:layout_alignParentEnd="true"
+           android:layout_centerVertical="true"/>
+   </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
