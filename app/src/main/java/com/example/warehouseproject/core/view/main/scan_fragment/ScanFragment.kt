@@ -37,6 +37,7 @@ class ScanFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentScanBinding.inflate(layoutInflater, container, false)
+        clickScan()
         return binding.root
     }
 
@@ -62,7 +63,7 @@ class ScanFragment : Fragment() {
     private fun openCamera() {
         val qrScan = IntentIntegrator.forSupportFragment(this@ScanFragment)
         qrScan.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)
-        qrScan.setPrompt("Scan a QR Code")
+        qrScan.setPrompt("Scan a QR Code | warehouse-project")
         qrScan.setOrientationLocked(true)
         qrScan.setBeepEnabled(true)
         qrScan.setBarcodeImageEnabled(true)
@@ -99,8 +100,10 @@ class ScanFragment : Fragment() {
         }
     }
     private fun openGallery() {
-        val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        resultLauncherGallery.launch(galleryIntent)
+        Toast.makeText(requireActivity(), "Fitur ini sedang dalam perbaikan", Toast.LENGTH_SHORT).show()
+//        Todo: Fungsi ini di non aktifkan dulu
+//        val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+//        resultLauncherGallery.launch(galleryIntent)
     }
 
     var resultLauncherGallery = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
