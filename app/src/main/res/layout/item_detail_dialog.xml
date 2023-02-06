@@ -64,7 +64,6 @@
                                     android:layout_alignParentEnd="true"
                                     android:layout_alignParentBottom="true"
                                     android:layout_marginEnd="8dp"
-                                    android:backgroundTint="@color/green_cendol"
                                     android:text="actived"
                                     android:textColor="@color/white" />
                             </RelativeLayout>
@@ -256,12 +255,13 @@
                                 android:text="save barcode"
                                 android:layout_gravity="center"/>
 
-                            <ImageView
-                                android:id="@+id/iv_btn_trash"
+                            <TextView
+                                android:id="@+id/tv_btn_trash"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/trash_24"
-                                android:layout_marginTop="16dp"/>
+                                android:layout_marginTop="16dp"
+                                android:text="delete item"
+                                android:textColor="@color/blue"/>
 
                         </LinearLayout>
 

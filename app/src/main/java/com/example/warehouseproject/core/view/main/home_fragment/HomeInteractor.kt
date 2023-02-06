@@ -28,6 +28,18 @@ class HomeInteractor {
 
         Picasso.get().load(data.image).placeholder(R.drawable.ic_people).error(R.drawable.img_example).into(binding.ivItemDetail)
         binding.statusDetail.text = data.status
+        when(data.status) {
+            "active" -> {
+                binding.statusDetail.chipBackgroundColor = context.getColorStateList(R.color.green_cendol)
+            }
+            "sold" -> {
+                binding.statusDetail.chipBackgroundColor = context.getColorStateList(R.color.red_smooth)
+            }
+            else -> {
+                binding.statusDetail.chipBackgroundColor = context.getColorStateList(R.color.blue)
+            }
+        }
+
         binding.chipCodeItemDetail.text = data.code_items
         binding.tvNameProductDetail.text = data.name
 
@@ -44,7 +56,7 @@ class HomeInteractor {
         binding.tvModelDetail.text = data.model
         "exp: ${data.exp}".also { binding.tvExpDetail.text = it }
 
-        binding.ivBtnTrash.setOnClickListener {
+        binding.tvBtnTrash.setOnClickListener {
 
             val builder = AlertDialog.Builder(context)
             with(builder) {
