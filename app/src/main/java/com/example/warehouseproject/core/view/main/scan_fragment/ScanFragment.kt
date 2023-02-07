@@ -84,8 +84,6 @@ class ScanFragment : Fragment() {
                 try {
                     val contents = result.contents
 
-                    binding.tvResult.text = contents
-
                     val bundle = Bundle()
                     bundle.putString("code_items_key", contents)
 
@@ -157,7 +155,14 @@ class ScanFragment : Fragment() {
             val result: Result = reader.decode(bitmap)
             contents = result.text
 
-            binding.tvResult.text = contents
+            val bundle = Bundle()
+            bundle.putString("code_items_key", contents)
+
+            val intent = Intent(requireActivity(), StockInActivity::class.java)
+            intent.putExtras(bundle)
+            startActivity(intent)
+            requireActivity().finish()
+
         } catch (e: Exception) {
             Log.e("QrTest", "Error decoding qr code", e)
             Toast.makeText(requireActivity(), "Error decoding QR Code, Mohon pilih gambar QR Code yang benar!", Toast.LENGTH_SHORT).show()

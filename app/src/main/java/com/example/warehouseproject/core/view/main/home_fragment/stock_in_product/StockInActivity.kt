@@ -1,5 +1,6 @@
 package com.example.warehouseproject.core.view.main.home_fragment.stock_in_product
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -24,6 +25,7 @@ class StockInActivity : AppCompatActivity() {
         setContentView(binding.root)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onStart() {
         super.onStart()
 
@@ -50,6 +52,12 @@ class StockInActivity : AppCompatActivity() {
                 binding.etInputCodeProduct.text?.clear()
                 binding.cardFullContent.visibility = View.VISIBLE
                 binding.progressBar.visibility = View.GONE
+            }, {
+                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+                binding.progressBar.visibility = View.GONE
+                binding.etInputCodeProduct.text?.clear()
+                binding.tvDataIsEmpty.visibility = View.VISIBLE
+                binding.tvDataIsEmpty.text = "Data dengan code $code tidak di temukan"
             })
 
         }

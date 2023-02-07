@@ -6,27 +6,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".core.view.main.scan_fragment.ScanFragment">
 
-   <androidx.cardview.widget.CardView
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:layout_centerInParent="true"
-       android:layout_margin="8dp"
-       app:cardCornerRadius="20dp">
-
-      <TextView
-          android:id="@+id/tv_result"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="content"
-          android:textColor="@color/black"
-          android:layout_margin="16dp"/>
-   </androidx.cardview.widget.CardView>
+  <ImageView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:src="@drawable/ilustration_example"
+      android:layout_above="@id/btn_click_scan"/>
 
    <Button
        android:id="@+id/btn_click_scan"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:text="click scan"
-       android:layout_alignParentBottom="true"/>
+       android:text="scan"
+       android:layout_alignParentBottom="true"
+       android:visibility="gone"/>
 
 </RelativeLayout>

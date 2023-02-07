@@ -45,6 +45,7 @@ class HomeAdapter(
                         binding.chipStatus.chipBackgroundColor = context.getColorStateList(R.color.blue)
                     }
                 }
+                binding.tvItemCodeProduct.text = code_items
                 binding.tvSpecProduct.text = specification
                 "Quantity: ${qty.toInt()}".also { binding.tvQuantityProduct.text = it }
                 binding.tvDetailProduct.setOnClickListener {

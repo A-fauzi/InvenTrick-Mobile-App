@@ -7,7 +7,6 @@
     android:padding="16dp"
     tools:context=".core.view.main.home_fragment.stock_in_product.StockInActivity">
 
-<!--Jangan lupa di hide lagi-->
     <androidx.cardview.widget.CardView
         android:id="@+id/card_full_content"
         android:layout_width="match_parent"
@@ -27,7 +26,7 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="150dp"
                 app:cardCornerRadius="25dp">
 
                 <RelativeLayout
@@ -38,9 +37,9 @@
                         android:id="@+id/iv_item_product"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_people"
+                        android:adjustViewBounds="true"
                         android:scaleType="centerCrop"
-                        android:adjustViewBounds="true"/>
+                        android:src="@drawable/ic_people" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chip_status"
@@ -117,7 +116,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:text="This view result data."/>
+        android:text="This view result data."
+        android:textColor="@color/black"/>
 
     <ProgressBar
         android:id="@+id/progress_bar"

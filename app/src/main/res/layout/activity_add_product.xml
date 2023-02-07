@@ -120,6 +120,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="quantity product"
+            android:enabled="false"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
 
@@ -127,7 +128,8 @@
                 android:id="@+id/et_qty_product"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number" />
+                android:inputType="number"
+                android:text="0"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 

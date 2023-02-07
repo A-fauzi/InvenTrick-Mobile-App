@@ -102,7 +102,7 @@ class ProductApiService {
             })
     }
 
-    fun getProductByCode(context: Context, codeProduct: String, getResultData: (product: Product) -> Unit, onResponseSuccessBody: () -> Unit) {
+    fun getProductByCode(context: Context, codeProduct: String, getResultData: (product: Product) -> Unit, onResponseSuccessBody: () -> Unit, onResponseErrorBody: (msg: String) -> Unit) {
         NetworkConfig(Constant.BASE_URL)
             .productService()
             .getProductByCode(codeProduct)
@@ -114,7 +114,10 @@ class ProductApiService {
                        }
                        onResponseSuccessBody()
                    } else {
-                       Toast.makeText(context, response.message(), Toast.LENGTH_SHORT).show()
+                       // convert json to String
+                       val gson = Gson()
+                       val mNanu = gson.fromJson(response.errorBody()?.string(), ProductResponses.SingleResponse::class.java)
+                       onResponseErrorBody(mNanu.message)
                    }
                 }
 
