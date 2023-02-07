@@ -15,9 +15,11 @@ import androidx.room.Room
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.helper.RandomColor
 import com.example.warehouseproject.core.model.product.Product
+import com.example.warehouseproject.core.model.product.StockHistory
 import com.example.warehouseproject.core.room.db.ProductDB
 import com.example.warehouseproject.core.service.product.ProductApiService
 import com.example.warehouseproject.core.view.main.MainActivity
+import com.example.warehouseproject.core.view.main.home_fragment.stock_histories.StockHistoriesActivity
 import com.example.warehouseproject.core.view.main.home_fragment.stock_in_product.StockInActivity
 import com.example.warehouseproject.core.view.product.add_product.AddProductActivity
 import com.example.warehouseproject.databinding.FragmentHomeBinding
@@ -63,7 +65,7 @@ class HomeFragment : Fragment(), HomeAdapter.CallClickListener, HomeView {
             Toast.makeText(requireActivity(), "Fitur sedang dalam pengembangan", Toast.LENGTH_SHORT).show()
         }
         binding.cvStockHistory.setOnClickListener {
-            Toast.makeText(requireActivity(), "Fitur sedang dalam pengembangan", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(requireActivity(), StockHistoriesActivity::class.java))
         }
         binding.cvProductCategory.setOnClickListener {
             Toast.makeText(requireActivity(), "Fitur sedang dalam pengembangan", Toast.LENGTH_SHORT).show()

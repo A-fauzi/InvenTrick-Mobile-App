@@ -8,6 +8,7 @@ import com.example.warehouseproject.core.constant.Constant
 import com.example.warehouseproject.core.model.product.Product
 import com.example.warehouseproject.core.model.product.ProductRequest
 import com.example.warehouseproject.core.model.product.ProductResponses
+import com.example.warehouseproject.core.model.product.StockHistory
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
@@ -128,7 +129,7 @@ class ProductApiService {
             })
     }
 
-    fun updateProductQty(context: Context, id: String, qtyOnly: ProductRequest.RequestQtyOnly, onResponseSuccessBody: (msg: String) -> Unit) {
+    fun updateProductQty(context: Context, id: String, qtyOnly: ProductRequest.RequestQtyOnly, onResponseSuccessBody: (msg: String, data: Product) -> Unit) {
         NetworkConfig(Constant.BASE_URL)
             .productService()
             .updateProductQty(id, qtyOnly)
@@ -139,7 +140,7 @@ class ProductApiService {
                 ) {
                     if (response.isSuccessful) {
                         response.body()?.let {
-                            onResponseSuccessBody(it.message)
+                            onResponseSuccessBody(it.message, it.data)
                         }
                     } else {
                         Toast.makeText(context, response.message(), Toast.LENGTH_SHORT).show()
@@ -152,4 +153,61 @@ class ProductApiService {
 
             })
     }
+
+    // Create api service stock history
+    fun createStockHistory(request: StockHistory.StockHistoryRequest) {
+        NetworkConfig(Constant.BASE_URL)
+            .productService()
+            .stockHistory(request)
+            .enqueue(object : Callback<StockHistory.StockHistorySingleResponse> {
+                override fun onResponse(
+                    call: Call<StockHistory.StockHistorySingleResponse>,
+                    response: Response<StockHistory.StockHistorySingleResponse>
+                ) {
+                   if (response.isSuccessful) {
+                       Log.d("StockHistoryActivity", "SUCCESS MSG: ${response.body()?.message}")
+                       Log.d("StockHistoryActivity", "SUCCESS DATA: ${response.body()?.data}")
+                   } else {
+                       Log.d("StockHistoryActivity", "ERROR RESPONSE: ${response.body()?.message}")
+                   }
+                }
+
+                override fun onFailure(
+                    call: Call<StockHistory.StockHistorySingleResponse>,
+                    t: Throwable
+                ) {
+                    Log.d("StockHistoryActivity", "ON FAILURE: ${t.message}")
+                }
+
+            })
+    }
+
+    fun getStockHistories(onResponseSuccessBody: (msg: String, data: List<StockHistory>, count: String) -> Unit) {
+        NetworkConfig(Constant.BASE_URL)
+            .productService()
+            .getStockHistories()
+            .enqueue(object : Callback<StockHistory.StockHistoryAllResponse> {
+                override fun onResponse(
+                    call: Call<StockHistory.StockHistoryAllResponse>,
+                    response: Response<StockHistory.StockHistoryAllResponse>
+                ) {
+                    if (response.isSuccessful) {
+                       response.body()?.let {
+                           onResponseSuccessBody(it.message, it.data, it.count)
+                       }
+                    } else {
+                        Log.d("Histories", response.message())
+                    }
+                }
+
+                override fun onFailure(
+                    call: Call<StockHistory.StockHistoryAllResponse>,
+                    t: Throwable
+                ) {
+                    Log.d("Histories", t.message.toString())
+                }
+
+            })
+    }
+
 }

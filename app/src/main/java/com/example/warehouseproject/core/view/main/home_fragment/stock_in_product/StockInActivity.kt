@@ -2,15 +2,18 @@ package com.example.warehouseproject.core.view.main.home_fragment.stock_in_produ
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.airbnb.lottie.LottieAnimationView
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.helper.HideKeyboardHelper
 import com.example.warehouseproject.core.model.product.ProductRequest
+import com.example.warehouseproject.core.model.product.StockHistory
 import com.example.warehouseproject.core.service.product.ProductApiService
 import com.example.warehouseproject.core.view.main.MainActivity
 import com.example.warehouseproject.databinding.ActivityStockInBinding
@@ -21,6 +24,9 @@ class StockInActivity : AppCompatActivity() {
     private lateinit var animationView: LottieAnimationView
 
     private lateinit var binding: ActivityStockInBinding
+
+    private var beforeQty: Int = 0
+    private var afterQty: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +62,9 @@ class StockInActivity : AppCompatActivity() {
             val code = binding.etInputCodeProduct.text.toString()
 
             ProductApiService().getProductByCode(this, code, {
+
+                beforeQty = it.qty.toInt()
+
                 Picasso.get().load(it.image).placeholder(R.drawable.ic_people).error(R.drawable.img_example).into(binding.ivItemProduct)
                 binding.tvIdProduct.text = it._id
                 binding.chipStatus.text = it.status
@@ -87,12 +96,31 @@ class StockInActivity : AppCompatActivity() {
 
             HideKeyboardHelper.hideSoftKeyBoard(this, binding.root)
 
-            val qty = ProductRequest.RequestQtyOnly(binding.etQtyProduct.text.toString())
+            val qtyInput = binding.etQtyProduct.text.toString()
 
-            ProductApiService().updateProductQty(this, binding.tvIdProduct.text.toString(), qty) {
-                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
+            val resultCalculate = beforeQty + qtyInput.toInt()
+
+            val qty = ProductRequest.RequestQtyOnly(resultCalculate.toString())
+
+
+            ProductApiService().updateProductQty(this, binding.tvIdProduct.text.toString(), qty) { message, data ->
+
+
+                val dataRequest = StockHistory.StockHistoryRequest(data.code_items, data.name, qtyInput, "IN")
+                ProductApiService().createStockHistory( dataRequest)
+
+                binding.cardFullContent.visibility = View.GONE
+                binding.progressBar.visibility = View.GONE
+
+                animationView.setAnimation(R.raw.successful)
+                animationView.loop(false)
+                animationView.playAnimation()
+
+                Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+
+                Handler().postDelayed( {
+                    startActivity(Intent(this, MainActivity::class.java).setFlags(FLAG_ACTIVITY_CLEAR_TOP))
+                }, 1500 )
             }
 
         }

@@ -3,6 +3,7 @@ package com.example.warehouseproject.core.service.product
 import com.example.warehouseproject.core.model.product.Product
 import com.example.warehouseproject.core.model.product.ProductRequest
 import com.example.warehouseproject.core.model.product.ProductResponses
+import com.example.warehouseproject.core.model.product.StockHistory
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -22,4 +23,10 @@ interface ProductService {
 
     @DELETE("product/{id}")
     fun deleteProduct(@Path("id") productId: String): Call<ProductResponses.SingleResponse>
+
+    @POST("stock-history")
+    fun stockHistory(@Body stockHistoryRequest: StockHistory.StockHistoryRequest): Call<StockHistory.StockHistorySingleResponse>
+
+    @GET("stock-history")
+    fun getStockHistories(): Call<StockHistory.StockHistoryAllResponse>
 }

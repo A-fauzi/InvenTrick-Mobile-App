@@ -24,6 +24,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".core.view.main.home_fragment.stock_histories.StockHistoriesActivity"
+            android:exported="false" />
+        <activity
             android:name=".core.view.main.home_fragment.stock_in_product.StockInActivity"
             android:exported="false" />
         <activity
