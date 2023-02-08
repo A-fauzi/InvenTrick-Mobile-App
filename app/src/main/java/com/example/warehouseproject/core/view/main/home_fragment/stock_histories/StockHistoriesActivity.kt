@@ -2,16 +2,13 @@ package com.example.warehouseproject.core.view.main.home_fragment.stock_historie
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.warehouseproject.R
-import com.example.warehouseproject.core.model.product.Product
 import com.example.warehouseproject.core.model.product.StockHistory
 import com.example.warehouseproject.core.service.product.ProductApiService
-import com.example.warehouseproject.core.view.main.home_fragment.HomeAdapter
 import com.example.warehouseproject.databinding.ActivityStockHistoriesBinding
 
-class StockHistoriesActivity : AppCompatActivity() {
+class StockHistoriesActivity : AppCompatActivity(), StockHistoriesAdapter.Listener {
 
     private lateinit var binding: ActivityStockHistoriesBinding
     private lateinit var stockHistoriesAdapter: StockHistoriesAdapter
@@ -28,7 +25,7 @@ class StockHistoriesActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
-        stockHistoriesAdapter = StockHistoriesAdapter(this, arrayListOf())
+        stockHistoriesAdapter = StockHistoriesAdapter(this, arrayListOf(), this)
         binding.rvHistories.apply {
             layoutManager =
                 LinearLayoutManager(this@StockHistoriesActivity, LinearLayoutManager.VERTICAL, false)
@@ -42,9 +39,16 @@ class StockHistoriesActivity : AppCompatActivity() {
 
     private fun getData() {
         ProductApiService().getStockHistories {msg, data, count ->
-            Log.d("StockHistoriesActivity", msg)
-            Log.d("StockHistoriesActivity", count)
             showDataProduct(data)
         }
     }
+
+    override fun onClickItemHistory(data: StockHistory) {
+        ProductApiService().getProductByCode(data.code_items, {}, {
+            Toast.makeText(this, "Product masih tersedia", Toast.LENGTH_SHORT).show()
+        }, {
+            Toast.makeText(this, "Product sudah tidak tersedia", Toast.LENGTH_SHORT).show()
+        })
+    }
+
 }

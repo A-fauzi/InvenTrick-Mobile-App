@@ -6,15 +6,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.warehouseproject.R
-import com.example.warehouseproject.core.model.product.Product
 import com.example.warehouseproject.core.model.product.StockHistory
+import com.example.warehouseproject.core.service.product.ProductApiService
 import com.example.warehouseproject.databinding.ItemDataHistoryBinding
-import com.example.warehouseproject.databinding.ItemDataProductBinding
-import com.squareup.picasso.Picasso
 
 class StockHistoriesAdapter(
     private val context: Context,
-    private val items: ArrayList<StockHistory>
+    private val items: ArrayList<StockHistory>,
+    private val lister: Listener
 ): RecyclerView.Adapter<StockHistoriesAdapter.MainViewHolder>() {
     class MainViewHolder( val binding: ItemDataHistoryBinding): RecyclerView.ViewHolder(binding.root)
 
@@ -23,6 +22,7 @@ class StockHistoriesAdapter(
         return MainViewHolder(binding)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         with(holder) {
             with(items[position]) {
@@ -43,6 +43,17 @@ class StockHistoriesAdapter(
                 binding.tvItemCode.text = code_items
                 "Quantity: ${qty.toInt()}".also { binding.tvQuantity.text = it }
                 binding.tvDate.text = created_at
+
+                binding.cardItem.setOnClickListener {
+                    lister.onClickItemHistory(items[position])
+                }
+
+                ProductApiService().getProductByCode(code_items, {}, {
+                    binding.tvDataNotFound.text = "Product is avail"
+                    binding.tvDataNotFound.setTextColor(context.resources.getColor(R.color.blue)) }, {
+                    binding.tvDataNotFound.text = "Product not avail"}
+                )
+
             }
         }
     }
@@ -56,4 +67,7 @@ class StockHistoriesAdapter(
         notifyDataSetChanged()
     }
 
+    interface Listener {
+        fun onClickItemHistory(data: StockHistory)
+    }
 }

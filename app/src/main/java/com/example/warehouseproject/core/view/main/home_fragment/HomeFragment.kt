@@ -2,9 +2,7 @@ package com.example.warehouseproject.core.view.main.home_fragment
 
 import android.content.Intent
 import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
-import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,12 +13,12 @@ import androidx.room.Room
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.helper.RandomColor
 import com.example.warehouseproject.core.model.product.Product
-import com.example.warehouseproject.core.model.product.StockHistory
 import com.example.warehouseproject.core.room.db.ProductDB
 import com.example.warehouseproject.core.service.product.ProductApiService
 import com.example.warehouseproject.core.view.main.MainActivity
 import com.example.warehouseproject.core.view.main.home_fragment.stock_histories.StockHistoriesActivity
 import com.example.warehouseproject.core.view.main.home_fragment.stock_in_product.StockInActivity
+import com.example.warehouseproject.core.view.main.home_fragment.stock_out_product.StockOutActivity
 import com.example.warehouseproject.core.view.product.add_product.AddProductActivity
 import com.example.warehouseproject.databinding.FragmentHomeBinding
 
@@ -62,7 +60,7 @@ class HomeFragment : Fragment(), HomeAdapter.CallClickListener, HomeView {
             startActivity(Intent(requireActivity(), StockInActivity::class.java))
         }
         binding.cvStockOut.setOnClickListener {
-            Toast.makeText(requireActivity(), "Fitur sedang dalam pengembangan", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(requireActivity(), StockOutActivity::class.java))
         }
         binding.cvStockHistory.setOnClickListener {
             startActivity(Intent(requireActivity(), StockHistoriesActivity::class.java))
@@ -123,10 +121,10 @@ class HomeFragment : Fragment(), HomeAdapter.CallClickListener, HomeView {
                 binding.rvProduct.visibility = View.VISIBLE
                 binding.tvListProduct.visibility = View.VISIBLE
             }
-        }, {
+        }) {
             binding.llFullContainer.visibility = View.VISIBLE
             binding.progressBar.visibility = View.GONE
-        })
+        }
     }
 
     private fun showDataProduct(product: List<Product>) {

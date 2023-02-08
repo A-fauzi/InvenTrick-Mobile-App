@@ -1,13 +1,14 @@
-package com.example.warehouseproject.core.view.main.home_fragment.stock_in_product
+package com.example.warehouseproject.core.view.main.home_fragment.stock_out_product
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP
+import android.content.res.ColorStateList
+import android.graphics.Color
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.airbnb.lottie.LottieAnimationView
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.helper.HideKeyboardHelper
@@ -15,20 +16,20 @@ import com.example.warehouseproject.core.model.product.ProductRequest
 import com.example.warehouseproject.core.model.product.StockHistory
 import com.example.warehouseproject.core.service.product.ProductApiService
 import com.example.warehouseproject.core.view.main.MainActivity
-import com.example.warehouseproject.databinding.ActivityStockInBinding
+import com.example.warehouseproject.databinding.ActivityStockOutBinding
 import com.squareup.picasso.Picasso
 
-class StockInActivity : AppCompatActivity() {
+class StockOutActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityStockOutBinding
 
     private lateinit var animationView: LottieAnimationView
-
-    private lateinit var binding: ActivityStockInBinding
 
     private var beforeQty: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityStockInBinding.inflate(layoutInflater)
+        binding = ActivityStockOutBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         animationView = binding.animationView
@@ -43,7 +44,7 @@ class StockInActivity : AppCompatActivity() {
         animationView.playAnimation()
 
         val codeItemBundle = intent.extras?.getString("code_items_key")
-            binding.etInputCodeProduct.setText(codeItemBundle)
+        binding.etInputCodeProduct.setText(codeItemBundle)
 
         binding.btnSearchProduct.setOnClickListener {
 
@@ -94,29 +95,39 @@ class StockInActivity : AppCompatActivity() {
 
             val qtyInput = binding.etQtyProduct.text.toString()
 
-            val resultCalculate = beforeQty + qtyInput.toInt()
-
-            val qty = ProductRequest.RequestQtyOnly(resultCalculate.toString())
-
-
-            ProductApiService().updateProductQty(this, binding.tvIdProduct.text.toString(), qty) { message, data ->
-
-
-                val dataRequest = StockHistory.StockHistoryRequest(data.code_items, data.name, qtyInput, "IN")
-                ProductApiService().createStockHistory( dataRequest)
-
-                binding.cardFullContent.visibility = View.GONE
+            if ( beforeQty < qtyInput.toInt()) {
                 binding.progressBar.visibility = View.GONE
+                binding.outlinedTextFieldQtyProduct.helperText = "Jumlah quantity product tidak memenuhi, jumlah saat ini $beforeQty "
+                binding.outlinedTextFieldQtyProduct.isHelperTextEnabled = true
+                binding.outlinedTextFieldQtyProduct.setHelperTextColor(getColorStateList(R.color.red_smooth))
+            } else {
 
-                animationView.setAnimation(R.raw.successful)
-                animationView.loop(false)
-                animationView.playAnimation()
+                val resultCalculate = beforeQty - qtyInput.toInt()
 
-                binding.tvDataIsEmpty.text = "Quantity product telah ditambahkan sejumlah ${binding.etQtyProduct.text.toString()}"
+                val qty = ProductRequest.RequestQtyOnly(resultCalculate.toString())
 
-                Handler().postDelayed( {
-                    startActivity(Intent(this, MainActivity::class.java).setFlags(FLAG_ACTIVITY_CLEAR_TOP))
-                }, 2000 )
+
+                ProductApiService().updateProductQty(this, binding.tvIdProduct.text.toString(), qty) { message, data ->
+
+
+                    val dataRequest = StockHistory.StockHistoryRequest(data.code_items, data.name, qtyInput, "OUT")
+                    ProductApiService().createStockHistory( dataRequest)
+
+                    binding.cardFullContent.visibility = View.GONE
+                    binding.progressBar.visibility = View.GONE
+
+                    animationView.setAnimation(R.raw.successful)
+                    animationView.loop(false)
+                    animationView.playAnimation()
+
+                    binding.tvDataIsEmpty.text = "Quantity product telah keluar sejumlah ${binding.etQtyProduct.text.toString()}"
+
+                    Handler().postDelayed( {
+                        startActivity(Intent(this, MainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+                    }, 2000 )
+                }
+
+
             }
 
         }

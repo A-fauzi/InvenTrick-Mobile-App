@@ -107,7 +107,7 @@
                     android:layout_margin="16dp"
                     app:cardElevation="8dp"
                     app:cardCornerRadius="16dp"
-                    android:backgroundTint="@color/pink"
+                    android:backgroundTint="@color/green_cendol"
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground">
@@ -144,7 +144,7 @@
                     android:layout_margin="16dp"
                     app:cardElevation="8dp"
                     app:cardCornerRadius="16dp"
-                    android:backgroundTint="@color/green_cendol"
+                    android:backgroundTint="@color/red_smooth"
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground">

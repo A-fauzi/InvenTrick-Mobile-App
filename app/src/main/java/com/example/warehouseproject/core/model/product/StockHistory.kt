@@ -1,6 +1,7 @@
 package com.example.warehouseproject.core.model.product
 
 data class StockHistory(
+    val _id: String,
     val code_items: String,
     val name: String,
     val qty: String,

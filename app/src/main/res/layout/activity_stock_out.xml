@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context=".core.view.main.home_fragment.stock_in_product.StockInActivity">
+    tools:context=".core.view.main.home_fragment.stock_out_product.StockOutActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_full_content"
@@ -27,16 +27,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Product masuk"
+                android:text="Product keluar"
                 android:textColor="@color/black"/>
-
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 app:cardCornerRadius="25dp"
                 android:layout_marginTop="8dp">
-
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -94,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 app:helperTextEnabled="true"
-                app:helperText="Jumlah quantity yang ingin ditambahkan"
+                app:helperText="Jumlah quantity yang keluar"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
 
@@ -111,7 +109,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Submit"
-                android:backgroundTint="@color/green_cendol"
+                android:backgroundTint="@color/red_smooth"
                 android:layout_gravity="center"
                 app:cornerRadius="25dp"
                 android:layout_marginTop="8dp"/>
@@ -147,35 +145,35 @@
         app:layout_constraintTop_toBottomOf="@id/card_full_content"
         android:visibility="invisible"/>
 
-   <RelativeLayout
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       app:layout_constraintLeft_toLeftOf="parent"
-       app:layout_constraintRight_toRightOf="parent"
-       app:layout_constraintBottom_toBottomOf="parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-       <com.google.android.material.textfield.TextInputLayout
-           android:id="@+id/text_input_layout_code_product"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_toStartOf="@id/btn_search_product"
-           android:layout_marginEnd="8dp">
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_input_layout_code_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@id/btn_search_product"
+            android:layout_marginEnd="8dp">
 
-           <com.google.android.material.textfield.TextInputEditText
-               android:id="@+id/et_input_code_product"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:hint="Your Text Here"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_input_code_product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Your Text Here"/>
 
-       </com.google.android.material.textfield.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
 
-       <Button
-           android:id="@+id/btn_search_product"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="Go"
-           android:layout_alignParentEnd="true"
-           android:layout_centerVertical="true"/>
-   </RelativeLayout>
+        <Button
+            android:id="@+id/btn_search_product"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Go"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

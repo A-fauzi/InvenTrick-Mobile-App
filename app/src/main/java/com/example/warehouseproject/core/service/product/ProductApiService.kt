@@ -48,7 +48,7 @@ class ProductApiService {
             })
     }
 
-    fun getDataProduct(context: Context, resultDataCount: (data: List<Product>, count: String) -> Unit, viewVisibilitySuccess: () -> Unit) {
+    fun getDataProduct(context: Context? = null, resultDataCount: (data: List<Product>, count: String) -> Unit, viewVisibilitySuccess: () -> Unit) {
         NetworkConfig(Constant.BASE_URL)
             .productService()
             .getProducts()
@@ -63,6 +63,7 @@ class ProductApiService {
                         }
                         viewVisibilitySuccess()
                     } else {
+                        Log.d("MainActivity", response.message())
                         Toast.makeText(context, "Error Response: ${response.message()}", Toast.LENGTH_SHORT).show()
                     }
 
@@ -103,7 +104,7 @@ class ProductApiService {
             })
     }
 
-    fun getProductByCode(context: Context, codeProduct: String, getResultData: (product: Product) -> Unit, onResponseSuccessBody: () -> Unit, onResponseErrorBody: (msg: String) -> Unit) {
+    fun getProductByCode( codeProduct: String, getResultData: (product: Product) -> Unit, onResponseSuccessBody: () -> Unit, onResponseErrorBody: (msg: String) -> Unit) {
         NetworkConfig(Constant.BASE_URL)
             .productService()
             .getProductByCode(codeProduct)
