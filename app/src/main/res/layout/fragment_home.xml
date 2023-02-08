@@ -47,10 +47,10 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/inter_bold"
                             android:text="Total Product"
                             android:textColor="@color/white"
-                            android:textSize="24sp"
-                            android:textStyle="bold"/>
+                            android:textSize="24sp" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -62,6 +62,8 @@
                                 android:id="@+id/tv_count_products"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter"
+                                android:textFontWeight="500"
                                 android:text="200"
                                 android:textColor="@color/white"
                                 android:textSize="24sp"/>
@@ -74,17 +76,21 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
                                     android:text="Dari keseluruhan product"
-                                    android:textColor="@color/white"
-                                    android:layout_centerVertical="true"/>
+                                    android:fontFamily="@font/inter_medium"
+                                    android:textColor="@color/white" />
+
                                 <Button
                                     android:id="@+id/btn_to_add_product"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Add Product"
+                                    android:layout_alignParentEnd="true"
                                     android:backgroundTint="@color/white"
-                                    android:textColor="@color/black"
-                                    android:layout_alignParentEnd="true"/>
+                                    android:fontFamily="@font/inter_medium"
+                                    android:text="Add Product"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/black" />
                             </RelativeLayout>
                         </LinearLayout>
                     </RelativeLayout>
@@ -120,18 +126,19 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="stock"
                             android:layout_gravity="center"
-                            android:textColor="@color/white"/>
+                            android:text="stock"
+                            android:fontFamily="@font/inter_medium"
+                            android:textColor="@color/white" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="IN"
+                            android:fontFamily="@font/inter_semibold"
                             android:layout_gravity="center"
                             android:layout_centerInParent="true"
-                            android:textColor="@color/white"
-                            android:textStyle="bold"/>
+                            android:textColor="@color/white"/>
                     </RelativeLayout>
 
                 </androidx.cardview.widget.CardView>
@@ -157,9 +164,10 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="stock"
                             android:layout_gravity="center"
-                            android:textColor="@color/white"/>
+                            android:text="stock"
+                            android:fontFamily="@font/inter_medium"
+                            android:textColor="@color/white" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -167,6 +175,7 @@
                             android:layout_centerInParent="true"
                             android:layout_gravity="center"
                             android:text="OUT"
+                            android:fontFamily="@font/inter_semibold"
                             android:textColor="@color/white"
                             android:textStyle="bold" />
                     </RelativeLayout>
@@ -194,9 +203,10 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="stock"
                             android:layout_gravity="center"
-                            android:textColor="@color/white"/>
+                            android:text="stock"
+                            android:fontFamily="@font/inter_medium"
+                            android:textColor="@color/white" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -204,6 +214,7 @@
                             android:layout_centerInParent="true"
                             android:layout_gravity="center"
                             android:text="History"
+                            android:fontFamily="@font/inter_semibold"
                             android:textColor="@color/white"
                             android:textStyle="bold" />
                     </RelativeLayout>
@@ -231,9 +242,10 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="product"
                             android:layout_gravity="center"
-                            android:textColor="@color/white"/>
+                            android:text="product"
+                            android:fontFamily="@font/inter_medium"
+                            android:textColor="@color/white" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -241,6 +253,7 @@
                             android:layout_centerInParent="true"
                             android:layout_gravity="center"
                             android:text="Category"
+                            android:fontFamily="@font/inter_semibold"
                             android:textColor="@color/white"
                             android:textStyle="bold" />
                     </RelativeLayout>
@@ -258,9 +271,9 @@
                 <com.google.android.material.divider.MaterialDivider
                     android:id="@+id/divider"
                     android:layout_width="match_parent"
-                    android:layout_height="5dp"
+                    android:layout_height="2dp"
                     app:dividerInsetEnd="150dp"
-                    app:dividerInsetStart="150dp"/>
+                    app:dividerInsetStart="150dp" />
 
                 <TextView
                     android:id="@+id/tv_list_product"
@@ -269,15 +282,16 @@
                     android:layout_below="@id/divider"
                     android:layout_centerHorizontal="true"
                     android:text="Product list"
-                    android:textColor="@color/black"/>
+                    android:fontFamily="@font/inter_medium"
+                    android:textColor="@color/black" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_product"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_list_product"
                     android:layout_marginTop="8dp"
-                    tools:listitem="@layout/item_data_product"
-                    android:layout_below="@id/tv_list_product"/>
+                    tools:listitem="@layout/item_data_product" />
                 <TextView
                     android:id="@+id/tv_data_is_empty"
                     android:layout_width="wrap_content"

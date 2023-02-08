@@ -23,6 +23,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:text="active"
+                android:fontFamily="@font/inter_medium"
                 android:textColor="@color/white"/>
 
 
@@ -36,6 +37,7 @@
                     android:id="@+id/tv_item_code"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_medium"
                     android:text="code"
                     android:textColor="@color/black" />
 
@@ -48,7 +50,7 @@
                     android:text="Susu Beruang"
                     android:textColor="@color/black"
                     android:textSize="24sp"
-                    android:textStyle="bold" />
+                    android:fontFamily="@font/inter_bold"/>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -60,6 +62,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="quantity: 200"
+                        android:fontFamily="@font/inter_medium"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -73,13 +76,15 @@
                             android:id="@+id/tv_date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="date" />
+                            android:text="date"
+                            android:fontFamily="@font/inter_medium"/>
 
                         <TextView
                             android:id="@+id/tv_data_not_found"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="memuat..."
+                            android:fontFamily="@font/inter_medium"
                             android:textColor="@color/red_smooth" />
                     </LinearLayout>
                 </RelativeLayout>

@@ -4,17 +4,22 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.constant.Constant.REQUEST_CODE
+import com.example.warehouseproject.core.helper.Currency
 import com.example.warehouseproject.core.helper.HideKeyboardHelper
 import com.example.warehouseproject.core.model.product.ProductRequest
 import com.example.warehouseproject.core.view.main.MainActivity
 import com.example.warehouseproject.databinding.ActivityAddProductBinding
 import com.google.firebase.storage.FirebaseStorage
 import com.tapadoo.alerter.Alerter
+import java.text.NumberFormat
 import java.util.*
 
 class AddProductActivity : AppCompatActivity(), AddProductView {
@@ -70,21 +75,22 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
 
         firebaseStorage = FirebaseStorage.getInstance()
 
+
         binding.submitButtonAddProduct.setOnClickListener {
             modelRequestAddProduct = ProductRequest(
-                "Kosong",
-                "${code.text}",
-                "${name.text}",
-                "${qty.text}",
-                "${category.text}",
-                "${subCategory.text}",
-                "${spec.text}",
-                price.text.toString(),
-                "${location.text}",
-                "${status.text}",
-                "${model.text}",
-                "${lot.text}",
-                "${exp.text}",
+                image = "Kosong",
+                code_items = "${code.text}",
+                name = "${name.text}",
+                qty = "${qty.text}",
+                price = price.text.toString(),
+                category = "${category.text}",
+                sub_category = "${subCategory.text}",
+                specification = "${spec.text}",
+                location = "${location.text}",
+                status = "${status.text}",
+                model = "${model.text}",
+                lot = "${lot.text}",
+                exp = "${exp.text}",
             )
             checkInitializedView(modelRequestAddProduct)
             HideKeyboardHelper.hideSoftKeyBoard(this, binding.root)
@@ -101,6 +107,29 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
         binding.btnGetCapture.setOnClickListener {
             getImageCapture()
         }
+
+        val textWatcher =  object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if (price.text.toString().isEmpty()) {
+                    binding.outlinedTextFieldPriceProduct.helperText =  "is not empty!"
+                    binding.outlinedTextFieldPriceProduct.setHelperTextColor(getColorStateList(R.color.red_smooth))
+                } else {
+                    binding.outlinedTextFieldPriceProduct.helperText =  Currency.format(p0.toString().toDouble(), "id", "ID")
+                    binding.outlinedTextFieldPriceProduct.setHelperTextColor(getColorStateList(R.color.black))
+                }
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+            }
+
+        }
+
+        price.addTextChangedListener(textWatcher)
+
 
     }
 

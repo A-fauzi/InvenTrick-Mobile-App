@@ -7,6 +7,7 @@
     android:padding="16dp"
     tools:context=".core.view.main.home_fragment.stock_out_product.StockOutActivity">
 
+<!--  Jangan lupa di hide  -->
     <androidx.cardview.widget.CardView
         android:id="@+id/card_full_content"
         android:layout_width="match_parent"
@@ -28,7 +29,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Product keluar"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black"
+                android:fontFamily="@font/inter_medium"/>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -52,9 +54,13 @@
                         android:id="@+id/chip_status"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="active"
                         android:layout_alignParentEnd="true"
-                        android:layout_margin="8dp"/>
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="active"
+                        android:fontFamily="@font/inter_medium"/>
 
                     <TextView
                         android:id="@+id/tv_id_product"
@@ -73,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:text="code_item"
                 android:textColor="@color/black"
-                android:textStyle="bold"
+                android:fontFamily="@font/inter_bold"
                 android:layout_marginTop="8dp"
                 android:textSize="24sp"/>
 
@@ -84,6 +90,7 @@
                 android:layout_marginTop="8dp"
                 android:textSize="16sp"
                 android:textColor="@color/black"
+                android:fontFamily="@font/inter_medium"
                 android:text="name product"/>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -109,6 +116,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Submit"
+                android:fontFamily="@font/inter_medium"
+                android:textAllCaps="false"
                 android:backgroundTint="@color/red_smooth"
                 android:layout_gravity="center"
                 app:cornerRadius="25dp"
@@ -134,7 +143,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:text="This view result data."
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:fontFamily="@font/inter_medium"/>
 
     <ProgressBar
         android:id="@+id/progress_bar"
@@ -163,7 +173,8 @@
                 android:id="@+id/et_input_code_product"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Your Text Here"/>
+                android:hint="Your Text Here"
+                android:fontFamily="@font/inter_medium"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -172,8 +183,10 @@
             android:id="@+id/btn_search_product"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Go"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true"
+            android:text="Search"
+            android:textAllCaps="false"
+            android:fontFamily="@font/inter_medium"/>
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="200dp"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="8dp"
     app:layout_constraintLeft_toLeftOf="parent"
@@ -19,6 +19,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:text="active"
+                android:fontFamily="@font/inter_medium"
                 android:textColor="@color/white"/>
 
            <RelativeLayout
@@ -49,19 +50,20 @@
                     android:id="@+id/tv_item_code_product"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_medium"
                     android:text="code"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black" />
 
                 <TextView
                     android:id="@+id/tv_name_product"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:layout_marginBottom="16dp"
                     android:text="Susu Beruang"
                     android:textColor="@color/black"
                     android:textSize="24sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="8dp"/>
+                    android:fontFamily="@font/inter_bold"/>
 
                 <TextView
                     android:id="@+id/tv_spec_product"
@@ -71,7 +73,8 @@
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:text="@string/lorem"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:fontFamily="@font/inter_medium"/>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -83,7 +86,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="quantity: 200"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/inter_medium"/>
 
                     <TextView
                         android:id="@+id/tv_detail_product"
@@ -91,6 +95,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:text="detail"
+                        android:fontFamily="@font/inter_medium"
                         android:textColor="@color/blue" />
                 </RelativeLayout>
 

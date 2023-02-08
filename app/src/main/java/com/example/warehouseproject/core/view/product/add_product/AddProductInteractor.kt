@@ -29,7 +29,7 @@ class AddProductInteractor {
             input.category.isEmpty()  -> listener.onInputErrorCategory()
             input.sub_category.isEmpty()  -> listener.onInputErrorSubCategory()
             input.specification.isEmpty()  -> listener.onInputErrorSpec()
-            input.price.isEmpty()  -> listener.onInputErrorPrice()
+            input.price?.isEmpty() == true -> listener.onInputErrorPrice()
             input.location.isEmpty()  -> listener.onInputErrorLocation()
             input.status.isEmpty()  -> listener.onInputErrorStatus()
             input.model.isEmpty()  -> listener.onInputErrorModel()

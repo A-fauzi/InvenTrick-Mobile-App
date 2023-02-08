@@ -82,6 +82,7 @@ class StockOutActivity : AppCompatActivity() {
                 binding.progressBar.visibility = View.GONE
                 binding.etInputCodeProduct.text?.clear()
                 binding.tvDataIsEmpty.visibility = View.VISIBLE
+                binding.cardFullContent.visibility = View.GONE
                 binding.tvDataIsEmpty.text = "Data dengan code $code tidak di temukan"
             })
 

@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.warehouseproject.R
+import com.example.warehouseproject.core.helper.Currency
 import com.example.warehouseproject.core.helper.QrCode
 import com.example.warehouseproject.core.model.product.Product
 import com.example.warehouseproject.core.service.product.ProductApiService
@@ -44,7 +45,7 @@ class HomeInteractor {
         binding.tvNameProductDetail.text = data.name
 
         "quantity: ${data.qty}".also { binding.tvQtyDetail.text = it }
-        "price: ${data.price}".also { binding.tvPriceDetail.text = it }
+        binding.tvPriceDetail.text = Currency.format(data.price.toDouble(), "id", "ID")
         "location: ${data.location}".also { binding.tvLocationDetail.text = it }
 
         binding.tvCreatedAtDetail.text = data.created_at

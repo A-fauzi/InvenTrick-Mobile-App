@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".core.view.product.add_product.AddProductActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -191,6 +192,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="price product"
+            app:helperText="format"
+            app:helperTextEnabled="true"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
 
@@ -201,6 +204,7 @@
                 android:inputType="numberDecimal" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
 
         <!--  Location  -->
         <com.google.android.material.textfield.TextInputLayout

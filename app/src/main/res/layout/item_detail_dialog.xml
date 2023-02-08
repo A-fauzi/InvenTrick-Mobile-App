@@ -13,7 +13,7 @@
         <com.google.android.material.divider.MaterialDivider
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:dividerThickness="5dp"
+            app:dividerThickness="2dp"
             android:layout_marginBottom="8dp"
             app:dividerInsetStart="120dp"
             app:dividerInsetEnd="120dp"/>
@@ -85,14 +85,15 @@
                                 android:id="@+id/chip_code_item_detail"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="PX0001"/>
+                                android:text="PX0001"
+                                android:fontFamily="@font/inter_medium"/>
 
                             <TextView
                                 android:id="@+id/tv_exp_detail"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="exp"
-                                android:layout_alignParentBottom="true"
+                                android:fontFamily="@font/inter_medium"
                                 android:layout_margin="8dp"/>
 
                             <RelativeLayout
@@ -108,7 +109,7 @@
                                     android:text="Susu beruang"
                                     android:textColor="@color/black"
                                     android:textSize="24sp"
-                                    android:textStyle="bold" />
+                                    android:fontFamily="@font/inter_bold"/>
 
                                 <LinearLayout
                                     android:layout_width="wrap_content"
@@ -121,6 +122,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="quantity: 100"
+                                        android:fontFamily="@font/inter_medium"
                                         android:textColor="@color/black"/>
 
                                     <TextView
@@ -128,7 +130,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="Rp 250.000"
-                                        android:textStyle="bold"
+                                        android:fontFamily="@font/inter_medium"
                                         android:layout_marginTop="8dp"
                                         android:textColor="@color/black"/>
                                 </LinearLayout>
@@ -139,7 +141,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_below="@id/tv_name_product_detail"
                                     android:layout_marginTop="8dp"
-                                    android:text="Location"/>
+                                    android:text="Location"
+                                    android:fontFamily="@font/inter_medium"/>
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -152,14 +155,16 @@
                                         android:id="@+id/tv_created_at_detail"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="Created_at" />
+                                        android:text="Created_at"
+                                        android:fontFamily="@font/inter_medium"/>
 
                                     <TextView
                                         android:id="@+id/tv_updated_at_detail"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="8dp"
-                                        android:text="Update_at" />
+                                        android:text="Update_at"
+                                        android:fontFamily="@font/inter_medium"/>
                                 </LinearLayout>
 
                             </RelativeLayout>
@@ -174,15 +179,17 @@
                                     android:id="@+id/chip_catgory"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="category" />
+                                    android:text="category"
+                                    android:fontFamily="@font/inter_medium"/>
 
                                 <com.google.android.material.chip.Chip
                                     android:id="@+id/chip_sub_category"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="8dp"
-                                    android:layout_toRightOf="@id/chip_catgory"
-                                    android:text="sub category" />
+                                    android:layout_toEndOf="@id/chip_catgory"
+                                    android:text="sub category"
+                                    android:fontFamily="@font/inter_medium"/>
                             </RelativeLayout>
 
                             <RelativeLayout
@@ -206,7 +213,8 @@
                                             android:id="@+id/tv_spec_product_detail"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:text="@string/lorem" />
+                                            android:text="@string/lorem"
+                                            android:fontFamily="@font/inter_medium"/>
                                     </RelativeLayout>
                                 </androidx.cardview.widget.CardView>
 
@@ -225,14 +233,16 @@
                                             android:id="@+id/tv_lot_detail"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:text="lot" />
+                                            android:text="lot"
+                                            android:fontFamily="@font/inter_medium"/>
 
                                         <TextView
                                             android:id="@+id/tv_model_detail"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_alignParentEnd="true"
-                                            android:text="model" />
+                                            android:text="model"
+                                            android:fontFamily="@font/inter_medium"/>
 
 
                                     </RelativeLayout>
@@ -252,6 +262,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="save barcode"
+                                android:fontFamily="@font/inter_medium"
+                                android:textAllCaps="false"
                                 android:layout_gravity="center"/>
 
                             <TextView
@@ -260,6 +272,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="16dp"
                                 android:text="delete item"
+                                android:fontFamily="@font/inter_medium"
                                 android:textColor="@color/blue"/>
 
                         </LinearLayout>
