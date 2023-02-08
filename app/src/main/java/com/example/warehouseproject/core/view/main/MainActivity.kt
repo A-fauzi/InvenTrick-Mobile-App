@@ -1,21 +1,10 @@
 package com.example.warehouseproject.core.view.main
 
 import android.Manifest
-import android.app.Activity
-import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.net.Uri
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.MediaStore
-import android.util.Log
-import android.view.View
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.view.main.account_fragment.AccountFragment
@@ -23,23 +12,16 @@ import com.example.warehouseproject.core.view.main.home_fragment.HomeFragment
 import com.example.warehouseproject.core.view.main.scan_fragment.ScanFragment
 import com.example.warehouseproject.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.zxing.*
-import com.google.zxing.common.HybridBinarizer
-import com.google.zxing.integration.android.IntentIntegrator
-import org.json.JSONException
-import java.io.BufferedInputStream
-import java.io.File
-import java.io.FileInputStream
-import java.io.InputStream
 
 class MainActivity : AppCompatActivity() {
+    companion object {
+        private var WRITE_EXTERNAL_STORAGE_PERMISSION_CODE: Int = 1
+        private var READ_EXTERNAL_STORAGE_PERMISSION_CODE: Int = 2
+        private var CAMERA_PERMISSION_CODE: Int = 3
+    }
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var bottomNavigationView: BottomNavigationView
-
-    private var WRITE_EXTERNAL_STORAGE_PERMISSION_CODE: Int = 1
-    private var READ_EXTERNAL_STORAGE_PERMISSION_CODE: Int = 2
-    private var CAMERA_PERMISSION_CODE: Int = 3
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

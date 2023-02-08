@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
@@ -19,7 +18,6 @@ import com.example.warehouseproject.core.view.main.MainActivity
 import com.example.warehouseproject.databinding.ActivityAddProductBinding
 import com.google.firebase.storage.FirebaseStorage
 import com.tapadoo.alerter.Alerter
-import java.text.NumberFormat
 import java.util.*
 
 class AddProductActivity : AppCompatActivity(), AddProductView {

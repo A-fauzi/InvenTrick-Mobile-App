@@ -51,7 +51,8 @@ class StockHistoriesAdapter(
                 ProductApiService().getProductByCode(code_items, {}, {
                     binding.tvDataNotFound.text = "Product is avail"
                     binding.tvDataNotFound.setTextColor(context.resources.getColor(R.color.blue)) }, {
-                    binding.tvDataNotFound.text = "Product not avail"}
+                    binding.tvDataNotFound.text = "Product not avail"
+                    binding.tvDataNotFound.setTextColor(context.resources.getColor(R.color.red_smooth))}
                 )
 
             }
