@@ -18,7 +18,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Image:" />
+            android:text="Image:"
+            android:fontFamily="@font/inter_medium"
+            android:textColor="@color/black"/>
 
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
@@ -274,12 +276,30 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!--  Desc Oracle  -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_select_exp_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="4dp"
+            android:layout_marginTop="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardElevation="0dp"
+            android:foreground="?attr/selectableItemBackground">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_calendar_month_24"/>
+        </androidx.cardview.widget.CardView>
+
+        <!--  Exp date  -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/outlinedTextFieldExpProduct"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="exp product"
+            android:enabled="false"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
 

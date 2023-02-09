@@ -21,6 +21,7 @@ import com.example.warehouseproject.core.helper.PreferenceHelper.saveData
 import com.example.warehouseproject.core.model.product.ProductRequest
 import com.example.warehouseproject.core.view.main.MainActivity
 import com.example.warehouseproject.databinding.ActivityAddProductBinding
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import com.tapadoo.alerter.Alerter
@@ -100,6 +101,18 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
             )
             checkInitializedView(modelRequestAddProduct)
             HideKeyboardHelper.hideSoftKeyBoard(this, binding.root)
+        }
+
+        binding.cvSelectExpDate.setOnClickListener {
+            val datePicker = MaterialDatePicker.Builder.datePicker()
+                .setTitleText("Select exp date")
+                .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+                .build()
+
+            datePicker.show(supportFragmentManager, "tag ")
+            datePicker.addOnPositiveButtonClickListener {
+                exp.setText(datePicker.headerText)
+            }
         }
 
         binding.btnChooseGalery.setOnClickListener {
