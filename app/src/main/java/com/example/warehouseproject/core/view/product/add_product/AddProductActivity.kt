@@ -1,5 +1,6 @@
 package com.example.warehouseproject.core.view.product.add_product
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -15,12 +16,16 @@ import com.example.warehouseproject.R
 import com.example.warehouseproject.core.constant.Constant.REQUEST_CODE
 import com.example.warehouseproject.core.helper.Currency
 import com.example.warehouseproject.core.helper.HideKeyboardHelper
+import com.example.warehouseproject.core.helper.PreferenceHelper
+import com.example.warehouseproject.core.helper.PreferenceHelper.saveData
 import com.example.warehouseproject.core.model.product.ProductRequest
 import com.example.warehouseproject.core.view.main.MainActivity
 import com.example.warehouseproject.databinding.ActivityAddProductBinding
 import com.google.firebase.storage.FirebaseStorage
+import com.squareup.picasso.Picasso
 import com.tapadoo.alerter.Alerter
 import java.io.ByteArrayOutputStream
+import java.io.File
 import java.util.*
 
 class AddProductActivity : AppCompatActivity(), AddProductView {
@@ -148,7 +153,7 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
             try {
                 if (data != null) {
                     fillPath = data.data!!
-                    binding.ivChooseImage.setImageURI(fillPath)
+                    Picasso.get().load(fillPath).centerCrop().resize(500, 500).error(R.drawable.img_example).into(binding.ivChooseImage)
                     binding.btnChooseGalery.visibility = View.GONE
                     binding.btnGetCapture.visibility = View.GONE
                     binding.btnChooseGaleryChange.visibility = View.VISIBLE
@@ -230,16 +235,20 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
 
         val nameFile = UUID.randomUUID()
 
-        val refStorage = firebaseStorage.reference.child("/image_product/${lot.text}_${nameFile}.jpg")
+        val refStorage = firebaseStorage.reference.child("/image_product/${code.text}/${name.text}_${nameFile}.jpg")
 
-        // Compress image
+//        // Compress image
         val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, fillPath)
         val byteArrayOutputStream = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, 10, byteArrayOutputStream)
         val reduceImage: ByteArray = byteArrayOutputStream.toByteArray()
 
+        // save data in shared
+        saveData(this, refStorage.path, code.text.toString())
 
         refStorage.putBytes(reduceImage).addOnSuccessListener { uploadTask ->
+
+            PreferenceHelper.saveData(this, refStorage.path, code.text.toString())
 
             // Mendapatkan uri image yang telah di upload
             uploadTask.storage.downloadUrl.addOnSuccessListener { uri ->
@@ -247,8 +256,10 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
                 modelRequestAddProduct.image = uri.toString()
                 presenter.requestApiDataProduct(modelRequestAddProduct, {msg, data ->
                     Toast.makeText(this, "$msg ${data?.name}", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, MainActivity::class.java))
+
+                    startActivity(Intent(applicationContext, MainActivity::class.java))
                     finish()
+
                 }, { msg ->
                     Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
                     binding.progressBar.visibility = View.GONE
@@ -272,14 +283,15 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
         Toast.makeText(this, "get Image capture", Toast.LENGTH_SHORT).show()
     }
 
+    @SuppressLint("PrivateResource")
     private fun checkInitializedView(request: ProductRequest) {
         if (this::fillPath.isInitialized) {
             presenter.validateAddProduct(request)
         } else {
             Alerter.create(this@AddProductActivity)
                 .setText("Gambar harus dilampirkan!")
-                .setIcon(R.drawable.ic_baseline_warning_amber_24)
-                .setBackgroundColorRes(R.color.yellow)
+                .setIcon(com.google.android.material.R.drawable.mtrl_ic_error)
+                .setBackgroundColorRes(R.color.red_smooth)
                 .show()
         }
     }

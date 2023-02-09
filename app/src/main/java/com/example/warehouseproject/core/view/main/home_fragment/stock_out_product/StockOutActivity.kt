@@ -63,10 +63,7 @@ class StockOutActivity : AppCompatActivity() {
 
                 beforeQty = it.qty.toInt()
 
-                binding.ivItemProduct.load(it.image) {
-                    crossfade(true)
-                    placeholder(R.drawable.ic_people)
-                }
+                Picasso.get().load(it.image).centerCrop().resize(500, 500).error(R.drawable.img_example).into(binding.ivItemProduct)
                 binding.tvIdProduct.text = it._id
                 binding.chipStatus.text = it.status
                 binding.tvCodeItem.text = it.code_items

@@ -112,24 +112,13 @@ class StockInActivity : AppCompatActivity(), StockInView {
             // call presenter update qty
             presenter.updateProductQty(this, binding.tvIdProduct.text.toString(), qty)
 
-
-//            // update product qty
-//            ProductApiService().updateProductQty(this, binding.tvIdProduct.text.toString(), qty) { message, data ->
-//
-//                // On Response success
-//
-//            }
-
         }
     }
 
     override fun getResultDataOnRest(data: Product) {
         beforeQty = data.qty.toInt()
 
-        binding.ivItemProduct.load(data.image) {
-            crossfade(true)
-            placeholder(R.drawable.ic_people)
-        }
+        Picasso.get().load(data.image).centerCrop().resize(500, 500).error(R.drawable.img_example).into(binding.ivItemProduct)
         binding.tvIdProduct.text = data._id
         binding.chipStatus.text = data.status
         binding.tvCodeItem.text = data.code_items

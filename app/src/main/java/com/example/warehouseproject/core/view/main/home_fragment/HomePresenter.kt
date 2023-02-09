@@ -3,6 +3,8 @@ package com.example.warehouseproject.core.view.main.home_fragment
 import android.content.Context
 import android.view.LayoutInflater
 import com.example.warehouseproject.core.model.product.Product
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 
 
 class HomePresenter(private val mainView: HomeView?, private val homeInteractor: HomeInteractor): HomeInteractor.HomeInteractorContract {
@@ -10,7 +12,7 @@ class HomePresenter(private val mainView: HomeView?, private val homeInteractor:
         homeInteractor.showDialog(context, layoutInflater, data, this)
     }
 
-    override fun onSuccessDeleted() {
+    override fun onSuccessDeleted(data: Product?) {
         mainView?.moveMainActivity()
     }
 }

@@ -2,6 +2,7 @@ package com.example.warehouseproject.core.view.main.home_fragment
 
 import android.content.Context
 import android.content.DialogInterface
+import android.util.Log
 import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
@@ -10,17 +11,19 @@ import androidx.appcompat.app.AlertDialog
 import coil.load
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.helper.Currency
+import com.example.warehouseproject.core.helper.PreferenceHelper.loadData
 import com.example.warehouseproject.core.helper.QrCode
 import com.example.warehouseproject.core.model.product.Product
 import com.example.warehouseproject.core.service.product.ProductApiService
 import com.example.warehouseproject.databinding.ItemDetailDialogBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 
 class HomeInteractor {
 
     interface HomeInteractorContract {
-        fun onSuccessDeleted()
+        fun onSuccessDeleted(data: Product?)
     }
 
     fun showDialog(context: Context, layoutInflater: LayoutInflater, data: Product, listener: HomeInteractorContract) {
@@ -72,7 +75,7 @@ class HomeInteractor {
 
                     ProductApiService().deleteProductApiService(data._id, {msg, data ->
                         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
-                        listener.onSuccessDeleted()
+                        listener.onSuccessDeleted(data)
                     }, { msg ->
                         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
                         binding.progressDelete.visibility = View.GONE
@@ -86,7 +89,18 @@ class HomeInteractor {
                 setTitle("Delete item")
                 setMessage("are u sure this delete item?")
                 setPositiveButton("OK", DialogInterface.OnClickListener { dialog, id ->
-                    deleteItem()
+
+                    val dataSharedPref = loadData(context, data.code_items)
+                    val firebaseStorage: FirebaseStorage = FirebaseStorage.getInstance()
+                    val refStorageDelete = firebaseStorage.reference.child(dataSharedPref ?: "No Data In Shared")
+                    refStorageDelete.delete().addOnSuccessListener {
+                        binding.progressDelete.visibility = View.VISIBLE
+                        binding.llFullContainer.visibility = View.GONE
+                        deleteItem()
+                    }.addOnFailureListener { e ->
+                        Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()
+                    }
+
                 })
                 setNegativeButton(android.R.string.no, DialogInterface.OnClickListener { dialogInterface, i ->
                     dialog.cancel()

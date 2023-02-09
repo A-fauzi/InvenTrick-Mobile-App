@@ -5,7 +5,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.model.product.Product
 import com.example.warehouseproject.databinding.ItemDataProductBinding
@@ -26,10 +25,7 @@ class HomeAdapter(
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         with(holder) {
             with(items[position]) {
-               binding.ivItemProduct.load(image) {
-                   crossfade(true)
-                   placeholder(R.drawable.ic_people)
-               }
+                Picasso.get().load(image).centerCrop().resize(500, 500).placeholder(R.drawable.ic_people).error(R.drawable.img_example).into(binding.ivItemProduct)
                 binding.tvNameProduct.text = name
 
                 binding.chipStatus.text = status

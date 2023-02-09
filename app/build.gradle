@@ -66,6 +66,7 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.github.bumptech.glide:glide:4.14.2'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
+    implementation "io.coil-kt:coil-compose:2.1.0"
 
     // alert
     implementation 'com.github.tapadoo:alerter:7.2.4'
@@ -79,18 +80,8 @@ dependencies {
     implementation 'com.github.androidmads:QRGenerator:1.0.1'
     implementation('com.journeyapps:zxing-android-embedded:4.2.0') { transitive = false }
 
-    // Room
-    implementation "androidx.lifecycle:lifecycle-extensions:2.0.0-alpha1"
-    kapt "androidx.lifecycle:lifecycle-compiler:2.0.0-alpha1"
-    implementation 'androidx.room:room-runtime:2.3.0'
-    kapt 'androidx.room:room-compiler:2.3.0'
-    annotationProcessor "androidx.room:room-compiler:2.3.0"
-    implementation 'androidx.room:room-ktx:2.3.0'
-
-    // Coroutine
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1'
-
-    implementation "io.coil-kt:coil-compose:2.1.0"
+    // Facebook shimmer
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
