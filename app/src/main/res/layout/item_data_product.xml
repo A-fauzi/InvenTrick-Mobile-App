@@ -31,9 +31,9 @@
                <ImageView
                    android:id="@+id/iv_item_product"
                    android:layout_width="match_parent"
-                   android:layout_height="match_parent"
-                   android:scaleType="centerCrop"
-                   android:src="@drawable/ic_people" />
+                   android:layout_height="wrap_content"
+                   android:src="@drawable/ic_people"
+                   android:scaleType="centerCrop"/>
            </RelativeLayout>
 
 

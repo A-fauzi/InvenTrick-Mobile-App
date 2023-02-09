@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import coil.load
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.helper.Currency
 import com.example.warehouseproject.core.helper.QrCode
@@ -27,7 +28,11 @@ class HomeInteractor {
 
         val dialog = BottomSheetDialog(context)
 
-        Picasso.get().load(data.image).placeholder(R.drawable.ic_people).error(R.drawable.img_example).into(binding.ivItemDetail)
+        binding.ivItemDetail.load(data.image) {
+            crossfade(true)
+            placeholder(R.drawable.ic_people)
+        }
+
         binding.statusDetail.text = data.status
         when(data.status) {
             "active" -> {

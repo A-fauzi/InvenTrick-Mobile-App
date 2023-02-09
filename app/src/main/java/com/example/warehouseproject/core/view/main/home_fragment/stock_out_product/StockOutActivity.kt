@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.widget.Toast
+import coil.load
 import com.airbnb.lottie.LottieAnimationView
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.helper.HideKeyboardHelper
@@ -62,7 +63,10 @@ class StockOutActivity : AppCompatActivity() {
 
                 beforeQty = it.qty.toInt()
 
-                Picasso.get().load(it.image).placeholder(R.drawable.ic_people).error(R.drawable.img_example).into(binding.ivItemProduct)
+                binding.ivItemProduct.load(it.image) {
+                    crossfade(true)
+                    placeholder(R.drawable.ic_people)
+                }
                 binding.tvIdProduct.text = it._id
                 binding.chipStatus.text = it.status
                 binding.tvCodeItem.text = it.code_items

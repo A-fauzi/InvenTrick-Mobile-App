@@ -1,9 +1,11 @@
 package com.example.warehouseproject.core.view.product.add_product
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -18,6 +20,7 @@ import com.example.warehouseproject.core.view.main.MainActivity
 import com.example.warehouseproject.databinding.ActivityAddProductBinding
 import com.google.firebase.storage.FirebaseStorage
 import com.tapadoo.alerter.Alerter
+import java.io.ByteArrayOutputStream
 import java.util.*
 
 class AddProductActivity : AppCompatActivity(), AddProductView {
@@ -141,6 +144,7 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         presenter.resultImageFromGallery(requestCode, resultCode) {
+
             try {
                 if (data != null) {
                     fillPath = data.data!!
@@ -227,7 +231,15 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
         val nameFile = UUID.randomUUID()
 
         val refStorage = firebaseStorage.reference.child("/image_product/${lot.text}_${nameFile}.jpg")
-        refStorage.putFile(fillPath).addOnSuccessListener { uploadTask ->
+
+        // Compress image
+        val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, fillPath)
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 10, byteArrayOutputStream)
+        val reduceImage: ByteArray = byteArrayOutputStream.toByteArray()
+
+
+        refStorage.putBytes(reduceImage).addOnSuccessListener { uploadTask ->
 
             // Mendapatkan uri image yang telah di upload
             uploadTask.storage.downloadUrl.addOnSuccessListener { uri ->

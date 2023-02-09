@@ -12,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
+import coil.load
 import com.airbnb.lottie.LottieAnimationView
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.helper.HideKeyboardHelper
@@ -125,7 +126,10 @@ class StockInActivity : AppCompatActivity(), StockInView {
     override fun getResultDataOnRest(data: Product) {
         beforeQty = data.qty.toInt()
 
-        Picasso.get().load(data.image).placeholder(R.drawable.ic_people).error(R.drawable.img_example).into(binding.ivItemProduct)
+        binding.ivItemProduct.load(data.image) {
+            crossfade(true)
+            placeholder(R.drawable.ic_people)
+        }
         binding.tvIdProduct.text = data._id
         binding.chipStatus.text = data.status
         binding.tvCodeItem.text = data.code_items
