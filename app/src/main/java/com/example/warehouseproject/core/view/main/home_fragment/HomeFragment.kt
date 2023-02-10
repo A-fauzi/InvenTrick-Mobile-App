@@ -4,12 +4,15 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.warehouseproject.R
 import com.example.warehouseproject.core.helper.PreferenceHelper
 import com.example.warehouseproject.core.helper.PreferenceHelper.loadData
 import com.example.warehouseproject.core.helper.RandomColor
@@ -58,25 +61,17 @@ class HomeFragment : Fragment(), HomeAdapter.CallClickListener, HomeView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+        binding.newTxtTopbar.txtTopBar.text = "Home"
+        binding.newTxtTopbar.viewEnd.setOnClickListener {
+            popUpMenu()
+        }
+
         shimmerViewContainer.startShimmer()
         shimmerViewTotalProduct.startShimmer()
 
         binding.btnToAddProduct.setOnClickListener {
             startActivity(Intent(requireActivity(), AddProductActivity::class.java))
             activity?.finish()
-        }
-
-        binding.cvStockIn.setOnClickListener {
-            startActivity(Intent(requireActivity(), StockInActivity::class.java))
-        }
-        binding.cvStockOut.setOnClickListener {
-            startActivity(Intent(requireActivity(), StockOutActivity::class.java))
-        }
-        binding.cvStockHistory.setOnClickListener {
-            startActivity(Intent(requireActivity(), StockHistoriesActivity::class.java))
-        }
-        binding.cvProductCategory.setOnClickListener {
-            Toast.makeText(requireActivity(), "Fitur sedang dalam pengembangan", Toast.LENGTH_SHORT).show()
         }
 
         binding.rlTotalProduct.setBackgroundColor(Color.parseColor(RandomColor.generate()))
@@ -128,6 +123,31 @@ class HomeFragment : Fragment(), HomeAdapter.CallClickListener, HomeView {
         val intent = Intent(context, MainActivity::class.java)
         startActivity(intent)
         activity?.finish()
+    }
+
+
+    private fun popUpMenu() {
+        val popupMenu = PopupMenu(activity, binding.newTxtTopbar.viewEnd, Gravity.END)
+        popupMenu.menuInflater.inflate(R.menu.product_activity_menu, popupMenu.menu)
+        popupMenu.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.stockIn -> {
+                    startActivity(Intent(requireActivity(), StockInActivity::class.java))
+                }
+                R.id.stockOut -> {
+                    startActivity(Intent(requireActivity(), StockOutActivity::class.java))
+                }
+                R.id.history -> {
+                    startActivity(Intent(requireActivity(), StockHistoriesActivity::class.java))
+                }
+                R.id.category -> {
+                    Toast.makeText(requireActivity(), "Fitur sedang dalam pengembangan", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            true
+        }
+        popupMenu.show()
     }
 
 }

@@ -10,4 +10,11 @@
     <color name="green_cendol">#84CD50</color>
     <color name="red_smooth">#EC6D70</color>
     <color name="yellow">#E7E796</color>
+
+<!--  soft scheme  -->
+    <color name="purple_soft_700">#EDCCE4</color>
+    <color name="purple_soft_500">#E7D6E7</color>
+    <color name="purple_soft_200">#EDCCE4</color>
+    <color name="blue_soft">#DAE9EE</color>
+    <color name="blue_soft_toska">#D3F3F1</color>
 </resources>

@@ -27,13 +27,18 @@ class DetailDialog {
     fun showDialog(context: Context, layoutInflater: LayoutInflater, data: Product, listener: DetailDialogOnFinished) {
         val binding = ItemDetailDialogBinding.inflate(layoutInflater)
 
-        binding.containerParent.setBackgroundColor(Color.parseColor(RandomColor.generate()))
-
         val dialog = BottomSheetDialog(context)
 
         binding.ivItemDetail.load(data.image) {
             crossfade(true)
             placeholder(R.drawable.ic_people)
+        }
+
+        binding.chipCatgory.setOnClickListener {
+            Toast.makeText(context, "category masih kosong", Toast.LENGTH_SHORT).show()
+        }
+        binding.chipSubCategory.setOnClickListener {
+            Toast.makeText(context, "sub category masih kosong", Toast.LENGTH_SHORT).show()
         }
 
         binding.statusDetail.text = data.status
