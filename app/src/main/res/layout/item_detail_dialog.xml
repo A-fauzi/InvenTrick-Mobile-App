@@ -2,21 +2,14 @@
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    android:background="@drawable/dialog_round_corner"
+    android:id="@+id/container_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
-        <com.google.android.material.divider.MaterialDivider
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:dividerThickness="2dp"
-            android:layout_marginBottom="8dp"
-            app:dividerInsetStart="120dp"
-            app:dividerInsetEnd="120dp"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -32,259 +25,371 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <RelativeLayout
+                  <LinearLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="vertical"
+                      android:padding="16dp">
+
+                      <!--Divider-->
+                      <com.google.android.material.divider.MaterialDivider
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          app:dividerThickness="2dp"
+                          android:layout_marginBottom="8dp"
+                          app:dividerInsetStart="120dp"
+                          app:dividerInsetEnd="120dp"
+                          app:dividerColor="@color/white"/>
+                      <!--Item name-->
+                      <TextView
+                          android:id="@+id/tv_name_product_detail"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:text="Susu beruang"
+                          android:textColor="@color/white"
+                          android:textSize="24sp"
+                          android:fontFamily="@font/inter_bold"/>
+
+                      <!--code item-->
+                      <LinearLayout
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="horizontal">
+
+                          <TextView
+                              android:id="@+id/chip_code_item_detail"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:text="PX0001"
+                              android:textColor="@color/white"
+                              android:fontFamily="@font/inter_medium"/>
+                      </LinearLayout>
+
+                      <!-- card image-->
+                      <RelativeLayout
+                          android:layout_width="match_parent"
+                          android:layout_height="250dp">
+
+                          <androidx.cardview.widget.CardView
+                              android:layout_width="match_parent"
+                              android:layout_height="match_parent"
+                              android:layout_margin="8dp"
+                              app:cardCornerRadius="25dp">
+
+                              <RelativeLayout
+                                  android:layout_width="match_parent"
+                                  android:layout_height="match_parent">
+
+                                  <ImageView
+                                      android:id="@+id/iv_item_detail"
+                                      android:layout_width="match_parent"
+                                      android:layout_height="match_parent"
+                                      android:layout_centerInParent="true"
+                                      android:adjustViewBounds="true"
+                                      android:contentDescription="@string/image"
+                                      android:scaleType="centerCrop"
+                                      android:src="@drawable/ic_people" />
+
+                                  <com.google.android.material.chip.Chip
+                                      android:id="@+id/status_detail"
+                                      android:layout_width="wrap_content"
+                                      android:layout_height="wrap_content"
+                                      android:layout_alignParentEnd="true"
+                                      android:layout_alignParentBottom="true"
+                                      android:layout_marginEnd="8dp"
+                                      android:text="actived"
+                                      android:textColor="@color/white" />
+                              </RelativeLayout>
+                          </androidx.cardview.widget.CardView>
+
+                      </RelativeLayout>
+                  </LinearLayout>
+
+                    <!-- data -->
+                    <LinearLayout
+                        android:id="@+id/ll_full_container"
                         android:layout_width="match_parent"
-                        android:layout_height="250dp">
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp"
+                        android:background="@color/white">
 
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_margin="8dp"
-                            app:cardCornerRadius="25dp">
+                        <!--Spec item-->
+                       <LinearLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:orientation="vertical">
 
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
+                           <TextView
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:text="Specification"
+                               android:fontFamily="@font/inter_semibold"
+                               android:textSize="16dp"/>
 
-                                <ImageView
-                                    android:id="@+id/iv_item_detail"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_centerInParent="true"
-                                    android:adjustViewBounds="true"
-                                    android:contentDescription="@string/image"
-                                    android:scaleType="centerCrop"
-                                    android:src="@drawable/ic_people" />
+                           <TextView
+                               android:id="@+id/tv_spec_product_detail"
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:layout_marginTop="8dp"
+                               android:fontFamily="@font/inter_medium"
+                               android:text="@string/lorem" />
 
-                                <com.google.android.material.chip.Chip
-                                    android:id="@+id/status_detail"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentEnd="true"
-                                    android:layout_alignParentBottom="true"
-                                    android:layout_marginEnd="8dp"
-                                    android:text="actived"
-                                    android:textColor="@color/white" />
-                            </RelativeLayout>
-                        </androidx.cardview.widget.CardView>
-
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
+                       </LinearLayout>
+                        <!--data-->
                         <LinearLayout
-                            android:id="@+id/ll_full_container"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:padding="16dp">
+                            android:layout_marginTop="24dp">
 
-                            <com.google.android.material.chip.Chip
-                                android:id="@+id/chip_code_item_detail"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="PX0001"
-                                android:fontFamily="@font/inter_medium"/>
-
-                            <TextView
-                                android:id="@+id/tv_exp_detail"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="exp"
-                                android:fontFamily="@font/inter_medium"
-                                android:layout_margin="8dp"/>
-
-                            <RelativeLayout
-                                android:id="@+id/content_1"
+                            <!--exp date-->
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:padding="16dp">
+                                android:orientation="horizontal">
 
                                 <TextView
-                                    android:id="@+id/tv_name_product_detail"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Susu beruang"
-                                    android:textColor="@color/black"
-                                    android:textSize="24sp"
-                                    android:fontFamily="@font/inter_bold"/>
+                                    android:text="expired date: "
+                                    android:fontFamily="@font/inter_medium"/>
 
-                                <LinearLayout
+                                <TextView
+                                    android:id="@+id/tv_exp_detail"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:orientation="vertical"
-                                    android:layout_alignParentEnd="true">
+                                    android:text="exp"
+                                    android:fontFamily="@font/inter_medium"/>
+                            </LinearLayout>
 
-                                    <TextView
-                                        android:id="@+id/tv_qty_detail"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="quantity: 100"
-                                        android:fontFamily="@font/inter_medium"
-                                        android:textColor="@color/black"/>
+                            <!--qty-->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="8dp">
 
-                                    <TextView
-                                        android:id="@+id/tv_price_detail"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="Rp 250.000"
-                                        android:fontFamily="@font/inter_medium"
-                                        android:layout_marginTop="8dp"
-                                        android:textColor="@color/black"/>
-                                </LinearLayout>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="quantity: "
+                                    android:fontFamily="@font/inter_medium"/>
+
+                                <TextView
+                                    android:id="@+id/tv_qty_detail"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="100"
+                                    android:fontFamily="@font/inter_medium"/>
+                            </LinearLayout>
+
+                            <!--price-->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="8dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="price: "
+                                    android:fontFamily="@font/inter_medium"/>
+
+                                <TextView
+                                    android:id="@+id/tv_price_detail"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Rp 250.000"
+                                    android:fontFamily="@font/inter_medium"/>
+                            </LinearLayout>
+
+                            <!--location-->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="8dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="location: "
+                                    android:fontFamily="@font/inter_medium"/>
+
 
                                 <TextView
                                     android:id="@+id/tv_location_detail"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_below="@id/tv_name_product_detail"
-                                    android:layout_marginTop="8dp"
                                     android:text="Location"
                                     android:fontFamily="@font/inter_medium"/>
+                            </LinearLayout>
 
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical"
-                                    android:layout_below="@id/tv_location_detail"
-                                    android:layout_marginTop="24dp">
-
-                                    <TextView
-                                        android:id="@+id/tv_created_at_detail"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="Created_at"
-                                        android:fontFamily="@font/inter_medium"/>
-
-                                    <TextView
-                                        android:id="@+id/tv_updated_at_detail"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="8dp"
-                                        android:text="Update_at"
-                                        android:fontFamily="@font/inter_medium"/>
-                                </LinearLayout>
-
-                            </RelativeLayout>
-
-                            <RelativeLayout
-                                android:id="@+id/content_2"
+                            <!--model-->
+                            <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="8dp">
 
-
-                                <com.google.android.material.chip.Chip
-                                    android:id="@+id/chip_catgory"
+                                <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="category"
+                                    android:text="model: "
                                     android:fontFamily="@font/inter_medium"/>
 
-                                <com.google.android.material.chip.Chip
-                                    android:id="@+id/chip_sub_category"
+                                <TextView
+                                    android:id="@+id/tv_model_detail"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginStart="8dp"
-                                    android:layout_toEndOf="@id/chip_catgory"
-                                    android:text="sub category"
+                                    android:text="model"
                                     android:fontFamily="@font/inter_medium"/>
-                            </RelativeLayout>
 
-                            <RelativeLayout
+
+                            </LinearLayout>
+
+                            <!--lot-->
+                            <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="8dp">
 
-                                <androidx.cardview.widget.CardView
-                                    android:id="@+id/cv_spec_product"
+                                <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_margin="8dp"
-                                    app:cardCornerRadius="25dp">
+                                    android:text="lot: "
+                                    android:fontFamily="@font/inter_medium"/>
 
-
-                                    <RelativeLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:padding="16dp">
-
-                                        <TextView
-                                            android:id="@+id/tv_spec_product_detail"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="@string/lorem"
-                                            android:fontFamily="@font/inter_medium"/>
-                                    </RelativeLayout>
-                                </androidx.cardview.widget.CardView>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
+                                <TextView
+                                    android:id="@+id/tv_lot_detail"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:orientation="vertical"
-                                    android:layout_below="@id/cv_spec_product"
-                                    android:padding="16dp">
-
-                                    <RelativeLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content">
-
-                                        <TextView
-                                            android:id="@+id/tv_lot_detail"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="lot"
-                                            android:fontFamily="@font/inter_medium"/>
-
-                                        <TextView
-                                            android:id="@+id/tv_model_detail"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_alignParentEnd="true"
-                                            android:text="model"
-                                            android:fontFamily="@font/inter_medium"/>
-
-
-                                    </RelativeLayout>
-                                </LinearLayout>
-
-                            </RelativeLayout>
-
-                            <ImageView
-                                android:id="@+id/ivQrCode"
-                                android:layout_width="300dp"
-                                android:layout_height="300dp"
-                                android:layout_gravity="center"
-                                android:layout_marginTop="8dp"/>
-
-                            <Button
-                                android:id="@+id/btn_save_barcode"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="save barcode"
-                                android:fontFamily="@font/inter_medium"
-                                android:textAllCaps="false"
-                                android:layout_gravity="center"/>
-
-                            <TextView
-                                android:id="@+id/tv_btn_trash"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="16dp"
-                                android:text="delete item"
-                                android:fontFamily="@font/inter_medium"
-                                android:textColor="@color/blue"/>
-
+                                    android:text="lot"
+                                    android:fontFamily="@font/inter_medium"/>
+                            </LinearLayout>
                         </LinearLayout>
 
-                        <ProgressBar
-                            android:id="@+id/progress_delete"
+                        <!--created_at-->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="24dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="created_at: "
+                                android:fontFamily="@font/inter_medium"/>
+
+                            <TextView
+                                android:id="@+id/tv_created_at_detail"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Created_at"
+                                android:fontFamily="@font/inter_medium"/>
+                        </LinearLayout>
+
+                        <!--updated_at-->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="updated_at: "
+                                android:fontFamily="@font/inter_medium"/>
+
+                            <TextView
+                                android:id="@+id/tv_updated_at_detail"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Update_at"
+                                android:fontFamily="@font/inter_medium"/>
+                        </LinearLayout>
+
+                        <!--category and sub category-->
+                        <RelativeLayout
+                            android:id="@+id/content_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="24dp">
+
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/chip_catgory"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="category"
+                                android:fontFamily="@font/inter_medium"/>
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/chip_sub_category"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_toEndOf="@id/chip_catgory"
+                                android:text="sub category"
+                                android:fontFamily="@font/inter_medium"/>
+                        </RelativeLayout>
+
+
+                        <ImageView
+                            android:id="@+id/ivQrCode"
+                            android:layout_width="300dp"
+                            android:layout_height="300dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="8dp"/>
+
+                        <Button
+                            android:id="@+id/btn_save_barcode"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_centerHorizontal="true"
-                            android:layout_centerVertical="true"
-                            android:visibility="gone"/>
+                            android:text="save barcode"
+                            android:fontFamily="@font/inter_medium"
+                            android:textAllCaps="false"
+                            android:layout_gravity="center"/>
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:gravity="center"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/tv_btn_trash"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="delete item"
+                            android:fontFamily="@font/inter_medium"
+                            android:textColor="@color/red_smooth"/>
+
+
+                        <TextView
+                            android:id="@+id/tv_btn_update"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="update item"
+                            android:layout_alignParentEnd="true"
+                            android:fontFamily="@font/inter_medium"
+                            android:textColor="@color/green_cendol"/>
                     </RelativeLayout>
+
+                    <ProgressBar
+                        android:id="@+id/progress_delete"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:visibility="gone"/>
 
                 </LinearLayout>
             </ScrollView>

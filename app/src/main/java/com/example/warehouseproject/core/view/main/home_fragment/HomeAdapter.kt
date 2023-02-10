@@ -33,7 +33,7 @@ class HomeAdapter(
                     "active" -> {
                         binding.chipStatus.chipBackgroundColor = context.getColorStateList(R.color.green_cendol)
                     }
-                    "sold" -> {
+                    "in-progress" -> {
                         binding.chipStatus.chipBackgroundColor = context.getColorStateList(R.color.red_smooth)
                     }
                     else -> {

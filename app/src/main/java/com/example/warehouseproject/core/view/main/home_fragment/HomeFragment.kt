@@ -13,9 +13,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.warehouseproject.core.helper.PreferenceHelper
 import com.example.warehouseproject.core.helper.PreferenceHelper.loadData
 import com.example.warehouseproject.core.helper.RandomColor
+import com.example.warehouseproject.core.helper.SimpleDateFormat
 import com.example.warehouseproject.core.model.product.Product
 import com.example.warehouseproject.core.service.product.ProductApiService
 import com.example.warehouseproject.core.view.main.MainActivity
+import com.example.warehouseproject.core.view.main.home_fragment.home_dialog_detail.DetailDialog
 import com.example.warehouseproject.core.view.main.home_fragment.stock_histories.StockHistoriesActivity
 import com.example.warehouseproject.core.view.main.home_fragment.stock_in_product.StockInActivity
 import com.example.warehouseproject.core.view.main.home_fragment.stock_out_product.StockOutActivity
@@ -44,7 +46,7 @@ class HomeFragment : Fragment(), HomeAdapter.CallClickListener, HomeView {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
 
-        presenter = HomePresenter(this, HomeInteractor())
+        presenter = HomePresenter(this, DetailDialog())
         setupRecyclerView()
         getData()
 

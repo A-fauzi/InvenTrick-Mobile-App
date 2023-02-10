@@ -2,6 +2,7 @@ package com.example.warehouseproject.core.view.product.add_product
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -9,7 +10,9 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Toast
 import com.example.warehouseproject.R
@@ -19,6 +22,10 @@ import com.example.warehouseproject.core.helper.HideKeyboardHelper
 import com.example.warehouseproject.core.helper.PreferenceHelper
 import com.example.warehouseproject.core.helper.PreferenceHelper.saveData
 import com.example.warehouseproject.core.model.product.ProductRequest
+import com.example.warehouseproject.core.model.product.category.Category
+import com.example.warehouseproject.core.model.product.category.CategoryResponse
+import com.example.warehouseproject.core.service.product.ProductApiService
+import com.example.warehouseproject.core.service.product.category.ProductCategoryService
 import com.example.warehouseproject.core.view.main.MainActivity
 import com.example.warehouseproject.databinding.ActivityAddProductBinding
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -61,7 +68,7 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
        code = binding.etCodeProduct
        name =  binding.etNameProduct
         qty = binding.etQtyProduct
-       category = binding.etCategoryProduct
+       category = binding.autoCompleteTextView
        subCategory = binding.etSubCategoryProduct
        spec =  binding.etSpecProduct
        price = binding.etPriceProduct
@@ -76,6 +83,20 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
         super.onCreate(savedInstanceState)
         binding = ActivityAddProductBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // tes api
+        ProductCategoryService().getCategories{ data ->
+            if (data.isNotEmpty()) {
+                // Example category nanti
+                val arrayAdapter = ArrayAdapter(this, R.layout.item_dropdown_category, data.map { it.name })
+                binding.autoCompleteTextView.setAdapter(arrayAdapter)
+            } else {
+               binding.autoCompleteTextView.isEnabled = false
+                binding.autoCompleteTextView.setText("Kosong")
+                binding.txtInputLayoutCategory.helperText = "Category masih kosong, tambahkan nanti"
+                binding.txtInputLayoutCategory.setHelperTextColor(getColorStateList(R.color.red_smooth))
+            }
+        }
 
         initView()
 
