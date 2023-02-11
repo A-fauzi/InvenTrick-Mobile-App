@@ -25,7 +25,7 @@ class StockHistoryPresenter(private val context: Context): StockHistoriesAdapter
 
     fun getData() {
         ProductApiService().getStockHistories { msg, data, count ->
-            showDataProduct(data)
+            showDataProduct(data.reversed())
         }
     }
 

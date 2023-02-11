@@ -2,6 +2,7 @@ package com.example.warehouseproject.core.view.main.home_fragment.stock_historie
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -42,7 +43,13 @@ class StockHistoriesAdapter(
                 }
                 binding.tvItemCode.text = code_items
                 "Quantity: ${qty.toInt()}".also { binding.tvQuantity.text = it }
-                binding.tvDate.text = created_at
+
+                val date = created_at.split(" ")
+                val monthYear = "${date[1]} ${date[2]} ${date[3]}"
+                val dayTime = "${date[0]} ${date[5]}"
+
+                binding.tvItemMonthYear.text = monthYear
+                binding.tvDayTime.text = dayTime
 
                 binding.cardItem.setOnClickListener {
                     lister.onClickItemHistory(items[position])

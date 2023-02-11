@@ -1,95 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:layout_constraintLeft_toLeftOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:cardCornerRadius="20dp"
-    android:clickable="true"
-    android:focusable="true"
-    android:foreground="?attr/selectableItemBackground"
-    android:id="@+id/card_item">
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tv_item_month_year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="18 Jan 2023"
+        android:textSize="16sp"
+        android:fontFamily="@font/inter_bold"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/tv_day_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sat, 23:23:01"
+        android:fontFamily="@font/inter_bold"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="2dp"
+            android:layout_height="match_parent"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="16dp">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp">
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:text="active"
-                android:fontFamily="@font/inter_medium"
-                android:textColor="@color/white"/>
-
-
-            <LinearLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tv_item_code"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter_medium"
-                    android:text="code"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/tv_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="16dp"
-                    android:text="Susu Beruang"
-                    android:textColor="@color/black"
-                    android:textSize="24sp"
-                    android:fontFamily="@font/inter_bold"/>
+                android:layout_margin="8dp"
+                app:cardCornerRadius="20dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:id="@+id/card_item">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_height="match_parent"
+                    android:padding="16dp">
 
-                    <TextView
-                        android:id="@+id/tv_quantity"
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_status"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="quantity: 200"
+                        android:layout_alignParentEnd="true"
+                        android:text="active"
                         android:fontFamily="@font/inter_medium"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/white"/>
+
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/tv_quantity"
-                        android:layout_marginTop="8dp"
+                        android:gravity="center_vertical"
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/tv_date"
+                            android:id="@+id/tv_item_code"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="date"
-                            android:fontFamily="@font/inter_medium"/>
+                            android:fontFamily="@font/inter_medium"
+                            android:text="code"
+                            android:textColor="@color/black" />
 
                         <TextView
-                            android:id="@+id/tv_data_not_found"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/tv_name"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="memuat..."
-                            android:fontFamily="@font/inter_medium" />
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="16dp"
+                            android:fontFamily="@font/inter_bold"
+                            android:text="Susu Beruang"
+                            android:textColor="@color/black"
+                            android:textSize="24sp" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_quantity"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter_medium"
+                                android:text="quantity: 200"
+                                android:textColor="@color/black" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/tv_quantity"
+                                android:layout_marginTop="8dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/tv_data_not_found"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/inter_medium"
+                                    android:text="memuat..." />
+                            </LinearLayout>
+                        </RelativeLayout>
+
                     </LinearLayout>
+
                 </RelativeLayout>
-
-            </LinearLayout>
-
+            </androidx.cardview.widget.CardView>
         </RelativeLayout>
-    </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</LinearLayout>
 
