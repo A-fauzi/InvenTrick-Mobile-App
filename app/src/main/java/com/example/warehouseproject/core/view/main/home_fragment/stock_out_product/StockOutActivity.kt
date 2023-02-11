@@ -97,7 +97,11 @@ class StockOutActivity : AppCompatActivity() {
 
             val qtyInput = binding.etQtyProduct.text.toString()
 
-            if ( beforeQty < qtyInput.toInt()) {
+            if (binding.etQtyProduct.text.toString().isEmpty()) {
+                binding.progressBar.visibility = View.GONE
+                binding.outlinedTextFieldQtyProduct.helperText = "is required!"
+                binding.outlinedTextFieldQtyProduct.setHelperTextColor(getColorStateList(R.color.red_smooth))
+            } else if ( beforeQty < qtyInput.toInt()) {
                 binding.progressBar.visibility = View.GONE
                 binding.outlinedTextFieldQtyProduct.helperText = "Jumlah quantity product tidak memenuhi, jumlah saat ini $beforeQty "
                 binding.outlinedTextFieldQtyProduct.isHelperTextEnabled = true

@@ -232,18 +232,20 @@
         <!--  Status  -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/outlinedTextFieldStatusProduct"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="status product"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            android:layout_marginTop="20dp"
+            android:hint="status"
+            app:layout_constraintTop_toBottomOf="@+id/textView">
 
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_status_product"
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteStatus"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text" />
-
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:inputType="none"
+                tools:text="active" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <!--  Model  -->

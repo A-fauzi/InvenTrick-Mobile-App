@@ -99,18 +99,23 @@ class StockInActivity : AppCompatActivity(), StockInView {
         // on Click submit stock
         binding.btnSubmitStockIn.setOnClickListener {
 
-            progressBar.visibility = View.VISIBLE
+            if (binding.etQtyProduct.text.toString().isEmpty()) {
+                binding.outlinedTextFieldQtyProduct.helperText = "is required!"
+                binding.outlinedTextFieldQtyProduct.setHelperTextColor(getColorStateList(R.color.red_smooth))
+            } else {
+                progressBar.visibility = View.VISIBLE
 
-            HideKeyboardHelper.hideSoftKeyBoard(this, binding.root)
+                HideKeyboardHelper.hideSoftKeyBoard(this, binding.root)
 
-            val qtyInput = inputQtyProduct.text.toString()
+                val qtyInput = inputQtyProduct.text.toString()
 
-            val resultCalculate = beforeQty + qtyInput.toInt()
+                val resultCalculate = beforeQty + qtyInput.toInt()
 
-            val qty = ProductRequest.RequestQtyOnly(resultCalculate.toString())
+                val qty = ProductRequest.RequestQtyOnly(resultCalculate.toString())
 
-            // call presenter update qty
-            presenter.updateProductQty(this, binding.tvIdProduct.text.toString(), qty)
+                // call presenter update qty
+                presenter.updateProductQty(this, binding.tvIdProduct.text.toString(), qty)
+            }
 
         }
     }

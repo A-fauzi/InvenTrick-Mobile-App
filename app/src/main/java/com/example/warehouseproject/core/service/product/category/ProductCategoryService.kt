@@ -11,7 +11,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class ProductCategoryService {
-    fun createCategory(categoryRequest: CategoryRequest) {
+    fun createCategory(categoryRequest: CategoryRequest, onResponseSuccessBody: (response: CategoryResponse.SingleResponse) -> Unit, onResponseErrorBody: (msg: String) -> Unit, onFailure: (msg: String) -> Unit) {
         NetworkConfig(Constant.BASE_URL)
             .productService()
             .createCategory(categoryRequest)
@@ -22,16 +22,17 @@ class ProductCategoryService {
                 ) {
                     if (response.isSuccessful) {
                         response.body()?.let {
-                            Log.d("CATEGORY", it.message)
-                            Log.d("CATEGORY", it.data.toString())
+                            onResponseSuccessBody(it)
                         }
                     } else {
-                        Log.d("CATEGORY", response.errorBody()?.string() ?: "Error boy wee")
+                        response.errorBody()?.string()?.let {
+                            onResponseErrorBody(it)
+                        }
                     }
                 }
 
                 override fun onFailure(call: Call<CategoryResponse.SingleResponse>, t: Throwable) {
-                    Log.d("CATEGORY", t.message.toString())
+                    onFailure(t.message.toString())
                 }
 
             })

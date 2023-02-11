@@ -23,6 +23,7 @@ import com.example.warehouseproject.core.helper.SimpleDateFormat
 import com.example.warehouseproject.core.model.product.Product
 import com.example.warehouseproject.core.service.product.ProductApiService
 import com.example.warehouseproject.core.view.main.MainActivity
+import com.example.warehouseproject.core.view.main.home_fragment.category.ProductCategoryActivity
 import com.example.warehouseproject.core.view.main.home_fragment.home_dialog_detail.DetailDialog
 import com.example.warehouseproject.core.view.main.home_fragment.stock_histories.StockHistoriesActivity
 import com.example.warehouseproject.core.view.main.home_fragment.stock_in_product.StockInActivity
@@ -67,10 +68,10 @@ class HomeFragment : Fragment(), HomeAdapter.CallClickListener, HomeView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-//        binding.newTxtTopbar.txtTopBar.text = "Home"
-//        binding.newTxtTopbar.viewEnd.setOnClickListener {
-//            popUpMenu()
-//        }
+        binding.newTxtTopbar.txtTopBar.text = "Home"
+        binding.newTxtTopbar.viewEnd.setOnClickListener {
+            popUpMenu()
+        }
 
         shimmerViewContainer.startShimmer()
         shimmerViewTotalProduct.startShimmer()
@@ -132,28 +133,28 @@ class HomeFragment : Fragment(), HomeAdapter.CallClickListener, HomeView {
     }
 
 
-//    private fun popUpMenu() {
-//        val popupMenu = PopupMenu(activity, binding.newTxtTopbar.viewEnd, Gravity.END)
-//        popupMenu.menuInflater.inflate(R.menu.product_activity_menu, popupMenu.menu)
-//        popupMenu.setOnMenuItemClickListener {
-//            when (it.itemId) {
-//                R.id.stockIn -> {
-//                    startActivity(Intent(requireActivity(), StockInActivity::class.java))
-//                }
-//                R.id.stockOut -> {
-//                    startActivity(Intent(requireActivity(), StockOutActivity::class.java))
-//                }
-//                R.id.history -> {
-//                    startActivity(Intent(requireActivity(), StockHistoriesActivity::class.java))
-//                }
-//                R.id.category -> {
-//                    Toast.makeText(requireActivity(), "Fitur sedang dalam pengembangan", Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//
-//            true
-//        }
-//        popupMenu.show()
-//    }
+    private fun popUpMenu() {
+        val popupMenu = PopupMenu(activity, binding.newTxtTopbar.viewEnd, Gravity.END)
+        popupMenu.menuInflater.inflate(R.menu.product_activity_menu, popupMenu.menu)
+        popupMenu.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.stockIn -> {
+                    startActivity(Intent(requireActivity(), StockInActivity::class.java))
+                }
+                R.id.stockOut -> {
+                    startActivity(Intent(requireActivity(), StockOutActivity::class.java))
+                }
+                R.id.history -> {
+                    startActivity(Intent(requireActivity(), StockHistoriesActivity::class.java))
+                }
+                R.id.category -> {
+                    startActivity(Intent(requireActivity(), ProductCategoryActivity::class.java))
+                }
+            }
+
+            true
+        }
+        popupMenu.show()
+    }
 
 }

@@ -73,7 +73,7 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
        spec =  binding.etSpecProduct
        price = binding.etPriceProduct
        location =  binding.etLocationProduct
-       status = binding.etStatusProduct
+       status = binding.autoCompleteStatus
        model = binding.etModelProduct
        lot = binding.etLotProduct
        exp = binding.etExpProduct
@@ -87,7 +87,6 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
         // tes api
         ProductCategoryService().getCategories{ data ->
             if (data.isNotEmpty()) {
-                // Example category nanti
                 val arrayAdapter = ArrayAdapter(this, R.layout.item_dropdown_category, data.map { it.name })
                 binding.autoCompleteTextView.setAdapter(arrayAdapter)
             } else {
@@ -95,8 +94,17 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
                 binding.autoCompleteTextView.setText("Kosong")
                 binding.txtInputLayoutCategory.helperText = "Category masih kosong, tambahkan nanti"
                 binding.txtInputLayoutCategory.setHelperTextColor(getColorStateList(R.color.red_smooth))
+
+                binding.outlinedTextFieldSubCategoryProduct.isEnabled = false
+                binding.etSubCategoryProduct.setText("kosong")
+                binding.outlinedTextFieldSubCategoryProduct.helperText = "Sub Category masih kosong, tambahkan nanti"
+                binding.outlinedTextFieldSubCategoryProduct.setHelperTextColor(getColorStateList(R.color.red_smooth))
             }
         }
+
+        val array = arrayListOf("active", "in-progress")
+        val arrayAdapter = ArrayAdapter(this, R.layout.item_dropdown_category, array)
+        binding.autoCompleteStatus.setAdapter(arrayAdapter)
 
         initView()
 
@@ -155,7 +163,7 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (price.text.toString().isEmpty()) {
-                    binding.outlinedTextFieldPriceProduct.helperText =  "is not empty!"
+                    binding.outlinedTextFieldPriceProduct.helperText =  "price is not empty!"
                     binding.outlinedTextFieldPriceProduct.setHelperTextColor(getColorStateList(R.color.red_smooth))
                 } else {
                     binding.outlinedTextFieldPriceProduct.helperText =  Currency.format(p0.toString().toDouble(), "id", "ID")

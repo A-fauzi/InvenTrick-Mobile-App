@@ -374,6 +374,14 @@
                             android:textColor="@color/red_smooth"/>
 
 
+                        <ProgressBar
+                            android:id="@+id/progress_delete"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:visibility="gone"/>
+
+
                         <TextView
                             android:id="@+id/tv_btn_update"
                             android:layout_width="wrap_content"
@@ -383,14 +391,6 @@
                             android:fontFamily="@font/inter_medium"
                             android:textColor="@color/green_cendol"/>
                     </RelativeLayout>
-
-                    <ProgressBar
-                        android:id="@+id/progress_delete"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_centerVertical="true"
-                        android:visibility="gone"/>
 
                 </LinearLayout>
             </ScrollView>

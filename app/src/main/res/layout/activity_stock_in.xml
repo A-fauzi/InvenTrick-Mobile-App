@@ -169,27 +169,30 @@
            android:id="@+id/text_input_layout_code_product"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
+           android:hint="search product"
            android:layout_toStartOf="@id/btn_search_product"
-           android:layout_marginEnd="8dp">
+           android:layout_marginEnd="8dp"
+           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
 
            <com.google.android.material.textfield.TextInputEditText
                android:id="@+id/et_input_code_product"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
-               android:hint="Your Text Here"
-               android:fontFamily="@font/inter_medium"/>
+               android:inputType="text"/>
 
        </com.google.android.material.textfield.TextInputLayout>
 
 
-       <Button
+       <com.google.android.material.button.MaterialButton
            android:id="@+id/btn_search_product"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:layout_alignParentEnd="true"
            android:layout_centerVertical="true"
+           android:fontFamily="@font/inter_medium"
            android:text="Search"
-           android:textAllCaps="false"
-           android:fontFamily="@font/inter_medium"/>
+           app:cornerRadius="24dp"
+           android:textAllCaps="false" />
    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
