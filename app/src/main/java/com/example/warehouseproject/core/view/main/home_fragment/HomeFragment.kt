@@ -49,6 +49,8 @@ class HomeFragment : Fragment(), HomeAdapter.CallClickListener, HomeView {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
 
+        activity?.setActionBar(binding.toolbar)
+
         presenter = HomePresenter(this, DetailDialog())
         setupRecyclerView()
         getData()
