@@ -128,7 +128,7 @@
                                     android:fontFamily="@font/inter_medium"
                                     android:textColor="@color/white" />
 
-                                <Button
+                                <com.google.android.material.button.MaterialButton
                                     android:id="@+id/btn_to_add_product"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"

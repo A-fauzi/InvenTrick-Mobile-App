@@ -8,6 +8,7 @@ import android.util.Log
 import android.util.TypedValue
 import android.view.*
 import android.view.animation.AccelerateInterpolator
+import android.view.animation.AnimationUtils
 import android.view.animation.DecelerateInterpolator
 import android.widget.PopupMenu
 import android.widget.Toast
@@ -77,8 +78,8 @@ class HomeFragment : Fragment(), HomeAdapter.CallClickListener, HomeView {
         shimmerViewTotalProduct.startShimmer()
 
         binding.btnToAddProduct.setOnClickListener {
+            binding.btnToAddProduct.startAnimation(AnimationUtils.loadAnimation(requireActivity(), R.anim.animation_button))
             startActivity(Intent(requireActivity(), AddProductActivity::class.java))
-            activity?.finish()
         }
 
         binding.rlTotalProduct.setBackgroundColor(Color.parseColor(RandomColor.generate()))
