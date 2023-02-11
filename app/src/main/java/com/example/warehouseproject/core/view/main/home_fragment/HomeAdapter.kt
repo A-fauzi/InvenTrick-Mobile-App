@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.model.product.Product
@@ -23,8 +24,10 @@ class HomeAdapter(
     }
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
+
         with(holder) {
             with(items[position]) {
+
                 Picasso.get().load(image).centerCrop().resize(500, 500).placeholder(R.drawable.ic_people).error(R.drawable.img_example).into(binding.ivItemProduct)
                 binding.tvNameProduct.text = name
 

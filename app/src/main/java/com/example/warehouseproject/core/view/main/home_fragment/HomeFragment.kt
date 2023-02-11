@@ -2,16 +2,19 @@ package com.example.warehouseproject.core.view.main.home_fragment
 
 import android.content.Intent
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.TypedValue
+import android.view.*
+import android.view.animation.AccelerateInterpolator
+import android.view.animation.DecelerateInterpolator
 import android.widget.PopupMenu
 import android.widget.Toast
+import android.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.helper.PreferenceHelper
 import com.example.warehouseproject.core.helper.PreferenceHelper.loadData
@@ -27,6 +30,7 @@ import com.example.warehouseproject.core.view.main.home_fragment.stock_out_produ
 import com.example.warehouseproject.core.view.product.add_product.AddProductActivity
 import com.example.warehouseproject.databinding.FragmentHomeBinding
 import com.facebook.shimmer.ShimmerFrameLayout
+import java.lang.Math.abs
 
 class HomeFragment : Fragment(), HomeAdapter.CallClickListener, HomeView {
 
@@ -49,11 +53,11 @@ class HomeFragment : Fragment(), HomeAdapter.CallClickListener, HomeView {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
 
-        activity?.setActionBar(binding.toolbar)
-
         presenter = HomePresenter(this, DetailDialog())
         setupRecyclerView()
         getData()
+
+
 
         shimmerViewContainer = binding.shimmerViewContainerListProduct
         shimmerViewTotalProduct = binding.shimmerViewTotalProduct
@@ -63,10 +67,10 @@ class HomeFragment : Fragment(), HomeAdapter.CallClickListener, HomeView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        binding.newTxtTopbar.txtTopBar.text = "Home"
-        binding.newTxtTopbar.viewEnd.setOnClickListener {
-            popUpMenu()
-        }
+//        binding.newTxtTopbar.txtTopBar.text = "Home"
+//        binding.newTxtTopbar.viewEnd.setOnClickListener {
+//            popUpMenu()
+//        }
 
         shimmerViewContainer.startShimmer()
         shimmerViewTotalProduct.startShimmer()
@@ -128,28 +132,28 @@ class HomeFragment : Fragment(), HomeAdapter.CallClickListener, HomeView {
     }
 
 
-    private fun popUpMenu() {
-        val popupMenu = PopupMenu(activity, binding.newTxtTopbar.viewEnd, Gravity.END)
-        popupMenu.menuInflater.inflate(R.menu.product_activity_menu, popupMenu.menu)
-        popupMenu.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.stockIn -> {
-                    startActivity(Intent(requireActivity(), StockInActivity::class.java))
-                }
-                R.id.stockOut -> {
-                    startActivity(Intent(requireActivity(), StockOutActivity::class.java))
-                }
-                R.id.history -> {
-                    startActivity(Intent(requireActivity(), StockHistoriesActivity::class.java))
-                }
-                R.id.category -> {
-                    Toast.makeText(requireActivity(), "Fitur sedang dalam pengembangan", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            true
-        }
-        popupMenu.show()
-    }
+//    private fun popUpMenu() {
+//        val popupMenu = PopupMenu(activity, binding.newTxtTopbar.viewEnd, Gravity.END)
+//        popupMenu.menuInflater.inflate(R.menu.product_activity_menu, popupMenu.menu)
+//        popupMenu.setOnMenuItemClickListener {
+//            when (it.itemId) {
+//                R.id.stockIn -> {
+//                    startActivity(Intent(requireActivity(), StockInActivity::class.java))
+//                }
+//                R.id.stockOut -> {
+//                    startActivity(Intent(requireActivity(), StockOutActivity::class.java))
+//                }
+//                R.id.history -> {
+//                    startActivity(Intent(requireActivity(), StockHistoriesActivity::class.java))
+//                }
+//                R.id.category -> {
+//                    Toast.makeText(requireActivity(), "Fitur sedang dalam pengembangan", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//
+//            true
+//        }
+//        popupMenu.show()
+//    }
 
 }
