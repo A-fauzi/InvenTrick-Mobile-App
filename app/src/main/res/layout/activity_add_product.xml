@@ -154,7 +154,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:inputType="none"
-                tools:text="Happy" />
+                android:text="Tambahkan nanti"
+                app:simpleItems="@array/default_items"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <!--  Sub Category  -->

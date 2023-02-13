@@ -17,11 +17,7 @@
 
     <string name="feelings">Feelings</string>
     <string name="txt_topbar_account">Account</string>
-    <string-array name="feelings">
-        <item>Sad</item>
-        <item>Dissatisfied</item>
-        <item>Satisfied</item>
-        <item>Happy</item>
-        <item>Excited</item>
+    <string-array name="default_items">
+        <item>Tambahkan nanti</item>
     </string-array>
 </resources>

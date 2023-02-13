@@ -14,36 +14,39 @@ import com.example.warehouseproject.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
-    companion object {
-        private var WRITE_EXTERNAL_STORAGE_PERMISSION_CODE: Int = 1
-        private var READ_EXTERNAL_STORAGE_PERMISSION_CODE: Int = 2
-        private var CAMERA_PERMISSION_CODE: Int = 3
-    }
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var bottomNavigationView: BottomNavigationView
+
+    private lateinit var presenter: MainActivityPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        checkPermission()
+        presenter = MainActivityPresenter(applicationContext, this)
+        presenter.checkPermission()
 
-        loadFragment(HomeFragment())
+        setUpBottomNav()
+    }
+
+    private fun setUpBottomNav() {
+        presenter.loadFragment(HomeFragment(), this)
+
         bottomNavigationView = binding.bottomNav
         bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId) {
                 R.id.home -> {
-                    loadFragment(HomeFragment())
+                    presenter.loadFragment(HomeFragment(), this)
                     true
                 }
                 R.id.scan -> {
-                    loadFragment(ScanFragment())
+                    presenter.loadFragment(ScanFragment(), this)
                     true
                 }
                 R.id.account -> {
-                    loadFragment(AccountFragment())
+                    presenter.loadFragment(AccountFragment(), this)
                     true
                 }
                 else -> false
@@ -51,34 +54,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun loadFragment(fragment: Fragment) {
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.container, fragment)
-        transaction.commit()
-    }
-
-    private fun checkPermission() {
-        when (PackageManager.PERMISSION_DENIED) {
-            checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) -> {
-                requestPermissions(
-                    arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                    WRITE_EXTERNAL_STORAGE_PERMISSION_CODE
-                )
-            }
-            checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) -> {
-                requestPermissions(
-                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-                    READ_EXTERNAL_STORAGE_PERMISSION_CODE
-                )
-            }
-            checkSelfPermission(Manifest.permission.CAMERA) -> {
-                requestPermissions(
-                    arrayOf(Manifest.permission.CAMERA),
-                    CAMERA_PERMISSION_CODE
-                )
-            }
-        }
-    }
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -87,19 +62,19 @@ class MainActivity : AppCompatActivity() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
-            WRITE_EXTERNAL_STORAGE_PERMISSION_CODE -> if (grantResults.isNotEmpty()) {
+            ObjectPermission.WRITE_EXTERNAL_STORAGE_PERMISSION_CODE -> if (grantResults.isNotEmpty()) {
                 if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
                     Toast.makeText(this, "Anda perlu memberikan semua izin untuk menggunakan aplikasi ini.", Toast.LENGTH_SHORT).show()
                     finish()
                 }
             }
-            READ_EXTERNAL_STORAGE_PERMISSION_CODE -> if (grantResults.isNotEmpty()) {
+            ObjectPermission.READ_EXTERNAL_STORAGE_PERMISSION_CODE -> if (grantResults.isNotEmpty()) {
                 if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
                     Toast.makeText(this, "Anda perlu memberikan semua izin untuk menggunakan aplikasi ini.", Toast.LENGTH_SHORT).show()
                     finish()
                 }
             }
-            CAMERA_PERMISSION_CODE -> if (grantResults.isNotEmpty()) {
+            ObjectPermission.CAMERA_PERMISSION_CODE -> if (grantResults.isNotEmpty()) {
                 if (grantResults[0] == PackageManager.PERMISSION_DENIED){
                     Toast.makeText(this, "Anda perlu memberikan semua izin untuk menggunakan aplikasi ini.", Toast.LENGTH_SHORT).show()
                     finish()
