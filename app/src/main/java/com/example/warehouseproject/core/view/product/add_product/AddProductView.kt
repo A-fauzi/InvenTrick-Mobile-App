@@ -1,5 +1,8 @@
 package com.example.warehouseproject.core.view.product.add_product
 
+import com.example.warehouseproject.core.model.product.ProductModelAssets
+import com.example.warehouseproject.core.model.product.category.Category
+
 interface AddProductView {
     fun showInputErrorCode()
     fun showInputErrorName()
@@ -22,4 +25,10 @@ interface AddProductView {
 
     fun getImageCapture()
     fun getImageFromGallery()
+
+    fun onDataCategoryRequestNotEmptyView(data: List<Category>)
+    fun onDataCategoryRequestIsEmptyView()
+
+    fun searchItemsIsNullView()
+    fun searchItemsIsNotNullView(data: ProductModelAssets?)
 }

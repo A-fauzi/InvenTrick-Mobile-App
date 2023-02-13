@@ -1,10 +1,13 @@
 package com.example.warehouseproject.core.view.product.add_product
 
 import android.app.Activity
+import android.content.Context
 import com.example.warehouseproject.core.constant.Constant
 import com.example.warehouseproject.core.model.product.Product
+import com.example.warehouseproject.core.model.product.ProductModelAssets
 import com.example.warehouseproject.core.service.product.ProductApiService
 import com.example.warehouseproject.core.model.product.ProductRequest
+import com.example.warehouseproject.core.model.product.category.Category
 
 class AddProductPresenter(var addProductView: AddProductView?, val addProductInteractor: AddProductInteractor): AddProductInteractor.OnAddProductFinishedListener {
 
@@ -21,6 +24,14 @@ class AddProductPresenter(var addProductView: AddProductView?, val addProductInt
         if (resultCode == Activity.RESULT_OK && requestCode == Constant.REQUEST_CODE) {
             getFile()
         }
+    }
+
+    fun getCategory() {
+        addProductInteractor.requestCategoryApi(this)
+    }
+
+    fun searchItemsProductName(context: Context, itemCode: String) {
+        addProductInteractor.searchItemProductNameByCode(context, "product.json", itemCode, this)
     }
 
     override fun onInputErrorCode() {
@@ -76,4 +87,21 @@ class AddProductPresenter(var addProductView: AddProductView?, val addProductInt
         addProductView?.hideButton()
         addProductView?.showProgressbar()
     }
+
+    override fun onDataCategoryRequestNotEmpty(data: List<Category>) {
+        addProductView?.onDataCategoryRequestNotEmptyView(data)
+    }
+
+    override fun onDataCategoryRequestIsEmpty() {
+        addProductView?.onDataCategoryRequestIsEmptyView()
+    }
+
+    override fun searchItemsIsNull() {
+        addProductView?.searchItemsIsNullView()
+    }
+
+    override fun searchItemsIsNotNull(data: ProductModelAssets?) {
+        addProductView?.searchItemsIsNotNullView(data)
+    }
+
 }

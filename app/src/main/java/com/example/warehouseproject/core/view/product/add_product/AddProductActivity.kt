@@ -2,42 +2,30 @@ package com.example.warehouseproject.core.view.product.add_product
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Toast
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.constant.Constant.REQUEST_CODE
+import com.example.warehouseproject.core.helper.*
 import com.example.warehouseproject.core.helper.Currency
-import com.example.warehouseproject.core.helper.HideKeyboardHelper
-import com.example.warehouseproject.core.helper.PreferenceHelper
 import com.example.warehouseproject.core.helper.PreferenceHelper.saveData
+import com.example.warehouseproject.core.helper.TextWatcher.addTextCangedListener
 import com.example.warehouseproject.core.model.product.ProductModelAssets
 import com.example.warehouseproject.core.model.product.ProductRequest
 import com.example.warehouseproject.core.model.product.category.Category
-import com.example.warehouseproject.core.model.product.category.CategoryResponse
-import com.example.warehouseproject.core.service.product.ProductApiService
-import com.example.warehouseproject.core.service.product.category.ProductCategoryService
-import com.example.warehouseproject.core.utils.DataFromAssets
 import com.example.warehouseproject.core.view.main.MainActivity
 import com.example.warehouseproject.databinding.ActivityAddProductBinding
-import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.firebase.storage.FirebaseStorage
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.squareup.picasso.Picasso
 import com.tapadoo.alerter.Alerter
 import java.io.ByteArrayOutputStream
-import java.io.File
 import java.util.*
 
 class AddProductActivity : AppCompatActivity(), AddProductView {
@@ -88,60 +76,15 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
         binding = ActivityAddProductBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // tes api
-        ProductCategoryService().getCategories{ data ->
-            if (data.isNotEmpty()) {
-                val arrayAdapter = ArrayAdapter(this, R.layout.item_dropdown_category, data.map { it.name })
-                binding.autoCompleteTextView.setAdapter(arrayAdapter)
-            } else {
-               binding.autoCompleteTextView.isEnabled = false
-                binding.autoCompleteTextView.setText("Kosong")
-                binding.txtInputLayoutCategory.helperText = "Category masih kosong, tambahkan nanti"
-                binding.txtInputLayoutCategory.setHelperTextColor(getColorStateList(R.color.red_smooth))
+        presenter.getCategory()
 
-                binding.outlinedTextFieldSubCategoryProduct.isEnabled = false
-                binding.etSubCategoryProduct.setText("kosong")
-                binding.outlinedTextFieldSubCategoryProduct.helperText = "Sub Category masih kosong, tambahkan nanti"
-                binding.outlinedTextFieldSubCategoryProduct.setHelperTextColor(getColorStateList(R.color.red_smooth))
-            }
-        }
-
-        val array = arrayListOf("active", "in-progress")
-        val arrayAdapter = ArrayAdapter(this, R.layout.item_dropdown_category, array)
-        binding.autoCompleteStatus.setAdapter(arrayAdapter)
+        autoCompleteStatusProduct()
 
         initView()
 
-        // data assets
-        val jsonFileString = DataFromAssets().getJsonDataFromAssets(applicationContext, "product.json")
-
-        val gson = Gson()
-        val listType = object : TypeToken<List<ProductModelAssets>>() {}.type
-
-        val list: List<ProductModelAssets> = gson.fromJson(jsonFileString, listType)
-
-
-//        val input = "NBE38000"
         addTextCangedListener(code) { char ->
-
-            val searchItem = list.find { it.itemCode == char.toString().uppercase() }
-
-            if (searchItem == null) {
-                binding.etNameProduct.text?.clear()
-                binding.outlinedTextFieldNameProduct.helperText = "Tidak ada data name dengan code produk ${code.text}"
-                binding.outlinedTextFieldNameProduct.setHelperTextColor(getColorStateList(R.color.red_smooth))
-                binding.etNameProduct.text?.clear()
-                binding.outlinedTextFieldNameProduct.isEnabled = false
-            } else {
-                binding.etNameProduct.setText(searchItem.itemNameDesc)
-                binding.etNameProduct.requestFocus()
-                binding.outlinedTextFieldNameProduct.isEnabled = true
-                binding.outlinedTextFieldNameProduct.isHelperTextEnabled = false
-                binding.outlinedTextFieldNameProduct.isEnabled = true
-            }
+            presenter.searchItemsProductName(applicationContext, char.toString())
         }
-
-
 
         firebaseStorage = FirebaseStorage.getInstance()
 
@@ -167,15 +110,9 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
         }
 
         binding.cvSelectExpDate.setOnClickListener {
-            val datePicker = MaterialDatePicker.Builder.datePicker()
-                .setTitleText("Select exp date")
-                .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
-                .build()
 
-            datePicker.show(supportFragmentManager, "tag ")
-            datePicker.addOnPositiveButtonClickListener {
-                exp.setText(datePicker.headerText)
-            }
+            datePickerDialog()
+
         }
 
         binding.btnChooseGalery.setOnClickListener {
@@ -192,41 +129,75 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
 
 
         addTextCangedListener(price) {
-            if (price.text.toString().isEmpty()) {
-                binding.outlinedTextFieldPriceProduct.helperText =  "price is not empty!"
-                binding.outlinedTextFieldPriceProduct.setHelperTextColor(getColorStateList(R.color.red_smooth))
-            } else {
-                binding.outlinedTextFieldPriceProduct.helperText =  Currency.format(it.toString().toDouble(), "id", "ID")
-                binding.outlinedTextFieldPriceProduct.setHelperTextColor(getColorStateList(R.color.black))
-            }
+            inputPriceInteractor(it)
         }
 
 
     }
 
-    private fun addTextCangedListener(editText: EditText, onTextChanged: (p0: CharSequence?) -> Unit) {
-        val textWatcher =  object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                onTextChanged(p0)
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-            }
-
+    private fun inputPriceInteractor(it: CharSequence?) {
+        if (price.text.toString().isEmpty()) {
+            binding.outlinedTextFieldPriceProduct.helperText = "price is not empty!"
+            binding.outlinedTextFieldPriceProduct.setHelperTextColor(getColorStateList(R.color.red_smooth))
+        } else {
+            binding.outlinedTextFieldPriceProduct.helperText = Currency.format(it.toString().toDouble(), "id", "ID")
+            binding.outlinedTextFieldPriceProduct.setHelperTextColor(getColorStateList(R.color.black))
         }
+    }
 
-        editText.addTextChangedListener(textWatcher)
+    private fun datePickerDialog() {
+        DatePickerDialog(this).setTextTitleDate("exp date") { datePicker ->
+            datePicker.show(supportFragmentManager, "tag")
+            datePicker.addOnPositiveButtonClickListener {
+                exp.setText(datePicker.headerText)
+            }
+        }
+    }
 
+    private fun autoCompleteStatusProduct() {
+        val array = arrayListOf("active", "in-progress")
+        val arrayAdapter = ArrayAdapter(this, R.layout.item_dropdown_category, array)
+        binding.autoCompleteStatus.setAdapter(arrayAdapter)
     }
 
     override fun getImageFromGallery() {
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
         startActivityForResult(intent, REQUEST_CODE)
+    }
+
+    override fun onDataCategoryRequestNotEmptyView(data: List<Category>) {
+        val arrayAdapter = ArrayAdapter(this, R.layout.item_dropdown_category, data.map { it.name })
+        binding.autoCompleteTextView.setAdapter(arrayAdapter)
+    }
+
+    override fun onDataCategoryRequestIsEmptyView() {
+        binding.autoCompleteTextView.isEnabled = false
+        binding.autoCompleteTextView.setText("Kosong")
+        binding.txtInputLayoutCategory.helperText = "Category masih kosong, tambahkan nanti"
+        binding.txtInputLayoutCategory.setHelperTextColor(getColorStateList(R.color.red_smooth))
+
+        binding.outlinedTextFieldSubCategoryProduct.isEnabled = false
+        binding.etSubCategoryProduct.setText("kosong")
+        binding.outlinedTextFieldSubCategoryProduct.helperText = "Sub Category masih kosong, tambahkan nanti"
+        binding.outlinedTextFieldSubCategoryProduct.setHelperTextColor(getColorStateList(R.color.red_smooth))
+
+    }
+
+    override fun searchItemsIsNullView() {
+        binding.etNameProduct.text?.clear()
+        binding.outlinedTextFieldNameProduct.helperText = "Tidak ada data name dengan code produk ${code.text}"
+        binding.outlinedTextFieldNameProduct.setHelperTextColor(getColorStateList(R.color.red_smooth))
+        binding.etNameProduct.text?.clear()
+        binding.outlinedTextFieldNameProduct.isEnabled = false
+    }
+
+    override fun searchItemsIsNotNullView(data: ProductModelAssets?) {
+        binding.etNameProduct.setText(data?.itemNameDesc)
+        binding.etNameProduct.requestFocus()
+        binding.outlinedTextFieldNameProduct.isEnabled = true
+        binding.outlinedTextFieldNameProduct.isHelperTextEnabled = false
+        binding.outlinedTextFieldNameProduct.isEnabled = true
     }
 
     @Deprecated("Deprecated in Java")
