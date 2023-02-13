@@ -1,11 +1,17 @@
 package com.example.warehouseproject.core.view.product.add_product
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.view.View
+import com.example.warehouseproject.R
+import com.example.warehouseproject.core.constant.Constant
 import com.example.warehouseproject.core.helper.DataJsonFromAssets
 import com.example.warehouseproject.core.model.product.ProductModelAssets
 import com.example.warehouseproject.core.model.product.ProductRequest
 import com.example.warehouseproject.core.model.product.category.Category
 import com.example.warehouseproject.core.service.product.category.ProductCategoryService
+import com.squareup.picasso.Picasso
 
 class AddProductInteractor {
 
@@ -30,6 +36,9 @@ class AddProductInteractor {
 
         fun searchItemsIsNull()
         fun searchItemsIsNotNull(data: ProductModelAssets?)
+
+        fun onSuccessTryResultImageFromGallery(data: Intent?)
+        fun onFailureCatchResultImageFromGallery(e: Exception)
     }
 
     fun addProduct(input: ProductRequest, listener: OnAddProductFinishedListener) {
@@ -67,6 +76,16 @@ class AddProductInteractor {
                listener.searchItemsIsNull()
             } else {
                listener.searchItemsIsNotNull(searchItem)
+            }
+        }
+    }
+
+    fun resultImageFromGallery(requestCode: Int, resultCode: Int, data: Intent?, listener: OnAddProductFinishedListener) {
+        if (resultCode == Activity.RESULT_OK && requestCode == Constant.REQUEST_CODE) {
+            try {
+                listener.onSuccessTryResultImageFromGallery(data)
+            }catch (e: Exception) {
+                listener.onFailureCatchResultImageFromGallery(e)
             }
         }
     }

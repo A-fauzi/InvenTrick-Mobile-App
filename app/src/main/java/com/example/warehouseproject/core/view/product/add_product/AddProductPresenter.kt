@@ -2,12 +2,16 @@ package com.example.warehouseproject.core.view.product.add_product
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.view.View
+import com.example.warehouseproject.R
 import com.example.warehouseproject.core.constant.Constant
 import com.example.warehouseproject.core.model.product.Product
 import com.example.warehouseproject.core.model.product.ProductModelAssets
 import com.example.warehouseproject.core.service.product.ProductApiService
 import com.example.warehouseproject.core.model.product.ProductRequest
 import com.example.warehouseproject.core.model.product.category.Category
+import com.squareup.picasso.Picasso
 
 class AddProductPresenter(var addProductView: AddProductView?, val addProductInteractor: AddProductInteractor): AddProductInteractor.OnAddProductFinishedListener {
 
@@ -20,10 +24,8 @@ class AddProductPresenter(var addProductView: AddProductView?, val addProductInt
         ProductApiService().addProductApiService(requestAddProduct, onResponseSuccessBody, onResponseErrorBody, onFailure)
     }
 
-    fun resultImageFromGallery(requestCode: Int, resultCode: Int, getFile: () -> Unit?) {
-        if (resultCode == Activity.RESULT_OK && requestCode == Constant.REQUEST_CODE) {
-            getFile()
-        }
+    fun resultImageFromGallery(requestCode: Int, resultCode: Int, data: Intent?) {
+        addProductInteractor.resultImageFromGallery(requestCode, resultCode, data, this)
     }
 
     fun getCategory() {
@@ -102,6 +104,14 @@ class AddProductPresenter(var addProductView: AddProductView?, val addProductInt
 
     override fun searchItemsIsNotNull(data: ProductModelAssets?) {
         addProductView?.searchItemsIsNotNullView(data)
+    }
+
+    override fun onSuccessTryResultImageFromGallery(data: Intent?) {
+        addProductView?.onSuccessTryResultImageFromGalleryView(data)
+    }
+
+    override fun onFailureCatchResultImageFromGallery(e: Exception) {
+        addProductView?.onFailureCatchResultImageFromGalleryView(e)
     }
 
 }

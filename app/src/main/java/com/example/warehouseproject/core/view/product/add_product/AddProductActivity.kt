@@ -200,22 +200,24 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
         binding.outlinedTextFieldNameProduct.isEnabled = true
     }
 
+    override fun onSuccessTryResultImageFromGalleryView(data: Intent?) {
+        if (data != null) {
+            fillPath = data.data!!
+            Picasso.get().load(fillPath).centerCrop().resize(500, 500).error(R.drawable.img_example).into(binding.ivChooseImage)
+            binding.btnChooseGalery.visibility = View.GONE
+            binding.btnGetCapture.visibility = View.GONE
+            binding.btnChooseGaleryChange.visibility = View.VISIBLE
+        }
+    }
+
+    override fun onFailureCatchResultImageFromGalleryView(e: Exception) {
+        Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+    }
+
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        presenter.resultImageFromGallery(requestCode, resultCode) {
-
-            try {
-                if (data != null) {
-                    fillPath = data.data!!
-                    Picasso.get().load(fillPath).centerCrop().resize(500, 500).error(R.drawable.img_example).into(binding.ivChooseImage)
-                    binding.btnChooseGalery.visibility = View.GONE
-                    binding.btnGetCapture.visibility = View.GONE
-                    binding.btnChooseGaleryChange.visibility = View.VISIBLE
-                }
-            }catch (e: Exception) {
-            }
-        }
+        presenter.resultImageFromGallery(requestCode, resultCode, data)
     }
 
     override fun showInputErrorCode() {

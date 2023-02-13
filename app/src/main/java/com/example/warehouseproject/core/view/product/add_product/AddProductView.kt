@@ -1,5 +1,6 @@
 package com.example.warehouseproject.core.view.product.add_product
 
+import android.content.Intent
 import com.example.warehouseproject.core.model.product.ProductModelAssets
 import com.example.warehouseproject.core.model.product.category.Category
 
@@ -31,4 +32,6 @@ interface AddProductView {
 
     fun searchItemsIsNullView()
     fun searchItemsIsNotNullView(data: ProductModelAssets?)
+    fun onSuccessTryResultImageFromGalleryView(data: Intent?)
+    fun onFailureCatchResultImageFromGalleryView(e: Exception)
 }
