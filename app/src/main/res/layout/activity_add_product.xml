@@ -98,31 +98,24 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_search_product_by_code"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="search product by code"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"/>
-        </RelativeLayout>
-
-        <!--  Name  -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/outlinedTextFieldNameProduct"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="name product"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_name_product"
+            <!--  Name  -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/outlinedTextFieldNameProduct"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text" />
+                android:hint="name product"
+                android:layout_toEndOf="@id/outlinedTextFieldCodeProduct"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-        </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_name_product"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+        </RelativeLayout>
 
         <!--  Qty  -->
         <com.google.android.material.textfield.TextInputLayout

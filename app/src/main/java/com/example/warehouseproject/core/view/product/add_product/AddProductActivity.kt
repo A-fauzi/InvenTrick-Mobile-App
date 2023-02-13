@@ -122,19 +122,22 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
 
 
 //        val input = "NBE38000"
+        addTextCangedListener(code) { char ->
 
-        binding.outlinedTextFieldNameProduct.isEnabled = false
-        binding.btnSearchProductByCode.setOnClickListener {
-            val searchItem = list.find { it.itemCode == binding.etCodeProduct.text.toString() }
-            if (searchItem != null) {
+            val searchItem = list.find { it.itemCode == char.toString().uppercase() }
+
+            if (searchItem == null) {
+                binding.etNameProduct.text?.clear()
+                binding.outlinedTextFieldNameProduct.helperText = "Tidak ada data name dengan code produk ${code.text}"
+                binding.outlinedTextFieldNameProduct.setHelperTextColor(getColorStateList(R.color.red_smooth))
+                binding.etNameProduct.text?.clear()
+                binding.outlinedTextFieldNameProduct.isEnabled = false
+            } else {
                 binding.etNameProduct.setText(searchItem.itemNameDesc)
                 binding.etNameProduct.requestFocus()
                 binding.outlinedTextFieldNameProduct.isEnabled = true
-            } else {
-                binding.outlinedTextFieldNameProduct.helperText = "Tidak ada data name pada code ${binding.etCodeProduct.text.toString()}"
-                binding.outlinedTextFieldNameProduct.setHelperTextColor(getColorStateList(R.color.red_smooth))
-                binding.outlinedTextFieldNameProduct.isEnabled = false
-                binding.etCodeProduct.text?.clear()
+                binding.outlinedTextFieldNameProduct.isHelperTextEnabled = false
+                binding.outlinedTextFieldNameProduct.isEnabled = true
             }
         }
 
@@ -187,19 +190,28 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
             getImageCapture()
         }
 
+
+        addTextCangedListener(price) {
+            if (price.text.toString().isEmpty()) {
+                binding.outlinedTextFieldPriceProduct.helperText =  "price is not empty!"
+                binding.outlinedTextFieldPriceProduct.setHelperTextColor(getColorStateList(R.color.red_smooth))
+            } else {
+                binding.outlinedTextFieldPriceProduct.helperText =  Currency.format(it.toString().toDouble(), "id", "ID")
+                binding.outlinedTextFieldPriceProduct.setHelperTextColor(getColorStateList(R.color.black))
+            }
+        }
+
+
+    }
+
+    private fun addTextCangedListener(editText: EditText, onTextChanged: (p0: CharSequence?) -> Unit) {
         val textWatcher =  object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                if (price.text.toString().isEmpty()) {
-                    binding.outlinedTextFieldPriceProduct.helperText =  "price is not empty!"
-                    binding.outlinedTextFieldPriceProduct.setHelperTextColor(getColorStateList(R.color.red_smooth))
-                } else {
-                    binding.outlinedTextFieldPriceProduct.helperText =  Currency.format(p0.toString().toDouble(), "id", "ID")
-                    binding.outlinedTextFieldPriceProduct.setHelperTextColor(getColorStateList(R.color.black))
-                }
+                onTextChanged(p0)
             }
 
             override fun afterTextChanged(p0: Editable?) {
@@ -207,8 +219,7 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
 
         }
 
-        price.addTextChangedListener(textWatcher)
-
+        editText.addTextChangedListener(textWatcher)
 
     }
 
