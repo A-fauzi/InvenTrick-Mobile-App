@@ -22,7 +22,9 @@ import com.example.warehouseproject.core.helper.PreferenceHelper.loadData
 import com.example.warehouseproject.core.helper.RandomColor
 import com.example.warehouseproject.core.helper.SimpleDateFormat
 import com.example.warehouseproject.core.model.product.Product
+import com.example.warehouseproject.core.model.product.ProductModelAssets
 import com.example.warehouseproject.core.service.product.ProductApiService
+import com.example.warehouseproject.core.utils.DataFromAssets
 import com.example.warehouseproject.core.view.main.MainActivity
 import com.example.warehouseproject.core.view.main.home_fragment.category.ProductCategoryActivity
 import com.example.warehouseproject.core.view.main.home_fragment.home_dialog_detail.DetailDialog
@@ -32,6 +34,8 @@ import com.example.warehouseproject.core.view.main.home_fragment.stock_out_produ
 import com.example.warehouseproject.core.view.product.add_product.AddProductActivity
 import com.example.warehouseproject.databinding.FragmentHomeBinding
 import com.facebook.shimmer.ShimmerFrameLayout
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import java.lang.Math.abs
 
 class HomeFragment : Fragment(), HomeAdapter.CallClickListener, HomeView {
@@ -59,8 +63,6 @@ class HomeFragment : Fragment(), HomeAdapter.CallClickListener, HomeView {
         setupRecyclerView()
         getData()
 
-
-
         shimmerViewContainer = binding.shimmerViewContainerListProduct
         shimmerViewTotalProduct = binding.shimmerViewTotalProduct
 
@@ -71,6 +73,7 @@ class HomeFragment : Fragment(), HomeAdapter.CallClickListener, HomeView {
 
         binding.newTxtTopbar.txtTopBar.text = "Home"
         binding.newTxtTopbar.viewEnd.setOnClickListener {
+            binding.newTxtTopbar.viewEnd.startAnimation(AnimationUtils.loadAnimation(requireActivity(), R.anim.animation_button))
             popUpMenu()
         }
 

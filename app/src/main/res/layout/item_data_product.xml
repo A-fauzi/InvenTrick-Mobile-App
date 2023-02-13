@@ -65,6 +65,8 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="16dp"
                     android:text="Susu Beruang"
+                    android:ellipsize="end"
+                    android:maxLines="1"
                     android:textColor="@color/black"
                     android:textSize="24sp"
                     android:fontFamily="@font/inter_bold"/>

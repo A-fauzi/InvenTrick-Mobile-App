@@ -76,46 +76,53 @@
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
 
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:orientation="horizontal">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-           <!--  code product  -->
-           <com.google.android.material.textfield.TextInputLayout
-               android:id="@+id/outlinedTextFieldCodeProduct"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:hint="code product"
-               android:layout_marginEnd="8dp"
-               style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-
-               <com.google.android.material.textfield.TextInputEditText
-                   android:id="@+id/et_code_product"
-                   android:layout_width="100dp"
-                   android:layout_height="wrap_content"
-                   android:inputType="text"/>
-
-           </com.google.android.material.textfield.TextInputLayout>
-
-           <!--  Name  -->
-           <com.google.android.material.textfield.TextInputLayout
-               android:id="@+id/outlinedTextFieldNameProduct"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:hint="name product"
-               style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            <!--  code product  -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/outlinedTextFieldCodeProduct"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="code product"
+                android:layout_marginEnd="8dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
 
-               <com.google.android.material.textfield.TextInputEditText
-                   android:id="@+id/et_name_product"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:inputType="text" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_code_product"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"/>
 
-           </com.google.android.material.textfield.TextInputLayout>
-       </LinearLayout>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_search_product_by_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="search product by code"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+
+        <!--  Name  -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/outlinedTextFieldNameProduct"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="name product"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_name_product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <!--  Qty  -->
         <com.google.android.material.textfield.TextInputLayout

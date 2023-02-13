@@ -16,6 +16,7 @@
     <string name="image">image</string>
 
     <string name="feelings">Feelings</string>
+    <string name="txt_topbar_account">Account</string>
     <string-array name="feelings">
         <item>Sad</item>
         <item>Dissatisfied</item>

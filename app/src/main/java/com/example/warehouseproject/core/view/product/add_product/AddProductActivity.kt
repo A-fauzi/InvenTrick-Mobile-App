@@ -21,15 +21,19 @@ import com.example.warehouseproject.core.helper.Currency
 import com.example.warehouseproject.core.helper.HideKeyboardHelper
 import com.example.warehouseproject.core.helper.PreferenceHelper
 import com.example.warehouseproject.core.helper.PreferenceHelper.saveData
+import com.example.warehouseproject.core.model.product.ProductModelAssets
 import com.example.warehouseproject.core.model.product.ProductRequest
 import com.example.warehouseproject.core.model.product.category.Category
 import com.example.warehouseproject.core.model.product.category.CategoryResponse
 import com.example.warehouseproject.core.service.product.ProductApiService
 import com.example.warehouseproject.core.service.product.category.ProductCategoryService
+import com.example.warehouseproject.core.utils.DataFromAssets
 import com.example.warehouseproject.core.view.main.MainActivity
 import com.example.warehouseproject.databinding.ActivityAddProductBinding
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.firebase.storage.FirebaseStorage
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.squareup.picasso.Picasso
 import com.tapadoo.alerter.Alerter
 import java.io.ByteArrayOutputStream
@@ -107,6 +111,33 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
         binding.autoCompleteStatus.setAdapter(arrayAdapter)
 
         initView()
+
+        // data assets
+        val jsonFileString = DataFromAssets().getJsonDataFromAssets(applicationContext, "product.json")
+
+        val gson = Gson()
+        val listType = object : TypeToken<List<ProductModelAssets>>() {}.type
+
+        val list: List<ProductModelAssets> = gson.fromJson(jsonFileString, listType)
+
+
+//        val input = "NBE38000"
+
+        binding.outlinedTextFieldNameProduct.isEnabled = false
+        binding.btnSearchProductByCode.setOnClickListener {
+            val searchItem = list.find { it.itemCode == binding.etCodeProduct.text.toString() }
+            if (searchItem != null) {
+                binding.etNameProduct.setText(searchItem.itemNameDesc)
+                binding.etNameProduct.requestFocus()
+                binding.outlinedTextFieldNameProduct.isEnabled = true
+            } else {
+                binding.outlinedTextFieldNameProduct.helperText = "Tidak ada data name pada code ${binding.etCodeProduct.text.toString()}"
+                binding.outlinedTextFieldNameProduct.setHelperTextColor(getColorStateList(R.color.red_smooth))
+                binding.outlinedTextFieldNameProduct.isEnabled = false
+                binding.etCodeProduct.text?.clear()
+            }
+        }
+
 
 
         firebaseStorage = FirebaseStorage.getInstance()
