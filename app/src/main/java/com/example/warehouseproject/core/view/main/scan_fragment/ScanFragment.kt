@@ -2,12 +2,14 @@ package com.example.warehouseproject.core.view.main.scan_fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.example.warehouseproject.core.view.main.home_fragment.stock_in_product.StockInActivity
+import com.example.warehouseproject.core.view.main.home_fragment.stock_out_product.StockOutActivity
 import com.example.warehouseproject.databinding.FragmentScanBinding
 import com.google.zxing.integration.android.IntentIntegrator
 import org.json.JSONException
@@ -17,6 +19,8 @@ class ScanFragment : Fragment() {
     private lateinit var presenter: ScanPresenter
 
     private lateinit var binding: FragmentScanBinding
+
+    private lateinit var btnScanState: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,9 +37,16 @@ class ScanFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // start presenter scan from camera
-        presenter.scanFromCamera()
+        binding.btnClickScanStockIn.setOnClickListener {
+            // start presenter scan from camera
+            presenter.scanFromCamera()
+            btnScanState = "in"
+        }
 
+        binding.btnClickScanStockOut.setOnClickListener {
+            presenter.scanFromCamera()
+            btnScanState = "out"
+        }
     }
 
     @Deprecated("Deprecated in Java")
@@ -54,10 +65,17 @@ class ScanFragment : Fragment() {
                     val bundle = Bundle()
                     bundle.putString("code_items_key", contents)
 
-                    val intent = Intent(requireActivity(), StockInActivity::class.java)
-                    intent.putExtras(bundle)
-                    startActivity(intent)
-                    requireActivity().finish()
+                   when(btnScanState) {
+                       "in" -> {
+                           intentWithContent(bundle, StockInActivity::class.java)
+                       }
+                       "out" -> {
+                           intentWithContent(bundle, StockOutActivity::class.java)
+                       }
+                       else -> {
+                           btnScanState = "null"
+                       }
+                   }
 
                 }
                 catch (e: JSONException) {
@@ -72,6 +90,13 @@ class ScanFragment : Fragment() {
         } else {
             super.onActivityResult(requestCode, resultCode, data)
         }
+    }
+
+    private fun intentWithContent(bundle: Bundle, intentClass: Class<*>) {
+        val intent = Intent(requireActivity(), intentClass)
+        intent.putExtras(bundle)
+        startActivity(intent)
+        requireActivity().finish()
     }
 
 }
