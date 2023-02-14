@@ -20,11 +20,15 @@ import com.example.warehouseproject.R
 import com.example.warehouseproject.core.helper.PreferenceHelper
 import com.example.warehouseproject.core.helper.PreferenceHelper.loadData
 import com.example.warehouseproject.core.helper.RandomColor
+import com.example.warehouseproject.core.helper.SavedPreferenceUser
 import com.example.warehouseproject.core.helper.SimpleDateFormat
 import com.example.warehouseproject.core.model.product.Product
 import com.example.warehouseproject.core.model.product.ProductModelAssets
 import com.example.warehouseproject.core.service.product.ProductApiService
 import com.example.warehouseproject.core.utils.DataFromAssets
+import com.example.warehouseproject.core.utils.DataUser.EMAIL
+import com.example.warehouseproject.core.utils.DataUser.PHOTO_URI
+import com.example.warehouseproject.core.utils.DataUser.USERNAME
 import com.example.warehouseproject.core.view.main.MainActivity
 import com.example.warehouseproject.core.view.main.home_fragment.category.ProductCategoryActivity
 import com.example.warehouseproject.core.view.main.home_fragment.home_dialog_detail.DetailDialog
@@ -36,6 +40,7 @@ import com.example.warehouseproject.databinding.FragmentHomeBinding
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.squareup.picasso.Picasso
 import java.lang.Math.abs
 
 class HomeFragment : Fragment(), HomeAdapter.CallClickListener, HomeView {
@@ -48,8 +53,6 @@ class HomeFragment : Fragment(), HomeAdapter.CallClickListener, HomeView {
 
     private lateinit var shimmerViewContainer: ShimmerFrameLayout
     private lateinit var shimmerViewTotalProduct: ShimmerFrameLayout
-
-
 
 
     override fun onCreateView(
@@ -86,6 +89,12 @@ class HomeFragment : Fragment(), HomeAdapter.CallClickListener, HomeView {
         }
 
         binding.rlTotalProduct.setBackgroundColor(Color.parseColor(RandomColor.generate()))
+
+        val photo = SavedPreferenceUser.getPhoto(requireActivity())
+        val name = SavedPreferenceUser.getUsername(requireActivity())
+        val email = SavedPreferenceUser.getEmail(requireActivity())
+
+        Picasso.get().load(photo.toString()).placeholder(R.drawable.example_user).error(R.drawable.img_example).into(binding.newTxtTopbar.viewStart)
     }
 
     private fun setupRecyclerView() {

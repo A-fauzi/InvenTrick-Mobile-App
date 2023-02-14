@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".core.view.authentication.SignInActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_medium"
+            android:text="Hello"
+            android:textColor="@color/black"
+            android:textSize="36sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Welcome Back"
+            android:textColor="@color/blue_soft"
+            android:fontFamily="@font/inter_medium"
+            android:textSize="36sp" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/ic_people"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+            android:contentDescription="image_logo_content_desc" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_sign_google"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sign with Google"
+            android:fontFamily="@font/inter_medium"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/white"
+            app:iconGravity="start"
+            app:iconSize="25dp"
+            app:icon="@drawable/ic_qrcode"
+            app:iconTint="@color/black"
+            app:cornerRadius="24dp"/>
+    </LinearLayout>
+
+</ScrollView>
