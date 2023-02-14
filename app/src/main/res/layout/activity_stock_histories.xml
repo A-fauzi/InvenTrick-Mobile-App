@@ -34,9 +34,9 @@
             android:id="@+id/rv_histories"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/divider"
             android:layout_marginTop="8dp"
-            tools:listitem="@layout/item_data_history"
-            android:layout_below="@id/divider"/>
+            tools:listitem="@layout/item_data_history" />
     </RelativeLayout>
 
 

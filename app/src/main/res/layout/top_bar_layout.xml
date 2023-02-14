@@ -8,7 +8,9 @@
         android:id="@+id/view_start"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/example_user"/>
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="5dp"
+        android:src="@drawable/example_user" />
 
     <TextView
         android:id="@+id/txt_top_bar"
@@ -22,8 +24,10 @@
 
     <ImageView
         android:id="@+id/view_end"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:padding="5dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
         android:layout_margin="8dp"
         android:src="@drawable/ic_apps"
         android:layout_centerVertical="true"
