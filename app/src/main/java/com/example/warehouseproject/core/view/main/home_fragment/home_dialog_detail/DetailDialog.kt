@@ -3,16 +3,14 @@ package com.example.warehouseproject.core.view.main.home_fragment.home_dialog_de
 import android.content.Context
 import android.content.DialogInterface
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import coil.load
 import com.example.warehouseproject.R
-import com.example.warehouseproject.core.helper.Currency
-import com.example.warehouseproject.core.helper.PreferenceHelper
-import com.example.warehouseproject.core.helper.QrCode
-import com.example.warehouseproject.core.helper.RandomColor
+import com.example.warehouseproject.core.helper.*
 import com.example.warehouseproject.core.model.product.Product
 import com.example.warehouseproject.core.service.product.ProductApiService
 import com.example.warehouseproject.databinding.ItemDetailDialogBinding
@@ -20,11 +18,13 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.storage.FirebaseStorage
 
 class DetailDialog {
+
     interface DetailDialogOnFinished {
         fun onSuccessDeleted(data: Product?)
     }
 
     fun showDialog(context: Context, layoutInflater: LayoutInflater, data: Product, listener: DetailDialogOnFinished) {
+
         val binding = ItemDetailDialogBinding.inflate(layoutInflater)
 
         val dialog = BottomSheetDialog(context)
@@ -95,9 +95,8 @@ class DetailDialog {
                 setMessage("are u sure this delete item?")
                 setPositiveButton("OK", DialogInterface.OnClickListener { dialog, id ->
 
-                    val dataSharedPref = PreferenceHelper.loadData(context, data.code_items)
                     val firebaseStorage: FirebaseStorage = FirebaseStorage.getInstance()
-                    val refStorageDelete = firebaseStorage.reference.child(dataSharedPref ?: "No Data In Shared")
+                    val refStorageDelete = firebaseStorage.reference.child(data.path_storage)
                     refStorageDelete.delete().addOnSuccessListener {
                         binding.progressDelete.visibility = View.VISIBLE
                         binding.llFullContainer.visibility = View.GONE

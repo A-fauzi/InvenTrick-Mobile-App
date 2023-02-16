@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import com.example.warehouseproject.core.utils.DataUser.EMAIL
 import com.example.warehouseproject.core.utils.DataUser.PHOTO_URI
+import com.example.warehouseproject.core.utils.DataUser.UID
 import com.example.warehouseproject.core.utils.DataUser.USERNAME
 
 object SavedPreferenceUser {
@@ -47,6 +48,11 @@ object SavedPreferenceUser {
     fun getPhoto(context: Context) = getSharedPreference(context)?.getString(PHOTO_URI, "")
     fun setPhoto(context: Context, photo: String) {
         editor(context, PHOTO_URI, photo)
+    }
+
+    fun getUid(context: Context) = getSharedPreference(context)?.getString(UID, "")
+    fun setUid(context: Context, uid: String) {
+        editor(context, UID, uid)
     }
 
 }

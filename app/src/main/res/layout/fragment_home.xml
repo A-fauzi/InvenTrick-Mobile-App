@@ -186,7 +186,8 @@
                             app:shimmer_duration="1000"
                             app:shimmer_auto_start="false"
                             app:shimmer_base_color="#1B1A1A"
-                            app:shimmer_colored="true">
+                            app:shimmer_colored="true"
+                            android:layout_margin="8dp">
 
 
                             <include layout="@layout/item_load_list_product"/>

@@ -20,6 +20,7 @@ import com.example.warehouseproject.core.helper.TextWatcher.addTextCangedListene
 import com.example.warehouseproject.core.model.product.ProductModelAssets
 import com.example.warehouseproject.core.model.product.ProductRequest
 import com.example.warehouseproject.core.model.product.category.Category
+import com.example.warehouseproject.core.model.user.User
 import com.example.warehouseproject.core.view.main.MainActivity
 import com.example.warehouseproject.databinding.ActivityAddProductBinding
 import com.google.firebase.storage.FirebaseStorage
@@ -30,6 +31,7 @@ import java.util.*
 
 class AddProductActivity : AppCompatActivity(), AddProductView {
     private lateinit var modelRequestAddProduct: ProductRequest
+    private lateinit var modelUser: User
 
 
 //    View
@@ -88,12 +90,16 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
 
         firebaseStorage = FirebaseStorage.getInstance()
 
-
+        val uid = SavedPreferenceUser.getUid(this)
+        val uName = SavedPreferenceUser.getUsername(this)
+        val uPhoto = SavedPreferenceUser.getPhoto(this)
         binding.submitButtonAddProduct.setOnClickListener {
+            modelUser = User(uid = uid.toString(), username = uName.toString(), user_photo = uPhoto.toString())
             modelRequestAddProduct = ProductRequest(
                 image = "Kosong",
                 code_items = "${code.text}",
                 name = "${name.text}",
+                user = modelUser,
                 qty = "${qty.text}",
                 price = price.text.toString(),
                 category = "${category.text}",
@@ -104,6 +110,7 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
                 model = "${model.text}",
                 lot = "${lot.text}",
                 exp = "${exp.text}",
+                path_storage = ""
             )
             checkInitializedView(modelRequestAddProduct)
             HideKeyboardHelper.hideSoftKeyBoard(this, binding.root)
@@ -300,12 +307,9 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 10, byteArrayOutputStream)
         val reduceImage: ByteArray = byteArrayOutputStream.toByteArray()
 
-        // save data in shared
-        saveData(this, refStorage.path, code.text.toString())
-
         refStorage.putBytes(reduceImage).addOnSuccessListener { uploadTask ->
 
-            PreferenceHelper.saveData(this, refStorage.path, code.text.toString())
+            modelRequestAddProduct.path_storage = refStorage.path
 
             // Mendapatkan uri image yang telah di upload
             uploadTask.storage.downloadUrl.addOnSuccessListener { uri ->

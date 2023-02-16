@@ -38,20 +38,41 @@
             android:contentDescription="image_logo_content_desc" />
 
 
-        <com.google.android.material.button.MaterialButton
+
+        <androidx.cardview.widget.CardView
             android:id="@+id/btn_sign_google"
-            android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sign with Google"
-            android:fontFamily="@font/inter_medium"
-            android:textColor="@color/black"
-            android:backgroundTint="@color/white"
-            app:iconGravity="start"
-            app:iconSize="25dp"
-            app:icon="@drawable/ic_qrcode"
-            app:iconTint="@color/black"
-            app:cornerRadius="24dp"/>
+            android:layout_margin="8dp"
+            app:cardCornerRadius="24dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_icons8_google"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sign in with Google"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"/>
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/ic_angle_right"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"/>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
     </LinearLayout>
 
 </ScrollView>

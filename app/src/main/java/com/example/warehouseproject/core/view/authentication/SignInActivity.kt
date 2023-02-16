@@ -89,6 +89,7 @@ class SignInActivity : AppCompatActivity() {
                 SavedPreferenceUser.setEmail(this, account.email.toString())
                 SavedPreferenceUser.setUsername(this, account.displayName.toString())
                 SavedPreferenceUser.setPhoto(this, account.photoUrl.toString())
+                SavedPreferenceUser.setUid(this, account.id.toString())
 
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)

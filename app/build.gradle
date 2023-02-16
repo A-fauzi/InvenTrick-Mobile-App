@@ -69,6 +69,10 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
     implementation "io.coil-kt:coil-compose:2.1.0"
 
+    // Local db
+    implementation 'com.google.code.gson:gson:2.8.8'
+    implementation 'io.github.pilgr:paperdb:2.7.2'
+
     // alert
     implementation 'com.github.tapadoo:alerter:7.2.4'
 

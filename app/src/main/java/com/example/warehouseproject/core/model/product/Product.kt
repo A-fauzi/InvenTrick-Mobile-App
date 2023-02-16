@@ -1,11 +1,15 @@
 package com.example.warehouseproject.core.model.product
 
+import com.example.warehouseproject.core.model.user.User
+
 data class Product(
 
 
     val _id: String,
 
     val code_items: String,
+
+    val user: User,
 
     val name: String,
 
@@ -40,6 +44,8 @@ data class Product(
 
 
     val exp: String,
+
+    val path_storage: String,
 
 
     val created_at: String? = null,
