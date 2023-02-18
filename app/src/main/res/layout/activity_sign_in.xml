@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,71 +8,135 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="center"
         android:padding="16dp">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/inter_medium"
-            android:text="Hello"
-            android:textColor="@color/black"
-            android:textSize="36sp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Welcome Back"
-            android:textColor="@color/blue_soft"
-            android:fontFamily="@font/inter_medium"
-            android:textSize="36sp" />
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:src="@drawable/ic_people"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_wifi_router_password_unlock"
             android:scaleType="centerCrop"
             android:adjustViewBounds="true"
             android:contentDescription="image_logo_content_desc" />
 
-
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/btn_sign_google"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            app:cardCornerRadius="24dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?attr/selectableItemBackground">
+            android:text="Login"
+            android:textColor="@color/black"
+            android:fontFamily="@font/inter_bold"
+            android:textSize="24sp" />
 
-            <RelativeLayout
+        <!--  email  -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/outlinedTextFieldEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="email"
+            app:startIconDrawable="@drawable/ic_baseline_alternate_email_24"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_email"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:inputType="textEmailAddress"/>
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_icons8_google"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Sign in with Google"
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"/>
+        <!--  password  -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/outlinedTextFieldPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="password"
+            app:endIconMode="password_toggle"
+            app:startIconDrawable="@drawable/ic_baseline_lock_24"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:src="@drawable/ic_angle_right"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"/>
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:inputType="textPassword"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+<!--    CARD LOGIN GOOGLE    -->
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:id="@+id/btn_sign_google"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="8dp"-->
+<!--            app:cardCornerRadius="24dp"-->
+<!--            android:clickable="true"-->
+<!--            android:focusable="true"-->
+<!--            android:foreground="?attr/selectableItemBackground">-->
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
+
+<!--                <ImageView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:src="@drawable/ic_icons8_google" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Sign in with Google"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_centerHorizontal="true"/>-->
+
+<!--                <ImageView-->
+<!--                    android:layout_width="25dp"-->
+<!--                    android:layout_height="25dp"-->
+<!--                    android:src="@drawable/ic_angle_right"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_centerVertical="true"/>-->
+<!--            </RelativeLayout>-->
+<!--        </androidx.cardview.widget.CardView>-->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Forgot password?"
+            android:layout_gravity="end"
+            android:layout_marginTop="8dp"
+            android:padding="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:fontFamily="@font/inter_bold"
+            android:textColor="@color/purple"/>
+
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+
+           <com.google.android.material.button.MaterialButton
+               android:id="@+id/btn_submit_login"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="Login"
+               android:layout_gravity="center"
+               android:layout_marginTop="8dp"
+               android:textAllCaps="false"/>
+
+           <ProgressBar
+               android:id="@+id/progress_bar"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_centerHorizontal="true"
+               android:layout_centerVertical="true"
+               android:visibility="invisible"/>
+       </RelativeLayout>
+
     </LinearLayout>
 
-</ScrollView>
+</RelativeLayout>

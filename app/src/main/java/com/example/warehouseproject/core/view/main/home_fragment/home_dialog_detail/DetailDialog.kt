@@ -16,6 +16,7 @@ import com.example.warehouseproject.core.service.product.ProductApiService
 import com.example.warehouseproject.databinding.ItemDetailDialogBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.storage.FirebaseStorage
+import io.paperdb.Paper
 
 class DetailDialog {
 
@@ -24,6 +25,7 @@ class DetailDialog {
     }
 
     fun showDialog(context: Context, layoutInflater: LayoutInflater, data: Product, listener: DetailDialogOnFinished) {
+        Paper.init(context)
 
         val binding = ItemDetailDialogBinding.inflate(layoutInflater)
 
@@ -78,7 +80,8 @@ class DetailDialog {
                     binding.progressDelete.visibility = View.VISIBLE
                     binding.llFullContainer.visibility = View.GONE
 
-                    ProductApiService().deleteProductApiService(data._id, { msg, data ->
+                    val token = Paper.book().read<String>("token").toString()
+                    ProductApiService(token).deleteProductApiService(data._id, { msg, data ->
                         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
                         listener.onSuccessDeleted(data)
                     }, { msg ->

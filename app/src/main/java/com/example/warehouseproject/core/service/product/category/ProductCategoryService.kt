@@ -10,9 +10,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ProductCategoryService {
+class ProductCategoryService(private val token: String) {
     fun createCategory(categoryRequest: CategoryRequest, onResponseSuccessBody: (response: CategoryResponse.SingleResponse) -> Unit, onResponseErrorBody: (msg: String) -> Unit, onFailure: (msg: String) -> Unit) {
-        NetworkConfig(Constant.BASE_URL)
+        NetworkConfig(Constant.BASE_URL, token)
             .productService()
             .createCategory(categoryRequest)
             .enqueue(object : Callback<CategoryResponse.SingleResponse> {
@@ -39,7 +39,7 @@ class ProductCategoryService {
     }
 
     fun getCategories(result: (data: List<Category>) -> Unit) {
-        NetworkConfig(Constant.BASE_URL)
+        NetworkConfig(Constant.BASE_URL, token)
             .productService()
             .getCategories()
             .enqueue(object : Callback<CategoryResponse> {

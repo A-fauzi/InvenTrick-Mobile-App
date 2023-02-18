@@ -24,6 +24,7 @@ import com.example.warehouseproject.core.view.main.MainActivity
 import com.example.warehouseproject.databinding.ActivityStockInBinding
 import com.google.android.material.textfield.TextInputEditText
 import com.squareup.picasso.Picasso
+import io.paperdb.Paper
 
 class StockInActivity : AppCompatActivity(), StockInView {
 
@@ -55,6 +56,8 @@ class StockInActivity : AppCompatActivity(), StockInView {
         super.onCreate(savedInstanceState)
         binding = ActivityStockInBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        Paper.init(this)
 
         // Init view
         initView()
@@ -91,7 +94,7 @@ class StockInActivity : AppCompatActivity(), StockInView {
             val code = inputCodeProduct.text.toString()
 
             // call presenter search product
-            presenter.searchProduct(code)
+            presenter.searchProduct(this, code)
 
 
         }
@@ -153,8 +156,9 @@ class StockInActivity : AppCompatActivity(), StockInView {
 
     @SuppressLint("SetTextI18n")
     override fun showViewOnSuccessUpdateQty(data: Product) {
+        val token = Paper.book().read<String>("token").toString()
         val dataRequest = StockHistory.StockHistoryRequest(data.code_items, data.name, inputQtyProduct.text.toString(), "IN")
-        ProductApiService().createStockHistory( dataRequest)
+        ProductApiService(token).createStockHistory( dataRequest)
 
         cardFullContent.visibility = View.GONE
         progressBar.visibility = View.GONE

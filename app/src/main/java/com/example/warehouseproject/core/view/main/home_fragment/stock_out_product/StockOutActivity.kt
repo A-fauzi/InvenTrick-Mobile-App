@@ -19,6 +19,7 @@ import com.example.warehouseproject.core.service.product.ProductApiService
 import com.example.warehouseproject.core.view.main.MainActivity
 import com.example.warehouseproject.databinding.ActivityStockOutBinding
 import com.squareup.picasso.Picasso
+import io.paperdb.Paper
 
 class StockOutActivity : AppCompatActivity() {
 
@@ -32,6 +33,7 @@ class StockOutActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityStockOutBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        Paper.init(this)
 
         animationView = binding.animationView
     }
@@ -59,7 +61,9 @@ class StockOutActivity : AppCompatActivity() {
 
             val code = binding.etInputCodeProduct.text.toString()
 
-            ProductApiService().getProductByCode( code, {
+
+            val token = Paper.book().read<String>("token").toString()
+            ProductApiService(token).getProductByCode( code, {
 
                 beforeQty = it.qty.toInt()
 
@@ -113,11 +117,12 @@ class StockOutActivity : AppCompatActivity() {
                 val qty = ProductRequest.RequestQtyOnly(resultCalculate.toString())
 
 
-                ProductApiService().updateProductQty(this, binding.tvIdProduct.text.toString(), qty) { message, data ->
+                val token = Paper.book().read<String>("token").toString()
+                ProductApiService(token).updateProductQty(this, binding.tvIdProduct.text.toString(), qty) { message, data ->
 
 
                     val dataRequest = StockHistory.StockHistoryRequest(data.code_items, data.name, qtyInput, "OUT")
-                    ProductApiService().createStockHistory( dataRequest)
+                    ProductApiService(token).createStockHistory( dataRequest)
 
                     binding.cardFullContent.visibility = View.GONE
                     binding.progressBar.visibility = View.GONE

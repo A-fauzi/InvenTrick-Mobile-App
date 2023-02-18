@@ -4,6 +4,7 @@ import android.content.Context
 import com.example.warehouseproject.core.model.product.Product
 import com.example.warehouseproject.core.model.product.ProductRequest
 import com.example.warehouseproject.core.service.product.ProductApiService
+import io.paperdb.Paper
 
 class StockInInteractor {
     interface InteractorListener {
@@ -13,8 +14,10 @@ class StockInInteractor {
 
         fun onSuccessUpdateQty(data: Product)
     }
-    fun productByCode(codeProduct: String, listener: InteractorListener) {
-        ProductApiService().getProductByCode(codeProduct, { data ->
+    fun productByCode(context: Context, codeProduct: String, listener: InteractorListener) {
+        Paper.init(context)
+        val token = Paper.book().read<String>("token").toString()
+        ProductApiService(token).getProductByCode(codeProduct, { data ->
             listener.onResultData(data)
         }, {
            listener.onResponseSuccess()
@@ -24,7 +27,9 @@ class StockInInteractor {
     }
 
     fun productUpdateQty(context: Context, id: String, qtyOnly: ProductRequest.RequestQtyOnly, listener: InteractorListener) {
-        ProductApiService().updateProductQty(context, id, qtyOnly) { msg, data ->
+        Paper.init(context)
+        val token = Paper.book().read<String>("token").toString()
+        ProductApiService(token).updateProductQty(context, id, qtyOnly) { msg, data ->
             listener.onSuccessUpdateQty(data)
         }
     }

@@ -12,6 +12,7 @@ import com.example.warehouseproject.core.model.product.ProductRequest
 import com.example.warehouseproject.core.model.product.category.Category
 import com.example.warehouseproject.core.service.product.category.ProductCategoryService
 import com.squareup.picasso.Picasso
+import io.paperdb.Paper
 
 class AddProductInteractor {
 
@@ -59,8 +60,10 @@ class AddProductInteractor {
         }
     }
 
-    fun requestCategoryApi(listener: OnAddProductFinishedListener) {
-        ProductCategoryService().getCategories{ data ->
+    fun requestCategoryApi(context: Context, listener: OnAddProductFinishedListener) {
+        Paper.init(context)
+        val token = Paper.book().read<String>("token").toString()
+        ProductCategoryService(token).getCategories{ data ->
             if (data.isNotEmpty()) {
                 listener.onDataCategoryRequestNotEmpty(data)
             } else {

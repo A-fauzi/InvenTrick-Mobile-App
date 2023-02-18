@@ -15,11 +15,11 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.net.SocketTimeoutException
 
-class ProductApiService {
+class ProductApiService(private val token: String) {
 
     fun addProductApiService(requestAddProduct: ProductRequest, onResponseSuccessBody: (msg: String, data: Product? ) -> Unit, onResponseErrorBody: (msg: String) -> Unit, onFailure: (msg: String) -> Unit) {
         // request api
-        NetworkConfig(Constant.BASE_URL)
+        NetworkConfig(Constant.BASE_URL, token)
             .productService()
             .addProduct(requestAddProduct)
             .enqueue(object : Callback<ProductResponses.SingleResponse> {
@@ -49,7 +49,7 @@ class ProductApiService {
     }
 
     fun getDataProduct(context: Context? = null, resultDataCount: (data: List<Product>, count: String) -> Unit, viewVisibilitySuccess: () -> Unit) {
-        NetworkConfig(Constant.BASE_URL)
+        NetworkConfig(Constant.BASE_URL, token)
             .productService()
             .getProducts()
             .enqueue(object : Callback<ProductResponses>{
@@ -78,7 +78,7 @@ class ProductApiService {
     }
 
     fun deleteProductApiService(id: String, onResponseSuccessBody: (msg: String, data: Product? ) -> Unit, onResponseErrorBody: (msg: String) -> Unit, onFailure: (msg: String) -> Unit) {
-        NetworkConfig(Constant.BASE_URL)
+        NetworkConfig(Constant.BASE_URL, token)
             .productService()
             .deleteProduct(id)
             .enqueue(object : Callback<ProductResponses.SingleResponse>{
@@ -105,7 +105,7 @@ class ProductApiService {
     }
 
     fun getProductByCode( codeProduct: String, getResultData: (product: Product) -> Unit, onResponseSuccessBody: () -> Unit, onResponseErrorBody: (msg: String) -> Unit) {
-        NetworkConfig(Constant.BASE_URL)
+        NetworkConfig(Constant.BASE_URL, token)
             .productService()
             .getProductByCode(codeProduct)
             .enqueue(object : Callback<Product> {
@@ -131,7 +131,7 @@ class ProductApiService {
     }
 
     fun updateProductQty(context: Context, id: String, qtyOnly: ProductRequest.RequestQtyOnly, onResponseSuccessBody: (msg: String, data: Product) -> Unit) {
-        NetworkConfig(Constant.BASE_URL)
+        NetworkConfig(Constant.BASE_URL, token)
             .productService()
             .updateProductQty(id, qtyOnly)
             .enqueue(object : Callback<ProductResponses.SingleResponse> {
@@ -157,7 +157,7 @@ class ProductApiService {
 
     // Create api service stock history
     fun createStockHistory(request: StockHistory.StockHistoryRequest) {
-        NetworkConfig(Constant.BASE_URL)
+        NetworkConfig(Constant.BASE_URL, token)
             .productService()
             .stockHistory(request)
             .enqueue(object : Callback<StockHistory.StockHistorySingleResponse> {
@@ -184,7 +184,7 @@ class ProductApiService {
     }
 
     fun getStockHistories(onResponseSuccessBody: (msg: String, data: List<StockHistory>, count: String) -> Unit) {
-        NetworkConfig(Constant.BASE_URL)
+        NetworkConfig(Constant.BASE_URL, token)
             .productService()
             .getStockHistories()
             .enqueue(object : Callback<StockHistory.StockHistoryAllResponse> {

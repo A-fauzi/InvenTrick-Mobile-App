@@ -6,8 +6,8 @@ import com.example.warehouseproject.core.model.product.ProductRequest
 import com.example.warehouseproject.core.service.product.ProductApiService
 
 class StockInPresenter(private val view: StockInView, private val interactor: StockInInteractor): StockInInteractor.InteractorListener {
-    fun searchProduct(codeProduct: String) {
-        interactor.productByCode(codeProduct, this)
+    fun searchProduct(context: Context, codeProduct: String) {
+        interactor.productByCode(context, codeProduct, this)
     }
 
     fun updateProductQty(context: Context, id: String, qtyOnly: ProductRequest.RequestQtyOnly) {

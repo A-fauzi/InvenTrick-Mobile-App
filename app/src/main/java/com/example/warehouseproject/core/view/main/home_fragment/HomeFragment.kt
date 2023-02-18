@@ -51,6 +51,8 @@ class HomeFragment : Fragment(), HomeAdapter.CallClickListener, HomeView {
 
         presenter = HomePresenter(this, DetailDialog())
 
+        Paper.init(requireContext())
+
         setupRecyclerView()
 
         getData()
@@ -105,7 +107,7 @@ class HomeFragment : Fragment(), HomeAdapter.CallClickListener, HomeView {
         val name = SavedPreferenceUser.getUsername(requireActivity())
         val email = SavedPreferenceUser.getEmail(requireActivity())
 
-        Picasso.get().load(photo.toString()).placeholder(R.drawable.example_user).error(R.drawable.img_example).into(binding.newTxtTopbar.viewStart)
+//        Picasso.get().load(photo.toString()).placeholder(R.drawable.example_user).error(R.drawable.img_example).into(binding.newTxtTopbar.viewStart)
     }
 
     private fun setupRecyclerView() {
@@ -118,7 +120,8 @@ class HomeFragment : Fragment(), HomeAdapter.CallClickListener, HomeView {
     }
 
     private fun getData() {
-        ProductApiService().getDataProduct(requireActivity(), { data, count ->
+        val token = Paper.book().read<String>("token").toString()
+        ProductApiService(token).getDataProduct(requireActivity(), { data, count ->
 
             // save data
 //            val product: List<Product> = data

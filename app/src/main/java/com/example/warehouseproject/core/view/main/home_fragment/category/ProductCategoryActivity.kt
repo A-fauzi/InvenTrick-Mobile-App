@@ -16,6 +16,7 @@ import com.example.warehouseproject.core.view.main.home_fragment.HomeAdapter
 import com.example.warehouseproject.databinding.ActivityProductCategoryBinding
 import com.example.warehouseproject.databinding.ItemCreateCategoryBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import io.paperdb.Paper
 
 class ProductCategoryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProductCategoryBinding
@@ -23,6 +24,8 @@ class ProductCategoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityProductCategoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        Paper.init(this)
     }
 
     override fun onStart() {
@@ -70,7 +73,9 @@ class ProductCategoryActivity : AppCompatActivity() {
                             val dataSubCategory1 = CategoryRequest.SubCategoryRequest("${binding.tvResultSubCategory.text}", SimpleDateFormat.generate())
                             val arraySub = arrayListOf(dataSubCategory1)
                             val dataCategory1 = CategoryRequest("${binding.tvResultCategory.text}", arraySub)
-                            ProductCategoryService().createCategory(dataCategory1,
+
+                            val token = Paper.book().read<String>("token").toString()
+                            ProductCategoryService(token).createCategory(dataCategory1,
                                 {
                                     Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
                                     dialog.dismiss()

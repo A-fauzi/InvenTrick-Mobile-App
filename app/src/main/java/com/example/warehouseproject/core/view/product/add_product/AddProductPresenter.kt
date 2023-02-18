@@ -12,6 +12,7 @@ import com.example.warehouseproject.core.service.product.ProductApiService
 import com.example.warehouseproject.core.model.product.ProductRequest
 import com.example.warehouseproject.core.model.product.category.Category
 import com.squareup.picasso.Picasso
+import io.paperdb.Paper
 
 class AddProductPresenter(var addProductView: AddProductView?, val addProductInteractor: AddProductInteractor): AddProductInteractor.OnAddProductFinishedListener {
 
@@ -20,16 +21,18 @@ class AddProductPresenter(var addProductView: AddProductView?, val addProductInt
         addProductInteractor.addProduct(inputFormAddProduct, this)
     }
 
-    fun requestApiDataProduct(requestAddProduct: ProductRequest, onResponseSuccessBody: (msg: String, data: Product?) -> Unit, onResponseErrorBody: (msg: String) -> Unit, onFailure: (msg: String) -> Unit) {
-        ProductApiService().addProductApiService(requestAddProduct, onResponseSuccessBody, onResponseErrorBody, onFailure)
+    fun requestApiDataProduct(context: Context, requestAddProduct: ProductRequest, onResponseSuccessBody: (msg: String, data: Product?) -> Unit, onResponseErrorBody: (msg: String) -> Unit, onFailure: (msg: String) -> Unit) {
+        Paper.init(context)
+        val token = Paper.book().read<String>("token").toString()
+        ProductApiService(token).addProductApiService(requestAddProduct, onResponseSuccessBody, onResponseErrorBody, onFailure)
     }
 
     fun resultImageFromGallery(requestCode: Int, resultCode: Int, data: Intent?) {
         addProductInteractor.resultImageFromGallery(requestCode, resultCode, data, this)
     }
 
-    fun getCategory() {
-        addProductInteractor.requestCategoryApi(this)
+    fun getCategory(context: Context) {
+        addProductInteractor.requestCategoryApi(context,this)
     }
 
     fun searchItemsProductName(context: Context, itemCode: String) {

@@ -7,9 +7,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.helper.SavedPreferenceUser
+import com.example.warehouseproject.core.model.user.UserRequest
+import com.example.warehouseproject.core.model.user.UserResponse
+import com.example.warehouseproject.core.service.user.UserApiService
 import com.example.warehouseproject.core.view.main.MainActivity
 import com.example.warehouseproject.databinding.ActivitySignInBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -20,11 +24,17 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import io.paperdb.Paper
 
-class SignInActivity : AppCompatActivity() {
+class SignInActivity : AppCompatActivity(), SignInView {
     companion object {
         private const val TAG = "SignInActivity"
         private const val GOOGLE_SIGNIN_REQ_CODE = 1046
+
+        private const val ID = "id"
+        private const val USERNAME = "username"
+        private const val EMAIL = "email"
+        private const val TOKEN = "token"
     }
 
     private lateinit var binding: ActivitySignInBinding
@@ -32,17 +42,62 @@ class SignInActivity : AppCompatActivity() {
     private lateinit var mGoogleSignInClient: GoogleSignInClient
     private lateinit var auth: FirebaseAuth
 
+    private lateinit var presenter: SignInPresenter
+
+    private var id = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        Paper.init(this)
+
+        id = Paper.book().read<String>(ID).toString()
+
         auth = FirebaseAuth.getInstance()
 
+        presenter = SignInPresenter(this, UserApiService())
+
         configureGso()
-        binding.btnSignGoogle.setOnClickListener {
-            signInGoogle()
+
+//        binding.btnSignGoogle.setOnClickListener {
+//            signInGoogle()
+//        }
+
+        binding.btnSubmitLogin.setOnClickListener {
+            val request = UserRequest(binding.etEmail.text.toString(), binding.etPassword.text.toString())
+            presenter.signInUser(request)
         }
+
+    }
+
+    override fun onClickBtnLoginView() {
+        binding.progressBar.visibility = View.VISIBLE
+        binding.btnSubmitLogin.visibility = View.GONE
+    }
+
+    override fun onResponseErrorView() {
+        binding.progressBar.visibility = View.GONE
+        binding.btnSubmitLogin.visibility = View.VISIBLE
+    }
+
+    override fun moveToMainActivity() {
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
+    }
+
+    override fun showResponseMessageSuccess(data: UserResponse.SingleResponse) {
+        Toast.makeText(this, "Hallo ${data.username}", Toast.LENGTH_SHORT).show()
+
+        Paper.book().write(ID, data.id)
+        Paper.book().write(USERNAME, data.username)
+        Paper.book().write(EMAIL, data.email)
+        Paper.book().write(TOKEN, data.accessToken)
+    }
+
+    override fun showResponseMessageError(msg: String) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 
     private fun configureGso() {
@@ -105,7 +160,12 @@ class SignInActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        if (GoogleSignIn.getLastSignedInAccount(this) != null) {
+//        if (GoogleSignIn.getLastSignedInAccount(this) != null) {
+//            startActivity(Intent(this, MainActivity::class.java))
+//            finish()
+//        }
+
+        if (id != "null") {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }

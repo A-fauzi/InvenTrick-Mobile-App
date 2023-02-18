@@ -78,7 +78,7 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
         binding = ActivityAddProductBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        presenter.getCategory()
+        presenter.getCategory(this)
 
         autoCompleteStatusProduct()
 
@@ -315,7 +315,7 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
             uploadTask.storage.downloadUrl.addOnSuccessListener { uri ->
 
                 modelRequestAddProduct.image = uri.toString()
-                presenter.requestApiDataProduct(modelRequestAddProduct, {msg, data ->
+                presenter.requestApiDataProduct(this, modelRequestAddProduct, {msg, data ->
                     Toast.makeText(this, "$msg ${data?.name}", Toast.LENGTH_SHORT).show()
 
                     startActivity(Intent(applicationContext, MainActivity::class.java))

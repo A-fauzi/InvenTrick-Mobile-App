@@ -10,6 +10,7 @@ import com.example.warehouseproject.R
 import com.example.warehouseproject.core.model.product.StockHistory
 import com.example.warehouseproject.core.service.product.ProductApiService
 import com.example.warehouseproject.databinding.ItemDataHistoryBinding
+import io.paperdb.Paper
 
 class StockHistoriesAdapter(
     private val context: Context,
@@ -55,7 +56,9 @@ class StockHistoriesAdapter(
                     lister.onClickItemHistory(items[position])
                 }
 
-                ProductApiService().getProductByCode(code_items, {}, {
+                Paper.init(context)
+                val token = Paper.book().read<String>("token").toString()
+                ProductApiService(token).getProductByCode(code_items, {}, {
                     binding.tvDataNotFound.text = "Product is avail"
                     binding.tvDataNotFound.setTextColor(context.resources.getColor(R.color.blue)) }, {
                     binding.tvDataNotFound.text = "Product not avail"

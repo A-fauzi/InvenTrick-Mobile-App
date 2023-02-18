@@ -16,6 +16,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.squareup.picasso.Picasso
+import io.paperdb.Paper
 
 class AccountFragment : Fragment() {
     private lateinit var binding: FragmentAccountBinding
@@ -32,13 +33,7 @@ class AccountFragment : Fragment() {
         // Set TopBar
         topAppBar()
 
-        val photo = SavedPreferenceUser.getPhoto(requireActivity())
-        val name = SavedPreferenceUser.getUsername(requireActivity())
-        val email = SavedPreferenceUser.getEmail(requireActivity())
-        val uid = SavedPreferenceUser.getUid(requireActivity())
-
-        binding.newTxtTopbar.txtTopBar.text = name
-        Picasso.get().load(photo.toString()).placeholder(R.drawable.example_user).error(R.drawable.img_example).into(binding.newTxtTopbar.viewStart)
+        Paper.init(requireContext())
 
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -48,9 +43,13 @@ class AccountFragment : Fragment() {
         mGoogleSignInClient= GoogleSignIn.getClient(requireActivity(),gso)
         binding.newTxtTopbar.viewEnd.setOnClickListener {
             mGoogleSignInClient.signOut().addOnCompleteListener {
-                val intent= Intent(requireContext(), SignInActivity::class.java)
-                startActivity(intent)
-                activity?.finish()
+//                val intent= Intent(requireContext(), SignInActivity::class.java)
+//                startActivity(intent)
+//                activity?.finish()
+
+                Paper.book().destroy()
+                startActivity(Intent(requireContext(), SignInActivity::class.java))
+                requireActivity().finish()
             }
         }
 

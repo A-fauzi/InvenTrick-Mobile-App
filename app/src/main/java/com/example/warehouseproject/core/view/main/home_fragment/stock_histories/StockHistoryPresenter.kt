@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.warehouseproject.core.model.product.StockHistory
 import com.example.warehouseproject.core.service.product.ProductApiService
+import io.paperdb.Paper
 
 class StockHistoryPresenter(private val context: Context): StockHistoriesAdapter.Listener {
     private lateinit var stockHistoriesAdapter: StockHistoriesAdapter
@@ -24,13 +25,17 @@ class StockHistoryPresenter(private val context: Context): StockHistoriesAdapter
     }
 
     fun getData() {
-        ProductApiService().getStockHistories { msg, data, count ->
+        Paper.init(context)
+        val token = Paper.book().read<String>("token").toString()
+        ProductApiService(token).getStockHistories { msg, data, count ->
             showDataProduct(data.reversed())
         }
     }
 
     override fun onClickItemHistory(data: StockHistory) {
-        ProductApiService().getProductByCode(data.code_items, {}, {
+        Paper.init(context)
+        val token = Paper.book().read<String>("token").toString()
+        ProductApiService(token).getProductByCode(data.code_items, {}, {
             Toast.makeText(context, "Product masih tersedia", Toast.LENGTH_SHORT).show()
         }, {
             Toast.makeText(context, "Product sudah tidak tersedia", Toast.LENGTH_SHORT).show()
