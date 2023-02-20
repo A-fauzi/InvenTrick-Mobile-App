@@ -11,6 +11,7 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Toast
+import com.example.awesomedialog.*
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.constant.Constant.REQUEST_CODE
 import com.example.warehouseproject.core.helper.*
@@ -26,6 +27,7 @@ import com.example.warehouseproject.databinding.ActivityAddProductBinding
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import com.tapadoo.alerter.Alerter
+import io.paperdb.Paper
 import java.io.ByteArrayOutputStream
 import java.util.*
 
@@ -90,9 +92,9 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
 
         firebaseStorage = FirebaseStorage.getInstance()
 
-        val uid = SavedPreferenceUser.getUid(this)
-        val uName = SavedPreferenceUser.getUsername(this)
-        val uPhoto = SavedPreferenceUser.getPhoto(this)
+        val uid = Paper.book().read<String>("id")
+        val uName = Paper.book().read<String>("username")
+        val uPhoto = "null"
         binding.submitButtonAddProduct.setOnClickListener {
             modelUser = User(uid = uid.toString(), username = uName.toString(), user_photo = uPhoto.toString())
             modelRequestAddProduct = ProductRequest(
@@ -318,16 +320,34 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
                 presenter.requestApiDataProduct(this, modelRequestAddProduct, {msg, data ->
                     Toast.makeText(this, "$msg ${data?.name}", Toast.LENGTH_SHORT).show()
 
-                    startActivity(Intent(applicationContext, MainActivity::class.java))
+                    val intent = Intent(applicationContext, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
                     finish()
 
                 }, { msg ->
-                    Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+                    AwesomeDialog.build(this)
+                        .title("Error!", null, resources.getColor(R.color.red_smooth))
+                        .body(msg, null, resources.getColor(R.color.black))
+                        .position(AwesomeDialog.POSITIONS.BOTTOM)
+                        .onPositive("Ok", null, null) {
+                            startActivity(Intent(this, MainActivity::class.java))
+                            finish()
+                        }
+                        .icon(R.drawable.ic_icons8_cancel)
                     binding.progressBar.visibility = View.GONE
                     binding.submitButtonAddProduct.visibility = View.VISIBLE
                 },
                     { msg ->
-                        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+                        AwesomeDialog.build(this)
+                            .title("Error!", null, resources.getColor(R.color.red_smooth))
+                            .body(msg, null, resources.getColor(R.color.black))
+                            .position(AwesomeDialog.POSITIONS.BOTTOM)
+                            .onPositive("Ok", null, null) {
+                                startActivity(Intent(this, MainActivity::class.java))
+                                finish()
+                            }
+                            .icon(R.drawable.ic_icons8_cancel)
                         binding.progressBar.visibility = View.GONE
                         binding.submitButtonAddProduct.visibility = View.VISIBLE
                 })
@@ -349,11 +369,12 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
         if (this::fillPath.isInitialized) {
             presenter.validateAddProduct(request)
         } else {
-            Alerter.create(this@AddProductActivity)
-                .setText("Gambar harus dilampirkan!")
-                .setIcon(com.google.android.material.R.drawable.mtrl_ic_error)
-                .setBackgroundColorRes(R.color.red_smooth)
-                .show()
+            AwesomeDialog.build(this)
+                .title("Error!", null, resources.getColor(R.color.red_smooth))
+                .body("Please input image", null, resources.getColor(R.color.black))
+                .position(AwesomeDialog.POSITIONS.BOTTOM)
+                .onNegative("OK")
+                .icon(R.drawable.ic_icons8_cancel)
         }
     }
 }

@@ -13,6 +13,7 @@ class StockInInteractor {
         fun onResponseError(msg: String)
 
         fun onSuccessUpdateQty(data: Product)
+        fun onErrorUpdateQty(msg: String)
     }
     fun productByCode(context: Context, codeProduct: String, listener: InteractorListener) {
         Paper.init(context)
@@ -29,8 +30,10 @@ class StockInInteractor {
     fun productUpdateQty(context: Context, id: String, qtyOnly: ProductRequest.RequestQtyOnly, listener: InteractorListener) {
         Paper.init(context)
         val token = Paper.book().read<String>("token").toString()
-        ProductApiService(token).updateProductQty(context, id, qtyOnly) { msg, data ->
+        ProductApiService(token).updateProductQty(context, id, qtyOnly, { msg, data ->
             listener.onSuccessUpdateQty(data)
-        }
+        }, {
+            listener.onErrorUpdateQty(it)
+        })
     }
 }

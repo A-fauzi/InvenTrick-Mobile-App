@@ -29,4 +29,8 @@ class StockInPresenter(private val view: StockInView, private val interactor: St
     override fun onSuccessUpdateQty(data: Product) {
         view.showViewOnSuccessUpdateQty(data)
     }
+
+    override fun onErrorUpdateQty(msg: String) {
+        view.showViewOnErrorUpdateQty(msg)
+    }
 }

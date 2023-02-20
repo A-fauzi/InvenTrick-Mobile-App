@@ -15,6 +15,7 @@ import com.example.warehouseproject.core.helper.RandomColor
 import com.example.warehouseproject.core.helper.SavedPreferenceUser
 import com.example.warehouseproject.core.model.product.Product
 import com.example.warehouseproject.core.service.product.ProductApiService
+import com.example.warehouseproject.core.view.authentication.SignInActivity
 import com.example.warehouseproject.core.view.main.MainActivity
 import com.example.warehouseproject.core.view.main.home_fragment.category.ProductCategoryActivity
 import com.example.warehouseproject.core.view.main.home_fragment.home_dialog_detail.DetailDialog
@@ -144,10 +145,20 @@ class HomeFragment : Fragment(), HomeAdapter.CallClickListener, HomeView {
                 binding.tvListProduct.visibility = View.VISIBLE
                 shimmerViewTotalProduct.visibility = View.GONE
             }
-        }) {
+        },{
             binding.llFullContainer.visibility = View.VISIBLE
             binding.tvCountProducts.visibility = View.VISIBLE
             shimmerViewTotalProduct.visibility = View.GONE
+        }) {
+            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+            if (it == "user is deleted and token not valid") {
+                Toast.makeText(requireContext(), "your is blocked", Toast.LENGTH_SHORT).show()
+                Paper.book().destroy()
+                val intent = Intent(requireContext(), SignInActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+                activity?.finish()
+            }
         }
     }
 

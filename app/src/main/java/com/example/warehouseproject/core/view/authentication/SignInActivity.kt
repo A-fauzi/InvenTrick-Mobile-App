@@ -9,6 +9,7 @@ import android.preference.PreferenceManager
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import com.example.awesomedialog.*
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.helper.SavedPreferenceUser
 import com.example.warehouseproject.core.model.user.UserRequest
@@ -97,7 +98,11 @@ class SignInActivity : AppCompatActivity(), SignInView {
     }
 
     override fun showResponseMessageError(msg: String) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+        AwesomeDialog.build(this)
+            .title("Upps!", null, resources.getColor(R.color.red_smooth))
+            .body(msg, null, R.color.black)
+            .position(AwesomeDialog.POSITIONS.BOTTOM)
+            .onNegative("Close")
     }
 
     private fun configureGso() {

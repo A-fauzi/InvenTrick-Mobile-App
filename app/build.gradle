@@ -75,6 +75,7 @@ dependencies {
 
     // alert
     implementation 'com.github.tapadoo:alerter:7.2.4'
+    implementation 'com.github.chnouman:AwesomeDialog:1.0.5'
 
     // Lottie
     def lottieVersion = "3.4.0"

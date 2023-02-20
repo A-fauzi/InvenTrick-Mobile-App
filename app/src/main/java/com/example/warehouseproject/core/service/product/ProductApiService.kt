@@ -48,7 +48,7 @@ class ProductApiService(private val token: String) {
             })
     }
 
-    fun getDataProduct(context: Context? = null, resultDataCount: (data: List<Product>, count: String) -> Unit, viewVisibilitySuccess: () -> Unit) {
+    fun getDataProduct(context: Context? = null, resultDataCount: (data: List<Product>, count: String) -> Unit, viewVisibilitySuccess: () -> Unit, errorMessageBody: (err: String) -> Unit) {
         NetworkConfig(Constant.BASE_URL, token)
             .productService()
             .getProducts()
@@ -63,8 +63,10 @@ class ProductApiService(private val token: String) {
                         }
                         viewVisibilitySuccess()
                     } else {
-                        Log.d("MainActivity", response.message())
-                        Toast.makeText(context, "Error Response: ${response.message()}", Toast.LENGTH_SHORT).show()
+                        // convert json to String
+                        val gson = Gson()
+                        val mNanu = gson.fromJson(response.errorBody()?.string(), ProductResponses.SingleResponse::class.java)
+                        errorMessageBody(mNanu.message)
                     }
 
                 }
@@ -130,7 +132,7 @@ class ProductApiService(private val token: String) {
             })
     }
 
-    fun updateProductQty(context: Context, id: String, qtyOnly: ProductRequest.RequestQtyOnly, onResponseSuccessBody: (msg: String, data: Product) -> Unit) {
+    fun updateProductQty(context: Context, id: String, qtyOnly: ProductRequest.RequestQtyOnly, onResponseSuccessBody: (msg: String, data: Product) -> Unit, onResponseErrorBody: (msg: String) -> Unit) {
         NetworkConfig(Constant.BASE_URL, token)
             .productService()
             .updateProductQty(id, qtyOnly)
@@ -144,7 +146,10 @@ class ProductApiService(private val token: String) {
                             onResponseSuccessBody(it.message, it.data)
                         }
                     } else {
-                        Toast.makeText(context, response.message(), Toast.LENGTH_SHORT).show()
+                        // convert json to String
+                        val gson = Gson()
+                        val mNanu = gson.fromJson(response.errorBody()?.string(), ProductResponses.SingleResponse::class.java)
+                        onResponseErrorBody(mNanu.message)
                     }
                 }
 

@@ -8,4 +8,5 @@ interface StockInView {
     fun showViewOnErrorResponse(msg: String)
 
     fun showViewOnSuccessUpdateQty(data: Product)
+    fun showViewOnErrorUpdateQty(msg: String)
 }

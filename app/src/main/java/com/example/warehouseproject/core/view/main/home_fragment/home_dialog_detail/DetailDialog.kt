@@ -1,5 +1,6 @@
 package com.example.warehouseproject.core.view.main.home_fragment.home_dialog_detail
 
+import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
 import android.graphics.Color
@@ -9,6 +10,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import coil.load
+import com.example.awesomedialog.*
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.helper.*
 import com.example.warehouseproject.core.model.product.Product
@@ -24,7 +26,7 @@ class DetailDialog {
         fun onSuccessDeleted(data: Product?)
     }
 
-    fun showDialog(context: Context, layoutInflater: LayoutInflater, data: Product, listener: DetailDialogOnFinished) {
+    fun showDialog(context: Activity, layoutInflater: LayoutInflater, data: Product, listener: DetailDialogOnFinished) {
         Paper.init(context)
 
         val binding = ItemDetailDialogBinding.inflate(layoutInflater)
@@ -74,30 +76,29 @@ class DetailDialog {
 
         binding.tvBtnTrash.setOnClickListener {
 
-            val builder = AlertDialog.Builder(context)
-            with(builder) {
-                fun deleteItem(){
-                    binding.progressDelete.visibility = View.VISIBLE
-                    binding.llFullContainer.visibility = View.GONE
+            AwesomeDialog.build(context)
+                .title("Delete item!", null, context.resources.getColor(R.color.black))
+                .body("Are u sure this delete item?", null, context.resources.getColor(R.color.black))
+                .position(AwesomeDialog.POSITIONS.CENTER)
+                .onPositive("Next", null, null) {
+                    fun deleteItem(){
+                        binding.progressDelete.visibility = View.VISIBLE
+                        binding.llFullContainer.visibility = View.GONE
 
-                    val token = Paper.book().read<String>("token").toString()
-                    ProductApiService(token).deleteProductApiService(data._id, { msg, data ->
-                        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
-                        listener.onSuccessDeleted(data)
-                    }, { msg ->
-                        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
-                        binding.progressDelete.visibility = View.GONE
-                        binding.llFullContainer.visibility = View.VISIBLE
-                    }, { msg ->
-                        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
-                        binding.progressDelete.visibility = View.GONE
-                        binding.llFullContainer.visibility = View.VISIBLE
-                    })
-                }
-                setTitle("Delete item")
-                setMessage("are u sure this delete item?")
-                setPositiveButton("OK", DialogInterface.OnClickListener { dialog, id ->
-
+                        val token = Paper.book().read<String>("token").toString()
+                        ProductApiService(token).deleteProductApiService(data._id, { msg, data ->
+                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+                            listener.onSuccessDeleted(data)
+                        }, { msg ->
+                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+                            binding.progressDelete.visibility = View.GONE
+                            binding.llFullContainer.visibility = View.VISIBLE
+                        }, { msg ->
+                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+                            binding.progressDelete.visibility = View.GONE
+                            binding.llFullContainer.visibility = View.VISIBLE
+                        })
+                    }
                     val firebaseStorage: FirebaseStorage = FirebaseStorage.getInstance()
                     val refStorageDelete = firebaseStorage.reference.child(data.path_storage)
                     refStorageDelete.delete().addOnSuccessListener {
@@ -107,13 +108,8 @@ class DetailDialog {
                     }.addOnFailureListener { e ->
                         Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()
                     }
-
-                })
-                setNegativeButton(android.R.string.no, DialogInterface.OnClickListener { dialogInterface, i ->
-                    dialog.cancel()
-                })
-                show()
-            }
+                }
+                .onNegative("Cancel")
 
         }
 

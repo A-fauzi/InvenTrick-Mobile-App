@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import coil.load
 import com.airbnb.lottie.LottieAnimationView
+import com.example.awesomedialog.*
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.helper.HideKeyboardHelper
 import com.example.warehouseproject.core.model.product.Product
@@ -143,7 +144,7 @@ class StockInActivity : AppCompatActivity(), StockInView {
     @SuppressLint("SetTextI18n")
     override fun showViewOnErrorResponse(msg: String) {
         animationView.setAnimation(R.raw.product_not_found)
-        animationView.loop(true)
+        animationView.loop(false)
         animationView.playAnimation()
 
         animationView.visibility = View.VISIBLE
@@ -172,5 +173,18 @@ class StockInActivity : AppCompatActivity(), StockInView {
         Handler().postDelayed( {
             startActivity(Intent(this, MainActivity::class.java).setFlags(FLAG_ACTIVITY_CLEAR_TOP))
         }, 2000 )
+    }
+
+    override fun showViewOnErrorUpdateQty(msg: String) {
+        cardFullContent.visibility = View.GONE
+        progressBar.visibility = View.GONE
+        AwesomeDialog.build(this)
+            .title("Error!", null, resources.getColor(R.color.red_smooth))
+            .body(msg, null, resources.getColor(R.color.black))
+            .position(AwesomeDialog.POSITIONS.CENTER)
+            .onPositive("Ok", null, null) {
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            }
     }
 }

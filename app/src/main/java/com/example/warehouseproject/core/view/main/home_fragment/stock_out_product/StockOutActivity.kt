@@ -118,7 +118,7 @@ class StockOutActivity : AppCompatActivity() {
 
 
                 val token = Paper.book().read<String>("token").toString()
-                ProductApiService(token).updateProductQty(this, binding.tvIdProduct.text.toString(), qty) { message, data ->
+                ProductApiService(token).updateProductQty(this, binding.tvIdProduct.text.toString(), qty,  { message, data ->
 
 
                     val dataRequest = StockHistory.StockHistoryRequest(data.code_items, data.name, qtyInput, "OUT")
@@ -136,7 +136,7 @@ class StockOutActivity : AppCompatActivity() {
                     Handler().postDelayed( {
                         startActivity(Intent(this, MainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
                     }, 2000 )
-                }
+                }, {})
 
 
             }
