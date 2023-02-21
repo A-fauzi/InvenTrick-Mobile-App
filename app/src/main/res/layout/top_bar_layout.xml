@@ -12,6 +12,29 @@
         android:padding="5dp"
         android:src="@drawable/example_user" />
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_toEndOf="@id/view_start"
+        android:layout_centerVertical="true">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_status_activity_user"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            app:cardCornerRadius="50dp"/>
+
+        <TextView
+            android:id="@+id/tv_status_activity_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="online"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/black"/>
+    </LinearLayout>
+
     <TextView
         android:id="@+id/txt_top_bar"
         android:layout_width="wrap_content"

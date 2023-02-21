@@ -48,6 +48,8 @@ class MainActivity : AppCompatActivity(), MainView {
         val token = Paper.book().read<String>(TOKEN).toString()
         val userId = Paper.book().read<String>(ID).toString()
         presenter.updateStatusActivityUser(token, userId, data)
+
+        Paper.book().write("status", data.status_activity)
     }
 
     private fun setUpBottomNav() {
@@ -109,6 +111,8 @@ class MainActivity : AppCompatActivity(), MainView {
         val token = Paper.book().read<String>(TOKEN).toString()
         val userId = Paper.book().read<String>(ID).toString()
         presenter.updateStatusActivityUser(token, userId, data)
+
+        Paper.book().write("status", data.status_activity)
     }
 
     override fun onDestroy() {
@@ -119,6 +123,8 @@ class MainActivity : AppCompatActivity(), MainView {
         val userId = Paper.book().read<String>(ID).toString()
 
         presenter.updateStatusActivityUser(token, userId, data)
+
+        Paper.book().write("status", data.status_activity)
     }
 
     override fun onSuccessBodyReqStatusView(response: UserResponse.SingleResponse) {

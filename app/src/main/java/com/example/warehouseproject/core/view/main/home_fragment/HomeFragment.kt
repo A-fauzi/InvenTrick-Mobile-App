@@ -58,6 +58,18 @@ class HomeFragment : Fragment(), HomeAdapter.CallClickListener, HomeView {
 
         getData()
 
+        val status = Paper.book().read<String>("status").toString()
+        when(status) {
+            "online" -> {
+                binding.newTxtTopbar.cvStatusActivityUser.setCardBackgroundColor(Color.GREEN)
+                binding.newTxtTopbar.tvStatusActivityUser.text = status
+            }
+            "offline" -> {
+                binding.newTxtTopbar.cvStatusActivityUser.setCardBackgroundColor(Color.RED)
+                binding.newTxtTopbar.tvStatusActivityUser.text = status
+            }
+        }
+
 //        // paperdb
 //        Paper.init(requireContext())
 //
