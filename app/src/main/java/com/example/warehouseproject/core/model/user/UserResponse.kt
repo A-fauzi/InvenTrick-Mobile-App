@@ -1,13 +1,13 @@
 package com.example.warehouseproject.core.model.user
 
 data class UserResponse(
-    val message: String
+    val message: String,
+    val count: String,
+    val data: List<User>,
 ){
     data class SingleResponse(
-        val id: String,
-        val username: String,
-        val email: String,
-        // val roles: []
-        val accessToken: String
+        val message: String,
+        val count: String,
+        val data: User,
     )
 }

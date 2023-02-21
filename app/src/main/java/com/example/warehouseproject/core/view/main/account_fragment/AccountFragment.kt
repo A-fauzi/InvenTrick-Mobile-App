@@ -10,7 +10,13 @@ import android.view.animation.AnimationUtils
 import android.widget.Toast
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.helper.SavedPreferenceUser
+import com.example.warehouseproject.core.model.user.UserRequest
+import com.example.warehouseproject.core.model.user.UserResponse
+import com.example.warehouseproject.core.service.user.UserApiService
 import com.example.warehouseproject.core.view.authentication.SignInActivity
+import com.example.warehouseproject.core.view.main.MainActivity
+import com.example.warehouseproject.core.view.main.MainActivityPresenter
+import com.example.warehouseproject.core.view.main.MainView
 import com.example.warehouseproject.databinding.FragmentAccountBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -18,8 +24,17 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.squareup.picasso.Picasso
 import io.paperdb.Paper
 
-class AccountFragment : Fragment() {
+class AccountFragment : Fragment(), MainView {
+    companion object {
+        private const val ID = "id"
+        private const val USERNAME = "username"
+        private const val EMAIL = "email"
+        private const val TOKEN = "token"
+    }
+
     private lateinit var binding: FragmentAccountBinding
+
+    private lateinit var presenter: MainActivityPresenter
 
     private lateinit var mGoogleSignInClient: GoogleSignInClient
 
@@ -29,6 +44,8 @@ class AccountFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentAccountBinding.inflate(layoutInflater, container, false)
+
+        presenter = MainActivityPresenter(requireContext(), requireActivity(), this, UserApiService())
 
         // Set TopBar
         topAppBar()
@@ -42,15 +59,25 @@ class AccountFragment : Fragment() {
             .build()
         mGoogleSignInClient= GoogleSignIn.getClient(requireActivity(),gso)
         binding.newTxtTopbar.viewEnd.setOnClickListener {
-            mGoogleSignInClient.signOut().addOnCompleteListener {
-//                val intent= Intent(requireContext(), SignInActivity::class.java)
-//                startActivity(intent)
-//                activity?.finish()
 
-                Paper.book().destroy()
-                startActivity(Intent(requireContext(), SignInActivity::class.java))
-                requireActivity().finish()
-            }
+            val data = UserRequest.StatusActivity("offline")
+            val token = Paper.book().read<String>(TOKEN).toString()
+            val userId = Paper.book().read<String>(ID).toString()
+            presenter.updateStatusActivityUser(token, userId, data)
+
+            Paper.book().destroy()
+            val intent = Intent(requireContext(), SignInActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
+            requireActivity().finish()
+
+//            mGoogleSignInClient.signOut().addOnCompleteListener {
+////                val intent= Intent(requireContext(), SignInActivity::class.java)
+////                startActivity(intent)
+////                activity?.finish()
+//
+//
+//            }
         }
 
         return binding.root
@@ -69,5 +96,17 @@ class AccountFragment : Fragment() {
             binding.newTxtTopbar.viewStart.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.animation_button))
             Toast.makeText(requireActivity(), "Masih dalam pengembangan", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    override fun onSuccessBodyReqStatusView(response: UserResponse.SingleResponse) {
+        Toast.makeText(requireContext(), "status anda ${response.data.status_activity}", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onErrorBodyReqStatusView(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onFailureView(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 }

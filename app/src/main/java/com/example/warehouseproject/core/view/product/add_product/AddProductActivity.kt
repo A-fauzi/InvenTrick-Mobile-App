@@ -16,7 +16,6 @@ import com.example.warehouseproject.R
 import com.example.warehouseproject.core.constant.Constant.REQUEST_CODE
 import com.example.warehouseproject.core.helper.*
 import com.example.warehouseproject.core.helper.Currency
-import com.example.warehouseproject.core.helper.PreferenceHelper.saveData
 import com.example.warehouseproject.core.helper.TextWatcher.addTextCangedListener
 import com.example.warehouseproject.core.model.product.ProductModelAssets
 import com.example.warehouseproject.core.model.product.ProductRequest
@@ -26,7 +25,6 @@ import com.example.warehouseproject.core.view.main.MainActivity
 import com.example.warehouseproject.databinding.ActivityAddProductBinding
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
-import com.tapadoo.alerter.Alerter
 import io.paperdb.Paper
 import java.io.ByteArrayOutputStream
 import java.util.*
@@ -92,11 +90,12 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
 
         firebaseStorage = FirebaseStorage.getInstance()
 
-        val uid = Paper.book().read<String>("id")
-        val uName = Paper.book().read<String>("username")
+        val uid = Paper.book().read<String>("id").toString()
+        val uName = Paper.book().read<String>("username").toString()
+        val token = Paper.book().read<String>("token").toString()
         val uPhoto = "null"
         binding.submitButtonAddProduct.setOnClickListener {
-            modelUser = User(uid = uid.toString(), username = uName.toString(), user_photo = uPhoto.toString())
+            modelUser = User(uid, uName, "null", "null", arrayListOf(), "null", "online", token)
             modelRequestAddProduct = ProductRequest(
                 image = "Kosong",
                 code_items = "${code.text}",

@@ -4,16 +4,28 @@ import android.Manifest
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.warehouseproject.R
+import com.example.warehouseproject.core.model.user.UserRequest
+import com.example.warehouseproject.core.model.user.UserResponse
+import com.example.warehouseproject.core.service.user.UserApiService
 import com.example.warehouseproject.core.view.main.account_fragment.AccountFragment
 import com.example.warehouseproject.core.view.main.home_fragment.HomeFragment
 import com.example.warehouseproject.core.view.main.scan_fragment.ScanFragment
 import com.example.warehouseproject.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import io.paperdb.Paper
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MainView {
+
+    companion object {
+        private const val ID = "id"
+        private const val USERNAME = "username"
+        private const val EMAIL = "email"
+        private const val TOKEN = "token"
+    }
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var bottomNavigationView: BottomNavigationView
@@ -25,10 +37,17 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        presenter = MainActivityPresenter(applicationContext, this)
+        Paper.init(this)
+
+        presenter = MainActivityPresenter(applicationContext, this, this, UserApiService())
         presenter.checkPermission()
 
         setUpBottomNav()
+
+        val data = UserRequest.StatusActivity("online")
+        val token = Paper.book().read<String>(TOKEN).toString()
+        val userId = Paper.book().read<String>(ID).toString()
+        presenter.updateStatusActivityUser(token, userId, data)
     }
 
     private fun setUpBottomNav() {
@@ -81,5 +100,36 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        val data = UserRequest.StatusActivity("online")
+        val token = Paper.book().read<String>(TOKEN).toString()
+        val userId = Paper.book().read<String>(ID).toString()
+        presenter.updateStatusActivityUser(token, userId, data)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        val data = UserRequest.StatusActivity("offline")
+        val token = Paper.book().read<String>(TOKEN).toString()
+        val userId = Paper.book().read<String>(ID).toString()
+
+        presenter.updateStatusActivityUser(token, userId, data)
+    }
+
+    override fun onSuccessBodyReqStatusView(response: UserResponse.SingleResponse) {
+        Toast.makeText(this, "status anda ${response.data.status_activity}", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onErrorBodyReqStatusView(message: String) {
+        Log.d("MainActivity", "onErrorBodyReqStatusView: $message")
+    }
+
+    override fun onFailureView(message: String) {
+        Log.d("MainActivity", "onFailureView: $message")
     }
 }

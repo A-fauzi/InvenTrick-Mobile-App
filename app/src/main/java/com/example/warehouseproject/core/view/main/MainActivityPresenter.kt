@@ -9,8 +9,11 @@ import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.example.warehouseproject.R
+import com.example.warehouseproject.core.model.user.UserRequest
+import com.example.warehouseproject.core.model.user.UserResponse
+import com.example.warehouseproject.core.service.user.UserApiService
 
-class MainActivityPresenter(private val context: Context, private val activity: Activity) {
+class MainActivityPresenter(private val context: Context, private val activity: Activity, private val view: MainView, private val userApiService: UserApiService): UserApiService.OnFinishedStatusRequest {
     fun checkPermission() {
         when (PackageManager.PERMISSION_DENIED) {
             checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) -> {
@@ -41,5 +44,21 @@ class MainActivityPresenter(private val context: Context, private val activity: 
         val transaction = fragmentActivity.supportFragmentManager.beginTransaction()
         transaction.replace(R.id.container, fragment)
         transaction.commit()
+    }
+
+    fun updateStatusActivityUser(token: String, userId: String, reqStatus: UserRequest.StatusActivity) {
+        userApiService.updateStatusUser(token, userId, reqStatus, this)
+    }
+
+    override fun onSuccessBodyReqStatus(response: UserResponse.SingleResponse) {
+        view.onSuccessBodyReqStatusView(response)
+    }
+
+    override fun onErrorBodyReqStatus(message: String) {
+        view.onErrorBodyReqStatusView(message)
+    }
+
+    override fun onFailure(message: String) {
+        view.onFailureView(message)
     }
 }

@@ -1,11 +1,8 @@
 package com.example.warehouseproject.core.view.authentication
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -89,12 +86,12 @@ class SignInActivity : AppCompatActivity(), SignInView {
     }
 
     override fun showResponseMessageSuccess(data: UserResponse.SingleResponse) {
-        Toast.makeText(this, "Hallo ${data.username}", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Hallo ${data.data.username}", Toast.LENGTH_SHORT).show()
 
-        Paper.book().write(ID, data.id)
-        Paper.book().write(USERNAME, data.username)
-        Paper.book().write(EMAIL, data.email)
-        Paper.book().write(TOKEN, data.accessToken)
+        Paper.book().write(ID, data.data._id)
+        Paper.book().write(USERNAME, data.data.username)
+        Paper.book().write(EMAIL, data.data.email)
+        Paper.book().write(TOKEN, data.data.jwt_token)
     }
 
     override fun showResponseMessageError(msg: String) {
