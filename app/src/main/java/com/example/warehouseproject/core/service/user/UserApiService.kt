@@ -11,7 +11,7 @@ import retrofit2.Response
 
 class UserApiService {
     interface OnFinishedRequestUser {
-        fun onSuccessBody(response: UserResponse.SingleResponse)
+        fun onSuccessBody(response: UserResponse.SignIn)
         fun onErrorBody(message: String)
         fun onFailure(message: String)
     }
@@ -19,10 +19,10 @@ class UserApiService {
         NetworkConfig(Constant.BASE_URL, "")
             .userService()
             .signInUser(userRequest)
-            .enqueue(object : Callback<UserResponse.SingleResponse>{
+            .enqueue(object : Callback<UserResponse.SignIn>{
                 override fun onResponse(
-                    call: Call<UserResponse.SingleResponse>,
-                    response: Response<UserResponse.SingleResponse>
+                    call: Call<UserResponse.SignIn>,
+                    response: Response<UserResponse.SignIn>
                 ) {
                     if (response.isSuccessful) {
                         response.body()?.let {
@@ -36,7 +36,7 @@ class UserApiService {
                     }
                 }
 
-                override fun onFailure(call: Call<UserResponse.SingleResponse>, t: Throwable) {
+                override fun onFailure(call: Call<UserResponse.SignIn>, t: Throwable) {
                     listener.onFailure(t.message.toString())
                 }
 

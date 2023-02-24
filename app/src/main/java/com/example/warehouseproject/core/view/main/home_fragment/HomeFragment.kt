@@ -27,6 +27,9 @@ import com.example.warehouseproject.databinding.FragmentHomeBinding
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.squareup.picasso.Picasso
 import io.paperdb.Paper
+import io.socket.client.IO
+import io.socket.client.Socket
+import java.net.URISyntaxException
 
 class HomeFragment : Fragment(), HomeAdapter.CallClickListener, HomeView {
 
@@ -116,11 +119,6 @@ class HomeFragment : Fragment(), HomeAdapter.CallClickListener, HomeView {
 
         binding.rlTotalProduct.setBackgroundColor(Color.parseColor(RandomColor.generate()))
 
-        val photo = SavedPreferenceUser.getPhoto(requireActivity())
-        val name = SavedPreferenceUser.getUsername(requireActivity())
-        val email = SavedPreferenceUser.getEmail(requireActivity())
-
-//        Picasso.get().load(photo.toString()).placeholder(R.drawable.example_user).error(R.drawable.img_example).into(binding.newTxtTopbar.viewStart)
     }
 
     private fun setupRecyclerView() {
@@ -135,12 +133,6 @@ class HomeFragment : Fragment(), HomeAdapter.CallClickListener, HomeView {
     private fun getData() {
         val token = Paper.book().read<String>("token").toString()
         ProductApiService(token).getDataProduct(requireActivity(), { data, count ->
-
-            // save data
-//            val product: List<Product> = data
-//            val productCount: String = count
-//            Paper.book().write("products", product)
-//            Paper.book().write("count", productCount)
 
             showDataProduct(data)
 

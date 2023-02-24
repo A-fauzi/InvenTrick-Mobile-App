@@ -7,7 +7,14 @@ data class UserResponse(
 ){
     data class SingleResponse(
         val message: String,
-        val count: String,
         val data: User,
+    )
+
+    data class SignIn(
+        val message: String,
+        val id: String,
+        val username: String,
+        val email: String,
+        val accessToken: String,
     )
 }

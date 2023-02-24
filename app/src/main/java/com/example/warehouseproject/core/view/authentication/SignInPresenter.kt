@@ -11,7 +11,7 @@ class SignInPresenter(private val view: SignInView, private val service: UserApi
         view.onClickBtnLoginView()
     }
 
-    override fun onSuccessBody(response: UserResponse.SingleResponse) {
+    override fun onSuccessBody(response: UserResponse.SignIn) {
         view.moveToMainActivity()
         view.showResponseMessageSuccess(response)
     }

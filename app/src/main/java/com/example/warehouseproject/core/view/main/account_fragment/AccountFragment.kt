@@ -2,6 +2,7 @@ package com.example.warehouseproject.core.view.main.account_fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import com.example.warehouseproject.R
+import com.example.warehouseproject.core.helper.RealtimeDatabase
 import com.example.warehouseproject.core.helper.SavedPreferenceUser
 import com.example.warehouseproject.core.model.user.UserRequest
 import com.example.warehouseproject.core.model.user.UserResponse
@@ -21,10 +23,20 @@ import com.example.warehouseproject.databinding.FragmentAccountBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
 import io.paperdb.Paper
+import io.socket.client.IO
+import io.socket.client.Socket
+import java.net.URISyntaxException
 
 class AccountFragment : Fragment(), MainView {
+
+    private lateinit var realtimeDatabase: RealtimeDatabase
+
     companion object {
         private const val ID = "id"
         private const val USERNAME = "username"
@@ -46,6 +58,8 @@ class AccountFragment : Fragment(), MainView {
         binding = FragmentAccountBinding.inflate(layoutInflater, container, false)
 
         presenter = MainActivityPresenter(requireContext(), requireActivity(), this, UserApiService())
+
+        realtimeDatabase = RealtimeDatabase(requireContext())
 
         // Set TopBar
         topAppBar()
@@ -100,6 +114,8 @@ class AccountFragment : Fragment(), MainView {
 
     override fun onSuccessBodyReqStatusView(response: UserResponse.SingleResponse) {
         Toast.makeText(requireContext(), "status anda ${response.data.status_activity}", Toast.LENGTH_SHORT).show()
+
+        realtimeDatabase.write(response.data._id, UserRequest.StatusActivity(response.data.status_activity))
     }
 
     override fun onErrorBodyReqStatusView(message: String) {
@@ -109,4 +125,5 @@ class AccountFragment : Fragment(), MainView {
     override fun onFailureView(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
+
 }

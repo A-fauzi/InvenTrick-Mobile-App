@@ -2,12 +2,16 @@ package com.example.warehouseproject.core.view.main
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.warehouseproject.R
+import com.example.warehouseproject.core.constant.Constant
+import com.example.warehouseproject.core.helper.RealtimeDatabase
 import com.example.warehouseproject.core.model.user.UserRequest
 import com.example.warehouseproject.core.model.user.UserResponse
 import com.example.warehouseproject.core.service.user.UserApiService
@@ -17,8 +21,13 @@ import com.example.warehouseproject.core.view.main.scan_fragment.ScanFragment
 import com.example.warehouseproject.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.paperdb.Paper
+import io.socket.client.IO
+import io.socket.client.Socket
+import java.net.URISyntaxException
 
 class MainActivity : AppCompatActivity(), MainView {
+
+    private lateinit var realtimeDatabase: RealtimeDatabase
 
     companion object {
         private const val ID = "id"
@@ -38,6 +47,8 @@ class MainActivity : AppCompatActivity(), MainView {
         setContentView(binding.root)
 
         Paper.init(this)
+
+        realtimeDatabase = RealtimeDatabase(this)
 
         presenter = MainActivityPresenter(applicationContext, this, this, UserApiService())
         presenter.checkPermission()
@@ -129,6 +140,8 @@ class MainActivity : AppCompatActivity(), MainView {
 
     override fun onSuccessBodyReqStatusView(response: UserResponse.SingleResponse) {
         Toast.makeText(this, "status anda ${response.data.status_activity}", Toast.LENGTH_SHORT).show()
+
+        realtimeDatabase.write(response.data._id, UserRequest.StatusActivity(response.data.status_activity))
     }
 
     override fun onErrorBodyReqStatusView(message: String) {
@@ -138,4 +151,5 @@ class MainActivity : AppCompatActivity(), MainView {
     override fun onFailureView(message: String) {
         Log.d("MainActivity", "onFailureView: $message")
     }
+
 }

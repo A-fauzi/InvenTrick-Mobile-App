@@ -8,6 +8,6 @@ interface SignInView {
     fun moveToMainActivity()
 
     // Response message
-    fun showResponseMessageSuccess(data: UserResponse.SingleResponse)
+    fun showResponseMessageSuccess(data: UserResponse.SignIn)
     fun showResponseMessageError(msg: String)
 }

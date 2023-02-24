@@ -23,8 +23,13 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import io.paperdb.Paper
+import io.socket.client.IO
+import io.socket.client.Socket
+import org.json.JSONObject
+import java.net.URISyntaxException
 
 class SignInActivity : AppCompatActivity(), SignInView {
+
     companion object {
         private const val TAG = "SignInActivity"
         private const val GOOGLE_SIGNIN_REQ_CODE = 1046
@@ -68,6 +73,41 @@ class SignInActivity : AppCompatActivity(), SignInView {
             presenter.signInUser(request)
         }
 
+        // Tes socket
+
+//        try {
+//            mSocket = IO.socket("http://192.168.43.88:5000")
+//        }catch (e: URISyntaxException) {
+//            e.printStackTrace()
+//        }
+//
+//        mSocket.connect()
+//
+//        mSocket.on(Socket.EVENT_CONNECT) {
+//            Log.d("SOCKET_IO", "Connected")
+//        }
+//
+//        mSocket.on(Socket.EVENT_DISCONNECT) {
+//            Log.d("SOCKET_IO", "Disconnect")
+//        }
+//
+//        mSocket.on(Socket.EVENT_CONNECT_ERROR) {
+//            Log.d("SOCKET_IO", "Connect error")
+//        }
+//
+//        mSocket.on("chat message") {
+//            val message = it[0]
+//            Log.d("SOCKET_IO", "Message Received $message")
+//
+//            // Tampilkan pesan di ui
+//            runOnUiThread { binding.tvResultSocket.text = message.toString() }
+//        }
+//
+//        binding.btnTesSocket.setOnClickListener {
+//            val message = "Hello Socket"
+//            mSocket.emit("chat message", message)
+//        }
+
     }
 
     override fun onClickBtnLoginView() {
@@ -85,13 +125,11 @@ class SignInActivity : AppCompatActivity(), SignInView {
         finish()
     }
 
-    override fun showResponseMessageSuccess(data: UserResponse.SingleResponse) {
-        Toast.makeText(this, "Hallo ${data.data.username}", Toast.LENGTH_SHORT).show()
-
-        Paper.book().write(ID, data.data._id)
-        Paper.book().write(USERNAME, data.data.username)
-        Paper.book().write(EMAIL, data.data.email)
-        Paper.book().write(TOKEN, data.data.jwt_token)
+    override fun showResponseMessageSuccess(data: UserResponse.SignIn) {
+        Paper.book().write(ID, data.id)
+        Paper.book().write(USERNAME, data.username)
+        Paper.book().write(EMAIL, data.email)
+        Paper.book().write(TOKEN, data.accessToken)
     }
 
     override fun showResponseMessageError(msg: String) {
@@ -172,5 +210,6 @@ class SignInActivity : AppCompatActivity(), SignInView {
             finish()
         }
     }
+
 
 }
