@@ -10,7 +10,7 @@
         android:id="@+id/tv_item_month_year"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="18 Jan 2023"
+        android:text="@string/date"
         android:textSize="16sp"
         android:fontFamily="@font/inter_bold"
         android:textColor="@color/black"/>
@@ -19,7 +19,7 @@
         android:id="@+id/tv_day_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sat, 23:23:01"
+        android:text="@string/time"
         android:fontFamily="@font/inter_bold"/>
 
     <LinearLayout
@@ -57,8 +57,7 @@
                         android:id="@+id/chip_status"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:text="active"
+                        android:text="@string/chip_example_text"
                         android:fontFamily="@font/inter_medium"
                         android:textColor="@color/white"
                         android:layout_gravity="end"/>
@@ -68,7 +67,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/inter_medium"
-                        android:text="code"
+                        android:text="@string/code_example"
                         android:textColor="@color/black" />
 
                     <TextView
@@ -92,7 +91,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/inter_medium"
-                            android:text="quantity: 200"
+                            android:text="@string/quantity_200"
                             android:textColor="@color/black" />
 
                         <LinearLayout
@@ -107,7 +106,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/inter_medium"
-                                android:text="memuat..." />
+                                android:text="@string/load" />
                         </LinearLayout>
                     </RelativeLayout>
 

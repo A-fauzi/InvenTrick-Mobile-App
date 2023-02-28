@@ -1,30 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="300dp"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
     app:layout_constraintLeft_toLeftOf="parent"
     android:layout_marginTop="8dp"
     app:layout_constraintTop_toTopOf="parent">
-
-    <RelativeLayout
-        android:id="@+id/container_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/item_user_photo"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/example_user" />
-
-        <com.google.android.material.divider.MaterialDivider
-            android:layout_width="2dp"
-            android:layout_height="15dp"
-            android:layout_below="@id/item_user_photo"
-            android:layout_centerHorizontal="true" />
-    </RelativeLayout>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -36,8 +18,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:foreground="?attr/selectableItemBackground"
-            android:id="@+id/tv_detail_product"
-            android:layout_below="@id/container_profile">
+            android:id="@+id/tv_detail_product">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -55,7 +36,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/ic_people" />
+                        android:src="@drawable/ic_people"
+                        android:contentDescription="@string/content_desc_todo"/>
                 </RelativeLayout>
 
 
@@ -78,19 +60,20 @@
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
                            android:fontFamily="@font/inter_medium"
-                           android:text="code"
+                           android:text="@string/code_example"
                            android:layout_centerVertical="true"
-                           android:textColor="@color/black" />
+                           android:textColor="@color/black"
+                           tools:ignore="RelativeOverlap" />
 
                        <com.google.android.material.chip.Chip
                            android:id="@+id/chip_status"
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
                            android:layout_alignParentEnd="true"
-                           android:text="active"
-                           android:layout_marginEnd="16dp"
                            android:fontFamily="@font/inter_medium"
-                           android:textColor="@color/white"/>
+                           android:text="@string/chip_example_text"
+                           android:textColor="@color/white"
+                           tools:ignore="RelativeOverlap" />
                    </RelativeLayout>
 
                     <TextView
@@ -127,37 +110,57 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/inter_medium"
-                            android:text="quantity: 200"
+                            android:text="@string/quantity_200"
                             android:textColor="@color/black" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:fontFamily="@font/inter_medium"
-                            android:text="detail"
-                            android:textColor="@color/blue" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_alignParentBottom="true"
-                            android:orientation="horizontal">
+                            android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/inter_medium"
-                                android:text="dibuat oleh: "
+                                android:text="@string/created_by"
                                 android:textColor="@color/black" />
 
-                            <TextView
-                                android:id="@+id/item_user_name"
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/inter_medium"
-                                android:text="Akhmad"
-                                android:textColor="@color/black" />
+                                android:orientation="horizontal">
+
+                                <de.hdodenhof.circleimageview.CircleImageView
+                                    android:id="@+id/item_user_photo"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:src="@drawable/example_user" />
+
+                                <TextView
+                                    android:id="@+id/item_user_name"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/inter_medium"
+                                    android:text="@string/akhmad"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_gravity="center"
+                                    android:textColor="@color/black" />
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/inter_medium"
+                                        android:text="@string/detail"
+                                        android:textColor="@color/blue"
+                                        android:layout_alignParentEnd="true"/>
+                                </RelativeLayout>
+                            </LinearLayout>
 
                         </LinearLayout>
                     </RelativeLayout>

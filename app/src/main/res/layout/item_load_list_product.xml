@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:id="@+id/shimmer_view_container_list_product"
+<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/shimmer_view_container_list_product"
     android:layout_width="match_parent"
     android:layout_height="200dp"
     android:layout_margin="8dp"
@@ -14,9 +15,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:text="active"
+        android:text="@string/chip_example_text"
         android:fontFamily="@font/inter_medium"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white"
+        tools:ignore="RelativeOverlap" />
 
     <RelativeLayout
         android:id="@+id/ll_image"
@@ -29,7 +31,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_people" />
+            android:src="@drawable/ic_people"
+            android:contentDescription="@string/content_desc_todo"/>
     </RelativeLayout>
 
 

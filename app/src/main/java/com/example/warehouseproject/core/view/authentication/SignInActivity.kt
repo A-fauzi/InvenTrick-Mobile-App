@@ -62,7 +62,7 @@ class SignInActivity : AppCompatActivity(), SignInView {
 
         presenter = SignInPresenter(this, UserApiService())
 
-        configureGso()
+//        configureGso()
 
 //        binding.btnSignGoogle.setOnClickListener {
 //            signInGoogle()
@@ -140,63 +140,63 @@ class SignInActivity : AppCompatActivity(), SignInView {
             .onNegative("Close")
     }
 
-    private fun configureGso() {
-        val gso = GoogleSignInOptions
-            .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
-    }
+//    private fun configureGso() {
+//        val gso = GoogleSignInOptions
+//            .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//            .requestIdToken(getString(R.string.default_web_client_id))
+//            .requestEmail()
+//            .build()
+//        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+//    }
 
-    private fun signInGoogle() {
-        val signInIntent: Intent = mGoogleSignInClient.signInIntent
-        startActivityForResult(signInIntent, GOOGLE_SIGNIN_REQ_CODE)
-    }
+//    private fun signInGoogle() {
+//        val signInIntent: Intent = mGoogleSignInClient.signInIntent
+//        startActivityForResult(signInIntent, GOOGLE_SIGNIN_REQ_CODE)
+//    }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == GOOGLE_SIGNIN_REQ_CODE) {
-            val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
-            handleResult(task)
-        }
-    }
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//        if (requestCode == GOOGLE_SIGNIN_REQ_CODE) {
+//            val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
+//            handleResult(task)
+//        }
+//    }
 
-    private fun handleResult(completeTask: Task<GoogleSignInAccount>) {
-        try {
-            val account: GoogleSignInAccount? = completeTask.getResult(ApiException::class.java)
-            if (account != null) {
-                UpdateUi(account)
-            }
-        } catch (e: ApiException) {
-            Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show()
-        }
-    }
+//    private fun handleResult(completeTask: Task<GoogleSignInAccount>) {
+//        try {
+//            val account: GoogleSignInAccount? = completeTask.getResult(ApiException::class.java)
+//            if (account != null) {
+//                UpdateUi(account)
+//            }
+//        } catch (e: ApiException) {
+//            Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show()
+//        }
+//    }
 
     /**
      * Google oAuth handle methode
      */
-    private fun UpdateUi(account: GoogleSignInAccount) {
-        val credential = GoogleAuthProvider.getCredential(account.idToken, null)
-        auth.signInWithCredential(credential).addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-
-                SavedPreferenceUser.setEmail(this, account.email.toString())
-                SavedPreferenceUser.setUsername(this, account.displayName.toString())
-                SavedPreferenceUser.setPhoto(this, account.photoUrl.toString())
-                SavedPreferenceUser.setUid(this, account.id.toString())
-
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                finish()
-
-            } else {
-               Toast.makeText(this, "Task not successfuly", Toast.LENGTH_SHORT).show()
-            }
-        }.addOnFailureListener { signInCredentialFailure ->
-            Toast.makeText(this, signInCredentialFailure.message, Toast.LENGTH_SHORT).show()
-        }
-    }
+//    private fun UpdateUi(account: GoogleSignInAccount) {
+//        val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+//        auth.signInWithCredential(credential).addOnCompleteListener { task ->
+//            if (task.isSuccessful) {
+//
+//                SavedPreferenceUser.setEmail(this, account.email.toString())
+//                SavedPreferenceUser.setUsername(this, account.displayName.toString())
+//                SavedPreferenceUser.setPhoto(this, account.photoUrl.toString())
+//                SavedPreferenceUser.setUid(this, account.id.toString())
+//
+//                val intent = Intent(this, MainActivity::class.java)
+//                startActivity(intent)
+//                finish()
+//
+//            } else {
+//               Toast.makeText(this, "Task not successfuly", Toast.LENGTH_SHORT).show()
+//            }
+//        }.addOnFailureListener { signInCredentialFailure ->
+//            Toast.makeText(this, signInCredentialFailure.message, Toast.LENGTH_SHORT).show()
+//        }
+//    }
 
     override fun onStart() {
         super.onStart()

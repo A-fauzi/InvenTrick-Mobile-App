@@ -45,7 +45,7 @@ class HomeAdapter(
                 }
                 binding.tvItemCodeProduct.text = code_items
                 binding.tvSpecProduct.text = specification
-                "Quantity: ${qty.toInt()}".also { binding.tvQuantityProduct.text = it }
+                "Stock quantity: ${qty.toInt()}".also { binding.tvQuantityProduct.text = it }
 
                 binding.itemUserName.text = user.username
 //                Picasso.get().load(user.user_photo).centerCrop().resize(500, 500).placeholder(R.drawable.ic_people).error(R.drawable.img_example).into(binding.itemUserPhoto)

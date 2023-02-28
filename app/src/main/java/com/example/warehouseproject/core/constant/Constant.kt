@@ -4,5 +4,5 @@ object Constant {
     const val REQUEST_CODE = 101
 
     const val BASE_URL = "http://192.168.43.88:5000/"
-//    const val BASE_URL = "https://prickly-shoe-ox.cyclic.app/"
+//    const val BASE_URL = "https://red-clumsy-bandicoot.cyclic.app"
 }

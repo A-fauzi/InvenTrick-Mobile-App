@@ -3,6 +3,7 @@ package com.example.warehouseproject.core.model.user
 data class User(
     val _id: String,
     val username: String,
+    val user_photo: String,
     val fullName: String,
     val email: String,
     val roles: List<Roles>,

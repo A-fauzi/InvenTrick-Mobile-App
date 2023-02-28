@@ -3,11 +3,13 @@ package com.example.warehouseproject.core.view.main.account_fragment
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import android.widget.PopupMenu
 import android.widget.Toast
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.helper.RealtimeDatabase
@@ -67,23 +69,14 @@ class AccountFragment : Fragment(), MainView {
         Paper.init(requireContext())
 
 
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
-        mGoogleSignInClient= GoogleSignIn.getClient(requireActivity(),gso)
+//        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//            .requestIdToken(getString(R.string.default_web_client_id))
+//            .requestEmail()
+//            .build()
+//        mGoogleSignInClient= GoogleSignIn.getClient(requireActivity(),gso)
         binding.newTxtTopbar.viewEnd.setOnClickListener {
 
-            val data = UserRequest.StatusActivity("offline")
-            val token = Paper.book().read<String>(TOKEN).toString()
-            val userId = Paper.book().read<String>(ID).toString()
-            presenter.updateStatusActivityUser(token, userId, data)
-
-            Paper.book().destroy()
-            val intent = Intent(requireContext(), SignInActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(intent)
-            requireActivity().finish()
+            popUpMenu()
 
 //            mGoogleSignInClient.signOut().addOnCompleteListener {
 ////                val intent= Intent(requireContext(), SignInActivity::class.java)
@@ -100,6 +93,8 @@ class AccountFragment : Fragment(), MainView {
     private fun topAppBar() {
         binding.newTxtTopbar.viewEnd.setImageResource(R.drawable.ic_settings)
         binding.newTxtTopbar.txtTopBar.text = getString(R.string.txt_topbar_account)
+        binding.newTxtTopbar.cvStatusActivityUser.visibility = View.GONE
+        binding.newTxtTopbar.tvStatusActivityUser.visibility = View.GONE
 
         binding.newTxtTopbar.viewEnd.setOnClickListener {
             binding.newTxtTopbar.viewEnd.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.animation_button))
@@ -124,6 +119,31 @@ class AccountFragment : Fragment(), MainView {
 
     override fun onFailureView(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun popUpMenu() {
+        val popupMenu = PopupMenu(requireContext(), binding.newTxtTopbar.viewEnd, Gravity.END)
+        popupMenu.menuInflater.inflate(R.menu.top_bar_menu_account, popupMenu.menu)
+        popupMenu.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.logout -> {
+                    // Logout
+                    val data = UserRequest.StatusActivity("offline")
+                    val token = Paper.book().read<String>(TOKEN).toString()
+                    val userId = Paper.book().read<String>(ID).toString()
+                    presenter.updateStatusActivityUser(token, userId, data)
+
+                    Paper.book().destroy()
+                    val intent = Intent(requireContext(), SignInActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
+                    requireActivity().finish()
+                }
+            }
+
+            true
+        }
+        popupMenu.show()
     }
 
 }

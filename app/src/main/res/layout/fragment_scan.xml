@@ -9,7 +9,8 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/ilustration_example" />
+        android:src="@drawable/ic_barcode_amico"
+        android:contentDescription="@string/content_desc_todo"/>
 
    <LinearLayout
        android:layout_width="match_parent"
@@ -22,15 +23,15 @@
            android:id="@+id/btn_click_scan_stock_in"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
-           android:text="scan stock in"
-           android:backgroundTint="@color/green_cendol"
+           android:text="@string/scan_stock_in"
+           android:backgroundTint="@color/purple_smooth"
            app:cornerRadius="24dp"/>
 
        <com.google.android.material.button.MaterialButton
            android:id="@+id/btn_click_scan_stock_out"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
-           android:text="scan stock out"
+           android:text="@string/scan_stock_out"
            android:backgroundTint="@color/red_smooth"
            app:cornerRadius="24dp"/>
    </LinearLayout>

@@ -55,7 +55,7 @@
             android:exported="false" />
         <activity
             android:name="com.example.warehouseproject.core.view.main.MainActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="fullSensor"

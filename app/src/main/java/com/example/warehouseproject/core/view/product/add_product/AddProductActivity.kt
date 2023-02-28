@@ -84,6 +84,8 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
 
         initView()
 
+        uploadImageContainer()
+
         addTextCangedListener(code) { char ->
             presenter.searchItemsProductName(applicationContext, char.toString())
         }
@@ -95,7 +97,7 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
         val token = Paper.book().read<String>("token").toString()
         val uPhoto = "null"
         binding.submitButtonAddProduct.setOnClickListener {
-            modelUser = User(uid, uName, "null", "null", arrayListOf(), "null", "online", token)
+            modelUser = User(uid, uName, "null", "null", "null", arrayListOf(), "null", "online", token)
             modelRequestAddProduct = ProductRequest(
                 image = "Kosong",
                 code_items = "${code.text}",
@@ -123,24 +125,22 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
 
         }
 
-        binding.btnChooseGalery.setOnClickListener {
-            getImageFromGallery()
-        }
-
-        binding.btnChooseGaleryChange.setOnClickListener {
-            getImageFromGallery()
-        }
-
-        binding.btnGetCapture.setOnClickListener {
-            getImageCapture()
-        }
-
-
         addTextCangedListener(price) {
             inputPriceInteractor(it)
         }
 
 
+    }
+
+    private fun uploadImageContainer() {
+        binding.containerUploadImage.setOnClickListener {
+            AwesomeDialog.build(this)
+                .position(AwesomeDialog.POSITIONS.CENTER)
+                .onPositive("From gallery", R.color.green_cendol, null) {
+                    getImageFromGallery()
+                }
+                .onNegative("Cancel", R.color.red_smooth)
+        }
     }
 
     private fun inputPriceInteractor(it: CharSequence?) {
@@ -212,9 +212,7 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
         if (data != null) {
             fillPath = data.data!!
             Picasso.get().load(fillPath).centerCrop().resize(500, 500).error(R.drawable.img_example).into(binding.ivChooseImage)
-            binding.btnChooseGalery.visibility = View.GONE
-            binding.btnGetCapture.visibility = View.GONE
-            binding.btnChooseGaleryChange.visibility = View.VISIBLE
+            binding.containerImageProductPreview.visibility = View.VISIBLE
         }
     }
 
