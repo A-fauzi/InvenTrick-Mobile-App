@@ -60,7 +60,7 @@ class SignInActivity : AppCompatActivity(), SignInView {
 
         auth = FirebaseAuth.getInstance()
 
-        presenter = SignInPresenter(this, UserApiService())
+        presenter = SignInPresenter(this, UserApiService(), SignInInteractor())
 
 //        configureGso()
 
@@ -70,7 +70,7 @@ class SignInActivity : AppCompatActivity(), SignInView {
 
         binding.btnSubmitLogin.setOnClickListener {
             val request = UserRequest(binding.etEmail.text.toString(), binding.etPassword.text.toString())
-            presenter.signInUser(request)
+            presenter.validateFormSignIn(request)
         }
 
         // Tes socket
@@ -138,6 +138,26 @@ class SignInActivity : AppCompatActivity(), SignInView {
             .body(msg, null, R.color.black)
             .position(AwesomeDialog.POSITIONS.BOTTOM)
             .onNegative("Close")
+    }
+
+    override fun onInputUsernameErrorView() {
+        binding.outlinedTextFieldEmail.requestFocus()
+        binding.outlinedTextFieldEmail.helperText = "Username is required!"
+        binding.outlinedTextFieldEmail.setHelperTextColor(getColorStateList(R.color.red_smooth))
+        binding.progressBar.visibility = View.GONE
+        binding.btnSubmitLogin.visibility = View.VISIBLE
+    }
+
+    override fun onInputPasswordErrorView() {
+        binding.outlinedTextFieldPassword.requestFocus()
+        binding.outlinedTextFieldPassword.helperText = "Password is required!"
+        binding.outlinedTextFieldPassword.setHelperTextColor(getColorStateList(R.color.red_smooth))
+        binding.progressBar.visibility = View.GONE
+        binding.btnSubmitLogin.visibility = View.VISIBLE
+    }
+
+    override fun onSuccessValidationSignIn(userRequest: UserRequest) {
+        presenter.signInUser(userRequest)
     }
 
 //    private fun configureGso() {
