@@ -24,46 +24,66 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Login"
+            android:text="Login Account"
             android:textColor="@color/black"
             android:fontFamily="@font/inter_bold"
             android:textSize="24sp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="8dp"/>
 
         <!--  email  -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/outlinedTextFieldEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="email"
             app:startIconDrawable="@drawable/ic_baseline_alternate_email_24"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+            app:boxCornerRadiusTopStart="15dp"
+            app:boxCornerRadiusTopEnd="15dp"
+            app:boxCornerRadiusBottomStart="15dp"
+            app:boxCornerRadiusBottomEnd="15dp"
+            app:hintEnabled="false">
 
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:inputType="textEmailAddress"/>
+                android:inputType="textEmailAddress"
+                android:hint="Email"
+                android:padding="16dp"/>
 
         </com.google.android.material.textfield.TextInputLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="8dp"/>
 
         <!--  password  -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/outlinedTextFieldPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="password"
             app:endIconMode="password_toggle"
             app:startIconDrawable="@drawable/ic_baseline_lock_24"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+            app:boxCornerRadiusTopStart="15dp"
+            app:boxCornerRadiusTopEnd="15dp"
+            app:boxCornerRadiusBottomStart="15dp"
+            app:boxCornerRadiusBottomEnd="15dp"
+            app:hintEnabled="false">
 
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:hint="Email"
+                android:padding="16dp"
                 android:inputType="textPassword"/>
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -126,6 +146,8 @@
                android:layout_gravity="center"
                android:layout_marginTop="8dp"
                android:text="Login"
+               android:padding="16dp"
+               app:cornerRadius="15dp"
                android:textAllCaps="false" />
 
            <ProgressBar

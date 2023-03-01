@@ -129,6 +129,8 @@ class StockOutActivity : AppCompatActivity() {
                     val dataRequest = StockHistory.StockHistoryRequest(data.code_items, data.name, qtyInput, "OUT")
                     ProductApiService(token).createStockHistory( dataRequest)
 
+                    binding.stockOut.containerSearchView.visibility = View.GONE
+                    binding.stockOut.tvDescInputCode.visibility = View.GONE
                     binding.stockOut.cardFullContent.visibility = View.GONE
                     binding.stockOut.progressBar.visibility = View.GONE
 

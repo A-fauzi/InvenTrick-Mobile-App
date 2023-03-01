@@ -161,6 +161,8 @@ class StockInActivity : AppCompatActivity(), StockInView {
         val dataRequest = StockHistory.StockHistoryRequest(data.code_items, data.name, inputQtyProduct.text.toString(), "IN")
         ProductApiService(token).createStockHistory( dataRequest)
 
+        binding.stockIn.containerSearchView.visibility = View.GONE
+        binding.stockIn.tvDescInputCode.visibility = View.GONE
         cardFullContent.visibility = View.GONE
         progressBar.visibility = View.GONE
 
