@@ -35,9 +35,9 @@ class AddProductPresenter(var addProductView: AddProductView?, val addProductInt
         addProductInteractor.requestCategoryApi(context,this)
     }
 
-    fun searchItemsProductName(context: Context, itemCode: String) {
-        addProductInteractor.searchItemProductNameByCode(context, "product.json", itemCode, this)
-    }
+//    fun searchItemsProductName(context: Context, itemCode: String) {
+//        addProductInteractor.searchItemProductNameByCode(context, "product.json", itemCode, this)
+//    }
 
     override fun onInputErrorCode() {
         addProductView?.showInputErrorCode()

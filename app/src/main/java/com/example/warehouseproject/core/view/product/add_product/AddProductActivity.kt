@@ -34,7 +34,7 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
     private lateinit var modelUser: User
 
 
-//    View
+    //    View
     private lateinit var code: EditText
     private lateinit var name: EditText
     private lateinit var qty: EditText
@@ -59,18 +59,18 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
     private lateinit var binding: ActivityAddProductBinding
 
     private fun initView() {
-       code = binding.etCodeProduct
-       name =  binding.etNameProduct
+        code = binding.etCodeProduct
+        name = binding.etNameProduct
         qty = binding.etQtyProduct
-       category = binding.autoCompleteTextView
-       subCategory = binding.etSubCategoryProduct
-       spec =  binding.etSpecProduct
-       price = binding.etPriceProduct
-       location =  binding.etLocationProduct
-       status = binding.autoCompleteStatus
-       model = binding.etModelProduct
-       lot = binding.etLotProduct
-       exp = binding.etExpProduct
+        category = binding.autoCompleteTextView
+        subCategory = binding.etSubCategoryProduct
+        spec = binding.etSpecProduct
+        price = binding.etPriceProduct
+        location = binding.etLocationProduct
+        status = binding.autoCompleteStatus
+        model = binding.etModelProduct
+        lot = binding.etLotProduct
+        exp = binding.etExpProduct
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -86,16 +86,19 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
 
         uploadImageContainer()
 
-        addTextCangedListener(code) { char ->
-            presenter.searchItemsProductName(applicationContext, char.toString())
-        }
+//        addTextCangedListener(code) { char ->
+//            presenter.searchItemsProductName(applicationContext, char.toString())
+//        }
 
         firebaseStorage = FirebaseStorage.getInstance()
 
         val uid = Paper.book().read<String>("id").toString()
         val uName = Paper.book().read<String>("username").toString()
         val token = Paper.book().read<String>("token").toString()
-        val uPhoto = "null"
+
+        val generateCode = RandomCodeProduct.generate()
+        code.setText(generateCode)
+        binding.outlinedTextFieldCodeProduct.isEnabled = false
         binding.submitButtonAddProduct.setOnClickListener {
             modelUser = User(uid, uName, "null", "null", "null", arrayListOf(), "null", "online", token)
             modelRequestAddProduct = ProductRequest(
@@ -120,9 +123,7 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
         }
 
         binding.cvSelectExpDate.setOnClickListener {
-
             datePickerDialog()
-
         }
 
         addTextCangedListener(price) {
@@ -148,7 +149,8 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
             binding.outlinedTextFieldPriceProduct.helperText = "price is not empty!"
             binding.outlinedTextFieldPriceProduct.setHelperTextColor(getColorStateList(R.color.red_smooth))
         } else {
-            binding.outlinedTextFieldPriceProduct.helperText = Currency.format(it.toString().toDouble(), "id", "ID")
+            binding.outlinedTextFieldPriceProduct.helperText =
+                Currency.format(it.toString().toDouble(), "id", "ID")
             binding.outlinedTextFieldPriceProduct.setHelperTextColor(getColorStateList(R.color.black))
         }
     }
@@ -187,31 +189,34 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
 
         binding.outlinedTextFieldSubCategoryProduct.isEnabled = false
         binding.etSubCategoryProduct.setText("kosong")
-        binding.outlinedTextFieldSubCategoryProduct.helperText = "Sub Category masih kosong, tambahkan nanti"
+        binding.outlinedTextFieldSubCategoryProduct.helperText =
+            "Sub Category masih kosong, tambahkan nanti"
         binding.outlinedTextFieldSubCategoryProduct.setHelperTextColor(getColorStateList(R.color.red_smooth))
 
     }
 
     override fun searchItemsIsNullView() {
-        binding.etNameProduct.text?.clear()
-        binding.outlinedTextFieldNameProduct.helperText = "Tidak ada data name dengan code produk ${code.text}"
-        binding.outlinedTextFieldNameProduct.setHelperTextColor(getColorStateList(R.color.red_smooth))
-        binding.etNameProduct.text?.clear()
-        binding.outlinedTextFieldNameProduct.isEnabled = false
+//        binding.etNameProduct.text?.clear()
+//        binding.outlinedTextFieldNameProduct.helperText =
+//            "Tidak ada data name dengan code produk ${code.text}"
+//        binding.outlinedTextFieldNameProduct.setHelperTextColor(getColorStateList(R.color.red_smooth))
+//        binding.etNameProduct.text?.clear()
+//        binding.outlinedTextFieldNameProduct.isEnabled = false
     }
 
     override fun searchItemsIsNotNullView(data: ProductModelAssets?) {
-        binding.etNameProduct.setText(data?.itemNameDesc)
-        binding.etNameProduct.requestFocus()
-        binding.outlinedTextFieldNameProduct.isEnabled = true
-        binding.outlinedTextFieldNameProduct.isHelperTextEnabled = false
-        binding.outlinedTextFieldNameProduct.isEnabled = true
+//        binding.etNameProduct.setText(data?.itemNameDesc)
+//        binding.etNameProduct.requestFocus()
+//        binding.outlinedTextFieldNameProduct.isEnabled = true
+//        binding.outlinedTextFieldNameProduct.isHelperTextEnabled = false
+//        binding.outlinedTextFieldNameProduct.isEnabled = true
     }
 
     override fun onSuccessTryResultImageFromGalleryView(data: Intent?) {
         if (data != null) {
             fillPath = data.data!!
-            Picasso.get().load(fillPath).centerCrop().resize(500, 500).error(R.drawable.img_example).into(binding.ivChooseImage)
+            Picasso.get().load(fillPath).centerCrop().resize(500, 500).error(R.drawable.img_example)
+                .into(binding.ivChooseImage)
             binding.containerImageProductPreview.visibility = View.VISIBLE
         }
     }
@@ -242,7 +247,7 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
     }
 
     override fun showInputErrorCategory() {
-      category.error = "Category product harus di isi"
+        category.error = "Category product harus di isi"
         category.requestFocus()
     }
 
@@ -267,7 +272,7 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
     }
 
     override fun showInputErrorStatus() {
-       status.error = "Status product harus di isi"
+        status.error = "Status product harus di isi"
         status.requestFocus()
     }
 
@@ -277,12 +282,12 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
     }
 
     override fun showInputErrorLot() {
-       lot.error = "Code Oracle product harus di isi"
+        lot.error = "Code Oracle product harus di isi"
         lot.requestFocus()
     }
 
     override fun showInputErrorExp() {
-      exp.error = "Desc Oracle product harus di isi"
+        exp.error = "Desc Oracle product harus di isi"
         exp.requestFocus()
     }
 
@@ -298,7 +303,8 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
 
         val nameFile = UUID.randomUUID()
 
-        val refStorage = firebaseStorage.reference.child("/image_product/${code.text}/${name.text}_${nameFile}.jpg")
+        val refStorage =
+            firebaseStorage.reference.child("/image_product/${code.text}/${name.text}_${nameFile}.jpg")
 
 //        // Compress image
         val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, fillPath)
@@ -314,7 +320,7 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
             uploadTask.storage.downloadUrl.addOnSuccessListener { uri ->
 
                 modelRequestAddProduct.image = uri.toString()
-                presenter.requestApiDataProduct(this, modelRequestAddProduct, {msg, data ->
+                presenter.requestApiDataProduct(this, modelRequestAddProduct, { msg, data ->
                     Toast.makeText(this, "$msg ${data?.name}", Toast.LENGTH_SHORT).show()
 
                     val intent = Intent(applicationContext, MainActivity::class.java)
@@ -347,7 +353,7 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
                             .icon(R.drawable.ic_icons8_cancel)
                         binding.progressBar.visibility = View.GONE
                         binding.submitButtonAddProduct.visibility = View.VISIBLE
-                })
+                    })
 
             }.addOnFailureListener {
                 Toast.makeText(this, "DOWNLOAD PHOTO GAGAL!", Toast.LENGTH_SHORT).show()

@@ -72,16 +72,16 @@ class AddProductInteractor {
         }
     }
 
-    fun searchItemProductNameByCode(context: Context, jsonFileName: String, itemCode: String, listener: OnAddProductFinishedListener) {
-        DataJsonFromAssets.get(context, jsonFileName) { list ->
-            val searchItem = list.find { it.itemCode == itemCode }
-            if (searchItem == null) {
-               listener.searchItemsIsNull()
-            } else {
-               listener.searchItemsIsNotNull(searchItem)
-            }
-        }
-    }
+//    fun searchItemProductNameByCode(context: Context, jsonFileName: String, itemCode: String, listener: OnAddProductFinishedListener) {
+//        DataJsonFromAssets.get(context, jsonFileName) { list ->
+//            val searchItem = list.find { it.itemCode == itemCode }
+//            if (searchItem == null) {
+//               listener.searchItemsIsNull()
+//            } else {
+//               listener.searchItemsIsNotNull(searchItem)
+//            }
+//        }
+//    }
 
     fun resultImageFromGallery(requestCode: Int, resultCode: Int, data: Intent?, listener: OnAddProductFinishedListener) {
         if (resultCode == Activity.RESULT_OK && requestCode == Constant.REQUEST_CODE) {
