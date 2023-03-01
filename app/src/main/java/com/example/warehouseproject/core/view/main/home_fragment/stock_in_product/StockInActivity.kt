@@ -45,12 +45,12 @@ class StockInActivity : AppCompatActivity(), StockInView {
 
 
     private fun initView() {
-        inputCodeProduct = binding.etInputCodeProduct
-        textDataEmpty = binding.tvDataIsEmpty
-        progressBar = binding.progressBar
-        inputQtyProduct = binding.etQtyProduct
-        cardFullContent = binding.cardFullContent
-        animationView = binding.animationView
+        inputCodeProduct = binding.stockIn.etInputCodeProduct
+        textDataEmpty = binding.stockIn.tvDataIsEmpty
+        progressBar = binding.stockIn.progressBar
+        inputQtyProduct = binding.stockIn.etQtyProduct
+        cardFullContent = binding.stockIn.cardFullContent
+        animationView = binding.stockIn.animationView
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -81,7 +81,7 @@ class StockInActivity : AppCompatActivity(), StockInView {
         val codeItemBundle = intent.extras?.getString("code_items_key")
         inputCodeProduct.setText(codeItemBundle)
 
-        binding.btnSearchProduct.setOnClickListener {
+        binding.stockIn.btnSearchProduct.setOnClickListener {
 
             // On Click search
             animationView.setAnimation(R.raw.product_search)
@@ -101,11 +101,11 @@ class StockInActivity : AppCompatActivity(), StockInView {
         }
 
         // on Click submit stock
-        binding.btnSubmitStockIn.setOnClickListener {
+        binding.stockIn.btnSubmitStockIn.setOnClickListener {
 
-            if (binding.etQtyProduct.text.toString().isEmpty()) {
-                binding.outlinedTextFieldQtyProduct.helperText = "is required!"
-                binding.outlinedTextFieldQtyProduct.setHelperTextColor(getColorStateList(R.color.red_smooth))
+            if (binding.stockIn.etQtyProduct.text.toString().isEmpty()) {
+                binding.stockIn.outlinedTextFieldQtyProduct.helperText = "is required!"
+                binding.stockIn.outlinedTextFieldQtyProduct.setHelperTextColor(getColorStateList(R.color.red_smooth))
             } else {
                 progressBar.visibility = View.VISIBLE
 
@@ -118,7 +118,7 @@ class StockInActivity : AppCompatActivity(), StockInView {
                 val qty = ProductRequest.RequestQtyOnly(resultCalculate.toString())
 
                 // call presenter update qty
-                presenter.updateProductQty(this, binding.tvIdProduct.text.toString(), qty)
+                presenter.updateProductQty(this, binding.stockIn.tvIdProduct.text.toString(), qty)
             }
 
         }
@@ -127,12 +127,12 @@ class StockInActivity : AppCompatActivity(), StockInView {
     override fun getResultDataOnRest(data: Product) {
         beforeQty = data.qty.toInt()
 
-        Picasso.get().load(data.image).centerCrop().resize(500, 500).error(R.drawable.img_example).into(binding.ivItemProduct)
-        binding.tvIdProduct.text = data._id
-        binding.chipStatus.text = data.status
-        binding.tvCodeItem.text = data.code_items
-        binding.tvNameProduct.text = data.name
-        binding.etQtyProduct.hint = data.qty
+        Picasso.get().load(data.image).centerCrop().resize(500, 500).error(R.drawable.img_example).into(binding.stockIn.ivItemProduct)
+        binding.stockIn.tvIdProduct.text = data._id
+        binding.stockIn.chipStatus.text = data.status
+        binding.stockIn.tvCodeItem.text = data.code_items
+        binding.stockIn.tvNameProduct.text = data.name
+        binding.stockIn.etQtyProduct.hint = data.qty
     }
 
     override fun showViewOnSuccessResponse() {

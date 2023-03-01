@@ -35,31 +35,36 @@ class StockOutActivity : AppCompatActivity() {
         setContentView(binding.root)
         Paper.init(this)
 
-        animationView = binding.animationView
+        animationView = binding.stockOut.animationView
     }
 
     @SuppressLint("SetTextI18n")
     override fun onStart() {
         super.onStart()
 
+        binding.stockOut.tvProductMasuk.text = "Product Keluar"
+        binding.stockOut.outlinedTextFieldQtyProduct.boxStrokeColor = resources.getColor(R.color.red_smooth)
+        binding.stockOut.btnSubmitStockIn.setBackgroundColor(resources.getColor(R.color.red_smooth))
+        binding.stockOut.outlinedTextFieldQtyProduct.helperText = "Jumlah quantity yang keluar"
+
         animationView.setAnimation(R.raw.product)
         animationView.loop(false)
         animationView.playAnimation()
 
         val codeItemBundle = intent.extras?.getString("code_items_key")
-        binding.etInputCodeProduct.setText(codeItemBundle)
+        binding.stockOut.etInputCodeProduct.setText(codeItemBundle)
 
-        binding.btnSearchProduct.setOnClickListener {
+        binding.stockOut.btnSearchProduct.setOnClickListener {
 
-            binding.animationView.setAnimation(R.raw.product_search)
+            binding.stockOut.animationView.setAnimation(R.raw.product_search)
             animationView.loop(true)
             animationView.playAnimation()
 
-            binding.tvDataIsEmpty.text = "Mencari item..."
+            binding.stockOut.tvDataIsEmpty.text = "Mencari item..."
 
             HideKeyboardHelper.hideSoftKeyBoard(this, binding.root)
 
-            val code = binding.etInputCodeProduct.text.toString()
+            val code = binding.stockOut.etInputCodeProduct.text.toString()
 
 
             val token = Paper.book().read<String>("token").toString()
@@ -67,49 +72,49 @@ class StockOutActivity : AppCompatActivity() {
 
                 beforeQty = it.qty.toInt()
 
-                Picasso.get().load(it.image).centerCrop().resize(500, 500).error(R.drawable.img_example).into(binding.ivItemProduct)
-                binding.tvIdProduct.text = it._id
-                binding.chipStatus.text = it.status
-                binding.tvCodeItem.text = it.code_items
-                binding.tvNameProduct.text = it.name
-                binding.etQtyProduct.hint = it.qty
+                Picasso.get().load(it.image).centerCrop().resize(500, 500).error(R.drawable.img_example).into(binding.stockOut.ivItemProduct)
+                binding.stockOut.tvIdProduct.text = it._id
+                binding.stockOut.chipStatus.text = it.status
+                binding.stockOut.tvCodeItem.text = it.code_items
+                binding.stockOut.tvNameProduct.text = it.name
+                binding.stockOut.etQtyProduct.hint = it.qty
             }, {
-                binding.etInputCodeProduct.text?.clear()
-                binding.cardFullContent.visibility = View.VISIBLE
-                binding.progressBar.visibility = View.GONE
+                binding.stockOut.etInputCodeProduct.text?.clear()
+                binding.stockOut.cardFullContent.visibility = View.VISIBLE
+                binding.stockOut.progressBar.visibility = View.GONE
             }, {
-                binding.animationView.setAnimation(R.raw.product_not_found)
+                binding.stockOut.animationView.setAnimation(R.raw.product_not_found)
                 animationView.loop(true)
                 animationView.playAnimation()
 
-                binding.animationView.visibility = View.VISIBLE
+                binding.stockOut.animationView.visibility = View.VISIBLE
                 Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-                binding.progressBar.visibility = View.GONE
-                binding.etInputCodeProduct.text?.clear()
-                binding.tvDataIsEmpty.visibility = View.VISIBLE
-                binding.cardFullContent.visibility = View.GONE
-                binding.tvDataIsEmpty.text = "Data dengan code $code tidak di temukan"
+                binding.stockOut.progressBar.visibility = View.GONE
+                binding.stockOut.etInputCodeProduct.text?.clear()
+                binding.stockOut.tvDataIsEmpty.visibility = View.VISIBLE
+                binding.stockOut.cardFullContent.visibility = View.GONE
+                binding.stockOut.tvDataIsEmpty.text = "Data dengan code $code tidak di temukan"
             })
 
         }
 
-        binding.btnSubmitStockIn.setOnClickListener {
+        binding.stockOut.btnSubmitStockIn.setOnClickListener {
 
-            binding.progressBar.visibility = View.VISIBLE
+            binding.stockOut.progressBar.visibility = View.VISIBLE
 
             HideKeyboardHelper.hideSoftKeyBoard(this, binding.root)
 
-            val qtyInput = binding.etQtyProduct.text.toString()
+            val qtyInput = binding.stockOut.etQtyProduct.text.toString()
 
-            if (binding.etQtyProduct.text.toString().isEmpty()) {
-                binding.progressBar.visibility = View.GONE
-                binding.outlinedTextFieldQtyProduct.helperText = "is required!"
-                binding.outlinedTextFieldQtyProduct.setHelperTextColor(getColorStateList(R.color.red_smooth))
+            if (binding.stockOut.etQtyProduct.text.toString().isEmpty()) {
+                binding.stockOut.progressBar.visibility = View.GONE
+                binding.stockOut.outlinedTextFieldQtyProduct.helperText = "is required!"
+                binding.stockOut.outlinedTextFieldQtyProduct.setHelperTextColor(getColorStateList(R.color.red_smooth))
             } else if ( beforeQty < qtyInput.toInt()) {
-                binding.progressBar.visibility = View.GONE
-                binding.outlinedTextFieldQtyProduct.helperText = "Jumlah quantity product tidak memenuhi, jumlah saat ini $beforeQty "
-                binding.outlinedTextFieldQtyProduct.isHelperTextEnabled = true
-                binding.outlinedTextFieldQtyProduct.setHelperTextColor(getColorStateList(R.color.red_smooth))
+                binding.stockOut.progressBar.visibility = View.GONE
+                binding.stockOut.outlinedTextFieldQtyProduct.helperText = "Jumlah quantity product tidak memenuhi, jumlah saat ini $beforeQty "
+                binding.stockOut.outlinedTextFieldQtyProduct.isHelperTextEnabled = true
+                binding.stockOut.outlinedTextFieldQtyProduct.setHelperTextColor(getColorStateList(R.color.red_smooth))
             } else {
 
                 val resultCalculate = beforeQty - qtyInput.toInt()
@@ -118,20 +123,20 @@ class StockOutActivity : AppCompatActivity() {
 
 
                 val token = Paper.book().read<String>("token").toString()
-                ProductApiService(token).updateProductQty(this, binding.tvIdProduct.text.toString(), qty,  { message, data ->
+                ProductApiService(token).updateProductQty(this, binding.stockOut.tvIdProduct.text.toString(), qty,  { message, data ->
 
 
                     val dataRequest = StockHistory.StockHistoryRequest(data.code_items, data.name, qtyInput, "OUT")
                     ProductApiService(token).createStockHistory( dataRequest)
 
-                    binding.cardFullContent.visibility = View.GONE
-                    binding.progressBar.visibility = View.GONE
+                    binding.stockOut.cardFullContent.visibility = View.GONE
+                    binding.stockOut.progressBar.visibility = View.GONE
 
                     animationView.setAnimation(R.raw.successful)
                     animationView.loop(false)
                     animationView.playAnimation()
 
-                    binding.tvDataIsEmpty.text = "Quantity product telah keluar sejumlah ${binding.etQtyProduct.text.toString()}"
+                    binding.stockOut.tvDataIsEmpty.text = "Quantity product telah keluar sejumlah ${binding.stockOut.etQtyProduct.text.toString()}"
 
                     Handler().postDelayed( {
                         startActivity(Intent(this, MainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
