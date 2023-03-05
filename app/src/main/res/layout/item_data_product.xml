@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="250dp"
+    android:layout_height="200dp"
     app:layout_constraintLeft_toLeftOf="parent"
     android:layout_marginTop="8dp"
     app:layout_constraintTop_toTopOf="parent">
@@ -35,9 +35,9 @@
                         android:id="@+id/iv_item_product"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:contentDescription="@string/content_desc_todo"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/ic_people"
-                        android:contentDescription="@string/content_desc_todo"/>
+                        android:src="@drawable/ic_people" />
                 </RelativeLayout>
 
 
@@ -59,9 +59,9 @@
                            android:id="@+id/tv_item_code_product"
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
+                           android:layout_centerVertical="true"
                            android:fontFamily="@font/inter_medium"
                            android:text="@string/code_example"
-                           android:layout_centerVertical="true"
                            android:textColor="@color/black"
                            tools:ignore="RelativeOverlap" />
 
@@ -81,24 +81,20 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:layout_marginBottom="16dp"
                         android:ellipsize="end"
                         android:fontFamily="@font/inter_bold"
                         android:maxLines="1"
                         android:text="@string/lorem"
-                        android:textColor="@color/black"
-                        android:textSize="24sp" />
+                        android:textColor="@color/black" />
 
                     <TextView
                         android:id="@+id/tv_spec_product"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
                         android:ellipsize="end"
                         android:fontFamily="@font/inter_medium"
                         android:maxLines="1"
-                        android:text="@string/lorem"
-                        android:textSize="18sp" />
+                        android:text="@string/lorem" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -129,6 +125,7 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
                                 android:orientation="horizontal">
 
                                 <de.hdodenhof.circleimageview.CircleImageView
@@ -141,10 +138,10 @@
                                     android:id="@+id/item_user_name"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginStart="8dp"
                                     android:fontFamily="@font/inter_medium"
                                     android:text="@string/akhmad"
-                                    android:layout_marginStart="8dp"
-                                    android:layout_gravity="center"
                                     android:textColor="@color/black" />
 
                                 <RelativeLayout
@@ -155,10 +152,10 @@
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:layout_alignParentEnd="true"
                                         android:fontFamily="@font/inter_medium"
                                         android:text="@string/detail"
-                                        android:textColor="@color/blue"
-                                        android:layout_alignParentEnd="true"/>
+                                        android:textColor="@color/blue" />
                                 </RelativeLayout>
                             </LinearLayout>
 

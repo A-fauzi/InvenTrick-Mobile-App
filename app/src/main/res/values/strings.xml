@@ -79,6 +79,8 @@
     <string name="add_product">Add Product</string>
     <string name="product_list">Product list</string>
     <string name="no_product_data_has_been_added_yet">No product data has been added yet</string>
+    <string name="page_text_number">page ke..</string>
+    <string name="view_more">view more</string>
     <string-array name="default_items">
         <item>Tambahkan nanti</item>
     </string-array>

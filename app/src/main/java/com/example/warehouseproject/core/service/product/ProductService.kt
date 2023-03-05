@@ -16,7 +16,7 @@ interface ProductService {
     fun addProduct(@Body productRequest: ProductRequest): Call<ProductResponses.SingleResponse>
 
     @GET("product/all")
-    fun getProducts(): Call<ProductResponses>
+    fun getProducts(@Query("page") page: Int): Call<ProductResponses>
 
     @GET("product/")
     fun getProductByCode(@Query("code_items") codeItem: String): Call<Product>

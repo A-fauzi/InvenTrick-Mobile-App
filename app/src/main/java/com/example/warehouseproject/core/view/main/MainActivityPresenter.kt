@@ -13,7 +13,12 @@ import com.example.warehouseproject.core.model.user.UserRequest
 import com.example.warehouseproject.core.model.user.UserResponse
 import com.example.warehouseproject.core.service.user.UserApiService
 
-class MainActivityPresenter(private val context: Context, private val activity: Activity, private val view: MainView, private val userApiService: UserApiService): UserApiService.OnFinishedStatusRequest {
+class MainActivityPresenter(
+    private val context: Context,
+    private val activity: Activity,
+    private val view: MainView,
+    private val userApiService: UserApiService
+): UserApiService.OnFinishedStatusRequest {
     fun checkPermission() {
         when (PackageManager.PERMISSION_DENIED) {
             checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) -> {

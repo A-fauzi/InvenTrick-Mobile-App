@@ -48,10 +48,15 @@ class ProductApiService(private val token: String) {
             })
     }
 
-    fun getDataProduct(context: Context? = null, resultDataCount: (data: List<Product>, count: String) -> Unit, viewVisibilitySuccess: () -> Unit, errorMessageBody: (err: String) -> Unit) {
+    interface OnFinishedGetProducts {
+        fun successResponseBodyGetProducts(data: List<Product>, productResponses: ProductResponses)
+        fun errorResponseBodyGetProducts(msg: String)
+        fun onFailureRequestGetProducts(msg: String)
+    }
+    fun getDataProduct(page: Int, listener: OnFinishedGetProducts) {
         NetworkConfig(Constant.BASE_URL, token)
             .productService()
-            .getProducts()
+            .getProducts(page)
             .enqueue(object : Callback<ProductResponses>{
                 override fun onResponse(
                     call: Call<ProductResponses>,
@@ -59,21 +64,19 @@ class ProductApiService(private val token: String) {
                 ) {
                     if (response.isSuccessful) {
                         response.body()?.let {
-                            resultDataCount(it.data, it.count, )
+                            listener.successResponseBodyGetProducts(it.data, it)
                         }
-                        viewVisibilitySuccess()
                     } else {
                         // convert json to String
                         val gson = Gson()
-                        val mNanu = gson.fromJson(response.errorBody()?.string(), ProductResponses.SingleResponse::class.java)
-                        errorMessageBody(mNanu.message)
+                        val msg = gson.fromJson(response.errorBody()?.string(), ProductResponses.SingleResponse::class.java)
+                        listener.errorResponseBodyGetProducts(msg.message)
                     }
 
                 }
 
                 override fun onFailure(call: Call<ProductResponses>, t: Throwable) {
-                    Log.e("MainActivity", t.message.toString())
-                    Toast.makeText(context, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+                    listener.onFailureRequestGetProducts(t.message.toString())
                 }
 
             })

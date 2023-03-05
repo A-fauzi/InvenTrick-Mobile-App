@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout android:id="@+id/ll_full_container"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:id="@+id/ll_full_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -111,6 +112,7 @@
                                     android:fontFamily="@font/inter"
                                     android:text="@string/_200"
                                     android:textColor="@color/white"
+                                    android:textFontWeight="500"
                                     android:textSize="24sp"
                                     android:visibility="invisible" />
                             </RelativeLayout>
@@ -124,8 +126,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_centerVertical="true"
-                                    android:text="@string/of_the_whole_product"
                                     android:fontFamily="@font/inter_medium"
+                                    android:text="@string/of_the_whole_product"
                                     android:textColor="@color/white"
                                     tools:ignore="RelativeOverlap" />
 
@@ -163,10 +165,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/divider"
-                    android:layout_centerHorizontal="true"
-                    android:text="@string/product_list"
                     android:fontFamily="@font/inter_medium"
+                    android:text="@string/product_list"
                     android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/tv_list_more_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/divider"
+                    android:layout_alignParentEnd="true"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="@string/view_more"
+                    android:textColor="@color/blue" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"

@@ -1,18 +1,13 @@
 package com.example.warehouseproject.core.view.main.home_fragment.category
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.warehouseproject.core.helper.HideKeyboardHelper
 import com.example.warehouseproject.core.helper.SimpleDateFormat
-import com.example.warehouseproject.core.model.product.category.Category
 import com.example.warehouseproject.core.model.product.category.CategoryRequest
 import com.example.warehouseproject.core.service.product.category.ProductCategoryService
-import com.example.warehouseproject.core.view.main.MainActivity
-import com.example.warehouseproject.core.view.main.home_fragment.HomeAdapter
 import com.example.warehouseproject.databinding.ActivityProductCategoryBinding
 import com.example.warehouseproject.databinding.ItemCreateCategoryBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog

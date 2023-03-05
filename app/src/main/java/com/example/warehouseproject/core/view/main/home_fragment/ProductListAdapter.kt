@@ -4,18 +4,17 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.model.product.Product
 import com.example.warehouseproject.databinding.ItemDataProductBinding
 import com.squareup.picasso.Picasso
 
-class HomeAdapter(
+class ProductListAdapter(
     private val context: Context,
     private val items: ArrayList<Product>,
     private val callClickListener: CallClickListener
-    ): RecyclerView.Adapter<HomeAdapter.MainViewHolder>() {
+    ): RecyclerView.Adapter<ProductListAdapter.MainViewHolder>() {
     class MainViewHolder( val binding: ItemDataProductBinding): RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
@@ -61,9 +60,11 @@ class HomeAdapter(
 
     @SuppressLint("NotifyDataSetChanged")
     fun setData(data: List<Product>) {
+        val oldCount = items.size
         items.clear()
         items.addAll(data)
         notifyDataSetChanged()
+//        notifyItemRangeInserted(oldCount, items.size)
     }
 
     interface CallClickListener{
