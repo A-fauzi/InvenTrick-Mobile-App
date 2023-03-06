@@ -38,7 +38,6 @@ class HomeFragment : Fragment(), ProductListAdapter.CallClickListener, HomeView 
     private lateinit var productListAdapter: ProductListAdapter
     private lateinit var presenter: HomePresenter
     private lateinit var shimmerViewContainer: ShimmerFrameLayout
-    private lateinit var shimmerViewTotalProduct: ShimmerFrameLayout
 
 
     private val token = Paper.book().read<String>("token").toString()
@@ -47,7 +46,6 @@ class HomeFragment : Fragment(), ProductListAdapter.CallClickListener, HomeView 
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
         shimmerViewContainer = binding.shimmerViewContainerListProduct
-        shimmerViewTotalProduct = binding.shimmerViewTotalProduct
         presenter = HomePresenter(this, DetailDialog(), ProductApiService(token))
     }
 
@@ -111,11 +109,6 @@ class HomeFragment : Fragment(), ProductListAdapter.CallClickListener, HomeView 
 
         setUpTopBar()
         startShimmerView()
-        binding.btnToAddProduct.setOnClickListener {
-            binding.btnToAddProduct.startAnimation(AnimationUtils.loadAnimation(requireActivity(), R.anim.animation_button))
-            startActivity(Intent(requireActivity(), AddProductActivity::class.java))
-        }
-        binding.rlTotalProduct.setBackgroundColor(Color.parseColor(RandomColor.generate()))
 
     }
 
@@ -148,7 +141,6 @@ class HomeFragment : Fragment(), ProductListAdapter.CallClickListener, HomeView 
 
     private fun startShimmerView() {
         shimmerViewContainer.startShimmer()
-        shimmerViewTotalProduct.startShimmer()
     }
 
     private fun showDataProduct(product: List<Product>) {
@@ -170,11 +162,7 @@ class HomeFragment : Fragment(), ProductListAdapter.CallClickListener, HomeView 
         showDataProduct(data)
 
         binding.llFullContainer.visibility = View.VISIBLE
-        binding.tvCountProducts.visibility = View.VISIBLE
-        shimmerViewTotalProduct.visibility = View.GONE
 
-        Log.d("PAGE", "page ke ${productResponses.currentPage}/${productResponses.totalPages}")
-        binding.tvCountProducts.text = productResponses.totalCount.toString()
         if (productResponses.totalCount == 0) {
             shimmerViewContainer.visibility = View.GONE
             binding.rvProduct.visibility = View.GONE
@@ -182,7 +170,6 @@ class HomeFragment : Fragment(), ProductListAdapter.CallClickListener, HomeView 
         } else {
             shimmerViewContainer.visibility = View.GONE
             binding.rvProduct.visibility = View.VISIBLE
-            shimmerViewTotalProduct.visibility = View.GONE
             binding.tvDataIsEmpty.visibility = View.GONE
         }
     }

@@ -15,7 +15,7 @@ class HomePresenter(
     private val productApiService: ProductApiService
     ): DetailDialog.DetailDialogOnFinished, ProductApiService.OnFinishedGetProducts {
 
-    fun getDataProducts(page: Int) {
+    fun getDataProducts(page: Int = 1) {
         productApiService.getDataProduct(page, this)
     }
 

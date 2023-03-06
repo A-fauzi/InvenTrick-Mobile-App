@@ -53,7 +53,7 @@ class ProductApiService(private val token: String) {
         fun errorResponseBodyGetProducts(msg: String)
         fun onFailureRequestGetProducts(msg: String)
     }
-    fun getDataProduct(page: Int, listener: OnFinishedGetProducts) {
+    fun getDataProduct(page: Int = 1, listener: OnFinishedGetProducts) {
         NetworkConfig(Constant.BASE_URL, token)
             .productService()
             .getProducts(page)

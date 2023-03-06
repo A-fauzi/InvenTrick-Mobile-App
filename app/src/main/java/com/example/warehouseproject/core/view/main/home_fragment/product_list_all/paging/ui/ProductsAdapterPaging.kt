@@ -11,7 +11,10 @@ import com.example.warehouseproject.core.model.product.Product
 import com.example.warehouseproject.core.view.main.home_fragment.ProductListAdapter
 import com.example.warehouseproject.databinding.ItemDataProductBinding
 
-class ProductsAdapterPaging(private val context: Context): PagingDataAdapter<Product, ProductsAdapterPaging.ViewHolder>(ProductDiffComp) {
+class ProductsAdapterPaging(
+    private val context: Context,
+    private val listenerPaging: ProductsListenerPaging
+    ): PagingDataAdapter<Product, ProductsAdapterPaging.ViewHolder>(ProductDiffComp) {
     object ProductDiffComp : DiffUtil.ItemCallback<Product>() {
         override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
             return oldItem._id == newItem._id
@@ -30,6 +33,9 @@ class ProductsAdapterPaging(private val context: Context): PagingDataAdapter<Pro
             with(getItem(position)) {
                 Glide.with(context).load(this?.image).into(binding.ivItemProduct)
                 binding.tvItemCodeProduct.text = this?.code_items
+                binding.tvDetailProduct.setOnClickListener {
+                    listenerPaging.onClickItem(getItem(position))
+                }
             }
         }
     }
@@ -37,5 +43,9 @@ class ProductsAdapterPaging(private val context: Context): PagingDataAdapter<Pro
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemDataProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
+    }
+
+    interface ProductsListenerPaging {
+        fun onClickItem(data: Product?)
     }
 }
