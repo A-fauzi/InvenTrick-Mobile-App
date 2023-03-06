@@ -19,6 +19,18 @@
 
     </style>
 
+    <!--  Theme splashscreen api ini dijalankan pertama kali pada aplikasi  -->
+    <!--  Ketika splash berakhir postSplashScreenTheme akan mengarahkan ke base application theme  -->
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_samsung_internet_logo_wine</item>
+        <item name="postSplashScreenTheme">@style/Theme.WarehouseProject</item>
+        <item name="windowSplashScreenBackground">@color/blue</item>
+        <item name="windowSplashScreenIconBackgroundColor">@color/purple</item>
+        <item name="windowSplashScreenAnimationDuration">1000</item>
+<!--        <item name="android:windowSplashScreenBrandingImage">@drawable/splash_branding_image</item>-->
+    </style>
+
+
     <!--  Bottomsheet dialog custom  -->
     <style name="AppBottomSheetDialogTheme"
         parent="Theme.Design.Light.BottomSheetDialog">
@@ -29,6 +41,8 @@
         parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/dialog_round_corner</item>
     </style>
+
+
 
 
 </resources>

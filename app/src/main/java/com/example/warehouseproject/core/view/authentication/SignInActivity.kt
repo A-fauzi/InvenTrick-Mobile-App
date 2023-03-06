@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.awesomedialog.*
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.helper.SavedPreferenceUser
@@ -42,8 +43,11 @@ class SignInActivity : AppCompatActivity(), SignInView {
     private var id = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val splashScreen = installSplashScreen()
+
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
 
         Paper.init(this)

@@ -28,6 +28,7 @@
             android:exported="false" />
         <activity
             android:name=".core.view.authentication.SignInActivity"
+            android:theme="@style/Theme.App.Starting"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
