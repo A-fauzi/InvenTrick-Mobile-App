@@ -1,5 +1,6 @@
 package com.example.warehouseproject.core.view.main.home_fragment.product_list_all.paging.ui
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,6 +8,7 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.warehouseproject.R
 import com.example.warehouseproject.core.model.product.Product
 import com.example.warehouseproject.core.view.main.home_fragment.ProductListAdapter
 import com.example.warehouseproject.databinding.ItemDataProductBinding
@@ -28,14 +30,33 @@ class ProductsAdapterPaging(
 
     inner class ViewHolder(val binding: ItemDataProductBinding): RecyclerView.ViewHolder(binding.root)
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         with(holder) {
             with(getItem(position)) {
                 Glide.with(context).load(this?.image).into(binding.ivItemProduct)
                 binding.tvItemCodeProduct.text = this?.code_items
+                binding.chipStatus.text = this?.status
+                binding.tvNameProduct.text = this?.name
+                binding.tvSpecProduct.text = this?.specification
+                binding.tvQuantityProduct.text = "quantity: ${this?.qty}"
+                binding.itemUserName.text = this?.user?.username
                 binding.tvDetailProduct.setOnClickListener {
                     listenerPaging.onClickItem(getItem(position))
                 }
+
+                when(this?.status) {
+                    "active" -> {
+                        binding.chipStatus.chipBackgroundColor = context.getColorStateList(R.color.green_cendol)
+                    }
+                    "in-progress" -> {
+                        binding.chipStatus.chipBackgroundColor = context.getColorStateList(R.color.red_smooth)
+                    }
+                    else -> {
+                        binding.chipStatus.chipBackgroundColor = context.getColorStateList(R.color.blue)
+                    }
+                }
+
             }
         }
     }
