@@ -1,17 +1,13 @@
 package com.example.warehouseproject.core.view.main
 
-import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Toast
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.fragment.app.Fragment
 import com.example.warehouseproject.R
-import com.example.warehouseproject.core.constant.Constant
+import com.example.warehouseproject.core.helper.InternetConnect
 import com.example.warehouseproject.core.helper.RealtimeDatabase
 import com.example.warehouseproject.core.model.user.UserRequest
 import com.example.warehouseproject.core.model.user.UserResponse
@@ -19,12 +15,10 @@ import com.example.warehouseproject.core.service.user.UserApiService
 import com.example.warehouseproject.core.view.main.account_fragment.AccountFragment
 import com.example.warehouseproject.core.view.main.home_fragment.HomeFragment
 import com.example.warehouseproject.core.view.main.scan_fragment.ScanFragment
+import com.example.warehouseproject.core.view.not_internet_connect.ItemDisconnectActivity
 import com.example.warehouseproject.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.paperdb.Paper
-import io.socket.client.IO
-import io.socket.client.Socket
-import java.net.URISyntaxException
 
 class MainActivity : AppCompatActivity(), MainView {
 
@@ -42,26 +36,37 @@ class MainActivity : AppCompatActivity(), MainView {
 
     private lateinit var presenter: MainActivityPresenter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
+    private fun initView() {
         Paper.init(this)
 
         realtimeDatabase = RealtimeDatabase(this)
 
         presenter = MainActivityPresenter(applicationContext, this, this, UserApiService())
         presenter.checkPermission()
+    }
 
-        setUpBottomNav()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val data = UserRequest.StatusActivity("online")
-        val token = Paper.book().read<String>(TOKEN).toString()
-        val userId = Paper.book().read<String>(ID).toString()
-        presenter.updateStatusActivityUser(token, userId, data)
+        initView()
 
-        Paper.book().write("status", data.status_activity)
+        // Check for internet connection
+        if (InternetConnect.checkInternetConnect(this)) {
+
+            val data = UserRequest.StatusActivity("online")
+            val token = Paper.book().read<String>(TOKEN).toString()
+            val userId = Paper.book().read<String>(ID).toString()
+            presenter.updateStatusActivityUser(token, userId, data)
+
+            Paper.book().write("status", data.status_activity)
+
+            setUpBottomNav()
+        } else {
+            startActivity(Intent(this, ItemDisconnectActivity::class.java))
+            finish()
+        }
     }
 
     private fun setUpBottomNav() {
