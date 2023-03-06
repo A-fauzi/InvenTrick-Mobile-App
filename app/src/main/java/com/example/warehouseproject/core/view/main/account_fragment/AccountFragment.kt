@@ -21,6 +21,7 @@ import com.example.warehouseproject.core.view.authentication.SignInActivity
 import com.example.warehouseproject.core.view.main.MainActivity
 import com.example.warehouseproject.core.view.main.MainActivityPresenter
 import com.example.warehouseproject.core.view.main.MainView
+import com.example.warehouseproject.core.view.main.account_fragment.account_update.AccountUpdateActivity
 import com.example.warehouseproject.databinding.FragmentAccountBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -59,14 +60,14 @@ class AccountFragment : Fragment(), MainView {
         // Inflate the layout for this fragment
         binding = FragmentAccountBinding.inflate(layoutInflater, container, false)
 
-        presenter = MainActivityPresenter(requireContext(), requireActivity(), this, UserApiService())
+        presenter = MainActivityPresenter(requireActivity(), requireActivity(), this, UserApiService())
 
-        realtimeDatabase = RealtimeDatabase(requireContext())
+        realtimeDatabase = RealtimeDatabase(requireActivity())
 
         // Set TopBar
         topAppBar()
 
-        Paper.init(requireContext())
+        Paper.init(requireActivity())
 
 
 //        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -79,12 +80,20 @@ class AccountFragment : Fragment(), MainView {
             popUpMenu()
 
 //            mGoogleSignInClient.signOut().addOnCompleteListener {
-////                val intent= Intent(requireContext(), SignInActivity::class.java)
+////                val intent= Intent(activity, SignInActivity::class.java)
 ////                startActivity(intent)
 ////                activity?.finish()
 //
 //
 //            }
+        }
+
+        binding.ivBtnUpdateProfile.setOnClickListener {
+            startActivity(Intent(activity, AccountUpdateActivity::class.java))
+        }
+
+        binding.cvBtnLogout.setOnClickListener {
+            logOut()
         }
 
         return binding.root
@@ -97,53 +106,57 @@ class AccountFragment : Fragment(), MainView {
         binding.newTxtTopbar.tvStatusActivityUser.visibility = View.GONE
 
         binding.newTxtTopbar.viewEnd.setOnClickListener {
-            binding.newTxtTopbar.viewEnd.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.animation_button))
+            binding.newTxtTopbar.viewEnd.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.animation_button))
             Toast.makeText(requireActivity(), "Masih dalam pengembangan", Toast.LENGTH_SHORT).show()
         }
 
         binding.newTxtTopbar.viewStart.setOnClickListener {
-            binding.newTxtTopbar.viewStart.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.animation_button))
+            binding.newTxtTopbar.viewStart.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.animation_button))
             Toast.makeText(requireActivity(), "Masih dalam pengembangan", Toast.LENGTH_SHORT).show()
         }
     }
 
     override fun onSuccessBodyReqStatusView(response: UserResponse.SingleResponse) {
-        Toast.makeText(requireContext(), "status anda ${response.data.status_activity}", Toast.LENGTH_SHORT).show()
+        Toast.makeText(activity, "status anda ${response.data.status_activity}", Toast.LENGTH_SHORT).show()
 
         realtimeDatabase.write(response.data._id, UserRequest.StatusActivity(response.data.status_activity))
     }
 
     override fun onErrorBodyReqStatusView(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
     }
 
     override fun onFailureView(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
     }
 
     private fun popUpMenu() {
-        val popupMenu = PopupMenu(requireContext(), binding.newTxtTopbar.viewEnd, Gravity.END)
+        val popupMenu = PopupMenu(activity, binding.newTxtTopbar.viewEnd, Gravity.END)
         popupMenu.menuInflater.inflate(R.menu.top_bar_menu_account, popupMenu.menu)
         popupMenu.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.logout -> {
                     // Logout
-                    val data = UserRequest.StatusActivity("offline")
-                    val token = Paper.book().read<String>(TOKEN).toString()
-                    val userId = Paper.book().read<String>(ID).toString()
-                    presenter.updateStatusActivityUser(token, userId, data)
-
-                    Paper.book().destroy()
-                    val intent = Intent(requireContext(), SignInActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                    startActivity(intent)
-                    requireActivity().finish()
+                    logOut()
                 }
             }
 
             true
         }
         popupMenu.show()
+    }
+
+    private fun logOut() {
+        val data = UserRequest.StatusActivity("offline")
+        val token = Paper.book().read<String>(TOKEN).toString()
+        val userId = Paper.book().read<String>(ID).toString()
+        presenter.updateStatusActivityUser(token, userId, data)
+
+        Paper.book().destroy()
+        val intent = Intent(activity, SignInActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+        requireActivity().finish()
     }
 
 }

@@ -30,73 +30,290 @@
         </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.cardview.widget.CardView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="25dp">
+        android:orientation="vertical"
+        android:padding="16dp">
 
-        <LinearLayout
+        <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/purple_smooth"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:padding="16dp">
+            android:layout_height="70dp"/>
 
-           <View
-               android:layout_width="wrap_content"
-               android:layout_height="100dp"/>
+<!--    Profile container    -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_profile"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:src="@drawable/example_user"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Akhmad Fauzi"
-                android:gravity="center"
-                android:fontFamily="@font/inter_bold"
-                android:textColor="@color/white"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Warehouse admin"
-                android:gravity="center"
-                android:textColor="@color/white"/>
-
-            <com.google.android.material.divider.MaterialDivider
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="8dp"
-                app:dividerColor="@color/white"/>
-
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:gravity="center"
-                android:layout_marginTop="16dp">
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/iv_profile"
+                android:layout_marginStart="8dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1000"
-                    android:textColor="@color/white"
-                    android:textAlignment="center"
-                    android:fontFamily="@font/inter_bold"/>
-
+                    android:text="Akhmad Fauzi"
+                    android:fontFamily="@font/inter_bold"
+                    android:textSize="24sp"
+                    android:textColor="@color/black"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Produk telah di upload"
-                    android:textColor="@color/white"
-                    android:textAlignment="center"/>
+                    android:text="Welding"
+                    android:fontFamily="@font/inter_medium"/>
+
             </LinearLayout>
 
+            <ImageView
+                android:id="@+id/iv_btn_update_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/ic_edit"
+                android:padding="8dp"/>
+        </RelativeLayout>
+
+<!--    Dashboard container    -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="24dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Dashboard"
+                android:fontFamily="@font/inter_medium"/>
+
+            <!--Component dashboard-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardElevation="0dp"
+                android:layout_marginTop="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardCornerRadius="16dp"
+                android:foreground="?attr/selectableItemBackground">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/icon_activity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/green"
+                        app:cardCornerRadius="50dp"
+                        android:layout_marginBottom="8dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:src="@drawable/ic_time_past"
+                            app:tint="@color/white" />
+                    </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Activity"
+                        android:layout_toEndOf="@id/icon_activity"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="8dp"
+                        android:fontFamily="@font/inter_bold"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layoutDirection="rtl"
+                        android:text="2 news"
+                        android:textColor="@color/white"
+                        app:chipBackgroundColor="@color/blue_ocean"
+                        app:chipIcon="@drawable/ic_angle_small_right"
+                        app:chipIconEnabled="true"
+                        app:chipIconTint="@color/white" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardElevation="0dp"
+                android:layout_marginTop="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardCornerRadius="16dp"
+                android:foreground="?attr/selectableItemBackground">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/icon_activity2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/yellow"
+                        app:cardCornerRadius="50dp"
+                        android:layout_marginBottom="8dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:src="@drawable/ic_folder_upload"
+                            app:tint="@color/white" />
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="8dp"
+                        android:layout_toEndOf="@id/icon_activity2"
+                        android:fontFamily="@font/inter_bold"
+                        android:text="Product upload"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layoutDirection="rtl"
+                        android:text="2 news"
+                        android:textColor="@color/white"
+                        app:chipBackgroundColor="@color/blue_ocean"
+                        app:chipIcon="@drawable/ic_angle_small_right"
+                        app:chipIconEnabled="true"
+                        app:chipIconTint="@color/white" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardElevation="0dp"
+                android:layout_marginTop="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardCornerRadius="16dp"
+                android:foreground="?attr/selectableItemBackground">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/icon_activity3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/gray"
+                        app:cardCornerRadius="50dp"
+                        android:layout_marginBottom="8dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:src="@drawable/ic_shield_check"
+                            app:tint="@color/white" />
+                    </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Activity"
+                        android:layout_toEndOf="@id/icon_activity3"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="8dp"
+                        android:fontFamily="@font/inter_bold"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layoutDirection="rtl"
+                        android:text="Action needed"
+                        android:textColor="@color/white"
+                        app:chipBackgroundColor="@color/orange"
+                        app:chipIcon="@drawable/ic_angle_small_right"
+                        app:chipIconEnabled="true"
+                        app:chipIconTint="@color/white" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="vertical"
+       android:layout_gravity="bottom"
+       android:padding="16dp">
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="My Account"
+           android:layout_marginBottom="8dp"
+           android:fontFamily="@font/inter_medium"/>
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Switch to another account"
+           android:fontFamily="@font/inter_medium"
+           android:textSize="16sp"
+           android:textColor="@color/blue_ocean"
+           android:layout_marginBottom="8dp"/>
+
+       <androidx.cardview.widget.CardView
+           android:id="@+id/cv_btn_logout"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           app:cardElevation="0dp"
+           app:cardCornerRadius="16dp"
+           android:clickable="true"
+           android:focusable="true"
+           android:foreground="?attr/selectableItemBackground">
+
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Log Out"
+               android:fontFamily="@font/inter_semibold"
+               android:textSize="18sp"
+               android:textColor="@color/red_smooth"
+               android:layout_margin="8dp"/>
+       </androidx.cardview.widget.CardView>
+
+
+   </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

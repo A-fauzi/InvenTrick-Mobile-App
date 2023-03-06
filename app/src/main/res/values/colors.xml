@@ -9,7 +9,11 @@
     <color name="pink">#F3797E</color>
     <color name="green_cendol">#84CD50</color>
     <color name="red_smooth">#EC6D70</color>
-    <color name="yellow">#E7E796</color>
+    <color name="yellow">#FFD23A</color>
+    <color name="green">#5CC080</color>
+    <color name="blue_ocean">#3872FF</color>
+    <color name="orange">#FF673A</color>
+    <color name="gray">#D8DADE</color>
 
 <!--  soft scheme  -->
     <color name="purple_soft_700">#EDCCE4</color>
