@@ -34,6 +34,7 @@ class SignInActivity : AppCompatActivity(), SignInView {
     companion object {
         private const val ID = "id"
         private const val USERNAME = "username"
+        private const val FULLNAME = "fullname"
         private const val EMAIL = "email"
         private const val TOKEN = "token"
     }
@@ -81,6 +82,7 @@ class SignInActivity : AppCompatActivity(), SignInView {
     override fun showResponseMessageSuccess(data: UserResponse.SignIn) {
         Paper.book().write(ID, data.id)
         Paper.book().write(USERNAME, data.username)
+//        Paper.book().write(FULLNAME, data.)
         Paper.book().write(EMAIL, data.email)
         Paper.book().write(TOKEN, data.accessToken)
     }

@@ -96,6 +96,9 @@ class AccountFragment : Fragment(), MainView {
             logOut()
         }
 
+        val username = Paper.book().read<String>(USERNAME).toString()
+        binding.tvProfileFullname.text = username
+
         return binding.root
     }
 
