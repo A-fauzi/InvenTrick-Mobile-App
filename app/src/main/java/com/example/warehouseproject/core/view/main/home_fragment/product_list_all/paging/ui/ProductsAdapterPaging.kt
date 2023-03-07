@@ -12,6 +12,7 @@ import com.example.warehouseproject.R
 import com.example.warehouseproject.core.model.product.Product
 import com.example.warehouseproject.core.view.main.home_fragment.ProductListAdapter
 import com.example.warehouseproject.databinding.ItemDataProductBinding
+import com.squareup.picasso.Picasso
 
 class ProductsAdapterPaging(
     private val context: Context,
@@ -41,6 +42,7 @@ class ProductsAdapterPaging(
                 binding.tvSpecProduct.text = this?.specification
                 binding.tvQuantityProduct.text = "quantity: ${this?.qty}"
                 binding.itemUserName.text = this?.user?.username
+                Picasso.get().load(this?.user?.user_photo).placeholder(R.drawable.ic_people).error(R.drawable.img_example).into(binding.itemUserPhoto)
                 binding.tvDetailProduct.setOnClickListener {
                     listenerPaging.onClickItem(getItem(position))
                 }

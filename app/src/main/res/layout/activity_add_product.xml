@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/content_desc_todo"
                 app:srcCompat="@drawable/ic_baseline_add_24"
-                app:tint="@color/white"/>
+                app:tint="@color/white" />
 
             <LinearLayout
                 android:layout_width="match_parent"

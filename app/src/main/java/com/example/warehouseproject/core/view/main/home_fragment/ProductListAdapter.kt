@@ -47,7 +47,7 @@ class ProductListAdapter(
                 "Stock quantity: ${qty.toInt()}".also { binding.tvQuantityProduct.text = it }
 
                 binding.itemUserName.text = user.username
-//                Picasso.get().load(user.user_photo).centerCrop().resize(500, 500).placeholder(R.drawable.ic_people).error(R.drawable.img_example).into(binding.itemUserPhoto)
+                Picasso.get().load(user.user_photo).placeholder(R.drawable.ic_people).error(R.drawable.img_example).into(binding.itemUserPhoto)
 
                 binding.tvDetailProduct.setOnClickListener {
                     callClickListener.onClickListenerDialog(items[position])

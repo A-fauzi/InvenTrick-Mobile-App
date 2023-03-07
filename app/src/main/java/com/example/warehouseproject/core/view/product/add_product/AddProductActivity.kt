@@ -22,6 +22,7 @@ import com.example.warehouseproject.core.model.product.ProductRequest
 import com.example.warehouseproject.core.model.product.category.Category
 import com.example.warehouseproject.core.model.user.User
 import com.example.warehouseproject.core.view.main.MainActivity
+import com.example.warehouseproject.core.view.main.home_fragment.HomeFragment
 import com.example.warehouseproject.databinding.ActivityAddProductBinding
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
@@ -30,6 +31,16 @@ import java.io.ByteArrayOutputStream
 import java.util.*
 
 class AddProductActivity : AppCompatActivity(), AddProductView {
+    companion object {
+        private const val ID = "id"
+        private const val USERNAME = "username"
+        private const val FULLNAME = "fullname"
+        private const val EMAIL = "email"
+        private const val TOKEN = "token"
+        private const val STORAGE_PATH_PROFILE = "path"
+        private const val PROFILE_PHOTO = "photo"
+    }
+
     private lateinit var modelRequestAddProduct: ProductRequest
     private lateinit var modelUser: User
 
@@ -71,6 +82,7 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
         model = binding.etModelProduct
         lot = binding.etLotProduct
         exp = binding.etExpProduct
+        Paper.init(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -95,12 +107,15 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
         val uid = Paper.book().read<String>("id").toString()
         val uName = Paper.book().read<String>("username").toString()
         val token = Paper.book().read<String>("token").toString()
+        val profileImg = Paper.book().read<String>(PROFILE_PHOTO).toString()
+        val fullName = Paper.book().read<String>(FULLNAME).toString()
+        val email = Paper.book().read<String>(EMAIL).toString()
 
         val generateCode = RandomCodeProduct.generate()
         code.setText(generateCode)
         binding.outlinedTextFieldCodeProduct.isEnabled = false
         binding.submitButtonAddProduct.setOnClickListener {
-            modelUser = User(uid, uName, "null", "null", "null", arrayListOf(), "null", "online", token)
+            modelUser = User(uid, uName, profileImg, fullName, email, arrayListOf(), "null", "online", token)
             modelRequestAddProduct = ProductRequest(
                 image = "Kosong",
                 code_items = "${code.text}",

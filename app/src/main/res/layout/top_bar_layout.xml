@@ -35,7 +35,8 @@
         android:orientation="horizontal"
         android:gravity="center"
         android:layout_toEndOf="@id/view_start_container"
-        android:layout_centerVertical="true">
+        android:layout_centerVertical="true"
+        android:layout_marginStart="8dp">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_status_activity_user"

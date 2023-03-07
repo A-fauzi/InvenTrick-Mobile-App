@@ -23,6 +23,7 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.squareup.picasso.Picasso
 import io.paperdb.Paper
 import io.socket.client.IO
 import io.socket.client.Socket
@@ -37,6 +38,9 @@ class SignInActivity : AppCompatActivity(), SignInView {
         private const val FULLNAME = "fullname"
         private const val EMAIL = "email"
         private const val TOKEN = "token"
+        private const val STORAGE_PATH_PROFILE = "path"
+        private const val PROFILE_PHOTO = "photo"
+        private const val DIVISION = "division"
     }
 
     private lateinit var binding: ActivitySignInBinding
@@ -82,9 +86,13 @@ class SignInActivity : AppCompatActivity(), SignInView {
     override fun showResponseMessageSuccess(data: UserResponse.SignIn) {
         Paper.book().write(ID, data.id)
         Paper.book().write(USERNAME, data.username)
-//        Paper.book().write(FULLNAME, data.)
+        Paper.book().write(FULLNAME, data.fullName)
         Paper.book().write(EMAIL, data.email)
         Paper.book().write(TOKEN, data.accessToken)
+        Paper.book().write(PROFILE_PHOTO, data.profile_image)
+        Paper.book().write(STORAGE_PATH_PROFILE, data.path_storage)
+        Paper.book().write(TOKEN, data.accessToken)
+        Paper.book().write(DIVISION, data.division)
     }
 
     override fun showResponseMessageError(msg: String) {

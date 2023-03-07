@@ -30,9 +30,19 @@ import com.example.warehouseproject.core.view.main.home_fragment.stock_out_produ
 import com.example.warehouseproject.core.view.product.add_product.AddProductActivity
 import com.example.warehouseproject.databinding.FragmentHomeBinding
 import com.facebook.shimmer.ShimmerFrameLayout
+import com.squareup.picasso.Picasso
 import io.paperdb.Paper
 
 class HomeFragment : Fragment(), ProductListAdapter.CallClickListener, HomeView {
+    companion object {
+        private const val ID = "id"
+        private const val USERNAME = "username"
+        private const val FULLNAME = "fullname"
+        private const val EMAIL = "email"
+        private const val TOKEN = "token"
+        private const val STORAGE_PATH_PROFILE = "path"
+        private const val PROFILE_PHOTO = "photo"
+    }
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var productListAdapter: ProductListAdapter
@@ -40,7 +50,8 @@ class HomeFragment : Fragment(), ProductListAdapter.CallClickListener, HomeView 
     private lateinit var shimmerViewContainer: ShimmerFrameLayout
 
 
-    private val token = Paper.book().read<String>("token").toString()
+    private val token = Paper.book().read<String>(TOKEN).toString()
+    private val profileImg = Paper.book().read<String>(PROFILE_PHOTO).toString()
 
     private fun initView(container: ViewGroup?) {
         // Inflate the layout for this fragment
@@ -127,6 +138,7 @@ class HomeFragment : Fragment(), ProductListAdapter.CallClickListener, HomeView 
 
     @SuppressLint("SetTextI18n")
     private fun setUpTopBar() {
+        Picasso.get().load(profileImg).error(R.drawable.example_user).into(binding.newTxtTopbar.viewStart)
         binding.newTxtTopbar.txtTopBar.text = "Home"
         binding.newTxtTopbar.viewEnd.setOnClickListener {
             binding.newTxtTopbar.viewEnd.startAnimation(

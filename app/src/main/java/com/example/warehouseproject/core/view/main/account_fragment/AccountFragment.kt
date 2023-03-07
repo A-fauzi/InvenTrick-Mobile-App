@@ -43,8 +43,12 @@ class AccountFragment : Fragment(), MainView {
     companion object {
         private const val ID = "id"
         private const val USERNAME = "username"
+        private const val FULLNAME = "fullname"
         private const val EMAIL = "email"
         private const val TOKEN = "token"
+        private const val STORAGE_PATH_PROFILE = "path"
+        private const val PROFILE_PHOTO = "photo"
+        private const val DIVISION = "division"
     }
 
     private lateinit var binding: FragmentAccountBinding
@@ -52,6 +56,10 @@ class AccountFragment : Fragment(), MainView {
     private lateinit var presenter: MainActivityPresenter
 
     private lateinit var mGoogleSignInClient: GoogleSignInClient
+
+    val profileImg = Paper.book().read<String>(PROFILE_PHOTO).toString()
+    val fullname = Paper.book().read<String>(FULLNAME).toString()
+    val division = Paper.book().read<String>("division").toString()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -96,13 +104,15 @@ class AccountFragment : Fragment(), MainView {
             logOut()
         }
 
-        val username = Paper.book().read<String>(USERNAME).toString()
-        binding.tvProfileFullname.text = username
+        binding.tvProfileFullname.text = fullname
+        binding.tvDivision.text = division
+        Picasso.get().load(profileImg).placeholder(R.drawable.ic_people).error(R.drawable.img_example).into(binding.ivProfile)
 
         return binding.root
     }
 
     private fun topAppBar() {
+        Picasso.get().load(profileImg).placeholder(R.drawable.ic_people).error(R.drawable.img_example).into(binding.newTxtTopbar.viewStart)
         binding.newTxtTopbar.viewEnd.setImageResource(R.drawable.ic_settings)
         binding.newTxtTopbar.txtTopBar.text = getString(R.string.txt_topbar_account)
         binding.newTxtTopbar.cvStatusActivityUser.visibility = View.GONE
