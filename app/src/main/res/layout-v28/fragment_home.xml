@@ -49,85 +49,96 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp">
+                android:layout_height="match_parent">
 
-                <com.google.android.material.divider.MaterialDivider
-                    android:id="@+id/divider"
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    app:dividerInsetEnd="150dp"
-                    app:dividerInsetStart="150dp" />
-
-                <TextView
-                    android:id="@+id/tv_list_product"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/divider"
-                    android:fontFamily="@font/inter_medium"
-                    android:text="@string/product_list"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/tv_list_more_all"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/divider"
-                    android:layout_alignParentEnd="true"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:fontFamily="@font/inter_medium"
-                    android:text="@string/view_more"
-                    android:textColor="@color/blue" />
+                <include
+                    android:id="@+id/view_error_response"
+                    layout="@layout/item_error_response"
+                    android:visibility="gone"/>
 
                 <RelativeLayout
+                    android:id="@+id/content_container"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@id/tv_list_product">
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        app:cardCornerRadius="25dp">
-
-                        <com.facebook.shimmer.ShimmerFrameLayout
-                            android:id="@+id/shimmer_view_container_list_product"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            app:layout_constraintVertical_bias="0.5"
-                            app:shimmer_duration="1000"
-                            app:shimmer_auto_start="false"
-                            app:shimmer_base_color="#1B1A1A"
-                            app:shimmer_colored="true"
-                            android:layout_margin="8dp">
-
-
-                            <include layout="@layout/item_load_list_product"/>
-
-
-                        </com.facebook.shimmer.ShimmerFrameLayout>
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rv_product"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        tools:listitem="@layout/item_data_product"
-                        android:visibility="invisible"/>
-                </RelativeLayout>
-                <TextView
-                    android:id="@+id/tv_data_is_empty"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/no_product_data_has_been_added_yet"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:visibility="gone"
-                    android:textColor="@color/black"
-                    android:layout_below="@id/divider"/>
+                    android:layout_marginTop="8dp">
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:id="@+id/divider"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        app:dividerInsetEnd="150dp"
+                        app:dividerInsetStart="150dp" />
+
+                    <TextView
+                        android:id="@+id/tv_list_product"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/divider"
+                        android:fontFamily="@font/inter_medium"
+                        android:text="@string/product_list"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/tv_list_more_all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/divider"
+                        android:layout_alignParentEnd="true"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/inter_medium"
+                        android:text="@string/view_more"
+                        android:textColor="@color/blue" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@id/tv_list_product">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            app:cardCornerRadius="25dp">
+
+                            <com.facebook.shimmer.ShimmerFrameLayout
+                                android:id="@+id/shimmer_view_container_list_product"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                app:layout_constraintVertical_bias="0.5"
+                                app:shimmer_duration="1000"
+                                app:shimmer_auto_start="false"
+                                app:shimmer_base_color="#1B1A1A"
+                                app:shimmer_colored="true"
+                                android:layout_margin="8dp">
+
+
+                                <include layout="@layout/item_load_list_product"/>
+
+
+                            </com.facebook.shimmer.ShimmerFrameLayout>
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_product"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            tools:listitem="@layout/item_data_product"
+                            android:visibility="invisible"/>
+                    </RelativeLayout>
+                    <TextView
+                        android:id="@+id/tv_data_is_empty"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/no_product_data_has_been_added_yet"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:visibility="gone"
+                        android:textColor="@color/black"
+                        android:layout_below="@id/divider"/>
+                </RelativeLayout>
             </RelativeLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

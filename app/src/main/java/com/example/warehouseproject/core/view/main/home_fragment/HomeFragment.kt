@@ -1,10 +1,11 @@
 package com.example.warehouseproject.core.view.main.home_fragment
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +16,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.warehouseproject.R
-import com.example.warehouseproject.core.helper.RandomColor
 import com.example.warehouseproject.core.model.product.Product
 import com.example.warehouseproject.core.model.product.ProductResponses
 import com.example.warehouseproject.core.service.product.ProductApiService
@@ -27,11 +27,11 @@ import com.example.warehouseproject.core.view.main.home_fragment.product_list_al
 import com.example.warehouseproject.core.view.main.home_fragment.stock_histories.StockHistoriesActivity
 import com.example.warehouseproject.core.view.main.home_fragment.stock_in_product.StockInActivity
 import com.example.warehouseproject.core.view.main.home_fragment.stock_out_product.StockOutActivity
-import com.example.warehouseproject.core.view.product.add_product.AddProductActivity
 import com.example.warehouseproject.databinding.FragmentHomeBinding
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.squareup.picasso.Picasso
 import io.paperdb.Paper
+
 
 class HomeFragment : Fragment(), ProductListAdapter.CallClickListener, HomeView {
     companion object {
@@ -43,6 +43,8 @@ class HomeFragment : Fragment(), ProductListAdapter.CallClickListener, HomeView 
         private const val STORAGE_PATH_PROFILE = "path"
         private const val PROFILE_PHOTO = "photo"
     }
+
+    private var activity: Activity? = null
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var productListAdapter: ProductListAdapter
@@ -69,7 +71,7 @@ class HomeFragment : Fragment(), ProductListAdapter.CallClickListener, HomeView 
 
         presenter.getDataProducts(1)
 
-        Paper.init(requireContext())
+        Paper.init(requireContext().applicationContext)
 
         setupRecyclerView()
 
@@ -79,7 +81,7 @@ class HomeFragment : Fragment(), ProductListAdapter.CallClickListener, HomeView 
     }
 
     private fun setupRecyclerView() {
-        productListAdapter = ProductListAdapter(requireContext(), arrayListOf(), this)
+        productListAdapter = ProductListAdapter(requireContext().applicationContext, arrayListOf(), this)
         binding.rvProduct.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = productListAdapter
@@ -93,16 +95,16 @@ class HomeFragment : Fragment(), ProductListAdapter.CallClickListener, HomeView 
         popupMenu.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.stockIn -> {
-                    startActivity(Intent(requireActivity(), StockInActivity::class.java))
+                    startActivity(Intent(activity, StockInActivity::class.java))
                 }
                 R.id.stockOut -> {
-                    startActivity(Intent(requireActivity(), StockOutActivity::class.java))
+                    startActivity(Intent(activity, StockOutActivity::class.java))
                 }
                 R.id.history -> {
-                    startActivity(Intent(requireActivity(), StockHistoriesActivity::class.java))
+                    startActivity(Intent(activity, StockHistoriesActivity::class.java))
                 }
                 R.id.category -> {
-                    startActivity(Intent(requireActivity(), ProductCategoryActivity::class.java))
+                    startActivity(Intent(activity, ProductCategoryActivity::class.java))
                 }
             }
 
@@ -143,7 +145,7 @@ class HomeFragment : Fragment(), ProductListAdapter.CallClickListener, HomeView 
         binding.newTxtTopbar.viewEnd.setOnClickListener {
             binding.newTxtTopbar.viewEnd.startAnimation(
                 AnimationUtils.loadAnimation(
-                    requireActivity(),
+                    activity,
                     R.anim.animation_button
                 )
             )
@@ -160,11 +162,11 @@ class HomeFragment : Fragment(), ProductListAdapter.CallClickListener, HomeView 
     }
 
     override fun onClickListenerDialog(data: Product) {
-        presenter.showDetailDialog(requireActivity(), layoutInflater, data)
+        activity?.let { presenter.showDetailDialog(it, layoutInflater, data) }
     }
 
     override fun moveMainActivity() {
-        val intent = Intent(context, MainActivity::class.java)
+        val intent = Intent(activity, MainActivity::class.java)
         startActivity(intent)
         activity?.finish()
     }
@@ -173,7 +175,8 @@ class HomeFragment : Fragment(), ProductListAdapter.CallClickListener, HomeView 
     override fun successResponseBodyGetProductsView(data: List<Product>, productResponses: ProductResponses) {
         showDataProduct(data)
 
-        binding.llFullContainer.visibility = View.VISIBLE
+        binding.contentContainer.visibility = View.VISIBLE
+        binding.viewErrorResponse.root.visibility = View.GONE
 
         if (productResponses.totalCount == 0) {
             shimmerViewContainer.visibility = View.GONE
@@ -187,26 +190,35 @@ class HomeFragment : Fragment(), ProductListAdapter.CallClickListener, HomeView 
     }
 
     override fun errorResponseBodyGetProductsView(msg: String) {
-        Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+        Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show()
         if (msg == "Unauthorized!") {
             Paper.book().destroy()
             clearSessionOrSignOut()
         }else if (msg == "user is deleted and token not valid") {
-            Toast.makeText(requireContext(), "your is blocked", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, "your is blocked", Toast.LENGTH_SHORT).show()
             Paper.book().destroy()
             clearSessionOrSignOut()
+        } else {
+            Toast.makeText(activity, "Error Respon: $msg", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun clearSessionOrSignOut() {
-        val intent = Intent(requireContext(), SignInActivity::class.java)
+        val intent = Intent(activity, SignInActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
         activity?.finish()
     }
 
     override fun onFailureRequestGetProductsView(msg: String) {
-        Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+        Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show()
+        binding.contentContainer.visibility = View.GONE
+        binding.viewErrorResponse.root.visibility = View.VISIBLE
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        activity = if (context is Activity) context else null
     }
 
 }

@@ -244,16 +244,17 @@
                             android:src="@drawable/ic_shield_check"
                             app:tint="@color/white" />
                     </androidx.cardview.widget.CardView>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Activity"
-                        android:layout_toEndOf="@id/icon_activity3"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="8dp"
+                        android:layout_toEndOf="@id/icon_activity3"
                         android:fontFamily="@font/inter_bold"
+                        android:text="Privacy"
                         android:textColor="@color/black"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp" />
 
                     <com.google.android.material.chip.Chip
                         android:layout_width="wrap_content"
