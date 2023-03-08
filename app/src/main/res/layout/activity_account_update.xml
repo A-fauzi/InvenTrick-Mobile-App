@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -118,7 +119,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Email address"/>
+                    android:text="Email address"
+                    android:textColor="@color/black"/>
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/outlinedTextFieldEmail"
                     android:layout_width="match_parent"
@@ -130,7 +132,10 @@
                     app:boxCornerRadiusTopEnd="15dp"
                     app:boxCornerRadiusBottomStart="15dp"
                     app:boxCornerRadiusBottomEnd="15dp"
-                    app:hintEnabled="false">
+                    app:hintEnabled="false"
+                    app:endIconDrawable="@drawable/ic_badge_check"
+                    app:endIconMode="none"
+                    app:endIconTint="@color/blue_ocean">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_email"
@@ -151,7 +156,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Username"/>
+                    android:text="Username"
+                    android:textColor="@color/black"/>
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/outlinedTextFieldUsername"
                     android:layout_width="match_parent"
@@ -163,7 +169,11 @@
                     app:boxCornerRadiusTopEnd="15dp"
                     app:boxCornerRadiusBottomStart="15dp"
                     app:boxCornerRadiusBottomEnd="15dp"
-                    app:hintEnabled="false">
+                    app:hintEnabled="false"
+                    android:enabled="false"
+                    app:endIconDrawable="@drawable/ic_badge_check"
+                    app:endIconMode="none"
+                    app:endIconTint="@color/blue_ocean">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_username"
@@ -184,7 +194,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Fullname"/>
+                    android:text="Fullname"
+                    android:textColor="@color/black"/>
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/outlinedTextFieldFullname"
                     android:layout_width="match_parent"
@@ -196,7 +207,11 @@
                     app:boxCornerRadiusTopEnd="15dp"
                     app:boxCornerRadiusBottomStart="15dp"
                     app:boxCornerRadiusBottomEnd="15dp"
-                    app:hintEnabled="false">
+                    app:hintEnabled="false"
+                    android:enabled="false"
+                    app:endIconDrawable="@drawable/ic_badge_check"
+                    app:endIconMode="none"
+                    app:endIconTint="@color/blue_ocean">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_fullname"
@@ -217,7 +232,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Password"/>
+                    android:text="Password"
+                    android:textColor="@color/black"/>
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/outlinedTextFieldPassword"
                     android:layout_width="match_parent"
@@ -230,7 +246,9 @@
                     app:boxCornerRadiusBottomStart="15dp"
                     app:boxCornerRadiusBottomEnd="15dp"
                     app:passwordToggleEnabled="true"
-                    app:hintEnabled="false">
+                    app:hintEnabled="false"
+                    android:enabled="false"
+                    app:startIconTint="@color/blue_ocean">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_password"
@@ -242,6 +260,19 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_submit_update_user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Submit"
+                android:textAllCaps="false"
+                android:layout_gravity="center"
+                android:enabled="false"
+                app:cornerRadius="15dp"/>
         </LinearLayout>
     </LinearLayout>
 
