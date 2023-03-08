@@ -56,14 +56,28 @@
                     layout="@layout/item_error_response"
                     android:visibility="gone"/>
 
-                <TextView
-                    android:id="@+id/tv_data_is_empty"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/container_view_data_empty"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/no_product_data_has_been_added_yet"
-                    android:layout_centerHorizontal="true"
-                    android:textColor="@color/black"
-                    android:visibility="gone"/>
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/no_product_data_has_been_added_yet"
+                        android:textColor="@color/black"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_add_product_now"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Add product now"
+                        android:textAllCaps="false"
+                        app:cornerRadius="15dp"/>
+                </LinearLayout>
 
                 <RelativeLayout
                     android:id="@+id/content_container"

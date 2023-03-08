@@ -27,6 +27,7 @@ import com.example.warehouseproject.core.view.main.home_fragment.product_list_al
 import com.example.warehouseproject.core.view.main.home_fragment.stock_histories.StockHistoriesActivity
 import com.example.warehouseproject.core.view.main.home_fragment.stock_in_product.StockInActivity
 import com.example.warehouseproject.core.view.main.home_fragment.stock_out_product.StockOutActivity
+import com.example.warehouseproject.core.view.product.add_product.AddProductActivity
 import com.example.warehouseproject.databinding.FragmentHomeBinding
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.squareup.picasso.Picasso
@@ -181,11 +182,15 @@ class HomeFragment : Fragment(), ProductListAdapter.CallClickListener, HomeView 
         if (productResponses.totalCount == 0) {
             binding.contentContainer.visibility = View.GONE
             binding.rvProduct.visibility = View.GONE
-            binding.tvDataIsEmpty.visibility = View.VISIBLE
+            binding.containerViewDataEmpty.visibility = View.VISIBLE
+            binding.btnAddProductNow.setOnClickListener {
+                startActivity(Intent(requireActivity(), AddProductActivity::class.java))
+            }
         } else {
             binding.contentContainer.visibility = View.VISIBLE
+            shimmerViewContainer.visibility = View.GONE
             binding.rvProduct.visibility = View.VISIBLE
-            binding.tvDataIsEmpty.visibility = View.GONE
+            binding.containerViewDataEmpty.visibility = View.GONE
         }
     }
 
