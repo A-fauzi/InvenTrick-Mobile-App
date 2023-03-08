@@ -1,19 +1,17 @@
-package com.example.warehouseproject.core.view.main.account_fragment.product_upload_user
+package com.example.warehouseproject.core.view.main.account_fragment.product_upload_user.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.warehouseproject.core.model.product.Product
+import com.example.warehouseproject.core.view.main.account_fragment.product_upload_user.api.ProductsUserApiService
 import com.example.warehouseproject.core.view.main.home_fragment.product_list_all.paging.api.ApiService
 import com.example.warehouseproject.core.view.main.home_fragment.product_list_all.paging.ui.ProductViewModel
 import com.example.warehouseproject.core.view.main.home_fragment.product_list_all.paging.ui.ProductViewModelFactory
 import com.example.warehouseproject.core.view.main.home_fragment.product_list_all.paging.ui.ProductsAdapterPaging
-import com.example.warehouseproject.core.view.main.home_fragment.product_list_all.paging.ui.ProductsLoadStateAdapter
 import com.example.warehouseproject.databinding.ActivityProductsUserBinding
 import io.paperdb.Paper
 import kotlinx.coroutines.launch
@@ -30,10 +28,9 @@ class ProductsUserActivity : AppCompatActivity(), ProductsAdapterPaging.Products
         private const val DIVISION = "division"
     }
     private lateinit var binding: ActivityProductsUserBinding
-    private lateinit var viewModel: ProductViewModel
-    private lateinit var productsUserAdapterPaging: ProductsAdapterPaging
+    private lateinit var viewModel: ProductsUserViewModel
+    private lateinit var productsAdapterPaging: ProductsAdapterPaging
 
-    private val uid = Paper.book().read<String>(ID).toString()
     private val token = Paper.book().read<String>(TOKEN).toString()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,12 +45,12 @@ class ProductsUserActivity : AppCompatActivity(), ProductsAdapterPaging.Products
     private fun setupViewModel() {
         viewModel = ViewModelProvider(
             this,
-            ProductViewModelFactory(ApiService.create(token))
-        )[ProductViewModel::class.java]
+            ProductsUserViewModelFactory(ProductsUserApiService.create(token))
+        )[ProductsUserViewModel::class.java]
     }
 
    private fun setupList() {
-       productsUserAdapterPaging = ProductsAdapterPaging(applicationContext, this)
+       productsAdapterPaging = ProductsAdapterPaging(applicationContext, this)
        binding.rvProductsUser.apply {
            layoutManager = LinearLayoutManager(context)
 
@@ -63,14 +60,14 @@ class ProductsUserActivity : AppCompatActivity(), ProductsAdapterPaging.Products
 //               footer = ProductsLoadStateAdapter { productListAdapter.retry() }
 //           )
 //            setHasFixedSize(true) --> Todo : jika ini di aktifkan, list tidak akan tampil saat initialisasi pertama kali (emang bangsat!)
-            adapter = productsUserAdapterPaging
+            adapter = productsAdapterPaging
        }
    }
 
     private fun setupView() {
         lifecycleScope.launch {
-            viewModel.listDataProduct.collect {
-                productsUserAdapterPaging.submitData(it)
+            viewModel.listDataProductsUser.collect {
+                productsAdapterPaging.submitData(it)
             }
         }
     }

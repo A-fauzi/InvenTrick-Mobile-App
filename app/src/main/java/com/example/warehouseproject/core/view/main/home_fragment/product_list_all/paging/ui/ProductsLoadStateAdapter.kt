@@ -22,6 +22,7 @@ class ProductsLoadStateAdapter(private val retry: () -> Unit): LoadStateAdapter<
             binding.progressbar.isVisible = (loadState is LoadState.Loading)
             binding.buttonRetry.isVisible = (loadState is LoadState.Error)
             binding.textViewError.isVisible = (loadState is LoadState.Error)
+
             binding.buttonRetry.setOnClickListener {
                 retry()
             }

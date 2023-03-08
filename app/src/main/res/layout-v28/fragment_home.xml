@@ -56,11 +56,21 @@
                     layout="@layout/item_error_response"
                     android:visibility="gone"/>
 
+                <TextView
+                    android:id="@+id/tv_data_is_empty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no_product_data_has_been_added_yet"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/black"
+                    android:visibility="gone"/>
+
                 <RelativeLayout
                     android:id="@+id/content_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp">
+                    android:layout_marginTop="8dp"
+                    android:visibility="visible">
 
                     <com.google.android.material.divider.MaterialDivider
                         android:id="@+id/divider"
@@ -128,16 +138,6 @@
                             tools:listitem="@layout/item_data_product"
                             android:visibility="invisible"/>
                     </RelativeLayout>
-                    <TextView
-                        android:id="@+id/tv_data_is_empty"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/no_product_data_has_been_added_yet"
-                        android:layout_centerHorizontal="true"
-                        android:layout_centerVertical="true"
-                        android:visibility="gone"
-                        android:textColor="@color/black"
-                        android:layout_below="@id/divider"/>
                 </RelativeLayout>
             </RelativeLayout>
         </LinearLayout>

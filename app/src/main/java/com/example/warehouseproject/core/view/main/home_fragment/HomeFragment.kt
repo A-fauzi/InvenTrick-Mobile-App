@@ -179,11 +179,11 @@ class HomeFragment : Fragment(), ProductListAdapter.CallClickListener, HomeView 
         binding.viewErrorResponse.root.visibility = View.GONE
 
         if (productResponses.totalCount == 0) {
-            shimmerViewContainer.visibility = View.GONE
+            binding.contentContainer.visibility = View.GONE
             binding.rvProduct.visibility = View.GONE
             binding.tvDataIsEmpty.visibility = View.VISIBLE
         } else {
-            shimmerViewContainer.visibility = View.GONE
+            binding.contentContainer.visibility = View.VISIBLE
             binding.rvProduct.visibility = View.VISIBLE
             binding.tvDataIsEmpty.visibility = View.GONE
         }

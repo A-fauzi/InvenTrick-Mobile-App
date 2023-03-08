@@ -2,7 +2,6 @@ package com.example.warehouseproject.core.view.main.account_fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,29 +12,18 @@ import android.widget.PopupMenu
 import android.widget.Toast
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.helper.RealtimeDatabase
-import com.example.warehouseproject.core.helper.SavedPreferenceUser
 import com.example.warehouseproject.core.model.user.UserRequest
 import com.example.warehouseproject.core.model.user.UserResponse
 import com.example.warehouseproject.core.service.user.UserApiService
 import com.example.warehouseproject.core.view.authentication.SignInActivity
-import com.example.warehouseproject.core.view.main.MainActivity
 import com.example.warehouseproject.core.view.main.MainActivityPresenter
 import com.example.warehouseproject.core.view.main.MainView
 import com.example.warehouseproject.core.view.main.account_fragment.account_update.AccountUpdateActivity
-import com.example.warehouseproject.core.view.main.account_fragment.product_upload_user.ProductsUserActivity
+import com.example.warehouseproject.core.view.main.account_fragment.product_upload_user.ui.ProductsUserActivity
 import com.example.warehouseproject.databinding.FragmentAccountBinding
-import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
 import io.paperdb.Paper
-import io.socket.client.IO
-import io.socket.client.Socket
-import java.net.URISyntaxException
 
 class AccountFragment : Fragment(), MainView {
 
@@ -78,23 +66,10 @@ class AccountFragment : Fragment(), MainView {
 
         Paper.init(requireActivity())
 
-
-//        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//            .requestIdToken(getString(R.string.default_web_client_id))
-//            .requestEmail()
-//            .build()
-//        mGoogleSignInClient= GoogleSignIn.getClient(requireActivity(),gso)
         binding.newTxtTopbar.viewEnd.setOnClickListener {
 
             popUpMenu()
 
-//            mGoogleSignInClient.signOut().addOnCompleteListener {
-////                val intent= Intent(activity, SignInActivity::class.java)
-////                startActivity(intent)
-////                activity?.finish()
-//
-//
-//            }
         }
 
         binding.ivBtnUpdateProfile.setOnClickListener {

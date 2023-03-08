@@ -24,7 +24,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".core.view.main.account_fragment.product_upload_user.ProductsUserActivity"
+            android:name=".core.view.main.account_fragment.product_upload_user.ui.ProductsUserActivity"
             android:exported="false" />
         <activity
             android:name=".core.view.main.account_fragment.account_update.AccountUpdateActivity"

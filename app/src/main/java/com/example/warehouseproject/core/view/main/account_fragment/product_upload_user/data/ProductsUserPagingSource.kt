@@ -1,23 +1,21 @@
-package com.example.warehouseproject.core.view.main.home_fragment.product_list_all.paging.data
+package com.example.warehouseproject.core.view.main.account_fragment.product_upload_user.data
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.warehouseproject.core.model.product.Product
-import com.example.warehouseproject.core.model.product.ProductResponses
-import com.example.warehouseproject.core.service.product.ProductApiService
-import com.example.warehouseproject.core.view.main.home_fragment.product_list_all.paging.api.ApiService
-import kotlinx.coroutines.delay
-import kotlin.math.max
+import com.example.warehouseproject.core.view.main.account_fragment.product_upload_user.api.ProductsUserApiService
+import io.paperdb.Paper
 
-class ProductsPagingSource(private val apiService: ApiService): PagingSource<Int, Product>() {
+class ProductsUserPagingSource(private val productsUserApiService: ProductsUserApiService): PagingSource<Int, Product>() {
     override fun getRefreshKey(state: PagingState<Int, Product>): Int? {
         TODO("Not yet implemented")
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Product> {
         try {
+            val uid = Paper.book().read<String>("id").toString()
             val currentLoadingPageKey = params.key ?: 1
-            val response = apiService.getProducts(currentLoadingPageKey)
+            val response = productsUserApiService.getProductsUser(uid, currentLoadingPageKey)
             val responseData = mutableListOf<Product>()
             val data = response.data
             responseData.addAll(data)
@@ -37,7 +35,7 @@ class ProductsPagingSource(private val apiService: ApiService): PagingSource<Int
                     nextKey = currentLoadingPageKey.plus(1)
                 )
             }
-        } catch (e: Exception) {
+        }catch (e: Exception){
             return LoadResult.Error(e)
         }
     }
