@@ -22,6 +22,7 @@ import com.example.warehouseproject.core.view.main.MainActivity
 import com.example.warehouseproject.core.view.main.MainActivityPresenter
 import com.example.warehouseproject.core.view.main.MainView
 import com.example.warehouseproject.core.view.main.account_fragment.account_update.AccountUpdateActivity
+import com.example.warehouseproject.core.view.main.account_fragment.product_upload_user.ProductsUserActivity
 import com.example.warehouseproject.databinding.FragmentAccountBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -109,6 +110,21 @@ class AccountFragment : Fragment(), MainView {
         Picasso.get().load(profileImg).placeholder(R.drawable.ic_people).error(R.drawable.img_example).into(binding.ivProfile)
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.cvActivityUser.setOnClickListener {
+            Toast.makeText(requireActivity(), "Masih dalam pengembangan", Toast.LENGTH_SHORT).show()
+        }
+        binding.cvProductUploads.setOnClickListener {
+            startActivity(Intent(requireActivity(), ProductsUserActivity::class.java))
+        }
+        binding.cvPrivacy.setOnClickListener {
+            Toast.makeText(requireActivity(), "Masih dalam pengembangan", Toast.LENGTH_SHORT).show()
+        }
+
     }
 
     private fun topAppBar() {

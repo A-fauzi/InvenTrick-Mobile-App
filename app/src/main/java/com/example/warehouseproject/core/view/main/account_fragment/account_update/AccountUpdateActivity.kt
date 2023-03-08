@@ -81,6 +81,10 @@ class AccountUpdateActivity : AppCompatActivity() {
         binding.newTxtTopbar.txtTopBar.text = "Edit Profile"
         binding.newTxtTopbar.cvStatusActivityUser.visibility = View.GONE
         binding.newTxtTopbar.tvStatusActivityUser.visibility = View.GONE
+
+        binding.btnSubmitUpdateUser.setOnClickListener {
+            Toast.makeText(this, "Fitur masih dalam pengembangan", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun textWatcher(input: EditText) = object : TextWatcher {

@@ -24,7 +24,7 @@
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:text="@string/scan_stock_in"
-           android:backgroundTint="@color/purple_smooth"
+           android:backgroundTint="@color/blue_ocean"
            app:cornerRadius="24dp"/>
 
        <com.google.android.material.button.MaterialButton
@@ -32,7 +32,7 @@
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:text="@string/scan_stock_out"
-           android:backgroundTint="@color/red_smooth"
+           android:backgroundTint="@color/orange"
            app:cornerRadius="24dp"/>
    </LinearLayout>
 
