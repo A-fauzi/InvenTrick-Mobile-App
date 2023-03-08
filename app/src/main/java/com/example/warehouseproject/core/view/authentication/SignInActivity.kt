@@ -3,13 +3,16 @@ package com.example.warehouseproject.core.view.authentication
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
 import android.util.Log
 import android.view.View
+import android.widget.EditText
 import android.widget.Toast
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.awesomedialog.*
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.helper.SavedPreferenceUser
+import com.example.warehouseproject.core.helper.TextWatcher
 import com.example.warehouseproject.core.model.user.UserRequest
 import com.example.warehouseproject.core.model.user.UserResponse
 import com.example.warehouseproject.core.service.user.UserApiService
@@ -21,6 +24,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.squareup.picasso.Picasso
@@ -65,6 +69,9 @@ class SignInActivity : AppCompatActivity(), SignInView {
             val request = UserRequest(binding.etEmail.text.toString(), binding.etPassword.text.toString())
             presenter.validateFormSignIn(request)
         }
+
+        binding.etEmail.addTextChangedListener(textWatcher(binding.etEmail))
+        binding.etPassword.addTextChangedListener(textWatcher(binding.etPassword))
 
     }
 
@@ -132,5 +139,30 @@ class SignInActivity : AppCompatActivity(), SignInView {
         }
     }
 
+    private fun textWatcher(input: EditText) = object : android.text.TextWatcher {
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+        override fun afterTextChanged(p0: Editable?) {
+            val text = p0.toString()
+            when(input) {
+                binding.etEmail -> {
+                    if (text.isNotEmpty()) {
+                        binding.outlinedTextFieldEmail.endIconMode = TextInputLayout.END_ICON_CUSTOM
+                        binding.outlinedTextFieldEmail.isHelperTextEnabled = false
+                        binding.outlinedTextFieldPassword.isEnabled = true
+                    } else {
+                        binding.outlinedTextFieldPassword.isEnabled = false
+                        binding.outlinedTextFieldEmail.helperText = "Username gaboleh kosong!"
+                        binding.outlinedTextFieldEmail.setHelperTextColor(getColorStateList(R.color.red_smooth))
+                        binding.outlinedTextFieldEmail.endIconMode = TextInputLayout.END_ICON_NONE
+                    }
+                }
+                binding.etPassword -> {
+                    binding.btnSubmitLogin.isEnabled = text.isNotEmpty()
+                }
+            }
+        }
+
+    }
 
 }

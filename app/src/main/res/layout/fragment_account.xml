@@ -85,8 +85,8 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:focusable="true"
-                android:src="@drawable/ic_edit"
-                android:padding="8dp"/>
+                android:padding="8dp"
+                android:src="@drawable/ic_edit__1_" />
         </RelativeLayout>
 
 <!--    Dashboard container    -->
@@ -285,6 +285,7 @@
            android:layout_height="wrap_content"
            android:text="My Account"
            android:layout_marginBottom="8dp"
+           android:layout_marginLeft="8dp"
            android:fontFamily="@font/inter_medium"/>
 
        <TextView
@@ -294,7 +295,8 @@
            android:fontFamily="@font/inter_medium"
            android:textSize="16sp"
            android:textColor="@color/blue_ocean"
-           android:layout_marginBottom="8dp"/>
+           android:layout_marginBottom="8dp"
+           android:layout_marginLeft="8dp"/>
 
        <androidx.cardview.widget.CardView
            android:id="@+id/cv_btn_logout"

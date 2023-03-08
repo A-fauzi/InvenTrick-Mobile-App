@@ -2,13 +2,13 @@
     <!-- Base application theme. -->
     <style name="Theme.WarehouseProject" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple</item>
-        <item name="colorPrimaryVariant">@color/purple</item>
+        <item name="colorPrimary">@color/blue_ocean</item>
+        <item name="colorPrimaryVariant">@color/blue_ocean</item>
         <item name="colorOnPrimary">@color/white</item>
 
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/purple</item>
-        <item name="colorSecondaryVariant">@color/purple</item>
+        <item name="colorSecondary">@color/blue_ocean</item>
+        <item name="colorSecondaryVariant">@color/blue_ocean</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
@@ -24,8 +24,8 @@
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_samsung_internet_logo_wine</item>
         <item name="postSplashScreenTheme">@style/Theme.WarehouseProject</item>
-        <item name="windowSplashScreenBackground">@color/blue</item>
-        <item name="windowSplashScreenIconBackgroundColor">@color/purple</item>
+        <item name="windowSplashScreenBackground">@color/blue_ocean</item>
+        <item name="windowSplashScreenIconBackgroundColor">@color/blue</item>
         <item name="windowSplashScreenAnimationDuration">1000</item>
 <!--        <item name="android:windowSplashScreenBrandingImage">@drawable/splash_branding_image</item>-->
     </style>
