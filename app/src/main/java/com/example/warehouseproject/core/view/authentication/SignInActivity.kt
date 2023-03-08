@@ -72,6 +72,7 @@ class SignInActivity : AppCompatActivity(), SignInView {
 
         binding.etEmail.addTextChangedListener(textWatcher(binding.etEmail))
         binding.etPassword.addTextChangedListener(textWatcher(binding.etPassword))
+        Picasso.get().load("https://i.pinimg.com/originals/ed/0a/a7/ed0aa728d861d69cdce28fb3055f9fd9.gif").into(binding.ivContent)
 
     }
 
