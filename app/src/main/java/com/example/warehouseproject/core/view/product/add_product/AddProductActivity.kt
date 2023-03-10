@@ -22,7 +22,6 @@ import com.example.warehouseproject.core.model.product.ProductRequest
 import com.example.warehouseproject.core.model.product.category.Category
 import com.example.warehouseproject.core.model.user.User
 import com.example.warehouseproject.core.view.main.MainActivity
-import com.example.warehouseproject.core.view.main.home_fragment.HomeFragment
 import com.example.warehouseproject.databinding.ActivityAddProductBinding
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
@@ -125,7 +124,7 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
                 fullName =  fullName,
                 email =  email,
                 roles = arrayListOf(),
-                division = division,
+                position = division,
                 status_activity = "null",
                 jwt_token = token,
                 path_storage = storagePath

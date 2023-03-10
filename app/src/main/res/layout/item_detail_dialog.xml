@@ -340,14 +340,26 @@
                     android:layout_marginTop="8dp"
                     android:contentDescription="@string/content_desc_todo"/>
 
-                <Button
-                    android:id="@+id/btn_save_barcode"
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_prod_in"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/save_barcode"
+                    android:text="Product IN"
                     android:fontFamily="@font/inter_medium"
                     android:textAllCaps="false"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    app:cornerRadius="15dp"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_prod_out"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Product OUT"
+                    android:fontFamily="@font/inter_medium"
+                    android:textAllCaps="false"
+                    android:layout_gravity="center"
+                    app:cornerRadius="15dp"
+                    android:backgroundTint="@color/red_smooth"/>
 
             </LinearLayout>
 
@@ -380,10 +392,10 @@
                     android:id="@+id/tv_btn_update"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/update_item"
                     android:layout_alignParentEnd="true"
                     android:fontFamily="@font/inter_medium"
-                    android:textColor="@color/green_cendol"
+                    android:text="@string/update_item"
+                    android:textColor="@color/blue_ocean"
                     tools:ignore="RelativeOverlap" />
             </RelativeLayout>
 

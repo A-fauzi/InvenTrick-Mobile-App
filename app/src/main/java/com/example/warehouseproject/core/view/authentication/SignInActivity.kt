@@ -4,35 +4,19 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
-import android.util.Log
 import android.view.View
 import android.widget.EditText
-import android.widget.Toast
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.awesomedialog.*
 import com.example.warehouseproject.R
-import com.example.warehouseproject.core.helper.SavedPreferenceUser
-import com.example.warehouseproject.core.helper.TextWatcher
 import com.example.warehouseproject.core.model.user.UserRequest
 import com.example.warehouseproject.core.model.user.UserResponse
 import com.example.warehouseproject.core.service.user.UserApiService
 import com.example.warehouseproject.core.view.main.MainActivity
 import com.example.warehouseproject.databinding.ActivitySignInBinding
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.tasks.Task
 import com.google.android.material.textfield.TextInputLayout
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GoogleAuthProvider
 import com.squareup.picasso.Picasso
 import io.paperdb.Paper
-import io.socket.client.IO
-import io.socket.client.Socket
-import org.json.JSONObject
-import java.net.URISyntaxException
 
 class SignInActivity : AppCompatActivity(), SignInView {
 
@@ -99,7 +83,7 @@ class SignInActivity : AppCompatActivity(), SignInView {
         Paper.book().write(TOKEN, data.data.jwt_token)
         Paper.book().write(PROFILE_PHOTO, data.data.profile_image)
         Paper.book().write(STORAGE_PATH_PROFILE, data.data.path_storage)
-        Paper.book().write(DIVISION, data.data.division)
+        Paper.book().write(DIVISION, data.data.position)
     }
 
     override fun showResponseMessageError(msg: String) {

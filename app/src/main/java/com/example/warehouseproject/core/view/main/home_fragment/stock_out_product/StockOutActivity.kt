@@ -82,6 +82,8 @@ class StockOutActivity : AppCompatActivity() {
                 binding.stockOut.etInputCodeProduct.text?.clear()
                 binding.stockOut.cardFullContent.visibility = View.VISIBLE
                 binding.stockOut.progressBar.visibility = View.GONE
+
+                binding.stockOut.containerSearchProductView.visibility = View.GONE
             }, {
                 binding.stockOut.animationView.setAnimation(R.raw.product_not_found)
                 animationView.loop(true)

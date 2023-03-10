@@ -3,18 +3,24 @@ package com.example.warehouseproject.core.view.main.home_fragment.home_dialog_de
 import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
 import android.graphics.Color
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat.startActivity
 import coil.load
 import com.example.awesomedialog.*
 import com.example.warehouseproject.R
+import com.example.warehouseproject.core.constant.Constant
 import com.example.warehouseproject.core.helper.*
 import com.example.warehouseproject.core.model.product.Product
 import com.example.warehouseproject.core.service.product.ProductApiService
+import com.example.warehouseproject.core.view.main.home_fragment.stock_in_product.StockInActivity
+import com.example.warehouseproject.core.view.main.home_fragment.stock_out_product.StockOutActivity
 import com.example.warehouseproject.databinding.ItemDetailDialogBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.storage.FirebaseStorage
@@ -74,6 +80,13 @@ class DetailDialog {
         binding.tvModelDetail.text = data.model
         binding.tvExpDetail.text = data.exp
 
+        val idCurrentUser = Paper.book().read<String>(Constant.User.ID)
+
+        if (data.user._id != idCurrentUser) {
+            binding.tvBtnTrash.visibility = View.INVISIBLE
+            binding.tvBtnUpdate.visibility = View.INVISIBLE
+        }
+
         binding.tvBtnTrash.setOnClickListener {
 
             AwesomeDialog.build(context)
@@ -117,13 +130,22 @@ class DetailDialog {
             Toast.makeText(context, "Belum bisa digunakan", Toast.LENGTH_SHORT).show()
         }
 
+        val bundle = Bundle()
+        bundle.putString("code_items_key", data.code_items)
+        binding.btnProdIn.setOnClickListener {
+            val intent = Intent(context, StockInActivity::class.java)
+            intent.putExtras(bundle)
+            context.startActivity(intent)
+        }
+        binding.btnProdOut.setOnClickListener {
+            val intent = Intent(context, StockOutActivity::class.java)
+            intent.putExtras(bundle)
+            context.startActivity(intent)
+        }
+
         // Encoder qrcode
         val text = data.code_items
         QrCode.generate(text, binding.ivQrCode)
-
-        binding.btnSaveBarcode.setOnClickListener {
-            Toast.makeText(context, "Belum bisa digunakan", Toast.LENGTH_SHORT).show()
-        }
 
         dialog.setContentView(binding.root)
         dialog.setCancelable(true)

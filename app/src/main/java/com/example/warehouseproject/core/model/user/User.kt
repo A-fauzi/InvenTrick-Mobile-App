@@ -7,7 +7,7 @@ data class User(
     val fullName: String,
     val email: String,
     val roles: List<Roles>,
-    val division: String,
+    val position: String,
     val status_activity: String,
     val jwt_token: String,
     val path_storage: String

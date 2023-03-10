@@ -133,12 +133,15 @@ class StockInActivity : AppCompatActivity(), StockInView {
         binding.stockIn.tvCodeItem.text = data.code_items
         binding.stockIn.tvNameProduct.text = data.name
         binding.stockIn.etQtyProduct.hint = data.qty
+
     }
 
     override fun showViewOnSuccessResponse() {
         inputCodeProduct.text?.clear()
         cardFullContent.visibility = View.VISIBLE
         progressBar.visibility = View.GONE
+
+        binding.stockIn.containerSearchProductView.visibility = View.GONE
     }
 
     @SuppressLint("SetTextI18n")
