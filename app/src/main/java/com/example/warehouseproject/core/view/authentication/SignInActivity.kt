@@ -91,16 +91,15 @@ class SignInActivity : AppCompatActivity(), SignInView {
         finish()
     }
 
-    override fun showResponseMessageSuccess(data: UserResponse.SignIn) {
-        Paper.book().write(ID, data.id)
-        Paper.book().write(USERNAME, data.username)
-        Paper.book().write(FULLNAME, data.fullName)
-        Paper.book().write(EMAIL, data.email)
-        Paper.book().write(TOKEN, data.accessToken)
-        Paper.book().write(PROFILE_PHOTO, data.profile_image)
-        Paper.book().write(STORAGE_PATH_PROFILE, data.path_storage)
-        Paper.book().write(TOKEN, data.accessToken)
-        Paper.book().write(DIVISION, data.division)
+    override fun showResponseMessageSuccess(data: UserResponse.SingleResponse) {
+        Paper.book().write(ID, data.data._id)
+        Paper.book().write(USERNAME, data.data.username)
+        Paper.book().write(FULLNAME, data.data.fullName)
+        Paper.book().write(EMAIL, data.data.email)
+        Paper.book().write(TOKEN, data.data.jwt_token)
+        Paper.book().write(PROFILE_PHOTO, data.data.profile_image)
+        Paper.book().write(STORAGE_PATH_PROFILE, data.data.path_storage)
+        Paper.book().write(DIVISION, data.data.division)
     }
 
     override fun showResponseMessageError(msg: String) {

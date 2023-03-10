@@ -42,7 +42,7 @@ class ProductsAdapterPaging(
                 binding.tvSpecProduct.text = this?.specification
                 binding.tvQuantityProduct.text = "quantity: ${this?.qty}"
                 binding.itemUserName.text = this?.user?.username
-                Picasso.get().load(this?.user?.user_photo).placeholder(R.drawable.ic_people).error(R.drawable.img_example).into(binding.itemUserPhoto)
+                Picasso.get().load(this?.user?.profile_image).placeholder(R.drawable.ic_people).error(R.drawable.img_example).into(binding.itemUserPhoto)
                 binding.tvDetailProduct.setOnClickListener {
                     listenerPaging.onClickItem(getItem(position))
                 }

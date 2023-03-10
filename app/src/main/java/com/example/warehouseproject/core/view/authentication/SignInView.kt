@@ -9,7 +9,7 @@ interface SignInView {
     fun moveToMainActivity()
 
     // Response message
-    fun showResponseMessageSuccess(data: UserResponse.SignIn)
+    fun showResponseMessageSuccess(data: UserResponse.SingleResponse)
     fun showResponseMessageError(msg: String)
 
     // Validation

@@ -7,7 +7,7 @@ import retrofit2.http.*
 
 interface UserService {
     @POST("api/auth/signin")
-    fun signInUser(@Body userRequest: UserRequest): Call<UserResponse.SignIn>
+    fun signInUser(@Body userRequest: UserRequest): Call<UserResponse.SingleResponse>
 
     @PUT("api/user/update/status/{id}")
     fun updateStatusActivityUser(@Path("id") userId: String, @Body userRequestStatus: UserRequest.StatusActivity): Call<UserResponse.SingleResponse>

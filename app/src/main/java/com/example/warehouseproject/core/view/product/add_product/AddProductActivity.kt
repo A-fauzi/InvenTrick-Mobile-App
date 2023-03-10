@@ -39,6 +39,7 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
         private const val TOKEN = "token"
         private const val STORAGE_PATH_PROFILE = "path"
         private const val PROFILE_PHOTO = "photo"
+        private const val DIVISION = "division"
     }
 
     private lateinit var modelRequestAddProduct: ProductRequest
@@ -104,18 +105,31 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
 
         firebaseStorage = FirebaseStorage.getInstance()
 
-        val uid = Paper.book().read<String>("id").toString()
-        val uName = Paper.book().read<String>("username").toString()
-        val token = Paper.book().read<String>("token").toString()
+        val uid = Paper.book().read<String>(ID).toString()
+        val uName = Paper.book().read<String>(USERNAME).toString()
+        val token = Paper.book().read<String>(TOKEN).toString()
         val profileImg = Paper.book().read<String>(PROFILE_PHOTO).toString()
         val fullName = Paper.book().read<String>(FULLNAME).toString()
         val email = Paper.book().read<String>(EMAIL).toString()
+        val division = Paper.book().read<String>(DIVISION).toString()
+        val storagePath = Paper.book().read<String>(STORAGE_PATH_PROFILE).toString()
 
         val generateCode = RandomCodeProduct.generate()
         code.setText(generateCode)
         binding.outlinedTextFieldCodeProduct.isEnabled = false
         binding.submitButtonAddProduct.setOnClickListener {
-            modelUser = User(uid, uName, profileImg, fullName, email, arrayListOf(), "null", "online", token)
+            modelUser = User(
+                _id = uid,
+                username =  uName,
+                profile_image =  profileImg,
+                fullName =  fullName,
+                email =  email,
+                roles = arrayListOf(),
+                division = division,
+                status_activity = "null",
+                jwt_token = token,
+                path_storage = storagePath
+            )
             modelRequestAddProduct = ProductRequest(
                 image = "Kosong",
                 code_items = "${code.text}",
