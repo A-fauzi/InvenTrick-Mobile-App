@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.WarehouseProject" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.WarehouseProject" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/blue_ocean</item>
         <item name="colorPrimaryVariant">@color/blue_ocean</item>
@@ -15,8 +15,7 @@
         <!-- Customize your theme here. -->
 
         <!--    Use Bottomsheet dialog custom    -->
-        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
-
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.MyApp.LargeComponent</item>
     </style>
 
     <!--  Theme splashscreen api ini dijalankan pertama kali pada aplikasi  -->
@@ -32,16 +31,16 @@
 
 
     <!--  Bottomsheet dialog custom  -->
-    <style name="AppBottomSheetDialogTheme"
-        parent="Theme.Design.Light.BottomSheetDialog">
-        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    <!--  Bottom Sheet Material Design Style  -->
+    <style name="ShapeAppearance.MyApp.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">30dp</item>
     </style>
 
-    <style name="AppModalStyle"
-        parent="Widget.Design.BottomSheet.Modal">
-        <item name="android:background">@drawable/dialog_round_corner</item>
+<!--  Pop menu custom  -->
+    <style name="myListPopupWindow" parent="Widget.MaterialComponents.PopupMenu">
+        <item name="android:popupBackground">@drawable/pop_up_menu_bg</item>
     </style>
-
 
 
 

@@ -135,7 +135,7 @@ class AccountFragment : Fragment(), MainView {
     }
 
     private fun popUpMenu() {
-        val popupMenu = PopupMenu(activity, binding.newTxtTopbar.viewEnd, Gravity.END)
+        val popupMenu = PopupMenu(activity, binding.newTxtTopbar.viewEnd, Gravity.END, 0, R.style.myListPopupWindow)
         popupMenu.menuInflater.inflate(R.menu.top_bar_menu_account, popupMenu.menu)
         popupMenu.setOnMenuItemClickListener {
             when (it.itemId) {

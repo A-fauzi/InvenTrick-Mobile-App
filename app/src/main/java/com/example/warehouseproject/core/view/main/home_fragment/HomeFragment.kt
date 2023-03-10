@@ -91,16 +91,10 @@ class HomeFragment : Fragment(), ProductListAdapter.CallClickListener, HomeView 
     }
 
     private fun popUpMenu() {
-        val popupMenu = PopupMenu(activity, binding.newTxtTopbar.viewEnd, Gravity.END)
-        popupMenu.menuInflater.inflate(R.menu.product_activity_menu, popupMenu.menu)
+        val popupMenu = PopupMenu(activity, binding.newTxtTopbar.viewEnd, Gravity.END, 0 , R.style.myListPopupWindow)
+        popupMenu.inflate(R.menu.product_activity_menu)
         popupMenu.setOnMenuItemClickListener {
             when (it.itemId) {
-                R.id.stockIn -> {
-                    startActivity(Intent(activity, StockInActivity::class.java))
-                }
-                R.id.stockOut -> {
-                    startActivity(Intent(activity, StockOutActivity::class.java))
-                }
                 R.id.history -> {
                     startActivity(Intent(activity, StockHistoriesActivity::class.java))
                 }
