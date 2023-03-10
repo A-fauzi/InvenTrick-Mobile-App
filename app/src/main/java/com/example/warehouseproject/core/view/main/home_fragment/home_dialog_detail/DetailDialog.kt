@@ -80,11 +80,20 @@ class DetailDialog {
         binding.tvModelDetail.text = data.model
         binding.tvExpDetail.text = data.exp
 
-        val idCurrentUser = Paper.book().read<String>(Constant.User.ID)
+        val idCurrentUser = Paper.book().read<String>(Constant.User.ID).toString()
 
         if (data.user._id != idCurrentUser) {
-            binding.tvBtnTrash.visibility = View.INVISIBLE
-            binding.tvBtnUpdate.visibility = View.INVISIBLE
+            binding.tvBtnTrash.visibility = View.GONE
+            binding.tvBtnUpdate.visibility = View.GONE
+            binding.btnProdOut.visibility = View.GONE
+            binding.btnProdIn.visibility = View.GONE
+        }
+
+        val positionCurrentUser = Paper.book().read<String>(Constant.User.DIVISION).toString()
+        if (positionCurrentUser == "Receiving") {
+            binding.btnProdOut.visibility = View.GONE
+        } else if (positionCurrentUser == "Finish Good") {
+            binding.btnProdIn.visibility = View.GONE
         }
 
         binding.tvBtnTrash.setOnClickListener {
