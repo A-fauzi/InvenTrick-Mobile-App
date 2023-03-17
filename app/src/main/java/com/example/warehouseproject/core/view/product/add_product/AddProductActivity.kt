@@ -14,9 +14,9 @@ import android.widget.Toast
 import com.example.awesomedialog.*
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.constant.Constant.REQUEST_CODE
-import com.example.warehouseproject.core.helper.*
-import com.example.warehouseproject.core.helper.Currency
-import com.example.warehouseproject.core.helper.TextWatcher.addTextCangedListener
+import com.example.warehouseproject.core.utils.helper.*
+import com.example.warehouseproject.core.utils.helper.Currency
+import com.example.warehouseproject.core.utils.helper.TextWatcher.addTextCangedListener
 import com.example.warehouseproject.core.model.product.ProductModelAssets
 import com.example.warehouseproject.core.model.product.ProductRequest
 import com.example.warehouseproject.core.model.product.category.Category

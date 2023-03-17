@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     tools:context=".core.view.main.home_fragment.category.ProductCategoryActivity">
-
-
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_create_category"
@@ -17,5 +16,11 @@
         android:contentDescription="TODO"
         app:srcCompat="@drawable/ic_plus"
         app:tint="@color/white"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/items_category"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -8,10 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.example.warehouseproject.core.constant.Constant
 import com.example.warehouseproject.core.view.main.home_fragment.stock_in_product.StockInActivity
 import com.example.warehouseproject.core.view.main.home_fragment.stock_out_product.StockOutActivity
 import com.example.warehouseproject.databinding.FragmentScanBinding
 import com.google.zxing.integration.android.IntentIntegrator
+import io.paperdb.Paper
 import org.json.JSONException
 
 class ScanFragment : Fragment() {
@@ -31,11 +33,20 @@ class ScanFragment : Fragment() {
 
         presenter = ScanPresenter(this@ScanFragment, ScanInteractor())
 
+        Paper.init(requireActivity())
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val position = Paper.book().read<String>(Constant.User.DIVISION).toString()
+        when(position) {
+            "Receiving" -> { binding.btnClickScanStockOut.visibility = View.GONE }
+            "Finish Good" -> { binding.btnClickScanStockIn.visibility = View.GONE }
+            else -> {}
+        }
 
         binding.btnClickScanStockIn.setOnClickListener {
             // start presenter scan from camera

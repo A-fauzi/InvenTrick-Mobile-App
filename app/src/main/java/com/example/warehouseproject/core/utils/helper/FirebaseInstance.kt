@@ -1,4 +1,4 @@
-package com.example.warehouseproject.core.helper
+package com.example.warehouseproject.core.utils.helper
 
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database

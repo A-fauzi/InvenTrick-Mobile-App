@@ -5,14 +5,16 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.drawable.InsetDrawable
+import android.os.Build
 import android.os.Bundle
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.TypedValue
+import android.view.*
 import android.view.animation.AnimationUtils
 import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.appcompat.view.menu.MenuBuilder
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.warehouseproject.R
@@ -82,7 +84,8 @@ class HomeFragment : Fragment(), ProductListAdapter.CallClickListener, HomeView 
     }
 
     private fun setupRecyclerView() {
-        productListAdapter = ProductListAdapter(requireContext().applicationContext, arrayListOf(), this)
+        productListAdapter =
+            ProductListAdapter(requireContext().applicationContext, arrayListOf(), this)
         binding.rvProduct.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = productListAdapter
@@ -90,9 +93,17 @@ class HomeFragment : Fragment(), ProductListAdapter.CallClickListener, HomeView 
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
+    @SuppressLint("RestrictedApi")
     private fun popUpMenu() {
-        val popupMenu = PopupMenu(activity, binding.newTxtTopbar.viewEnd, Gravity.END, 0 , R.style.myListPopupWindow)
-        popupMenu.inflate(R.menu.product_activity_menu)
+        val popupMenu = PopupMenu(
+            activity,
+            binding.newTxtTopbar.viewEnd,
+            Gravity.END,
+            0,
+            R.style.myListPopupWindow
+        )
+        popupMenu.menuInflater.inflate(R.menu.product_activity_menu, popupMenu.menu)
         popupMenu.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.history -> {
@@ -105,9 +116,11 @@ class HomeFragment : Fragment(), ProductListAdapter.CallClickListener, HomeView 
 
             true
         }
+        popupMenu.setForceShowIcon(true)
         popupMenu.show()
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
@@ -133,9 +146,11 @@ class HomeFragment : Fragment(), ProductListAdapter.CallClickListener, HomeView 
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     @SuppressLint("SetTextI18n")
     private fun setUpTopBar() {
-        Picasso.get().load(profileImg).error(R.drawable.example_user).into(binding.newTxtTopbar.viewStart)
+        Picasso.get().load(profileImg).error(R.drawable.example_user)
+            .into(binding.newTxtTopbar.viewStart)
         binding.newTxtTopbar.txtTopBar.text = "Home"
         binding.newTxtTopbar.viewEnd.setOnClickListener {
             binding.newTxtTopbar.viewEnd.startAnimation(
@@ -167,7 +182,10 @@ class HomeFragment : Fragment(), ProductListAdapter.CallClickListener, HomeView 
     }
 
     @SuppressLint("SetTextI18n")
-    override fun successResponseBodyGetProductsView(data: List<Product>, productResponses: ProductResponses) {
+    override fun successResponseBodyGetProductsView(
+        data: List<Product>,
+        productResponses: ProductResponses
+    ) {
         showDataProduct(data)
 
         binding.contentContainer.visibility = View.VISIBLE
@@ -193,7 +211,7 @@ class HomeFragment : Fragment(), ProductListAdapter.CallClickListener, HomeView 
         if (msg == "Unauthorized!") {
             Paper.book().destroy()
             clearSessionOrSignOut()
-        }else if (msg == "user is deleted and token not valid") {
+        } else if (msg == "user is deleted and token not valid") {
             Toast.makeText(activity, "your is blocked", Toast.LENGTH_SHORT).show()
             Paper.book().destroy()
             clearSessionOrSignOut()

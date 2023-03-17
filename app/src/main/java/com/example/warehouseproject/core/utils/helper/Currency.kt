@@ -1,4 +1,4 @@
-package com.example.warehouseproject.core.helper
+package com.example.warehouseproject.core.utils.helper
 
 import java.text.NumberFormat
 import java.util.*

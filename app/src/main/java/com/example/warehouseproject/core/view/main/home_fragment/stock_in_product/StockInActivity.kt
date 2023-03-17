@@ -9,14 +9,12 @@ import android.view.View
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
-import coil.load
 import com.airbnb.lottie.LottieAnimationView
 import com.example.awesomedialog.*
 import com.example.warehouseproject.R
-import com.example.warehouseproject.core.helper.HideKeyboardHelper
+import com.example.warehouseproject.core.utils.helper.HideKeyboardHelper
 import com.example.warehouseproject.core.model.product.Product
 import com.example.warehouseproject.core.model.product.ProductRequest
 import com.example.warehouseproject.core.model.product.StockHistory

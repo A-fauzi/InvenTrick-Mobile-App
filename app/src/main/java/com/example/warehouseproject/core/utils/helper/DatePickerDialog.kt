@@ -1,4 +1,4 @@
-package com.example.warehouseproject.core.helper
+package com.example.warehouseproject.core.utils.helper
 
 import androidx.fragment.app.FragmentActivity
 import com.google.android.material.datepicker.MaterialDatePicker

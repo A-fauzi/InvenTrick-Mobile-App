@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/history"
-        android:title="History" />
+        android:title="History"
+        android:icon="@drawable/ic_time_past"/>
 
     <item
         android:id="@+id/category"
-        android:title="Category" />
+        android:title="Category"
+        android:icon="@drawable/ic_apps"/>
 </menu>

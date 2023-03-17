@@ -3,15 +3,11 @@ package com.example.warehouseproject.core.view.product.add_product
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.view.View
-import com.example.warehouseproject.R
 import com.example.warehouseproject.core.constant.Constant
-import com.example.warehouseproject.core.helper.DataJsonFromAssets
 import com.example.warehouseproject.core.model.product.ProductModelAssets
 import com.example.warehouseproject.core.model.product.ProductRequest
 import com.example.warehouseproject.core.model.product.category.Category
 import com.example.warehouseproject.core.service.product.category.ProductCategoryService
-import com.squareup.picasso.Picasso
 import io.paperdb.Paper
 
 class AddProductInteractor {

@@ -2,17 +2,14 @@ package com.example.warehouseproject.core.view.main.home_fragment.stock_out_prod
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.res.ColorStateList
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.widget.Toast
-import coil.load
 import com.airbnb.lottie.LottieAnimationView
 import com.example.warehouseproject.R
-import com.example.warehouseproject.core.helper.HideKeyboardHelper
+import com.example.warehouseproject.core.utils.helper.HideKeyboardHelper
 import com.example.warehouseproject.core.model.product.ProductRequest
 import com.example.warehouseproject.core.model.product.StockHistory
 import com.example.warehouseproject.core.service.product.ProductApiService

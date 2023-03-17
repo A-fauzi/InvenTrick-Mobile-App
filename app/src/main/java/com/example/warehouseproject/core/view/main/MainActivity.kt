@@ -7,8 +7,8 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.example.warehouseproject.R
-import com.example.warehouseproject.core.helper.InternetConnect
-import com.example.warehouseproject.core.helper.RealtimeDatabase
+import com.example.warehouseproject.core.utils.helper.InternetConnect
+import com.example.warehouseproject.core.utils.helper.RealtimeDatabase
 import com.example.warehouseproject.core.model.user.UserRequest
 import com.example.warehouseproject.core.model.user.UserResponse
 import com.example.warehouseproject.core.service.user.UserApiService

@@ -1,4 +1,4 @@
-package com.example.warehouseproject.core.helper
+package com.example.warehouseproject.core.utils.helper
 
 object RandomCodeProduct {
     fun generate(): String {

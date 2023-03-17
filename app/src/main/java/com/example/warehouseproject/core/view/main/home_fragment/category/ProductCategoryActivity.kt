@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import com.example.warehouseproject.core.helper.HideKeyboardHelper
-import com.example.warehouseproject.core.helper.SimpleDateFormat
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.warehouseproject.core.constant.Constant
+import com.example.warehouseproject.core.utils.helper.HideKeyboardHelper
+import com.example.warehouseproject.core.utils.helper.SimpleDateFormat
 import com.example.warehouseproject.core.model.product.category.CategoryRequest
 import com.example.warehouseproject.core.service.product.category.ProductCategoryService
 import com.example.warehouseproject.databinding.ActivityProductCategoryBinding
@@ -14,13 +16,28 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import io.paperdb.Paper
 
 class ProductCategoryActivity : AppCompatActivity() {
+    companion object {
+        const val TAG = "ProductCategoryActivity"
+    }
     private lateinit var binding: ActivityProductCategoryBinding
+
+    private lateinit var adapterCategory: AdapterCategory
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProductCategoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         Paper.init(this)
+
+        val token = Paper.book().read<String>(Constant.User.TOKEN).toString()
+        ProductCategoryService(token).getCategories {
+            adapterCategory = AdapterCategory(this, arrayListOf())
+            binding.rvCategory.apply {
+                layoutManager = LinearLayoutManager(context)
+                adapter = adapterCategory
+            }
+            adapterCategory.setData(it)
+        }
     }
 
     override fun onStart() {

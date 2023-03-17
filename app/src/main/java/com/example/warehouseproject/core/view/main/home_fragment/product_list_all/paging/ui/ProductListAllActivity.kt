@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.warehouseproject.R
-import com.example.warehouseproject.core.helper.RandomColor
+import com.example.warehouseproject.core.utils.helper.RandomColor
 import com.example.warehouseproject.core.model.product.Product
 import com.example.warehouseproject.core.model.product.ProductResponses
 import com.example.warehouseproject.core.service.product.ProductApiService

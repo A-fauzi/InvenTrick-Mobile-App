@@ -2,14 +2,9 @@ package com.example.warehouseproject.core.view.not_internet_connect
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import com.example.warehouseproject.core.helper.InternetConnect
+import com.example.warehouseproject.core.utils.helper.InternetConnect
 import com.example.warehouseproject.core.view.main.MainActivity
 import com.example.warehouseproject.databinding.ItemDialogNotConnectionInternetBinding
 

@@ -1,8 +1,8 @@
-package com.example.warehouseproject.core.helper
+package com.example.warehouseproject.core.utils.helper
 
 import android.content.Context
 import android.widget.Toast
-import com.example.warehouseproject.core.helper.FirebaseInstance.database
+import com.example.warehouseproject.core.utils.helper.FirebaseInstance.database
 import com.example.warehouseproject.core.model.user.UserRequest
 
 class RealtimeDatabase(private val context: Context) {

@@ -67,10 +67,13 @@
         android:id="@+id/view_end"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:padding="5dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:layout_margin="8dp"
-        android:src="@drawable/ic_apps"
+        android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        android:layout_alignParentEnd="true"/>
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="5dp"
+        android:src="@drawable/ic_baseline_more_vert_24" />
 </RelativeLayout>

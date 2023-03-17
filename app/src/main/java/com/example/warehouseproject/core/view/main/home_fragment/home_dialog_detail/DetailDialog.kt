@@ -1,22 +1,16 @@
 package com.example.warehouseproject.core.view.main.home_fragment.home_dialog_detail
 
 import android.app.Activity
-import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContextCompat.startActivity
 import coil.load
 import com.example.awesomedialog.*
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.constant.Constant
-import com.example.warehouseproject.core.helper.*
+import com.example.warehouseproject.core.utils.helper.*
 import com.example.warehouseproject.core.model.product.Product
 import com.example.warehouseproject.core.service.product.ProductApiService
 import com.example.warehouseproject.core.view.main.home_fragment.stock_in_product.StockInActivity
@@ -85,8 +79,9 @@ class DetailDialog {
         if (data.user._id != idCurrentUser) {
             binding.tvBtnTrash.visibility = View.GONE
             binding.tvBtnUpdate.visibility = View.GONE
-            binding.btnProdOut.visibility = View.GONE
-            binding.btnProdIn.visibility = View.GONE
+
+//            binding.btnProdOut.visibility = View.GONE
+//            binding.btnProdIn.visibility = View.GONE
         }
 
         val positionCurrentUser = Paper.book().read<String>(Constant.User.DIVISION).toString()

@@ -1,5 +1,6 @@
 package com.example.warehouseproject.core.service.product.category
 
+import android.os.Handler
 import android.util.Log
 import com.example.warehouseproject.core.config.NetworkConfig
 import com.example.warehouseproject.core.constant.Constant
@@ -21,7 +22,7 @@ class ProductCategoryService(private val token: String) {
                     response: Response<CategoryResponse.SingleResponse>
                 ) {
                     if (response.isSuccessful) {
-                        response.body()?.let {
+                         response.body()?.let {
                             onResponseSuccessBody(it)
                         }
                     } else {
