@@ -12,6 +12,7 @@ import com.example.warehouseproject.core.view.main.home_fragment.product_list_al
 import com.example.warehouseproject.core.view.main.home_fragment.product_list_all.paging.ui.ProductViewModel
 import com.example.warehouseproject.core.view.main.home_fragment.product_list_all.paging.ui.ProductViewModelFactory
 import com.example.warehouseproject.core.view.main.home_fragment.product_list_all.paging.ui.ProductsAdapterPaging
+import com.example.warehouseproject.core.view.main.home_fragment.product_list_all.paging.ui.ProductsLoadStateAdapter
 import com.example.warehouseproject.databinding.ActivityProductsUserBinding
 import io.paperdb.Paper
 import kotlinx.coroutines.launch
@@ -55,12 +56,24 @@ class ProductsUserActivity : AppCompatActivity(), ProductsAdapterPaging.Products
            layoutManager = LinearLayoutManager(context)
 
            // with load adapter
-//           adapter = productListAdapter.withLoadStateHeaderAndFooter(
-//               header = ProductsLoadStateAdapter { productListAdapter.retry() },
-//               footer = ProductsLoadStateAdapter { productListAdapter.retry() }
-//           )
+           adapter = productsAdapterPaging.withLoadStateHeaderAndFooter(
+               header = ProductsLoadStateAdapter { productsAdapterPaging.retry() },
+               footer = ProductsLoadStateAdapter { productsAdapterPaging.retry() }
+           )
+
+           // Untuk mengecek data count pada paging first
+           productsAdapterPaging.addLoadStateListener { loadState ->
+               if (loadState.append.endOfPaginationReached) {
+                   if (productsAdapterPaging.itemCount < 1) {
+                       Toast.makeText(this@ProductsUserActivity, "Data Kosong", Toast.LENGTH_SHORT).show()
+                   } else {
+                       Toast.makeText(this@ProductsUserActivity, "Data Ada ${productsAdapterPaging.itemCount}", Toast.LENGTH_SHORT).show()
+                   }
+               }
+           }
+
 //            setHasFixedSize(true) --> Todo : jika ini di aktifkan, list tidak akan tampil saat initialisasi pertama kali (emang bangsat!)
-            adapter = productsAdapterPaging
+//            adapter = productsAdapterPaging
        }
    }
 

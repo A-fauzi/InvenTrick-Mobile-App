@@ -5,6 +5,8 @@ import androidx.paging.PagingState
 import com.example.warehouseproject.core.model.product.Product
 import com.example.warehouseproject.core.view.main.account_fragment.product_upload_user.api.ProductsUserApiService
 import io.paperdb.Paper
+import okio.IOException
+import retrofit2.HttpException
 
 class ProductsUserPagingSource(private val productsUserApiService: ProductsUserApiService): PagingSource<Int, Product>() {
     override fun getRefreshKey(state: PagingState<Int, Product>): Int? {
@@ -35,7 +37,11 @@ class ProductsUserPagingSource(private val productsUserApiService: ProductsUserA
                     nextKey = currentLoadingPageKey.plus(1)
                 )
             }
-        }catch (e: Exception){
+        }catch (e: IOException){
+            // IOException for network failures.
+            return LoadResult.Error(e)
+        }catch (e: HttpException){
+            // HttpException for any non-2xx HTTP status codes.
             return LoadResult.Error(e)
         }
     }
