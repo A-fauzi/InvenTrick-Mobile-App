@@ -2,6 +2,7 @@ package com.example.warehouseproject.core.view.main.account_fragment.product_upl
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -39,6 +40,9 @@ class ProductsUserActivity : AppCompatActivity(), ProductsAdapterPaging.Products
         setContentView(binding.root)
         Paper.init(this)
 
+        binding.progressBar.visibility = View.VISIBLE
+        binding.rvProductsUser.visibility = View.GONE
+
         setupViewModel()
         setupList()
         setupView()
@@ -65,9 +69,15 @@ class ProductsUserActivity : AppCompatActivity(), ProductsAdapterPaging.Products
            productsAdapterPaging.addLoadStateListener { loadState ->
                if (loadState.append.endOfPaginationReached) {
                    if (productsAdapterPaging.itemCount < 1) {
-                       Toast.makeText(this@ProductsUserActivity, "Data Kosong", Toast.LENGTH_SHORT).show()
+                       // data empty state
+                       binding.progressBar.visibility = View.GONE
+                       binding.rvProductsUser.visibility = View.GONE
+                       binding.tvDataIsEmpty.visibility = View.VISIBLE
                    } else {
-                       Toast.makeText(this@ProductsUserActivity, "Data Ada ${productsAdapterPaging.itemCount}", Toast.LENGTH_SHORT).show()
+                       // data is not empty
+                       binding.tvDataIsEmpty.visibility = View.GONE
+                       binding.progressBar.visibility = View.GONE
+                       binding.rvProductsUser.visibility = View.VISIBLE
                    }
                }
            }
