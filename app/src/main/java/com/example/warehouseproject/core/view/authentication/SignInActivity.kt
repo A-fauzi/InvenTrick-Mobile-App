@@ -1,18 +1,19 @@
 package com.example.warehouseproject.core.view.authentication
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.view.View
 import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.example.awesomedialog.*
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.model.user.UserRequest
 import com.example.warehouseproject.core.model.user.UserResponse
 import com.example.warehouseproject.core.service.user.UserApiService
 import com.example.warehouseproject.core.utils.helper.ZiHelper
+import com.example.warehouseproject.core.utils.helper.ZiHelper.openWa
 import com.example.warehouseproject.core.view.main.MainActivity
 import com.example.warehouseproject.databinding.ActivitySignInBinding
 import com.google.android.material.textfield.TextInputLayout
@@ -58,6 +59,10 @@ class SignInActivity : AppCompatActivity(), SignInView {
         binding.etEmail.addTextChangedListener(textWatcher(binding.etEmail))
         binding.etPassword.addTextChangedListener(textWatcher(binding.etPassword))
         Picasso.get().load("https://i.pinimg.com/originals/ed/0a/a7/ed0aa728d861d69cdce28fb3055f9fd9.gif").into(binding.ivContent)
+
+        binding.tvBtnDirectOpenwa.setOnClickListener {
+            openWa(this,"+6282112966360", "Hi admin, Saya ingin mendafatar akun")
+        }
 
     }
 

@@ -76,7 +76,7 @@
                 android:id="@+id/et_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email"
+                android:hint="Username"
                 android:inputType="textEmailAddress"
                 android:padding="16dp" />
 
@@ -202,11 +202,15 @@
                     android:text="Belum punya akun?"/>
 
                 <TextView
+                    android:id="@+id/tv_btn_direct_openwa"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Contact admin"
                     android:layout_marginStart="8dp"
-                    android:textColor="@color/blue_ocean"/>
+                    android:textColor="@color/blue_ocean"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?attr/selectableItemBackgroundBorderless"/>
             </LinearLayout>
         </RelativeLayout>
 

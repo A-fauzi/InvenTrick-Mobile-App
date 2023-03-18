@@ -1,6 +1,9 @@
 package com.example.warehouseproject.core.utils.helper
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import androidx.core.content.ContextCompat.startActivity
 import com.example.warehouseproject.R
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -22,4 +25,15 @@ object ZiHelper {
             }
             .show()
     }
+
+    fun openWa(context: Context, number: String, msg: String) {
+        try {
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse("https://wa.me/$number/?text=$msg")
+            startActivity(context, intent, null)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
 }
