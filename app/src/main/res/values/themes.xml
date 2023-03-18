@@ -29,6 +29,14 @@
 <!--        <item name="android:windowSplashScreenBrandingImage">@drawable/splash_branding_image</item>-->
     </style>
 
+<!--  Custom dialog  -->
+    <style name="ThemeOverlay.App.MaterialAlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog.Centered">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.App.MaterialAlertDialog</item>
+    </style>
+    <style name="ShapeAppearanceOverlay.App.MaterialAlertDialog" parent="">
+        <item name="cornerSize">16dp</item>
+    </style>
+
 
     <!--  Bottomsheet dialog custom  -->
     <!--  Bottom Sheet Material Design Style  -->

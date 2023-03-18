@@ -12,6 +12,7 @@ import com.example.warehouseproject.R
 import com.example.warehouseproject.core.model.user.UserRequest
 import com.example.warehouseproject.core.model.user.UserResponse
 import com.example.warehouseproject.core.service.user.UserApiService
+import com.example.warehouseproject.core.utils.helper.ZiHelper
 import com.example.warehouseproject.core.view.main.MainActivity
 import com.example.warehouseproject.databinding.ActivitySignInBinding
 import com.google.android.material.textfield.TextInputLayout
@@ -87,11 +88,12 @@ class SignInActivity : AppCompatActivity(), SignInView {
     }
 
     override fun showResponseMessageError(msg: String) {
-        AwesomeDialog.build(this)
-            .title("Upps!", null, resources.getColor(R.color.red_smooth))
-            .body(msg, null, R.color.black)
-            .position(AwesomeDialog.POSITIONS.BOTTOM)
-            .onNegative("Close")
+        ZiHelper.materialAlertDialog(
+            title = "Upps!",
+            message = msg,
+            context = this,
+            cancleLable = true,
+        ){}
     }
 
     override fun onInputUsernameErrorView() {
