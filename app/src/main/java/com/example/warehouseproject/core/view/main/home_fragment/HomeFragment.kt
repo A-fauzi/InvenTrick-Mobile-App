@@ -204,15 +204,19 @@ class HomeFragment : Fragment(), ProductListAdapter.CallClickListener, HomeView 
 
     override fun errorResponseBodyGetProductsView(msg: String) {
         Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show()
-        if (msg == "Unauthorized!") {
-            Paper.book().destroy()
-            clearSessionOrSignOut()
-        } else if (msg == "user is deleted and token not valid") {
-            Toast.makeText(activity, "your is blocked", Toast.LENGTH_SHORT).show()
-            Paper.book().destroy()
-            clearSessionOrSignOut()
-        } else {
-            Toast.makeText(activity, "Wahh ada error nih", Toast.LENGTH_SHORT).show()
+        when (msg) {
+            "Unauthorized!" -> {
+                Paper.book().destroy()
+                clearSessionOrSignOut()
+            }
+            "user is deleted and token not valid" -> {
+                Toast.makeText(activity, "your is blocked", Toast.LENGTH_SHORT).show()
+                Paper.book().destroy()
+                clearSessionOrSignOut()
+            }
+            else -> {
+                Toast.makeText(activity, "Wahh ada error nih", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
