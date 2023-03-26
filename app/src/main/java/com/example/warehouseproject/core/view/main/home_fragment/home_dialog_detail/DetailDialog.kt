@@ -18,12 +18,6 @@ import com.example.warehouseproject.core.service.product.ProductApiService
 import com.example.warehouseproject.core.view.main.home_fragment.stock_in_product.StockInActivity
 import com.example.warehouseproject.core.view.main.home_fragment.stock_out_product.StockOutActivity
 import com.example.warehouseproject.databinding.ItemDetailDialogBinding
-import com.github.alexzhirkevich.customqrgenerator.QrCodeGenerator
-import com.github.alexzhirkevich.customqrgenerator.QrData
-import com.github.alexzhirkevich.customqrgenerator.style.Color
-import com.github.alexzhirkevich.customqrgenerator.vector.QrCodeDrawable
-import com.github.alexzhirkevich.customqrgenerator.vector.createQrVectorOptions
-import com.github.alexzhirkevich.customqrgenerator.vector.style.*
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.storage.FirebaseStorage
 import io.paperdb.Paper
