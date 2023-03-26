@@ -45,12 +45,6 @@ class MainActivityPresenter(
         }
     }
 
-    fun loadFragment(fragment: Fragment, fragmentActivity: FragmentActivity) {
-        val transaction = fragmentActivity.supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.container, fragment)
-        transaction.commit()
-    }
-
     fun updateStatusActivityUser(token: String, userId: String, reqStatus: UserRequest.StatusActivity) {
         userApiService.updateStatusUser(token, userId, reqStatus, this)
     }

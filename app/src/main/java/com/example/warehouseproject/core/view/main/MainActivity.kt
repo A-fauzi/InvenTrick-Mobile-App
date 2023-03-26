@@ -1,23 +1,21 @@
 package com.example.warehouseproject.core.view.main
 
-import android.Manifest
+
 import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.utils.helper.InternetConnect
 import com.example.warehouseproject.core.utils.helper.RealtimeDatabase
 import com.example.warehouseproject.core.model.user.UserRequest
 import com.example.warehouseproject.core.model.user.UserResponse
 import com.example.warehouseproject.core.service.user.UserApiService
-import com.example.warehouseproject.core.view.main.account_fragment.AccountFragment
-import com.example.warehouseproject.core.view.main.home_fragment.HomeFragment
-import com.example.warehouseproject.core.view.main.scan_fragment.ScanFragment
 import com.example.warehouseproject.core.view.not_internet_connect.ItemDisconnectActivity
 import com.example.warehouseproject.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -26,6 +24,7 @@ import io.paperdb.Paper
 class MainActivity : AppCompatActivity(), MainView {
 
     private lateinit var realtimeDatabase: RealtimeDatabase
+    private lateinit var navController: NavController
 
     companion object {
         private const val ID = "id"
@@ -58,6 +57,10 @@ class MainActivity : AppCompatActivity(), MainView {
         initView()
 
         // Check for internet connection
+        checkInternetConnection()
+    }
+
+    private fun checkInternetConnection() {
         if (InternetConnect.checkInternetConnect(this)) {
 
             val data = UserRequest.StatusActivity("online")
@@ -67,35 +70,22 @@ class MainActivity : AppCompatActivity(), MainView {
 
             Paper.book().write("status", data.status_activity)
 
-            setUpBottomNav()
+            setUpNavigation()
         } else {
             startActivity(Intent(this, ItemDisconnectActivity::class.java))
             finish()
         }
     }
 
-    private fun setUpBottomNav() {
-        presenter.loadFragment(HomeFragment(), this)
 
-        bottomNavigationView = binding.bottomNav
-        bottomNavigationView.setOnItemSelectedListener {
-            when(it.itemId) {
-                R.id.home -> {
-                    presenter.loadFragment(HomeFragment(), this)
-                    true
-                }
-                R.id.scan -> {
-                    presenter.loadFragment(ScanFragment(), this)
-                    true
-                }
-                R.id.account -> {
-                    presenter.loadFragment(AccountFragment(), this)
-                    true
-                }
-                else -> false
-            }
-        }
+    private fun setUpNavigation() {
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
+        navController = navHostFragment.navController
+        val bottomNavigation = binding.bottomNav
+        setupWithNavController(bottomNavigation, navController)
     }
+
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
