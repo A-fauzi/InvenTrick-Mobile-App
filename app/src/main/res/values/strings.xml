@@ -90,6 +90,7 @@
     <string name="contact_admin">Contact admin</string>
     <string name="text">text</string>
     <string name="login_example">Login</string>
+    <string name="add_item_txt">Add Item</string>
     <string-array name="default_items">
         <item>Tambahkan nanti</item>
     </string-array>

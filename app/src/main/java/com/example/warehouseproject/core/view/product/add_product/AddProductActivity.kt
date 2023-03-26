@@ -9,11 +9,20 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.example.awesomedialog.*
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.constant.Constant.REQUEST_CODE
+import com.example.warehouseproject.core.constant.Constant.User.DIVISION
+import com.example.warehouseproject.core.constant.Constant.User.EMAIL
+import com.example.warehouseproject.core.constant.Constant.User.FULLNAME
+import com.example.warehouseproject.core.constant.Constant.User.ID
+import com.example.warehouseproject.core.constant.Constant.User.PROFILE_PHOTO
+import com.example.warehouseproject.core.constant.Constant.User.STORAGE_PATH_PROFILE
+import com.example.warehouseproject.core.constant.Constant.User.TOKEN
+import com.example.warehouseproject.core.constant.Constant.User.USERNAME
 import com.example.warehouseproject.core.utils.helper.*
 import com.example.warehouseproject.core.utils.helper.Currency
 import com.example.warehouseproject.core.utils.helper.TextWatcher.addTextCangedListener
@@ -23,6 +32,7 @@ import com.example.warehouseproject.core.model.product.category.Category
 import com.example.warehouseproject.core.model.user.User
 import com.example.warehouseproject.core.view.main.MainActivity
 import com.example.warehouseproject.databinding.ActivityAddProductBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import io.paperdb.Paper
@@ -30,19 +40,10 @@ import java.io.ByteArrayOutputStream
 import java.util.*
 
 class AddProductActivity : AppCompatActivity(), AddProductView {
-    companion object {
-        private const val ID = "id"
-        private const val USERNAME = "username"
-        private const val FULLNAME = "fullname"
-        private const val EMAIL = "email"
-        private const val TOKEN = "token"
-        private const val STORAGE_PATH_PROFILE = "path"
-        private const val PROFILE_PHOTO = "photo"
-        private const val DIVISION = "division"
-    }
 
     private lateinit var modelRequestAddProduct: ProductRequest
     private lateinit var modelUser: User
+    private lateinit var btnAddItem: Button
 
 
     //    View
@@ -82,7 +83,11 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
         model = binding.etModelProduct
         lot = binding.etLotProduct
         exp = binding.etExpProduct
+        btnAddItem = binding.btnComponentAddItem.btnComponent
+        btnAddItem.isEnabled = true
+        btnAddItem.text = getString(R.string.add_item_txt)
         Paper.init(this)
+        firebaseStorage = FirebaseStorage.getInstance()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -91,18 +96,19 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
         setContentView(binding.root)
 
         presenter.getCategory(this)
-
         autoCompleteStatusProduct()
-
         initView()
+        generateRandomCode()
 
-        uploadImageContainer()
+    }
 
-//        addTextCangedListener(code) { char ->
-//            presenter.searchItemsProductName(applicationContext, char.toString())
-//        }
+    private fun generateRandomCode() {
+        val generateCode = RandomCodeProduct.generate()
+        code.setText(generateCode)
+    }
 
-        firebaseStorage = FirebaseStorage.getInstance()
+    override fun onStart() {
+        super.onStart()
 
         val uid = Paper.book().read<String>(ID).toString()
         val uName = Paper.book().read<String>(USERNAME).toString()
@@ -113,10 +119,13 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
         val division = Paper.book().read<String>(DIVISION).toString()
         val storagePath = Paper.book().read<String>(STORAGE_PATH_PROFILE).toString()
 
-        val generateCode = RandomCodeProduct.generate()
-        code.setText(generateCode)
+        //        addTextCangedListener(code) { char ->
+//            presenter.searchItemsProductName(applicationContext, char.toString())
+//        }
+
+
         binding.outlinedTextFieldCodeProduct.isEnabled = false
-        binding.submitButtonAddProduct.setOnClickListener {
+        btnAddItem.setOnClickListener {
             modelUser = User(
                 _id = uid,
                 username =  uName,
@@ -158,17 +167,27 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
             inputPriceInteractor(it)
         }
 
-
+        uploadImageContainer()
     }
 
     private fun uploadImageContainer() {
         binding.containerUploadImage.setOnClickListener {
-            AwesomeDialog.build(this)
-                .position(AwesomeDialog.POSITIONS.CENTER)
-                .onPositive("From gallery", R.color.green_cendol, null) {
+
+            MaterialAlertDialogBuilder(this, R.style.ThemeOverlay_App_MaterialAlertDialog)
+                .setTitle("Upload!")
+                .setMessage("Choose image an product")
+                .setCancelable(true)
+                .setNeutralButton("Cancel") { dialog, which ->
+                    // Respond to neutral button press
+                }
+                .setNegativeButton("From Gallery") { dialog, which ->
                     getImageFromGallery()
                 }
-                .onNegative("Cancel", R.color.red_smooth)
+                .setPositiveButton("From Camera") { dialog, which ->
+                    Toast.makeText(this, "Masih dalam pengembangan", Toast.LENGTH_SHORT).show()
+                }
+                .show()
+
         }
     }
 
@@ -320,7 +339,7 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
     }
 
     override fun hideButton() {
-        binding.submitButtonAddProduct.visibility = View.GONE
+        btnAddItem.visibility = View.GONE
     }
 
     override fun showProgressbar() {
@@ -357,30 +376,15 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
                     finish()
 
                 }, { msg ->
-                    AwesomeDialog.build(this)
-                        .title("Error!", null, resources.getColor(R.color.red_smooth))
-                        .body(msg, null, resources.getColor(R.color.black))
-                        .position(AwesomeDialog.POSITIONS.BOTTOM)
-                        .onPositive("Ok", null, null) {
-                            startActivity(Intent(this, MainActivity::class.java))
-                            finish()
-                        }
-                        .icon(R.drawable.ic_icons8_cancel)
+
+                    alertDialogErrAddItem(msg)
                     binding.progressBar.visibility = View.GONE
-                    binding.submitButtonAddProduct.visibility = View.VISIBLE
+                    btnAddItem.visibility = View.VISIBLE
                 },
                     { msg ->
-                        AwesomeDialog.build(this)
-                            .title("Error!", null, resources.getColor(R.color.red_smooth))
-                            .body(msg, null, resources.getColor(R.color.black))
-                            .position(AwesomeDialog.POSITIONS.BOTTOM)
-                            .onPositive("Ok", null, null) {
-                                startActivity(Intent(this, MainActivity::class.java))
-                                finish()
-                            }
-                            .icon(R.drawable.ic_icons8_cancel)
+                        alertDialogErrAddItem(msg)
                         binding.progressBar.visibility = View.GONE
-                        binding.submitButtonAddProduct.visibility = View.VISIBLE
+                        btnAddItem.visibility = View.VISIBLE
                     })
 
             }.addOnFailureListener {
@@ -389,6 +393,18 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
         }.addOnFailureListener {
             Toast.makeText(this, "UPLOAD PHOTO GAGAL!", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun alertDialogErrAddItem(msg: String) {
+        MaterialAlertDialogBuilder(this, R.style.ThemeOverlay_App_MaterialAlertDialog)
+            .setTitle("Error!")
+            .setIcon(R.drawable.ic_icons8_cancel)
+            .setMessage(msg)
+            .setCancelable(true)
+            .setPositiveButton("Ok") { dialog, which ->
+
+            }
+            .show()
     }
 
     override fun getImageCapture() {
@@ -400,12 +416,7 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
         if (this::fillPath.isInitialized) {
             presenter.validateAddProduct(request)
         } else {
-            AwesomeDialog.build(this)
-                .title("Error!", null, resources.getColor(R.color.red_smooth))
-                .body("Please input image", null, resources.getColor(R.color.black))
-                .position(AwesomeDialog.POSITIONS.BOTTOM)
-                .onNegative("OK")
-                .icon(R.drawable.ic_icons8_cancel)
+            alertDialogErrAddItem("Please input image!")
         }
     }
 }
