@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.warehouseproject.core.constant.Constant.User.TOKEN
 import com.example.warehouseproject.core.model.product.Product
 import com.example.warehouseproject.core.view.main.account_fragment.product_upload_user.api.ProductsUserApiService
 import com.example.warehouseproject.core.view.main.home_fragment.product_list_all.paging.api.ApiService
@@ -19,16 +21,7 @@ import io.paperdb.Paper
 import kotlinx.coroutines.launch
 
 class ProductsUserActivity : AppCompatActivity(), ProductsAdapterPaging.ProductsListenerPaging{
-    companion object {
-        private const val ID = "id"
-        private const val USERNAME = "username"
-        private const val FULLNAME = "fullname"
-        private const val EMAIL = "email"
-        private const val TOKEN = "token"
-        private const val STORAGE_PATH_PROFILE = "path"
-        private const val PROFILE_PHOTO = "photo"
-        private const val DIVISION = "division"
-    }
+
     private lateinit var binding: ActivityProductsUserBinding
     private lateinit var viewModel: ProductsUserViewModel
     private lateinit var productsAdapterPaging: ProductsAdapterPaging
@@ -78,6 +71,8 @@ class ProductsUserActivity : AppCompatActivity(), ProductsAdapterPaging.Products
                        binding.tvDataIsEmpty.visibility = View.GONE
                        binding.progressBar.visibility = View.GONE
                        binding.rvProductsUser.visibility = View.VISIBLE
+
+                       Paper.book().write("product_count_user", productsAdapterPaging.itemCount.toString())
                    }
                }
            }

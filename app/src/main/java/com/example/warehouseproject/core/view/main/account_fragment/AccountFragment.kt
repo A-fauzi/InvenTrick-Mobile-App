@@ -11,6 +11,10 @@ import android.view.animation.AnimationUtils
 import android.widget.PopupMenu
 import android.widget.Toast
 import com.example.warehouseproject.R
+import com.example.warehouseproject.core.constant.Constant.User.FULLNAME
+import com.example.warehouseproject.core.constant.Constant.User.ID
+import com.example.warehouseproject.core.constant.Constant.User.PROFILE_PHOTO
+import com.example.warehouseproject.core.constant.Constant.User.TOKEN
 import com.example.warehouseproject.core.utils.helper.RealtimeDatabase
 import com.example.warehouseproject.core.model.user.UserRequest
 import com.example.warehouseproject.core.model.user.UserResponse
@@ -29,17 +33,6 @@ class AccountFragment : Fragment(), MainView {
 
     private lateinit var realtimeDatabase: RealtimeDatabase
 
-    companion object {
-        private const val ID = "id"
-        private const val USERNAME = "username"
-        private const val FULLNAME = "fullname"
-        private const val EMAIL = "email"
-        private const val TOKEN = "token"
-        private const val STORAGE_PATH_PROFILE = "path"
-        private const val PROFILE_PHOTO = "photo"
-        private const val DIVISION = "division"
-    }
-
     private lateinit var binding: FragmentAccountBinding
 
     private lateinit var presenter: MainActivityPresenter
@@ -49,6 +42,7 @@ class AccountFragment : Fragment(), MainView {
     val profileImg = Paper.book().read<String>(PROFILE_PHOTO).toString()
     val fullname = Paper.book().read<String>(FULLNAME).toString()
     val division = Paper.book().read<String>("division").toString()
+    val countProductUser = Paper.book().read<String>("product_count_user").toString()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,6 +50,12 @@ class AccountFragment : Fragment(), MainView {
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentAccountBinding.inflate(layoutInflater, container, false)
+
+        if (countProductUser == "null" || countProductUser == ""){
+            binding.chipProductUpload.text = getString(R.string.products_is_empty)
+        } else {
+            binding.chipProductUpload.text = "$countProductUser Products"
+        }
 
         presenter = MainActivityPresenter(requireActivity(), requireActivity(), this, UserApiService())
 
@@ -121,8 +121,6 @@ class AccountFragment : Fragment(), MainView {
     }
 
     override fun onSuccessBodyReqStatusView(response: UserResponse.SingleResponse) {
-        Toast.makeText(activity, "status anda ${response.data.status_activity}", Toast.LENGTH_SHORT).show()
-
         realtimeDatabase.write(response.data._id, UserRequest.StatusActivity(response.data.status_activity))
     }
 

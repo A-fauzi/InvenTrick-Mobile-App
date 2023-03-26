@@ -91,6 +91,7 @@
     <string name="text">text</string>
     <string name="login_example">Login</string>
     <string name="add_item_txt">Add Item</string>
+    <string name="products_is_empty">0 Products</string>
     <string-array name="default_items">
         <item>Tambahkan nanti</item>
     </string-array>
