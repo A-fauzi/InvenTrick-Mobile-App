@@ -6,13 +6,65 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".core.view.main.scan_fragment.ScanFragment">
 
-    <ImageView
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/ic_barcode_amico"
-        android:contentDescription="@string/content_desc_todo"/>
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        app:cardElevation="0dp"
+        app:cardCornerRadius="@dimen/radius_card_15"
+        android:backgroundTint="@color/material_on_surface_stroke"
+        android:layout_margin="25dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Scan QR Code"
+                android:fontFamily="@font/inter_bold"
+                android:textSize="20sp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lorem"
+                android:textAlignment="center"
+                android:fontFamily="@font/inter_medium"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <FrameLayout
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/qr_code_reader_square">
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_qrcode" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/blue_ocean"
+            app:cardElevation="50dp"/>
+
+
+    </FrameLayout>
 
    <LinearLayout
+       android:id="@+id/container_button"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:orientation="vertical"
@@ -25,7 +77,8 @@
            android:layout_height="wrap_content"
            android:text="@string/scan_stock_in"
            android:backgroundTint="@color/blue_ocean"
-           app:cornerRadius="24dp"/>
+           app:cornerRadius="@dimen/radius_card_15"
+           android:padding="@dimen/padding_btn_20"/>
 
        <com.google.android.material.button.MaterialButton
            android:id="@+id/btn_click_scan_stock_out"
@@ -33,7 +86,8 @@
            android:layout_height="wrap_content"
            android:text="@string/scan_stock_out"
            android:backgroundTint="@color/orange"
-           app:cornerRadius="24dp"/>
+           app:cornerRadius="@dimen/radius_card_15"
+           android:padding="@dimen/padding_btn_20"/>
    </LinearLayout>
 
 </RelativeLayout>
