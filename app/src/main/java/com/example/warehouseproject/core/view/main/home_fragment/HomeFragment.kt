@@ -29,6 +29,7 @@ import com.example.warehouseproject.core.view.main.home_fragment.product_list_al
 import com.example.warehouseproject.core.view.main.home_fragment.stock_histories.StockHistoriesActivity
 import com.example.warehouseproject.core.view.main.home_fragment.stock_in_product.StockInActivity
 import com.example.warehouseproject.core.view.main.home_fragment.stock_out_product.StockOutActivity
+import com.example.warehouseproject.core.view.main.home_fragment.webview.NewsActivity
 import com.example.warehouseproject.core.view.product.add_product.AddProductActivity
 import com.example.warehouseproject.databinding.FragmentHomeBinding
 import com.facebook.shimmer.ShimmerFrameLayout
@@ -111,6 +112,9 @@ class HomeFragment : Fragment(), ProductListAdapter.CallClickListener, HomeView 
                 }
                 R.id.category -> {
                     startActivity(Intent(activity, ProductCategoryActivity::class.java))
+                }
+                R.id.webView -> {
+                    startActivity(Intent(requireActivity(), NewsActivity::class.java))
                 }
             }
 

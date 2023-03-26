@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ll_full_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
+    tools:context=".core.view.main.home_fragment.HomeFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_layout"
@@ -22,13 +21,13 @@
 
             <include
                 android:id="@+id/new_txt_topbar"
+                layout="@layout/top_bar_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                layout="@layout/top_bar_layout"
                 android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"/>
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp" />
         </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -45,30 +44,30 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="50dp"/>
+                android:layout_height="50dp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <include
                     android:id="@+id/view_error_response"
                     layout="@layout/item_error_response"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
 
                 <LinearLayout
                     android:id="@+id/container_view_data_empty"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:orientation="vertical"
-                    android:visibility="gone"
-                    android:gravity="center">
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/no_product_data_has_been_added_yet"
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/black" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_add_product_now"
@@ -76,15 +75,14 @@
                         android:layout_height="wrap_content"
                         android:text="Add product now"
                         android:textAllCaps="false"
-                        app:cornerRadius="15dp"/>
+                        app:cornerRadius="15dp" />
                 </LinearLayout>
 
                 <RelativeLayout
                     android:id="@+id/content_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:visibility="visible">
+                    android:layout_marginTop="8dp">
 
                     <com.google.android.material.divider.MaterialDivider
                         android:id="@+id/divider"
@@ -115,8 +113,9 @@
                         android:textColor="@color/blue" />
 
                     <RelativeLayout
+                        android:id="@+id/container_rv_product"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_below="@id/tv_list_product">
 
                         <androidx.cardview.widget.CardView
@@ -130,15 +129,15 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
+                                android:layout_margin="8dp"
                                 app:layout_constraintVertical_bias="0.5"
-                                app:shimmer_duration="1000"
                                 app:shimmer_auto_start="false"
                                 app:shimmer_base_color="#1B1A1A"
                                 app:shimmer_colored="true"
-                                android:layout_margin="8dp">
+                                app:shimmer_duration="1000">
 
 
-                                <include layout="@layout/item_load_list_product"/>
+                                <include layout="@layout/item_load_list_product" />
 
 
                             </com.facebook.shimmer.ShimmerFrameLayout>
@@ -149,8 +148,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
+                            android:visibility="invisible"
                             tools:listitem="@layout/item_data_product"
-                            android:visibility="invisible"/>
+                            android:orientation="horizontal"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
                     </RelativeLayout>
                 </RelativeLayout>
             </RelativeLayout>

@@ -5,10 +5,19 @@ import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.view.View
+import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.warehouseproject.R
+import com.example.warehouseproject.core.constant.Constant.User.DIVISION
+import com.example.warehouseproject.core.constant.Constant.User.EMAIL
+import com.example.warehouseproject.core.constant.Constant.User.FULLNAME
+import com.example.warehouseproject.core.constant.Constant.User.ID
+import com.example.warehouseproject.core.constant.Constant.User.PROFILE_PHOTO
+import com.example.warehouseproject.core.constant.Constant.User.STORAGE_PATH_PROFILE
+import com.example.warehouseproject.core.constant.Constant.User.TOKEN
+import com.example.warehouseproject.core.constant.Constant.User.USERNAME
 import com.example.warehouseproject.core.model.user.UserRequest
 import com.example.warehouseproject.core.model.user.UserResponse
 import com.example.warehouseproject.core.service.user.UserApiService
@@ -16,64 +25,80 @@ import com.example.warehouseproject.core.utils.helper.ZiHelper
 import com.example.warehouseproject.core.utils.helper.ZiHelper.openWa
 import com.example.warehouseproject.core.view.main.MainActivity
 import com.example.warehouseproject.databinding.ActivitySignInBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputLayout
 import com.squareup.picasso.Picasso
 import io.paperdb.Paper
 
 class SignInActivity : AppCompatActivity(), SignInView {
 
-    companion object {
-        private const val ID = "id"
-        private const val USERNAME = "username"
-        private const val FULLNAME = "fullname"
-        private const val EMAIL = "email"
-        private const val TOKEN = "token"
-        private const val STORAGE_PATH_PROFILE = "path"
-        private const val PROFILE_PHOTO = "photo"
-        private const val DIVISION = "division"
-    }
-
     private lateinit var binding: ActivitySignInBinding
     private lateinit var presenter: SignInPresenter
-    private var id = ""
+    private lateinit var btnLogin: Button
+    private var id = "null"
 
+    private fun initView() {
+        btnLogin = binding.btnComponentLogin.btnComponent
+        btnLogin.text = getString(R.string.login)
+
+        Paper.init(this)
+        presenter = SignInPresenter(this, UserApiService(), SignInInteractor())
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
 
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
 
-        Paper.init(this)
+        initView()
 
         id = Paper.book().read<String>(ID).toString()
 
-        presenter = SignInPresenter(this, UserApiService(), SignInInteractor())
+    }
 
-        binding.btnSubmitLogin.setOnClickListener {
+    override fun onStart() {
+        super.onStart()
+
+        checkCurrentUser()
+        buttonAction()
+        editTextSetTextWatcher()
+
+        Picasso.get().load("https://i.pinimg.com/originals/ed/0a/a7/ed0aa728d861d69cdce28fb3055f9fd9.gif").into(binding.ivContent)
+
+    }
+
+    private fun checkCurrentUser() {
+        if (id != "null") {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
+    }
+
+    private fun editTextSetTextWatcher() {
+        binding.etEmail.addTextChangedListener(textWatcher(binding.etEmail))
+        binding.etPassword.addTextChangedListener(textWatcher(binding.etPassword))
+    }
+
+    private fun buttonAction() {
+        btnLogin.setOnClickListener {
             val request = UserRequest(binding.etEmail.text.toString(), binding.etPassword.text.toString())
             presenter.validateFormSignIn(request)
         }
 
-        binding.etEmail.addTextChangedListener(textWatcher(binding.etEmail))
-        binding.etPassword.addTextChangedListener(textWatcher(binding.etPassword))
-        Picasso.get().load("https://i.pinimg.com/originals/ed/0a/a7/ed0aa728d861d69cdce28fb3055f9fd9.gif").into(binding.ivContent)
-
         binding.tvBtnDirectOpenwa.setOnClickListener {
             openWa(this,"+6282112966360", "Hi admin, Saya ingin mendafatar akun")
         }
-
     }
 
     override fun onClickBtnLoginView() {
         binding.progressBar.visibility = View.VISIBLE
-        binding.btnSubmitLogin.visibility = View.GONE
+        btnLogin.visibility = View.GONE
     }
 
     override fun onResponseErrorView() {
         binding.progressBar.visibility = View.GONE
-        binding.btnSubmitLogin.visibility = View.VISIBLE
+        btnLogin.visibility = View.VISIBLE
     }
 
     override fun moveToMainActivity() {
@@ -93,12 +118,12 @@ class SignInActivity : AppCompatActivity(), SignInView {
     }
 
     override fun showResponseMessageError(msg: String) {
-        ZiHelper.materialAlertDialog(
-            title = "Upps!",
-            message = msg,
-            context = this,
-            cancleLable = true,
-        ){}
+        MaterialAlertDialogBuilder(this, R.style.ThemeOverlay_App_MaterialAlertDialog)
+            .setTitle("Uppss!")
+            .setMessage(msg)
+            .setCancelable(true)
+            .setPositiveButton("Retry") {_, _ ->}
+            .show()
     }
 
     override fun onInputUsernameErrorView() {
@@ -106,7 +131,7 @@ class SignInActivity : AppCompatActivity(), SignInView {
         binding.outlinedTextFieldEmail.helperText = "Username is required!"
         binding.outlinedTextFieldEmail.setHelperTextColor(getColorStateList(R.color.red_smooth))
         binding.progressBar.visibility = View.GONE
-        binding.btnSubmitLogin.visibility = View.VISIBLE
+        btnLogin.visibility = View.VISIBLE
     }
 
     override fun onInputPasswordErrorView() {
@@ -114,20 +139,11 @@ class SignInActivity : AppCompatActivity(), SignInView {
         binding.outlinedTextFieldPassword.helperText = "Password is required!"
         binding.outlinedTextFieldPassword.setHelperTextColor(getColorStateList(R.color.red_smooth))
         binding.progressBar.visibility = View.GONE
-        binding.btnSubmitLogin.visibility = View.VISIBLE
+        btnLogin.visibility = View.VISIBLE
     }
 
     override fun onSuccessValidationSignIn(userRequest: UserRequest) {
         presenter.signInUser(userRequest)
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-        if (id != "null") {
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
-        }
     }
 
     private fun textWatcher(input: EditText) = object : android.text.TextWatcher {
@@ -149,7 +165,7 @@ class SignInActivity : AppCompatActivity(), SignInView {
                     }
                 }
                 binding.etPassword -> {
-                    binding.btnSubmitLogin.isEnabled = text.isNotEmpty()
+                    btnLogin.isEnabled = text.isNotEmpty()
                 }
             }
         }

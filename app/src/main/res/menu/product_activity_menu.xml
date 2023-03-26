@@ -10,4 +10,8 @@
         android:id="@+id/category"
         android:title="Category"
         android:icon="@drawable/ic_apps"/>
+
+    <item
+        android:id="@+id/webView"
+        android:title="Web View Example"/>
 </menu>

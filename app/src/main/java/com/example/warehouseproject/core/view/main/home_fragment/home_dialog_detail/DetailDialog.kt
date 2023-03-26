@@ -2,10 +2,12 @@ package com.example.warehouseproject.core.view.main.home_fragment.home_dialog_de
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import coil.load
 import com.example.awesomedialog.*
 import com.example.warehouseproject.R
@@ -16,6 +18,12 @@ import com.example.warehouseproject.core.service.product.ProductApiService
 import com.example.warehouseproject.core.view.main.home_fragment.stock_in_product.StockInActivity
 import com.example.warehouseproject.core.view.main.home_fragment.stock_out_product.StockOutActivity
 import com.example.warehouseproject.databinding.ItemDetailDialogBinding
+import com.github.alexzhirkevich.customqrgenerator.QrCodeGenerator
+import com.github.alexzhirkevich.customqrgenerator.QrData
+import com.github.alexzhirkevich.customqrgenerator.style.Color
+import com.github.alexzhirkevich.customqrgenerator.vector.QrCodeDrawable
+import com.github.alexzhirkevich.customqrgenerator.vector.createQrVectorOptions
+import com.github.alexzhirkevich.customqrgenerator.vector.style.*
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.storage.FirebaseStorage
 import io.paperdb.Paper

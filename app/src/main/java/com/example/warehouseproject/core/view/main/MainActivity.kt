@@ -1,11 +1,14 @@
 package com.example.warehouseproject.core.view.main
 
+import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.utils.helper.InternetConnect
 import com.example.warehouseproject.core.utils.helper.RealtimeDatabase
@@ -43,6 +46,8 @@ class MainActivity : AppCompatActivity(), MainView {
 
         presenter = MainActivityPresenter(applicationContext, this, this, UserApiService())
         presenter.checkPermission()
+
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -91,7 +96,6 @@ class MainActivity : AppCompatActivity(), MainView {
             }
         }
     }
-
 
     override fun onRequestPermissionsResult(
         requestCode: Int,

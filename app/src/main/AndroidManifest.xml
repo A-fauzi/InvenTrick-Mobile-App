@@ -24,6 +24,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".core.view.main.home_fragment.webview.NewsActivity"
+            android:exported="false" />
+        <activity
             android:name=".core.view.main.account_fragment.product_upload_user.ui.ProductsUserActivity"
             android:exported="false" />
         <activity
@@ -59,12 +62,6 @@
             android:exported="false" />
         <activity
             android:name="com.example.warehouseproject.core.view.product.add_product.AddProductActivity"
-            android:exported="false" />
-        <activity
-            android:name=".example_mvp.main.ExampleMainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".example_mvp.login.LoginActivity"
             android:exported="false" />
         <activity
             android:name="com.example.warehouseproject.core.view.main.MainActivity"
