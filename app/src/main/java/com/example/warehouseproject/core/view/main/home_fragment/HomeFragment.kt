@@ -18,6 +18,8 @@ import androidx.appcompat.view.menu.MenuBuilder
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.warehouseproject.R
+import com.example.warehouseproject.core.constant.Constant.User.PROFILE_PHOTO
+import com.example.warehouseproject.core.constant.Constant.User.TOKEN
 import com.example.warehouseproject.core.model.product.Product
 import com.example.warehouseproject.core.model.product.ProductResponses
 import com.example.warehouseproject.core.service.product.ProductApiService
@@ -38,16 +40,6 @@ import io.paperdb.Paper
 
 
 class HomeFragment : Fragment(), ProductListAdapter.CallClickListener, HomeView {
-    companion object {
-        private const val ID = "id"
-        private const val USERNAME = "username"
-        private const val FULLNAME = "fullname"
-        private const val EMAIL = "email"
-        private const val TOKEN = "token"
-        private const val STORAGE_PATH_PROFILE = "path"
-        private const val PROFILE_PHOTO = "photo"
-    }
-
     private var activity: Activity? = null
 
     private lateinit var binding: FragmentHomeBinding

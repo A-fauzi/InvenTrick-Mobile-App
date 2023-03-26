@@ -11,6 +11,8 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.example.warehouseproject.R
+import com.example.warehouseproject.core.constant.Constant.User.ID
+import com.example.warehouseproject.core.constant.Constant.User.TOKEN
 import com.example.warehouseproject.core.utils.helper.InternetConnect
 import com.example.warehouseproject.core.utils.helper.RealtimeDatabase
 import com.example.warehouseproject.core.model.user.UserRequest
@@ -25,13 +27,6 @@ class MainActivity : AppCompatActivity(), MainView {
 
     private lateinit var realtimeDatabase: RealtimeDatabase
     private lateinit var navController: NavController
-
-    companion object {
-        private const val ID = "id"
-        private const val USERNAME = "username"
-        private const val EMAIL = "email"
-        private const val TOKEN = "token"
-    }
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var bottomNavigationView: BottomNavigationView
@@ -139,8 +134,6 @@ class MainActivity : AppCompatActivity(), MainView {
     }
 
     override fun onSuccessBodyReqStatusView(response: UserResponse.SingleResponse) {
-        Toast.makeText(this, "status anda ${response.data.status_activity}", Toast.LENGTH_SHORT).show()
-
         realtimeDatabase.write(response.data._id, UserRequest.StatusActivity(response.data.status_activity))
     }
 

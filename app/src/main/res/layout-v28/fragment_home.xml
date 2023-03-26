@@ -91,32 +91,51 @@
                         app:dividerInsetEnd="150dp"
                         app:dividerInsetStart="150dp" />
 
-                    <TextView
-                        android:id="@+id/tv_list_product"
-                        android:layout_width="wrap_content"
+                    <RelativeLayout
+                        android:id="@+id/container_text_product_all"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/divider"
-                        android:fontFamily="@font/inter_medium"
-                        android:text="@string/product_list"
-                        android:textColor="@color/black" />
+                        android:layout_below="@id/divider">
 
-                    <TextView
-                        android:id="@+id/tv_list_more_all"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/divider"
-                        android:layout_alignParentEnd="true"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:fontFamily="@font/inter_medium"
-                        android:text="@string/view_more"
-                        android:textColor="@color/blue" />
+                        <TextView
+                            android:id="@+id/tv_list_product"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:fontFamily="@font/inter_medium"
+                            android:text="@string/product_list"
+                            android:textColor="@color/black" />
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/tv_list_more_all"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            app:cardCornerRadius="15dp"
+                            app:cardElevation="0dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="8dp"
+                                android:fontFamily="@font/inter_medium"
+                                android:text="@string/view_more"
+                                android:textColor="@color/blue" />
+                        </androidx.cardview.widget.CardView>
+                    </RelativeLayout>
 
                     <RelativeLayout
                         android:id="@+id/container_rv_product"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/tv_list_product">
+                        android:layout_below="@id/container_text_product_all">
 
                         <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
@@ -147,10 +166,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:visibility="invisible"
-                            tools:listitem="@layout/item_data_product"
                             android:orientation="horizontal"
-                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+                            android:visibility="invisible"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            tools:listitem="@layout/item_data_product" />
                     </RelativeLayout>
                 </RelativeLayout>
             </RelativeLayout>
