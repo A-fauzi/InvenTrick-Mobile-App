@@ -212,7 +212,7 @@ class HomeFragment : Fragment(), ProductListAdapter.CallClickListener, HomeView 
             Paper.book().destroy()
             clearSessionOrSignOut()
         } else {
-            Toast.makeText(activity, "Error Respon: $msg", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, "Wahh ada error nih", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -224,7 +224,6 @@ class HomeFragment : Fragment(), ProductListAdapter.CallClickListener, HomeView 
     }
 
     override fun onFailureRequestGetProductsView(msg: String) {
-        Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show()
         binding.contentContainer.visibility = View.GONE
         binding.viewErrorResponse.root.visibility = View.VISIBLE
     }
