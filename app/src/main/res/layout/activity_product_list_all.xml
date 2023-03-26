@@ -90,6 +90,7 @@
                            android:textColor="@color/white"
                            tools:ignore="RelativeOverlap" />
 
+
                        <com.google.android.material.button.MaterialButton
                            android:id="@+id/btn_to_add_product"
                            android:layout_width="wrap_content"
@@ -100,18 +101,32 @@
                            android:text="@string/add_product"
                            android:textAllCaps="false"
                            android:textColor="@color/black"
-                           tools:ignore="RelativeOverlap" />
+                           tools:ignore="RelativeOverlap"
+                           app:cornerRadius="15dp"/>
                    </RelativeLayout>
                </LinearLayout>
            </RelativeLayout>
 
        </androidx.cardview.widget.CardView>
 
-       <androidx.recyclerview.widget.RecyclerView
-           android:id="@+id/rv_list_product_all"
+       <RelativeLayout
            android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           tools:listitem="@layout/item_data_product"
-           tools:itemCount="3"/>
+           android:layout_height="wrap_content">
+
+           <ProgressBar
+               android:id="@+id/progress_bar_list_product"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_centerVertical="true"
+               android:layout_centerHorizontal="true"
+               android:visibility="gone"/>
+
+           <androidx.recyclerview.widget.RecyclerView
+               android:id="@+id/rv_list_product_all"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               tools:listitem="@layout/item_data_product"
+               tools:itemCount="3"/>
+       </RelativeLayout>
    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

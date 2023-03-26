@@ -24,26 +24,31 @@ import com.example.warehouseproject.databinding.ActivityProductListAllBinding
 import io.paperdb.Paper
 import kotlinx.coroutines.launch
 
-class ProductListAllActivity : AppCompatActivity(), ProductsAdapterPaging.ProductsListenerPaging, HomeView {
+class ProductListAllActivity : AppCompatActivity(), ProductsAdapterPaging.ProductsListenerPaging {
 
     private lateinit var binding: ActivityProductListAllBinding
     private lateinit var viewModel: ProductViewModel
     private lateinit var productListAdapter: ProductsAdapterPaging
 
-    private lateinit var presenter: HomePresenter
-
     private val token = Paper.book().read<String>("token").toString()
+
+    private lateinit var presenter: HomePresenter
 
     private fun initView() {
         Paper.init(this)
-        presenter = HomePresenter(this, DetailDialog(), ProductApiService(token))
-        binding.shimmerViewTotalProduct.startShimmer()
+        presenter = HomePresenter(null, DetailDialog(), ProductApiService(token))
 
         binding.btnToAddProduct.setOnClickListener {
-            binding.btnToAddProduct.startAnimation(AnimationUtils.loadAnimation(this, R.anim.animation_button))
+            binding.btnToAddProduct.startAnimation(
+                AnimationUtils.loadAnimation(
+                    this,
+                    R.anim.animation_button
+                )
+            )
             startActivity(Intent(this, AddProductActivity::class.java))
         }
         binding.rlTotalProduct.setBackgroundColor(Color.parseColor(RandomColor.generate()))
+        productListAdapter = ProductsAdapterPaging(applicationContext, this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,8 +59,6 @@ class ProductListAllActivity : AppCompatActivity(), ProductsAdapterPaging.Produc
         setupViewModel()
         setupList()
         setupView()
-
-        presenter.getDataProducts()
     }
 
     private fun setupView() {
@@ -67,7 +70,7 @@ class ProductListAllActivity : AppCompatActivity(), ProductsAdapterPaging.Produc
     }
 
     private fun setupList() {
-        productListAdapter = ProductsAdapterPaging(applicationContext, this)
+
         binding.rvListProductAll.apply {
             layoutManager = LinearLayoutManager(context)
 
@@ -76,6 +79,28 @@ class ProductListAllActivity : AppCompatActivity(), ProductsAdapterPaging.Produc
                 header = ProductsLoadStateAdapter { productListAdapter.retry() },
                 footer = ProductsLoadStateAdapter { productListAdapter.retry() }
             )
+
+            productListAdapter.addLoadStateListener { loadState ->
+                binding.progressBarListProduct.visibility = View.VISIBLE
+                binding.shimmerViewTotalProduct.startShimmer()
+
+                if (loadState.append.endOfPaginationReached) {
+                    if (productListAdapter.itemCount < 1) {
+                        // data empty state
+                        binding.progressBarListProduct.visibility = View.GONE
+                        // Set text in bellow
+                    } else {
+                        // data is not empty
+                        binding.progressBarListProduct.visibility = View.GONE
+                        val dataCount = productListAdapter.itemCount.toString()
+
+                        binding.shimmerViewTotalProduct.stopShimmer()
+                        binding.shimmerViewTotalProduct.visibility = View.GONE
+                        binding.tvCountProducts.visibility = View.VISIBLE
+                        binding.tvCountProducts.text = dataCount
+                    }
+                }
+            }
 //            setHasFixedSize(true) --> Todo : jika ini di aktifkan, list tidak akan tampil saat initialisasi pertama kali (emang bangsat!)
 //            adapter = productListAdapter
         }
@@ -92,26 +117,5 @@ class ProductListAllActivity : AppCompatActivity(), ProductsAdapterPaging.Produc
         if (data != null) {
             presenter.showDetailDialog(this, layoutInflater, data)
         }
-    }
-
-    override fun moveMainActivity() {
-
-    }
-
-    override fun successResponseBodyGetProductsView(
-        data: List<Product>,
-        productResponses: ProductResponses
-    ) {
-        binding.shimmerViewTotalProduct.visibility = View.GONE
-        binding.tvCountProducts.visibility = View.VISIBLE
-        binding.tvCountProducts.text = productResponses.totalCount.toString()
-    }
-
-    override fun errorResponseBodyGetProductsView(msg: String) {
-        Toast.makeText(applicationContext, msg, Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onFailureRequestGetProductsView(msg: String) {
-        Toast.makeText(applicationContext, msg, Toast.LENGTH_SHORT).show()
     }
 }
