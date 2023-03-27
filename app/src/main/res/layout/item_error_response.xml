@@ -23,14 +23,13 @@
             android:text="Ooops!"
             android:textAlignment="center"
             android:fontFamily="@font/inter_bold"
-            android:textSize="24sp"
-            android:textColor="@color/black"/>
+            android:textSize="24sp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:fontFamily="@font/inter_medium"
+            android:fontFamily="@font/inter_semibold"
             android:text="Mohon maaf ada kendala pada jaringan kamu, Tidak dapat terhubung ke jaringan."/>
     </LinearLayout>
 </RelativeLayout>

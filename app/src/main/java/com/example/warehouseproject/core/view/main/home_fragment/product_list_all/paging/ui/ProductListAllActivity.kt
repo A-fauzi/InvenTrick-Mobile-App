@@ -38,16 +38,18 @@ class ProductListAllActivity : AppCompatActivity(), ProductsAdapterPaging.Produc
         Paper.init(this)
         presenter = HomePresenter(null, DetailDialog(), ProductApiService(token))
 
-        binding.btnToAddProduct.setOnClickListener {
-            binding.btnToAddProduct.startAnimation(
-                AnimationUtils.loadAnimation(
-                    this,
-                    R.anim.animation_button
-                )
-            )
-            startActivity(Intent(this, AddProductActivity::class.java))
-        }
-        binding.rlTotalProduct.setBackgroundColor(Color.parseColor(RandomColor.generate()))
+//        binding.btnToAddProduct.setOnClickListener {
+//            binding.btnToAddProduct.startAnimation(
+//                AnimationUtils.loadAnimation(
+//                    this,
+//                    R.anim.animation_button
+//                )
+//            )
+//            startActivity(Intent(this, AddProductActivity::class.java))
+//        }
+
+//        binding.rlTotalProduct.setBackgroundColor(Color.parseColor(RandomColor.generate()))
+
         productListAdapter = ProductsAdapterPaging(applicationContext, this)
     }
 
@@ -82,7 +84,6 @@ class ProductListAllActivity : AppCompatActivity(), ProductsAdapterPaging.Produc
 
             productListAdapter.addLoadStateListener { loadState ->
                 binding.progressBarListProduct.visibility = View.VISIBLE
-                binding.shimmerViewTotalProduct.startShimmer()
 
                 if (loadState.append.endOfPaginationReached) {
                     if (productListAdapter.itemCount < 1) {
@@ -93,11 +94,6 @@ class ProductListAllActivity : AppCompatActivity(), ProductsAdapterPaging.Produc
                         // data is not empty
                         binding.progressBarListProduct.visibility = View.GONE
                         val dataCount = productListAdapter.itemCount.toString()
-
-                        binding.shimmerViewTotalProduct.stopShimmer()
-                        binding.shimmerViewTotalProduct.visibility = View.GONE
-                        binding.tvCountProducts.visibility = View.VISIBLE
-                        binding.tvCountProducts.text = dataCount
                     }
                 }
             }

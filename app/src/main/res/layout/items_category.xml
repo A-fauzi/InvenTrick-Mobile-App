@@ -17,8 +17,7 @@
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:text="Automotive"
-           android:fontFamily="@font/inter_medium"
-           android:textColor="@color/black"/>
+           android:fontFamily="@font/inter_semibold"/>
 
        <ImageView
            android:layout_width="wrap_content"

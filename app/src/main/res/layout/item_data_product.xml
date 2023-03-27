@@ -60,9 +60,8 @@
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
                            android:layout_centerVertical="true"
-                           android:fontFamily="@font/inter_medium"
+                           android:fontFamily="@font/inter_bold"
                            android:text="@string/code_example"
-                           android:textColor="@color/black"
                            tools:ignore="RelativeOverlap" />
 
                        <com.google.android.material.chip.Chip
@@ -70,7 +69,7 @@
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
                            android:layout_alignParentEnd="true"
-                           android:fontFamily="@font/inter_medium"
+                           android:fontFamily="@font/inter_semibold"
                            android:text="@string/chip_example_text"
                            android:textColor="@color/white"
                            tools:ignore="RelativeOverlap" />
@@ -84,8 +83,7 @@
                         android:ellipsize="end"
                         android:fontFamily="@font/inter_bold"
                         android:maxLines="1"
-                        android:text="@string/lorem"
-                        android:textColor="@color/black" />
+                        android:text="@string/lorem" />
 
                     <TextView
                         android:id="@+id/tv_spec_product"
@@ -105,9 +103,8 @@
                             android:id="@+id/tv_quantity_product"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/inter_medium"
-                            android:text="@string/quantity_200"
-                            android:textColor="@color/black" />
+                            android:fontFamily="@font/inter_semibold"
+                            android:text="@string/quantity_200" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -118,9 +115,8 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/inter_medium"
-                                android:text="@string/created_by"
-                                android:textColor="@color/black" />
+                                android:fontFamily="@font/inter_semibold"
+                                android:text="@string/created_by"/>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -140,9 +136,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
                                     android:layout_marginStart="8dp"
-                                    android:fontFamily="@font/inter_medium"
-                                    android:text="@string/akhmad"
-                                    android:textColor="@color/black" />
+                                    android:fontFamily="@font/inter_semibold"
+                                    android:text="@string/akhmad" />
 
                                 <RelativeLayout
                                     android:layout_width="match_parent"
@@ -153,7 +148,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_alignParentEnd="true"
-                                        android:fontFamily="@font/inter_medium"
+                                        android:fontFamily="@font/inter_semibold"
                                         android:text="@string/detail"
                                         android:textColor="@color/blue" />
                                 </RelativeLayout>

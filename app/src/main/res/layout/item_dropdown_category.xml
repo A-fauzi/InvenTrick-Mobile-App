@@ -5,5 +5,4 @@
     android:layout_height="wrap_content"
     android:padding="15dp"
     android:text="@string/textview_example"
-    android:textColor="@color/black"
-    android:fontFamily="@font/inter_medium"/>
+    android:fontFamily="@font/inter_semibold"/>

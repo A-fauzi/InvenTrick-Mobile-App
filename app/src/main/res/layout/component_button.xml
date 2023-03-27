@@ -9,5 +9,6 @@
     android:text="@string/text"
     android:textAllCaps="false"
     app:cornerRadius="15dp"
+    android:fontFamily="@font/inter_semibold"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" />

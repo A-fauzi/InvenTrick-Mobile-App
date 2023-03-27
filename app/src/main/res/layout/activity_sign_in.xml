@@ -40,15 +40,13 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_bold"
                 android:text="@string/hello_again"
-                android:textColor="@color/black"
                 android:textSize="32sp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/inter_medium"
-                android:text="@string/welcome_back_you_ve_nbeen_missed"
-                android:textColor="@color/black"/>
+                android:fontFamily="@font/inter_semibold"
+                android:text="@string/welcome_back_you_ve_nbeen_missed"/>
 
         </LinearLayout>
 
@@ -80,6 +78,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/username"
                 android:inputType="textEmailAddress"
+                android:fontFamily="@font/inter_medium"
                 android:padding="16dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -111,6 +110,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/password"
                 android:inputType="textPassword"
+                android:fontFamily="@font/inter_medium"
                 android:padding="16dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -174,8 +174,7 @@
                 android:id="@+id/progress_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
+                android:layout_centerInParent="true"
                 android:visibility="invisible" />
         </RelativeLayout>
 
@@ -194,7 +193,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/belum_punya_akun"/>
+                    android:text="@string/belum_punya_akun"
+                    android:fontFamily="@font/inter_semibold"/>
 
                 <TextView
                     android:id="@+id/tv_btn_direct_openwa"
@@ -205,6 +205,7 @@
                     android:textColor="@color/blue_ocean"
                     android:clickable="true"
                     android:focusable="true"
+                    android:fontFamily="@font/inter_semibold"
                     android:background="?attr/selectableItemBackgroundBorderless"/>
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

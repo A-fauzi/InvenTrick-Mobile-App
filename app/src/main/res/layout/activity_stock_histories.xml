@@ -17,11 +17,10 @@
             android:id="@+id/tv_history"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="History Stock IN/OUT"
+            android:layout_centerHorizontal="true"
             android:fontFamily="@font/inter_bold"
-            android:textSize="24sp"
-            android:textColor="@color/black"
-            android:layout_centerHorizontal="true"/>
+            android:text="History Stock IN/OUT"
+            android:textSize="24sp" />
 
         <com.google.android.material.divider.MaterialDivider
             android:id="@+id/divider"

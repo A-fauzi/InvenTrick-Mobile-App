@@ -92,14 +92,13 @@
                     android:layout_height="wrap_content"
                     android:text="Akhmad Fauzi"
                     android:fontFamily="@font/inter_bold"
-                    android:textSize="24sp"
-                    android:textColor="@color/black"/>
+                    android:textSize="24sp"/>
                 <TextView
                     android:id="@+id/tv_division"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Welding"
-                    android:fontFamily="@font/inter_medium"/>
+                    android:fontFamily="@font/inter_semibold"/>
 
             </LinearLayout>
         </LinearLayout>
@@ -120,7 +119,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Email address"
-                    android:textColor="@color/black"/>
+                    android:fontFamily="@font/inter_semibold"/>
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/outlinedTextFieldEmail"
                     android:layout_width="match_parent"
@@ -143,6 +142,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="textEmailAddress"
                         android:hint="jhon@gmail.com"
+                        android:fontFamily="@font/inter_medium"
                         android:padding="16dp"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -157,7 +157,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Username"
-                    android:textColor="@color/black"/>
+                    android:fontFamily="@font/inter_semibold"/>
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/outlinedTextFieldUsername"
                     android:layout_width="match_parent"
@@ -181,6 +181,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="text"
                         android:hint="jhono"
+                        android:fontFamily="@font/inter_medium"
                         android:padding="16dp"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -195,7 +196,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Fullname"
-                    android:textColor="@color/black"/>
+                    android:fontFamily="@font/inter_semibold"/>
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/outlinedTextFieldFullname"
                     android:layout_width="match_parent"
@@ -219,6 +220,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="text"
                         android:hint="Jhono Ikhlas"
+                        android:fontFamily="@font/inter_medium"
                         android:padding="16dp"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -233,7 +235,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Password"
-                    android:textColor="@color/black"/>
+                    android:fontFamily="@font/inter_semibold"/>
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/outlinedTextFieldPassword"
                     android:layout_width="match_parent"
@@ -256,6 +258,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
                         android:hint="New Password"
+                        android:fontFamily="@font/inter_medium"
                         android:padding="16dp"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -271,6 +274,7 @@
                 android:text="Submit"
                 android:textAllCaps="false"
                 android:layout_gravity="center"
+                android:fontFamily="@font/inter_semibold"
                 android:enabled="false"
                 app:cornerRadius="15dp"/>
         </LinearLayout>

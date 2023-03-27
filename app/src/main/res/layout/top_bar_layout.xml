@@ -50,18 +50,16 @@
             android:layout_height="wrap_content"
             android:text="online"
             android:layout_marginStart="8dp"
-            android:textColor="@color/black"/>
+            android:fontFamily="@font/inter_semibold"/>
     </LinearLayout>
 
     <TextView
         android:id="@+id/txt_top_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="My Application"
-        android:textColor="@color/black"
-        android:fontFamily="@font/inter_semibold"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"/>
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/inter_bold"
+        android:text="My Application" />
 
     <ImageView
         android:id="@+id/view_end"

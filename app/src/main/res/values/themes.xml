@@ -14,6 +14,9 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
 
+        <!-- text color -->
+        <item name="android:textColor">@color/text_color_default</item>
+
         <!--    Use Bottomsheet dialog custom    -->
         <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.MyApp.LargeComponent</item>
     </style>

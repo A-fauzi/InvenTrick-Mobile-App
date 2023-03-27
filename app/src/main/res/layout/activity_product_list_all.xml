@@ -1,132 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".core.view.main.home_fragment.product_list_all.paging.ui.ProductListAllActivity">
 
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:orientation="vertical"
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintTop_toTopOf="parent">
-
-       <androidx.cardview.widget.CardView
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_margin="8dp"
-           app:cardCornerRadius="20dp">
-
-           <RelativeLayout
-               android:id="@+id/rl_total_product"
-               android:layout_width="match_parent"
-               android:layout_height="150dp"
-               android:background="@color/blue"
-               android:padding="16dp">
-
-               <TextView
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:fontFamily="@font/inter_bold"
-                   android:text="@string/total_product"
-                   android:textColor="@color/white"
-                   android:textSize="24sp" />
-
-               <LinearLayout
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:orientation="vertical"
-                   android:layout_alignParentBottom="true">
-
-                   <RelativeLayout
-                       android:layout_width="match_parent"
-                       android:layout_height="wrap_content">
-
-                       <com.facebook.shimmer.ShimmerFrameLayout
-                           android:id="@+id/shimmer_view_total_product"
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:layout_centerVertical="true"
-                           app:layout_constraintVertical_bias="0.5"
-                           app:shimmer_duration="1000"
-                           app:shimmer_auto_start="false"
-                           app:shimmer_base_color="#1B1A1A"
-                           app:shimmer_colored="true">
-
-                           <androidx.cardview.widget.CardView
-                               android:layout_width="100dp"
-                               android:layout_height="16dp"
-                               android:backgroundTint="@color/black"
-                               app:cardCornerRadius="24dp"
-                               tools:ignore="TooDeepLayout" />
-
-                       </com.facebook.shimmer.ShimmerFrameLayout>
-
-                       <TextView
-                           android:id="@+id/tv_count_products"
-                           android:layout_width="match_parent"
-                           android:layout_height="wrap_content"
-                           android:fontFamily="@font/inter"
-                           android:text="@string/_200"
-                           android:textColor="@color/white"
-                           android:textFontWeight="500"
-                           android:textSize="24sp"
-                           android:visibility="invisible" />
-                   </RelativeLayout>
-
-                   <RelativeLayout
-                       android:layout_width="match_parent"
-                       android:layout_height="wrap_content"
-                       android:orientation="horizontal">
-
-                       <TextView
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:layout_centerVertical="true"
-                           android:fontFamily="@font/inter_medium"
-                           android:text="@string/of_the_whole_product"
-                           android:textColor="@color/white"
-                           tools:ignore="RelativeOverlap" />
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/content_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
 
-                       <com.google.android.material.button.MaterialButton
-                           android:id="@+id/btn_to_add_product"
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:layout_alignParentEnd="true"
-                           android:backgroundTint="@color/white"
-                           android:fontFamily="@font/inter_medium"
-                           android:text="@string/add_product"
-                           android:textAllCaps="false"
-                           android:textColor="@color/black"
-                           tools:ignore="RelativeOverlap"
-                           app:cornerRadius="15dp"/>
-                   </RelativeLayout>
-               </LinearLayout>
-           </RelativeLayout>
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            android:fitsSystemWindows="true">
 
-       </androidx.cardview.widget.CardView>
 
-       <RelativeLayout
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content">
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:contentScrim="?attr/colorPrimary"
+                app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
+                app:title="Products"
+                app:expandedTitleTextColor="@color/black"
+                app:collapsedTitleTextColor="@color/white"
+                android:id="@+id/collapsing_toolbar">
 
-           <ProgressBar
-               android:id="@+id/progress_bar_list_product"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_centerVertical="true"
-               android:layout_centerHorizontal="true"
-               android:visibility="gone"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_collapseMode="none">
 
-           <androidx.recyclerview.widget.RecyclerView
-               android:id="@+id/rv_list_product_all"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               tools:listitem="@layout/item_data_product"
-               tools:itemCount="3"/>
-       </RelativeLayout>
-   </LinearLayout>
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_margin="8dp"
+                        app:cardCornerRadius="@dimen/radius_card_15">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:padding="16dp">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="421"
+                                    android:fontFamily="@font/inter_bold"
+                                    android:textSize="24sp"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Products"
+                                    android:fontFamily="@font/inter_semibold"/>
+                            </LinearLayout>
+                            <Space
+                                android:layout_width="50dp"
+                                android:layout_height="wrap_content"/>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="421"
+                                    android:fontFamily="@font/inter_bold"
+                                    android:textSize="24sp"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Products"
+                                    android:fontFamily="@font/inter_semibold"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                </RelativeLayout>
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_collapseMode="pin"/>
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_list_product_all"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/item_data_product"
+            tools:itemCount="3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"/>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+    <ProgressBar
+        android:id="@+id/progress_bar_list_product"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="invisible"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

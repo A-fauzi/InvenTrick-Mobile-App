@@ -29,17 +29,19 @@
                         android:id="@+id/et_category"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_toStartOf="@id/btn_add_category"
                         android:hint="@string/create_category_hint"
                         android:inputType="text"
-                        android:layout_toStartOf="@id/btn_add_category"/>
+                        android:fontFamily="@font/inter_semibold"/>
 
                     <Button
                         android:id="@+id/btn_add_category"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:fontFamily="@font/inter_semibold"
                         android:text="@string/add"
-                        android:textAllCaps="false"
-                        android:layout_alignParentEnd="true"/>
+                        android:textAllCaps="false" />
                 </RelativeLayout>
 
                 <RelativeLayout

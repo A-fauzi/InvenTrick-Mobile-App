@@ -11,5 +11,6 @@
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="Motor"/>
+        android:text="Motor"
+        android:fontFamily="@font/inter_semibold"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

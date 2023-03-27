@@ -65,14 +65,13 @@
                     android:layout_height="wrap_content"
                     android:text="Akhmad Fauzi"
                     android:fontFamily="@font/inter_bold"
-                    android:textSize="24sp"
-                    android:textColor="@color/black"/>
+                    android:textSize="24sp"/>
                 <TextView
                     android:id="@+id/tv_division"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Welding"
-                    android:fontFamily="@font/inter_medium"/>
+                    android:fontFamily="@font/inter_semibold"/>
 
             </LinearLayout>
 
@@ -100,7 +99,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Dashboard"
-                android:fontFamily="@font/inter_medium"/>
+                android:fontFamily="@font/inter_semibold"/>
 
             <!--Component dashboard-->
             <androidx.cardview.widget.CardView
@@ -142,7 +141,6 @@
                         android:layout_centerVertical="true"
                         android:layout_marginStart="8dp"
                         android:fontFamily="@font/inter_bold"
-                        android:textColor="@color/black"
                         android:textSize="16sp"/>
 
                     <com.google.android.material.chip.Chip
@@ -152,6 +150,7 @@
                         android:layout_centerVertical="true"
                         android:layoutDirection="rtl"
                         android:text="2 news"
+                        android:fontFamily="@font/inter_semibold"
                         android:textColor="@color/white"
                         app:chipBackgroundColor="@color/blue_ocean"
                         app:chipIcon="@drawable/ic_angle_small_right"
@@ -199,7 +198,6 @@
                         android:layout_toEndOf="@id/icon_activity2"
                         android:fontFamily="@font/inter_bold"
                         android:text="Product upload"
-                        android:textColor="@color/black"
                         android:textSize="16sp" />
 
                     <com.google.android.material.chip.Chip
@@ -209,12 +207,13 @@
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:layoutDirection="rtl"
-                        tools:text="100 products"
+                        android:fontFamily="@font/inter_semibold"
                         android:textColor="@color/white"
                         app:chipBackgroundColor="@color/blue_ocean"
                         app:chipIcon="@drawable/ic_angle_small_right"
                         app:chipIconEnabled="true"
-                        app:chipIconTint="@color/white" />
+                        app:chipIconTint="@color/white"
+                        tools:text="100 products" />
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
@@ -257,7 +256,6 @@
                         android:layout_toEndOf="@id/icon_activity3"
                         android:fontFamily="@font/inter_bold"
                         android:text="Privacy"
-                        android:textColor="@color/black"
                         android:textSize="16sp" />
 
                     <com.google.android.material.chip.Chip
@@ -267,6 +265,7 @@
                         android:layout_centerVertical="true"
                         android:layoutDirection="rtl"
                         android:text="Action needed"
+                        android:fontFamily="@font/inter_semibold"
                         android:textColor="@color/white"
                         app:chipBackgroundColor="@color/orange"
                         app:chipIcon="@drawable/ic_angle_small_right"
@@ -290,13 +289,13 @@
            android:text="My Account"
            android:layout_marginBottom="8dp"
            android:layout_marginLeft="8dp"
-           android:fontFamily="@font/inter_medium"/>
+           android:fontFamily="@font/inter_semibold"/>
 
        <TextView
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:text="Switch to another account"
-           android:fontFamily="@font/inter_medium"
+           android:fontFamily="@font/inter_semibold"
            android:textSize="16sp"
            android:textColor="@color/blue_ocean"
            android:layout_marginBottom="8dp"
@@ -316,7 +315,7 @@
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:text="Log Out"
-               android:fontFamily="@font/inter_semibold"
+               android:fontFamily="@font/inter_bold"
                android:textSize="18sp"
                android:textColor="@color/red_smooth"
                android:layout_margin="8dp"/>

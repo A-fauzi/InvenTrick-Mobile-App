@@ -54,7 +54,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/code_example"
                         android:textColor="@color/white"
-                        android:fontFamily="@font/inter_medium"/>
+                        android:fontFamily="@font/inter_semibold"/>
                 </LinearLayout>
 
                 <!-- card image-->
@@ -116,8 +116,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/specification_example"
-                        android:textColor="@color/black"
-                        android:fontFamily="@font/inter_semibold"
+                        android:fontFamily="@font/inter_bold"
                         android:textSize="16sp"/>
 
                     <TextView
@@ -125,7 +124,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:textColor="@color/black"
+                        android:fontFamily="@font/inter_semibold"
                         android:text="@string/lorem" />
 
                 </LinearLayout>
@@ -146,14 +145,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/expired_date_example"
-                            android:fontFamily="@font/inter_medium"/>
+                            android:fontFamily="@font/inter_semibold"/>
 
                         <TextView
                             android:id="@+id/tv_exp_detail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/exp_example"
-                            android:fontFamily="@font/inter_medium"/>
+                            android:fontFamily="@font/inter_semibold"/>
                     </LinearLayout>
 
                     <!--qty-->
@@ -167,14 +166,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/quantity_example"
-                            android:fontFamily="@font/inter_medium"/>
+                            android:fontFamily="@font/inter_semibold"/>
 
                         <TextView
                             android:id="@+id/tv_qty_detail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/quantity_number_example"
-                            android:fontFamily="@font/inter_medium"/>
+                            android:fontFamily="@font/inter_semibold"/>
                     </LinearLayout>
 
                     <!--price-->
@@ -188,14 +187,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/price"
-                            android:fontFamily="@font/inter_medium"/>
+                            android:fontFamily="@font/inter_semibold"/>
 
                         <TextView
                             android:id="@+id/tv_price_detail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/price_number_example"
-                            android:fontFamily="@font/inter_medium"/>
+                            android:fontFamily="@font/inter_semibold"/>
                     </LinearLayout>
 
                     <!--location-->
@@ -209,7 +208,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/location"
-                            android:fontFamily="@font/inter_medium"/>
+                            android:fontFamily="@font/inter_semibold"/>
 
 
                         <TextView
@@ -217,7 +216,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/location_example"
-                            android:fontFamily="@font/inter_medium"/>
+                            android:fontFamily="@font/inter_semibold"/>
                     </LinearLayout>
 
                     <!--model-->
@@ -231,14 +230,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/model"
-                            android:fontFamily="@font/inter_medium"/>
+                            android:fontFamily="@font/inter_semibold"/>
 
                         <TextView
                             android:id="@+id/tv_model_detail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/model_example"
-                            android:fontFamily="@font/inter_medium"/>
+                            android:fontFamily="@font/inter_semibold"/>
 
 
                     </LinearLayout>
@@ -254,14 +253,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/lot"
-                            android:fontFamily="@font/inter_medium"/>
+                            android:fontFamily="@font/inter_semibold"/>
 
                         <TextView
                             android:id="@+id/tv_lot_detail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/lot_example"
-                            android:fontFamily="@font/inter_medium"/>
+                            android:fontFamily="@font/inter_semibold"/>
                     </LinearLayout>
                 </LinearLayout>
 
@@ -276,14 +275,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/created_at"
-                        android:fontFamily="@font/inter_medium"/>
+                        android:fontFamily="@font/inter_semibold"/>
 
                     <TextView
                         android:id="@+id/tv_created_at_detail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/created_at_example"
-                        android:fontFamily="@font/inter_medium"/>
+                        android:fontFamily="@font/inter_semibold"/>
                 </LinearLayout>
 
                 <!--updated_at-->
@@ -296,14 +295,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/updated_at"
-                        android:fontFamily="@font/inter_medium"/>
+                        android:fontFamily="@font/inter_semibold"/>
 
                     <TextView
                         android:id="@+id/tv_updated_at_detail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/update_at_example"
-                        android:fontFamily="@font/inter_medium"/>
+                        android:fontFamily="@font/inter_semibold"/>
                 </LinearLayout>
 
                 <!--category and sub category-->
@@ -318,8 +317,8 @@
                         android:id="@+id/chip_catgory"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/chip_example_text"
-                        android:fontFamily="@font/inter_medium"/>
+                        android:fontFamily="@font/inter_semibold"
+                        android:text="@string/chip_example_text" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chip_sub_category"
@@ -328,7 +327,7 @@
                         android:layout_marginStart="8dp"
                         android:layout_toEndOf="@id/chip_catgory"
                         android:text="@string/chip_example_text"
-                        android:fontFamily="@font/inter_medium"/>
+                        android:fontFamily="@font/inter_semibold"/>
                 </RelativeLayout>
 
 
@@ -345,7 +344,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Product IN"
-                    android:fontFamily="@font/inter_medium"
+                    android:fontFamily="@font/inter_semibold"
                     android:textAllCaps="false"
                     android:layout_gravity="center"
                     app:cornerRadius="15dp"/>
@@ -355,7 +354,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Product OUT"
-                    android:fontFamily="@font/inter_medium"
+                    android:fontFamily="@font/inter_semibold"
                     android:textAllCaps="false"
                     android:layout_gravity="center"
                     app:cornerRadius="15dp"
@@ -375,7 +374,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/delete_item"
-                    android:fontFamily="@font/inter_medium"
+                    android:fontFamily="@font/inter_semibold"
                     android:textColor="@color/red_smooth"
                     tools:ignore="RelativeOverlap" />
 
@@ -393,7 +392,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:fontFamily="@font/inter_medium"
+                    android:fontFamily="@font/inter_semibold"
                     android:text="@string/update_item"
                     android:textColor="@color/blue_ocean"
                     tools:ignore="RelativeOverlap" />
