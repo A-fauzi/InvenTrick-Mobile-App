@@ -47,46 +47,78 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:padding="16dp"
                             android:gravity="center"
-                            android:padding="16dp">
+                            android:orientation="vertical">
 
                             <LinearLayout
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical">
+                                android:orientation="horizontal"
+                                android:gravity="center">
 
-                                <TextView
+                                <LinearLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="421"
-                                    android:fontFamily="@font/inter_bold"
-                                    android:textSize="24sp"/>
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Products"
-                                    android:fontFamily="@font/inter_semibold"/>
-                            </LinearLayout>
-                            <Space
-                                android:layout_width="50dp"
-                                android:layout_height="wrap_content"/>
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
+                                    android:orientation="vertical">
 
-                                <TextView
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="25k"
+                                        android:fontFamily="@font/inter_bold"
+                                        android:textSize="24sp"/>
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Products"
+                                        android:fontFamily="@font/inter_semibold"/>
+                                </LinearLayout>
+                                <Space
+                                    android:layout_width="50dp"
+                                    android:layout_height="wrap_content"/>
+                                <LinearLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="421"
-                                    android:fontFamily="@font/inter_bold"
-                                    android:textSize="24sp"/>
-                                <TextView
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="10k"
+                                        android:fontFamily="@font/inter_bold"
+                                        android:textSize="24sp"/>
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="On progres"
+                                        android:fontFamily="@font/inter_semibold"/>
+                                </LinearLayout>
+                                <Space
+                                    android:layout_width="50dp"
+                                    android:layout_height="wrap_content"/>
+                                <LinearLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Products"
-                                    android:fontFamily="@font/inter_semibold"/>
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="15k"
+                                        android:fontFamily="@font/inter_bold"
+                                        android:textSize="24sp"/>
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Active"
+                                        android:fontFamily="@font/inter_semibold"/>
+                                </LinearLayout>
                             </LinearLayout>
+
+                            <include
+                                android:id="@+id/btn_add_product"
+                                layout="@layout/component_button"/>
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
                 </RelativeLayout>

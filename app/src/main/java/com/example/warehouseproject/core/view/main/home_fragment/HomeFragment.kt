@@ -5,16 +5,13 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.drawable.InsetDrawable
 import android.os.Build
 import android.os.Bundle
-import android.util.TypedValue
 import android.view.*
 import android.view.animation.AnimationUtils
 import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.appcompat.view.menu.MenuBuilder
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.warehouseproject.R
@@ -23,14 +20,13 @@ import com.example.warehouseproject.core.constant.Constant.User.TOKEN
 import com.example.warehouseproject.core.model.product.Product
 import com.example.warehouseproject.core.model.product.ProductResponses
 import com.example.warehouseproject.core.service.product.ProductApiService
+import com.example.warehouseproject.core.utils.DataBundle
 import com.example.warehouseproject.core.view.authentication.SignInActivity
 import com.example.warehouseproject.core.view.main.MainActivity
+import com.example.warehouseproject.core.view.main.detail_product.DetailProductActivity
 import com.example.warehouseproject.core.view.main.home_fragment.category.ProductCategoryActivity
-import com.example.warehouseproject.core.view.main.home_fragment.home_dialog_detail.DetailDialog
 import com.example.warehouseproject.core.view.main.home_fragment.product_list_all.paging.ui.ProductListAllActivity
 import com.example.warehouseproject.core.view.main.home_fragment.stock_histories.StockHistoriesActivity
-import com.example.warehouseproject.core.view.main.home_fragment.stock_in_product.StockInActivity
-import com.example.warehouseproject.core.view.main.home_fragment.stock_out_product.StockOutActivity
 import com.example.warehouseproject.core.view.main.home_fragment.webview.NewsActivity
 import com.example.warehouseproject.core.view.product.add_product.AddProductActivity
 import com.example.warehouseproject.databinding.FragmentHomeBinding
@@ -55,7 +51,7 @@ class HomeFragment : Fragment(), ProductListAdapter.CallClickListener, HomeView 
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
         shimmerViewContainer = binding.shimmerViewContainerListProduct
-        presenter = HomePresenter(this, DetailDialog(), ProductApiService(token))
+        presenter = HomePresenter(this, ProductApiService(token))
     }
 
     override fun onCreateView(
@@ -167,8 +163,11 @@ class HomeFragment : Fragment(), ProductListAdapter.CallClickListener, HomeView 
         productListAdapter.setData(product)
     }
 
-    override fun onClickListenerDialog(data: Product) {
-        activity?.let { presenter.showDetailDialog(it, layoutInflater, data) }
+    override fun onClickListenerProduct(data: Product) {
+        val bundle = DataBundle.putProductData(data)
+        val intent = Intent(requireActivity(), DetailProductActivity::class.java)
+        intent.putExtras(bundle)
+        startActivity(intent)
     }
 
     override fun moveMainActivity() {

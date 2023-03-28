@@ -1,23 +1,18 @@
 package com.example.warehouseproject.core.view.main.home_fragment.product_list_all.paging.ui
 
 import android.content.Intent
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AnimationUtils
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.warehouseproject.R
-import com.example.warehouseproject.core.utils.helper.RandomColor
 import com.example.warehouseproject.core.model.product.Product
-import com.example.warehouseproject.core.model.product.ProductResponses
-import com.example.warehouseproject.core.service.product.ProductApiService
+import com.example.warehouseproject.core.utils.DataBundle
+import com.example.warehouseproject.core.view.main.detail_product.DetailProductActivity
 import com.example.warehouseproject.core.view.main.home_fragment.HomePresenter
-import com.example.warehouseproject.core.view.main.home_fragment.HomeView
-import com.example.warehouseproject.core.view.main.home_fragment.home_dialog_detail.DetailDialog
 import com.example.warehouseproject.core.view.main.home_fragment.product_list_all.paging.api.ApiService
 import com.example.warehouseproject.core.view.product.add_product.AddProductActivity
 import com.example.warehouseproject.databinding.ActivityProductListAllBinding
@@ -32,24 +27,10 @@ class ProductListAllActivity : AppCompatActivity(), ProductsAdapterPaging.Produc
 
     private val token = Paper.book().read<String>("token").toString()
 
-    private lateinit var presenter: HomePresenter
-
     private fun initView() {
         Paper.init(this)
-        presenter = HomePresenter(null, DetailDialog(), ProductApiService(token))
-
-//        binding.btnToAddProduct.setOnClickListener {
-//            binding.btnToAddProduct.startAnimation(
-//                AnimationUtils.loadAnimation(
-//                    this,
-//                    R.anim.animation_button
-//                )
-//            )
-//            startActivity(Intent(this, AddProductActivity::class.java))
-//        }
-
-//        binding.rlTotalProduct.setBackgroundColor(Color.parseColor(RandomColor.generate()))
-
+        binding.btnAddProduct.btnComponent.text = getString(R.string.add_product)
+        binding.btnAddProduct.btnComponent.isEnabled = true
         productListAdapter = ProductsAdapterPaging(applicationContext, this)
     }
 
@@ -61,6 +42,15 @@ class ProductListAllActivity : AppCompatActivity(), ProductsAdapterPaging.Produc
         setupViewModel()
         setupList()
         setupView()
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        binding.btnAddProduct.btnComponent.setOnClickListener {
+            binding.btnAddProduct.btnComponent.startAnimation(AnimationUtils.loadAnimation(this, R.anim.animation_button))
+            startActivity(Intent(this, AddProductActivity::class.java))
+        }
     }
 
     private fun setupView() {
@@ -111,7 +101,10 @@ class ProductListAllActivity : AppCompatActivity(), ProductsAdapterPaging.Produc
 
     override fun onClickItem(data: Product?) {
         if (data != null) {
-            presenter.showDetailDialog(this, layoutInflater, data)
+            val bundle = DataBundle.putProductData(data)
+            val intent = Intent(this, DetailProductActivity::class.java)
+            intent.putExtras(bundle)
+            startActivity(intent)
         }
     }
 }

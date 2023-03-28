@@ -1,7 +1,10 @@
 package com.example.warehouseproject.core.model.product
 
+import android.os.Parcelable
 import com.example.warehouseproject.core.model.user.User
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Product(
 
 
@@ -52,4 +55,4 @@ data class Product(
 
 
     val updated_at: String? = null
-)
+): Parcelable

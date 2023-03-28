@@ -82,10 +82,15 @@ class ProductApiService(private val token: String) {
             })
     }
 
-    fun deleteProductApiService(id: String, onResponseSuccessBody: (msg: String, data: Product? ) -> Unit, onResponseErrorBody: (msg: String) -> Unit, onFailure: (msg: String) -> Unit) {
+    interface DeleteProductApiServiceListener {
+        fun onResponseSuccessBody(msg: String, data: Product?)
+        fun onResponseErrorBody(msg: String)
+        fun onFailureDeleteProduct(msg: String)
+    }
+    fun deleteProductApiService(productId: String, listener: DeleteProductApiServiceListener) {
         NetworkConfig(Constant.BASE_URL, token)
             .productService()
-            .deleteProduct(id)
+            .deleteProduct(productId)
             .enqueue(object : Callback<ProductResponses.SingleResponse>{
                 override fun onResponse(
                     call: Call<ProductResponses.SingleResponse>,
@@ -93,17 +98,17 @@ class ProductApiService(private val token: String) {
                 ) {
                     if (response.isSuccessful) {
                         response.body()?.let {
-                            onResponseSuccessBody(it.message, it.data)
+                            listener.onResponseSuccessBody(it.message, it.data)
                         }
                     } else {
                         response.body()?.let {
-                            onResponseErrorBody(it.message)
+                            listener.onResponseErrorBody(it.message)
                         }
                     }
                 }
 
                 override fun onFailure(call: Call<ProductResponses.SingleResponse>, t: Throwable) {
-                    onFailure(t.message.toString())
+                    listener.onFailureDeleteProduct(t.message.toString())
                 }
 
             })

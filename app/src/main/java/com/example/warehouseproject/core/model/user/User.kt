@@ -1,5 +1,9 @@
 package com.example.warehouseproject.core.model.user
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class User(
     val _id: String,
     val username: String,
@@ -11,9 +15,10 @@ data class User(
     val status_activity: String,
     val jwt_token: String,
     val path_storage: String
-) {
+): Parcelable {
+    @Parcelize
     data class Roles(
         val _id: String,
         val name: String
-    )
+    ): Parcelable
 }

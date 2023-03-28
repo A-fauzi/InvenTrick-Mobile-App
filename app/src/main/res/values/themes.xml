@@ -14,11 +14,15 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
 
+        <!-- Toolbar icon nav color -->
+
+
         <!-- text color -->
         <item name="android:textColor">@color/text_color_default</item>
 
         <!--    Use Bottomsheet dialog custom    -->
-        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.MyApp.LargeComponent</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.MyApp.LargeComponent
+        </item>
     </style>
 
     <!--  Theme splashscreen api ini dijalankan pertama kali pada aplikasi  -->
@@ -29,13 +33,15 @@
         <item name="windowSplashScreenBackground">@color/blue_ocean</item>
         <item name="windowSplashScreenIconBackgroundColor">@color/blue</item>
         <item name="windowSplashScreenAnimationDuration">1000</item>
-<!--        <item name="android:windowSplashScreenBrandingImage">@drawable/splash_branding_image</item>-->
+        <!--        <item name="android:windowSplashScreenBrandingImage">@drawable/splash_branding_image</item>-->
     </style>
 
-<!--  Custom dialog  -->
+    <!--  Custom dialog  -->
     <style name="ThemeOverlay.App.MaterialAlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog.Centered">
-        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.App.MaterialAlertDialog</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.App.MaterialAlertDialog
+        </item>
     </style>
+
     <style name="ShapeAppearanceOverlay.App.MaterialAlertDialog" parent="">
         <item name="cornerSize">16dp</item>
     </style>
@@ -48,11 +54,10 @@
         <item name="cornerSize">30dp</item>
     </style>
 
-<!--  Pop menu custom  -->
+    <!--  Pop menu custom  -->
     <style name="myListPopupWindow" parent="Widget.MaterialComponents.PopupMenu">
         <item name="android:popupBackground">@drawable/pop_up_menu_bg</item>
     </style>
-
 
 
 </resources>

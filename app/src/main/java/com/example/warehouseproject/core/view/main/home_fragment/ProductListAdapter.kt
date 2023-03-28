@@ -50,7 +50,7 @@ class ProductListAdapter(
                 Picasso.get().load(user.profile_image).placeholder(R.drawable.ic_people).error(R.drawable.img_example).into(binding.itemUserPhoto)
 
                 binding.tvDetailProduct.setOnClickListener {
-                    callClickListener.onClickListenerDialog(items[position])
+                    callClickListener.onClickListenerProduct(items[position])
                 }
             }
         }
@@ -68,7 +68,7 @@ class ProductListAdapter(
     }
 
     interface CallClickListener{
-        fun onClickListenerDialog(data: Product)
+        fun onClickListenerProduct(data: Product)
     }
 
 }

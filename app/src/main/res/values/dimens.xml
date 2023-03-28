@@ -2,4 +2,5 @@
 <resources>
     <dimen name="padding_btn_20">20dp</dimen>
     <dimen name="radius_card_15">15dp</dimen>
+    <dimen name="margin_8">8dp</dimen>
 </resources>
