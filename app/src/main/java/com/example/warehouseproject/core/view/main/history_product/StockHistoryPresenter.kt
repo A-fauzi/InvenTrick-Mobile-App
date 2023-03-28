@@ -1,4 +1,4 @@
-package com.example.warehouseproject.core.view.main.home_fragment.stock_histories
+package com.example.warehouseproject.core.view.main.history_product
 
 import android.content.Context
 import android.widget.Toast

@@ -29,7 +29,6 @@ class MainActivity : AppCompatActivity(), MainView {
     private lateinit var navController: NavController
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var bottomNavigationView: BottomNavigationView
 
     private lateinit var presenter: MainActivityPresenter
 

@@ -10,6 +10,11 @@
         android:title="Scan" />
 
     <item
+        android:id="@+id/stock_history"
+        android:icon="@drawable/ic_time_past"
+        android:title="Stock History" />
+
+    <item
         android:id="@+id/account"
         android:icon="@drawable/ic_user"
         android:title="Account" />

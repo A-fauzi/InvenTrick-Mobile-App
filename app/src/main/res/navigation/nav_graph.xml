@@ -11,7 +11,7 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_homeFragment_to_scanFragment"
+            android:id="@+id/action_home_to_scan"
             app:destination="@id/scan" />
     </fragment>
     <fragment
@@ -20,12 +20,21 @@
         android:label="fragment_scan"
         tools:layout="@layout/fragment_scan" >
         <action
-            android:id="@+id/action_scanFragment_to_accountFragment"
-            app:destination="@id/account" />
+            android:id="@+id/action_scan_to_historyProductFragment"
+            app:destination="@id/stock_history" />
     </fragment>
     <fragment
         android:id="@+id/account"
         android:name="com.example.warehouseproject.core.view.main.account_fragment.AccountFragment"
         android:label="fragment_account"
         tools:layout="@layout/fragment_account" />
+    <fragment
+        android:id="@+id/stock_history"
+        android:name="com.example.warehouseproject.core.view.main.history_product.HistoryProductFragment"
+        android:label="fragment_stock_histories"
+        tools:layout="@layout/fragment_stock_histories" >
+        <action
+            android:id="@+id/action_historyProductFragment_to_account"
+            app:destination="@id/account" />
+    </fragment>
 </navigation>

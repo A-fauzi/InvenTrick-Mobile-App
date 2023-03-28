@@ -26,7 +26,6 @@ import com.example.warehouseproject.core.view.main.MainActivity
 import com.example.warehouseproject.core.view.main.detail_product.DetailProductActivity
 import com.example.warehouseproject.core.view.main.home_fragment.category.ProductCategoryActivity
 import com.example.warehouseproject.core.view.main.home_fragment.product_list_all.paging.ui.ProductListAllActivity
-import com.example.warehouseproject.core.view.main.home_fragment.stock_histories.StockHistoriesActivity
 import com.example.warehouseproject.core.view.main.home_fragment.webview.NewsActivity
 import com.example.warehouseproject.core.view.product.add_product.AddProductActivity
 import com.example.warehouseproject.databinding.FragmentHomeBinding
@@ -95,9 +94,6 @@ class HomeFragment : Fragment(), ProductListAdapter.CallClickListener, HomeView 
         popupMenu.menuInflater.inflate(R.menu.product_activity_menu, popupMenu.menu)
         popupMenu.setOnMenuItemClickListener {
             when (it.itemId) {
-                R.id.history -> {
-                    startActivity(Intent(activity, StockHistoriesActivity::class.java))
-                }
                 R.id.category -> {
                     startActivity(Intent(activity, ProductCategoryActivity::class.java))
                 }

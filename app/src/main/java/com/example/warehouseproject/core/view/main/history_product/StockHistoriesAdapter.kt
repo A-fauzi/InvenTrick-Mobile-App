@@ -1,8 +1,7 @@
-package com.example.warehouseproject.core.view.main.home_fragment.stock_histories
+package com.example.warehouseproject.core.view.main.history_product
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
