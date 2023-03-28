@@ -92,6 +92,8 @@
     <string name="login_example">Login</string>
     <string name="add_item_txt">Add Item</string>
     <string name="products_is_empty">0 Products</string>
+    <string name="product_is_avail">Product is avail</string>
+    <string name="product_is_not_avail">Product not avail</string>
     <string-array name="default_items">
         <item>Tambahkan nanti</item>
     </string-array>
