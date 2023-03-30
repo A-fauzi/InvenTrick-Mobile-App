@@ -36,9 +36,6 @@ interface ProductService {
     @POST("stock-history")
     fun stockHistory(@Body stockHistoryRequest: StockHistory.StockHistoryRequest): Call<StockHistory.StockHistorySingleResponse>
 
-    @GET("stock-history")
-    fun getStockHistories(): Call<StockHistory.StockHistoryAllResponse>
-
     @POST("category/create")
     fun createCategory(@Body categoryRequest: CategoryRequest): Call<CategoryResponse.SingleResponse>
 

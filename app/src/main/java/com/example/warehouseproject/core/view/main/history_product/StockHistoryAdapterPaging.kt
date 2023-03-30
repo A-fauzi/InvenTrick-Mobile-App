@@ -1,15 +1,21 @@
 package com.example.warehouseproject.core.view.main.history_product
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import com.bumptech.glide.Glide
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.model.product.StockHistory
 import com.example.warehouseproject.core.service.product.ProductApiService
+import com.example.warehouseproject.core.service.user.UserApiService
 import com.example.warehouseproject.databinding.ItemDataHistoryBinding
+import com.squareup.picasso.Picasso
 import io.paperdb.Paper
 
 class StockHistoryAdapterPaging(
@@ -68,6 +74,20 @@ class StockHistoryAdapterPaging(
                     binding.tvDataNotFound.text = context.getString(R.string.product_is_not_avail)
                     binding.tvDataNotFound.setTextColor(context.resources.getColor(com.example.warehouseproject.R.color.red_smooth))}
                 )
+
+                this?.user_id?.let {
+                    UserApiService().getUserById(token, it, { onSuccess ->
+                        if (onSuccess != null) {
+                            binding.tvItemUsername.text = onSuccess.username
+                            Picasso.get().load(onSuccess.profile_image).placeholder(R.drawable.ic_people).error(R.drawable.img_example).into(binding.ivItemUserPhoto)
+
+                        }
+                    }, { onError->
+                        Log.d("USER", onError)
+                    }, {onFailure ->
+                        Log.d("USER", onFailure)
+                    })
+                }
 
             }
         }

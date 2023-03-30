@@ -6,6 +6,7 @@ data class StockHistory(
     val name: String,
     val qty: String,
     val status: String,
+    val user_id: String,
     val created_at: String,
 ) {
     data class StockHistoryRequest(
@@ -13,6 +14,7 @@ data class StockHistory(
         val name: String,
         val qty: String,
         val status: String,
+        val user_id: String,
     )
     data class StockHistorySingleResponse(
         val message: String,

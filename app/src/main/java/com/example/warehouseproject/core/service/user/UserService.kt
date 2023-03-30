@@ -11,4 +11,7 @@ interface UserService {
 
     @PUT("api/user/update/status/{id}")
     fun updateStatusActivityUser(@Path("id") userId: String, @Body userRequestStatus: UserRequest.StatusActivity): Call<UserResponse.SingleResponse>
+
+    @GET("api/user/{id}")
+    fun getUserById(@Path("id") userId: String): Call<UserResponse.SingleResponse>
 }

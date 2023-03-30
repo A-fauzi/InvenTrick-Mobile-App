@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.Toast
 import com.airbnb.lottie.LottieAnimationView
 import com.example.warehouseproject.R
+import com.example.warehouseproject.core.constant.Constant
 import com.example.warehouseproject.core.utils.helper.HideKeyboardHelper
 import com.example.warehouseproject.core.model.product.ProductRequest
 import com.example.warehouseproject.core.model.product.StockHistory
@@ -122,10 +123,11 @@ class StockOutActivity : AppCompatActivity() {
 
 
                 val token = Paper.book().read<String>("token").toString()
+                val currentUid = Paper.book().read<String>(Constant.User.ID).toString()
                 ProductApiService(token).updateProductQty(this, binding.stockOut.tvIdProduct.text.toString(), qty,  { message, data ->
 
 
-                    val dataRequest = StockHistory.StockHistoryRequest(data.code_items, data.name, qtyInput, "OUT")
+                    val dataRequest = StockHistory.StockHistoryRequest(data.code_items, data.name, qtyInput, "OUT", currentUid)
                     ProductApiService(token).createStockHistory( dataRequest)
 
                     binding.stockOut.containerSearchView.visibility = View.GONE

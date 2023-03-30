@@ -14,6 +14,7 @@ import androidx.cardview.widget.CardView
 import com.airbnb.lottie.LottieAnimationView
 import com.example.awesomedialog.*
 import com.example.warehouseproject.R
+import com.example.warehouseproject.core.constant.Constant
 import com.example.warehouseproject.core.utils.helper.HideKeyboardHelper
 import com.example.warehouseproject.core.model.product.Product
 import com.example.warehouseproject.core.model.product.ProductRequest
@@ -159,7 +160,8 @@ class StockInActivity : AppCompatActivity(), StockInView {
     @SuppressLint("SetTextI18n")
     override fun showViewOnSuccessUpdateQty(data: Product) {
         val token = Paper.book().read<String>("token").toString()
-        val dataRequest = StockHistory.StockHistoryRequest(data.code_items, data.name, inputQtyProduct.text.toString(), "IN")
+        val currentUid = Paper.book().read<String>(Constant.User.ID).toString()
+        val dataRequest = StockHistory.StockHistoryRequest(data.code_items, data.name, inputQtyProduct.text.toString(), "IN", currentUid)
         ProductApiService(token).createStockHistory( dataRequest)
 
         binding.stockIn.containerSearchView.visibility = View.GONE

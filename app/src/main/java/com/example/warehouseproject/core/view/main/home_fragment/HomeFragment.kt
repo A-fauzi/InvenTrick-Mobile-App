@@ -28,6 +28,7 @@ import com.example.warehouseproject.core.view.main.home_fragment.category.Produc
 import com.example.warehouseproject.core.view.main.home_fragment.product_list_all.paging.ui.ProductListAllActivity
 import com.example.warehouseproject.core.view.main.home_fragment.webview.NewsActivity
 import com.example.warehouseproject.core.view.product.add_product.AddProductActivity
+import com.example.warehouseproject.core.view.product.add_product.steps.AddProductStepActivity
 import com.example.warehouseproject.databinding.FragmentHomeBinding
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.squareup.picasso.Picasso
@@ -187,7 +188,7 @@ class HomeFragment : Fragment(), ProductListAdapter.CallClickListener, HomeView 
             binding.rvProduct.visibility = View.GONE
             binding.containerViewDataEmpty.visibility = View.VISIBLE
             binding.btnAddProductNow.setOnClickListener {
-                startActivity(Intent(requireActivity(), AddProductActivity::class.java))
+                startActivity(Intent(requireActivity(), AddProductStepActivity::class.java))
             }
         } else {
             binding.contentContainer.visibility = View.VISIBLE

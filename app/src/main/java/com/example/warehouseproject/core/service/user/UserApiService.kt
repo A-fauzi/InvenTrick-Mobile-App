@@ -2,6 +2,7 @@ package com.example.warehouseproject.core.service.user
 
 import com.example.warehouseproject.core.config.NetworkConfig
 import com.example.warehouseproject.core.constant.Constant
+import com.example.warehouseproject.core.model.user.User
 import com.example.warehouseproject.core.model.user.UserRequest
 import com.example.warehouseproject.core.model.user.UserResponse
 import com.google.gson.Gson
@@ -70,6 +71,34 @@ class UserApiService {
 
                 override fun onFailure(call: Call<UserResponse.SingleResponse>, t: Throwable) {
                     listener.onFailure(t.message.toString())
+                }
+
+            })
+    }
+
+    fun getUserById(token: String, userId: String, onSuccessBody: (user: User?) -> Unit, onErrorBody: (msg: String) -> Unit, onFailure: (msg: String) -> Unit){
+        NetworkConfig(Constant.BASE_URL, token)
+            .userService()
+            .getUserById(userId)
+            .enqueue(object : Callback<UserResponse.SingleResponse>{
+                override fun onResponse(
+                    call: Call<UserResponse.SingleResponse>,
+                    response: Response<UserResponse.SingleResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        response.body()?.data.let {
+                            onSuccessBody(it)
+                        }
+                    } else {
+                        // convert json to String
+                        val gson = Gson()
+                        val msg = gson.fromJson(response.errorBody()?.string(), UserResponse::class.java)
+                        onErrorBody(msg.message)
+                    }
+                }
+
+                override fun onFailure(call: Call<UserResponse.SingleResponse>, t: Throwable) {
+                    onFailure(t.message.toString())
                 }
 
             })
