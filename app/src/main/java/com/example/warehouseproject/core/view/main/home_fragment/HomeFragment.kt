@@ -27,7 +27,6 @@ import com.example.warehouseproject.core.view.main.detail_product.DetailProductA
 import com.example.warehouseproject.core.view.main.home_fragment.category.ProductCategoryActivity
 import com.example.warehouseproject.core.view.main.home_fragment.product_list_all.paging.ui.ProductListAllActivity
 import com.example.warehouseproject.core.view.main.home_fragment.webview.NewsActivity
-import com.example.warehouseproject.core.view.product.add_product.AddProductActivity
 import com.example.warehouseproject.core.view.product.add_product.steps.AddProductStepActivity
 import com.example.warehouseproject.databinding.FragmentHomeBinding
 import com.facebook.shimmer.ShimmerFrameLayout

@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.constant.Constant
+import com.example.warehouseproject.core.model.product.Product
 import com.example.warehouseproject.core.model.product.ProductRequest
 import com.example.warehouseproject.core.model.product.category.Category
 import com.example.warehouseproject.core.model.user.User
@@ -32,6 +33,8 @@ import com.example.warehouseproject.core.utils.helper.DatePickerDialog
 import com.example.warehouseproject.core.utils.helper.RandomCodeProduct
 import com.example.warehouseproject.core.utils.helper.TextWatcher.addTextCangedListener
 import com.example.warehouseproject.core.view.main.MainActivity
+import com.example.warehouseproject.core.view.product.add_product.AddProductPresenter
+import com.example.warehouseproject.core.view.product.add_product.AddProductView
 import com.example.warehouseproject.databinding.ActivityAddProductStepBinding
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -41,8 +44,7 @@ import io.paperdb.Paper
 import java.io.ByteArrayOutputStream
 import java.util.*
 
-class AddProductStepActivity : AppCompatActivity(),
-    AdapterCategoryAddProduct.AdapterCategoryListener {
+class AddProductStepActivity : AppCompatActivity(), AdapterCategoryAddProduct.AdapterCategoryListener, AddProductView {
 
     private lateinit var binding: ActivityAddProductStepBinding
     private lateinit var adapterCategory: AdapterCategoryAddProduct
@@ -52,24 +54,31 @@ class AddProductStepActivity : AppCompatActivity(),
     private lateinit var firebaseStorage: FirebaseStorage
     private lateinit var modelRequestAddProduct: ProductRequest
     private lateinit var modelUser: User
+    private lateinit var presenter: AddProductPresenter
 
     private var category = "null"
     private var subCategory = "null"
     private var progressPercentace = 5
 
 
+    private val token = Paper.book().read<String>(Constant.User.TOKEN).toString()
+    private fun initView() {
+        Paper.init(this)
+        firebaseStorage = FirebaseStorage.getInstance()
+        adapterCategory = AdapterCategoryAddProduct(this, arrayListOf(), this)
+        adapterSubCategory = AdapterSubCategoryAddProduct(this, arrayListOf())
+        presenter = AddProductPresenter(this, ProductApiService(token))
+
+        val token = Paper.book().read<String>(Constant.User.TOKEN).toString()
+        productCategoryService = ProductCategoryService(token)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddProductStepBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        Paper.init(this)
-        firebaseStorage = FirebaseStorage.getInstance()
-        adapterCategory = AdapterCategoryAddProduct(this, arrayListOf(), this)
-        adapterSubCategory = AdapterSubCategoryAddProduct(this, arrayListOf())
-
-        val token = Paper.book().read<String>(Constant.User.TOKEN).toString()
-        productCategoryService = ProductCategoryService(token)
+        initView()
 
         binding.baseCardview2.isEnabled = false
         binding.baseCardview2.setStrokeColor(getColorStateList(com.google.android.material.R.color.material_on_surface_disabled))
@@ -106,8 +115,6 @@ class AddProductStepActivity : AppCompatActivity(),
             cardGroup = binding.cardGroup2View3,
             baseCard = binding.baseCardview3
         )
-
-        cardViewUploadImage()
 
         productCategoryService.getCategories {
             adapterCategory.setData(it)
@@ -158,6 +165,8 @@ class AddProductStepActivity : AppCompatActivity(),
             inputPriceInteractor(it)
         }
 
+        cardViewUploadImage()
+
         resultData()
     }
 
@@ -195,25 +204,8 @@ class AddProductStepActivity : AppCompatActivity(),
         btn.text = getString(R.string.upload)
         btn.isEnabled = true
 
-        // Menambahkan aksi klik ke tombol upload
         btn.setOnClickListener {
-            // Membuat sebuah dialog MaterialAlertDialogBuilder
-            MaterialAlertDialogBuilder(this, R.style.ThemeOverlay_App_MaterialAlertDialog)
-                .setTitle("Upload!")
-                .setMessage("Choose image an product")
-                .setCancelable(true)
-                .setNeutralButton("Cancel") { dialog, which ->
-                    // Respon saat tombol Cancel ditekan
-                }
-                .setNegativeButton("From Gallery") { dialog, which ->
-                    // Respon saat tombol From Gallery ditekan
-                    getImageFromGallery()
-                }
-                .setPositiveButton("From Camera") { dialog, which ->
-                    // Respon saat tombol From Camera ditekan
-                    Toast.makeText(this, "Masih dalam pengembangan", Toast.LENGTH_SHORT).show()
-                }
-                .show()
+            getImageFromGallery()
         }
     }
 
@@ -226,7 +218,6 @@ class AddProductStepActivity : AppCompatActivity(),
         // Membuat intent untuk membuka galeri
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
-
         // Memulai aktivitas untuk memilih gambar dari galeri dan menunggu hasil dengan request code Constant.REQUEST_CODE
         startActivityForResult(intent, Constant.REQUEST_CODE)
     }
@@ -236,7 +227,7 @@ class AddProductStepActivity : AppCompatActivity(),
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && requestCode == Constant.REQUEST_CODE) {
+        if (resultCode == RESULT_OK && requestCode == Constant.REQUEST_CODE) {
             try {
                 if (data != null) {
 
@@ -332,16 +323,6 @@ class AddProductStepActivity : AppCompatActivity(),
         }
     }
 
-    /**
-     * Fungsi ini mengembalikan sebuah instance TextWatcher. TextWatcher digunakan untuk
-     * memantau perubahan pada input EditText. Fungsi ini memerlukan sebuah parameter input
-     * dengan tipe EditText yang akan dimonitor.
-     *
-     * Fungsi ini mengimplementasikan tiga method dari TextWatcher, yaitu beforeTextChanged(),
-     * onTextChanged(), dan afterTextChanged(). Namun, hanya method afterTextChanged() yang
-     * diimplementasikan untuk melakukan validasi input dan menampilkan helper text dan
-     * error message pada TextInputLayout yang sesuai.
-     */
     private fun textWatcher(input: EditText) = object : TextWatcher {
         override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
@@ -461,6 +442,7 @@ class AddProductStepActivity : AppCompatActivity(),
                 binding.btnNextForm.visibility = View.INVISIBLE
                 binding.progressBar.visibility = View.VISIBLE
 
+                // Data product
                 val fillPath = fillPath.toString()
                 val code = binding.tvChipCode.text.toString()
                 val name = binding.etProductName.text.toString()
@@ -475,6 +457,7 @@ class AddProductStepActivity : AppCompatActivity(),
                 val lot = binding.etProductLot.text.toString()
                 val expDate = binding.tvResultExpDate.text.toString()
 
+                // Data user
                 val uid = Paper.book().read<String>(Constant.User.ID).toString()
                 val uName = Paper.book().read<String>(Constant.User.USERNAME).toString()
                 val token = Paper.book().read<String>(Constant.User.TOKEN).toString()
@@ -485,80 +468,22 @@ class AddProductStepActivity : AppCompatActivity(),
                 val storagePath = Paper.book().read<String>(Constant.User.STORAGE_PATH_PROFILE).toString()
 
                 modelUser = User(
-                    _id = uid,
-                    username =  uName,
-                    profile_image =  profileImg,
-                    fullName =  fullName,
-                    email =  email,
-                    roles = arrayListOf(),
-                    position = division,
-                    status_activity = "null",
-                    jwt_token = token,
+                    _id = uid, username =  uName, profile_image =  profileImg,
+                    fullName =  fullName, email =  email, roles = arrayListOf(),
+                    position = division, status_activity = "null", jwt_token = token,
                     path_storage = storagePath
                 )
                 modelRequestAddProduct = ProductRequest(
-                    image = "null",
-                    code_items = code,
-                    name = name,
-                    user = modelUser,
-                    qty = quantity,
-                    price = price,
-                    category = category,
-                    sub_category = subCategory,
-                    specification = spec,
-                    location = location,
-                    status = status,
-                    model = model,
-                    lot = lot,
-                    exp = expDate,
-                    path_storage = "null"
+                    image = "null", code_items = code, name = name,
+                    user = modelUser, qty = quantity, price = price,
+                    category = category, sub_category = subCategory, specification = spec,
+                    location = location, status = status, model = model,
+                    lot = lot, exp = expDate, path_storage = "null"
                 )
 
-                val nameFile = UUID.randomUUID()
-                val refStorage = firebaseStorage.reference.child("/image_product/${code}/${name}_${nameFile}.jpg")
+                // Upload image to firebase
+                uploadImageToFirebase(code, name, fillPath)
 
-                // Compress image
-                val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, fillPath.toUri())
-                val byteArrayOutputStream = ByteArrayOutputStream()
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 10, byteArrayOutputStream)
-                val reduceImage: ByteArray = byteArrayOutputStream.toByteArray()
-
-                refStorage.putBytes(reduceImage).addOnSuccessListener { uploadTask ->
-                    modelRequestAddProduct.path_storage = refStorage.path
-
-                    uploadTask.storage.downloadUrl.addOnSuccessListener { uri ->
-                        modelRequestAddProduct.image = uri.toString()
-                        ProductApiService(token).addProductApiService(modelRequestAddProduct, {msg, data ->
-                            Toast.makeText(this, "$msg ${data?.name}", Toast.LENGTH_SHORT).show()
-
-                            val intent = Intent(applicationContext, MainActivity::class.java)
-                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                            startActivity(intent)
-                        }, {responseErrorBodyMsg ->
-
-                            // Harus nya hapus image di firestore
-
-                            alertDialogErrAddItem(responseErrorBodyMsg)
-                            binding.btnNextForm.visibility = View.VISIBLE
-                            binding.progressBar.visibility = View.INVISIBLE
-                        }, {failureMessage ->
-
-                            // Harus nya hapus image di firestore
-
-                            alertDialogErrAddItem(failureMessage)
-                            binding.btnNextForm.visibility = View.VISIBLE
-                            binding.progressBar.visibility = View.INVISIBLE
-                        })
-                    }.addOnFailureListener {
-                        Toast.makeText(this, "DOWNLOAD PHOTO GAGAL!", Toast.LENGTH_SHORT).show()
-                        binding.btnNextForm.visibility = View.VISIBLE
-                        binding.progressBar.visibility = View.INVISIBLE
-                    }
-                }.addOnFailureListener {
-                    Toast.makeText(this, "UPLOAD PHOTO GAGAL!", Toast.LENGTH_SHORT).show()
-                    binding.btnNextForm.visibility = View.VISIBLE
-                    binding.progressBar.visibility = View.INVISIBLE
-                }
 
             } else {
                 Toast.makeText(this, "Tambahin gambar dulu", Toast.LENGTH_SHORT).show()
@@ -566,6 +491,46 @@ class AddProductStepActivity : AppCompatActivity(),
                 binding.progressBar.visibility = View.INVISIBLE
             }
         }
+    }
+
+    private fun uploadImageToFirebase(
+        code: String,
+        name: String,
+        fillPath: String
+    ) {
+        val nameFile = UUID.randomUUID()
+        val refStorage =
+            firebaseStorage.reference.child("/image_product/${code}/${name}_${nameFile}.jpg")
+
+        // Compress image
+        val reduceImage: ByteArray = bytes(fillPath)
+
+        refStorage.putBytes(reduceImage).addOnSuccessListener { uploadTask ->
+            modelRequestAddProduct.path_storage = refStorage.path
+
+            uploadTask.storage.downloadUrl.addOnSuccessListener { uri ->
+
+                modelRequestAddProduct.image = uri.toString()
+                presenter.addProductRequest(modelRequestAddProduct)
+
+            }.addOnFailureListener {
+                Toast.makeText(this, "DOWNLOAD PHOTO GAGAL!", Toast.LENGTH_SHORT).show()
+                binding.btnNextForm.visibility = View.VISIBLE
+                binding.progressBar.visibility = View.INVISIBLE
+            }
+        }.addOnFailureListener {
+            Toast.makeText(this, "UPLOAD PHOTO GAGAL!", Toast.LENGTH_SHORT).show()
+            binding.btnNextForm.visibility = View.VISIBLE
+            binding.progressBar.visibility = View.INVISIBLE
+        }
+    }
+
+    private fun bytes(fillPath: String): ByteArray {
+        val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, fillPath.toUri())
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 10, byteArrayOutputStream)
+        val reduceImage: ByteArray = byteArrayOutputStream.toByteArray()
+        return reduceImage
     }
 
 
@@ -579,6 +544,28 @@ class AddProductStepActivity : AppCompatActivity(),
 
             }
             .show()
+    }
+
+    override fun onResponseSuccessBodyAddProduct(msg: String, data: Product?) {
+        val intent = Intent(applicationContext, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+    }
+
+    override fun onResponseErrorBodyAddProduct(msg: String) {
+        // Harus nya hapus image di firestore
+
+        alertDialogErrAddItem(msg)
+        binding.btnNextForm.visibility = View.VISIBLE
+        binding.progressBar.visibility = View.INVISIBLE
+    }
+
+    override fun onFailureResponseAddProduct(msg: String) {
+        // Harus nya hapus image di firestore
+
+        alertDialogErrAddItem(msg)
+        binding.btnNextForm.visibility = View.VISIBLE
+        binding.progressBar.visibility = View.INVISIBLE
     }
 
 

@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -14,9 +13,7 @@ import com.example.warehouseproject.core.model.product.Product
 import com.example.warehouseproject.core.service.product.ProductApiService
 import com.example.warehouseproject.core.utils.DataBundle
 import com.example.warehouseproject.core.view.main.detail_product.DetailProductActivity
-import com.example.warehouseproject.core.view.main.home_fragment.HomePresenter
 import com.example.warehouseproject.core.view.main.home_fragment.product_list_all.paging.api.ApiService
-import com.example.warehouseproject.core.view.product.add_product.AddProductActivity
 import com.example.warehouseproject.core.view.product.add_product.steps.AddProductStepActivity
 import com.example.warehouseproject.databinding.ActivityProductListAllBinding
 import io.paperdb.Paper

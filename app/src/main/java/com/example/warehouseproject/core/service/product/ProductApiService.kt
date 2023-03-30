@@ -17,7 +17,12 @@ import java.net.SocketTimeoutException
 
 class ProductApiService(private val token: String) {
 
-    fun addProductApiService(requestAddProduct: ProductRequest, onResponseSuccessBody: (msg: String, data: Product? ) -> Unit, onResponseErrorBody: (msg: String) -> Unit, onFailure: (msg: String) -> Unit) {
+    interface OnFinishedAddProduct {
+        fun onResponseSuccessBodyAddProduct(msg: String, data: Product?)
+        fun onResponseErrorBodyAddProduct(msg: String)
+        fun onFailureResponseAddProduct(msg: String)
+    }
+    fun addProductApiService(requestAddProduct: ProductRequest, listener :OnFinishedAddProduct) {
         // request api
         NetworkConfig(Constant.BASE_URL, token)
             .productService()
@@ -29,19 +34,19 @@ class ProductApiService(private val token: String) {
                 ) {
                    if (response.isSuccessful) {
                        response.body()?.let {
-                           onResponseSuccessBody(it.message, it.data)
+                           listener.onResponseSuccessBodyAddProduct(it.message, it.data)
                        }
                    } else {
                        // convert json to String
                        val gson = Gson()
                        val mNanu = gson.fromJson(response.errorBody()?.string(), ProductResponses.SingleResponse::class.java)
-                       onResponseErrorBody(mNanu.message)
+                       listener.onResponseErrorBodyAddProduct(mNanu.message)
                    }
                 }
 
                 override fun onFailure(call: Call<ProductResponses.SingleResponse>, t: Throwable) {
                     if(t is SocketTimeoutException) {
-                        onFailure(t.message.toString())
+                        listener.onFailureResponseAddProduct(t.message.toString())
                     }
                 }
 

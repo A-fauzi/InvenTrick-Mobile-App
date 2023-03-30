@@ -14,107 +14,22 @@ import com.example.warehouseproject.core.model.product.category.Category
 import com.squareup.picasso.Picasso
 import io.paperdb.Paper
 
-class AddProductPresenter(var addProductView: AddProductView?, val addProductInteractor: AddProductInteractor): AddProductInteractor.OnAddProductFinishedListener {
+class AddProductPresenter(var addProductView: AddProductView?, private val productApiService: ProductApiService): ProductApiService.OnFinishedAddProduct {
 
-
-    fun validateAddProduct(inputFormAddProduct: ProductRequest) {
-        addProductInteractor.addProduct(inputFormAddProduct, this)
+    fun addProductRequest(request: ProductRequest) {
+        productApiService.addProductApiService(request, this)
     }
 
-    fun requestApiDataProduct(context: Context, requestAddProduct: ProductRequest, onResponseSuccessBody: (msg: String, data: Product?) -> Unit, onResponseErrorBody: (msg: String) -> Unit, onFailure: (msg: String) -> Unit) {
-        Paper.init(context)
-        val token = Paper.book().read<String>("token").toString()
-        ProductApiService(token).addProductApiService(requestAddProduct, onResponseSuccessBody, onResponseErrorBody, onFailure)
+    override fun onResponseSuccessBodyAddProduct(msg: String, data: Product?) {
+        addProductView?.onResponseSuccessBodyAddProduct(msg, data)
     }
 
-    fun resultImageFromGallery(requestCode: Int, resultCode: Int, data: Intent?) {
-        addProductInteractor.resultImageFromGallery(requestCode, resultCode, data, this)
+    override fun onResponseErrorBodyAddProduct(msg: String) {
+        addProductView?.onResponseErrorBodyAddProduct(msg)
     }
 
-    fun getCategory(context: Context) {
-        addProductInteractor.requestCategoryApi(context,this)
-    }
-
-//    fun searchItemsProductName(context: Context, itemCode: String) {
-//        addProductInteractor.searchItemProductNameByCode(context, "product.json", itemCode, this)
-//    }
-
-    override fun onInputErrorCode() {
-        addProductView?.showInputErrorCode()
-    }
-
-    override fun onInputErrorName() {
-        addProductView?.showInputErrorName()
-    }
-
-    override fun onInputErrorQty() {
-        addProductView?.showInputErrorQty()
-    }
-
-    override fun onInputErrorCategory() {
-        addProductView?.showInputErrorCategory()
-    }
-
-    override fun onInputErrorSubCategory() {
-        addProductView?.showInputErrorSubCategory()
-    }
-
-    override fun onInputErrorSpec() {
-        addProductView?.showInputErrorSpec()
-    }
-
-    override fun onInputErrorPrice() {
-        addProductView?.showInputErrorPrice()
-    }
-
-    override fun onInputErrorLocation() {
-        addProductView?.showInputErrorLocation()
-    }
-
-    override fun onInputErrorStatus() {
-        addProductView?.showInputErrorStatus()
-    }
-
-    override fun onInputErrorModel() {
-        addProductView?.showInputErrorModel()
-    }
-
-    override fun onInputErrorLot() {
-        addProductView?.showInputErrorLot()
-    }
-
-    override fun onInputErrorExp() {
-        addProductView?.showInputErrorExp()
-    }
-
-    override fun onSuccessValidationInput() {
-        addProductView?.showSuccessValidation()
-        addProductView?.hideButton()
-        addProductView?.showProgressbar()
-    }
-
-    override fun onDataCategoryRequestNotEmpty(data: List<Category>) {
-        addProductView?.onDataCategoryRequestNotEmptyView(data)
-    }
-
-    override fun onDataCategoryRequestIsEmpty() {
-        addProductView?.onDataCategoryRequestIsEmptyView()
-    }
-
-    override fun searchItemsIsNull() {
-        addProductView?.searchItemsIsNullView()
-    }
-
-    override fun searchItemsIsNotNull(data: ProductModelAssets?) {
-        addProductView?.searchItemsIsNotNullView(data)
-    }
-
-    override fun onSuccessTryResultImageFromGallery(data: Intent?) {
-        addProductView?.onSuccessTryResultImageFromGalleryView(data)
-    }
-
-    override fun onFailureCatchResultImageFromGallery(e: Exception) {
-        addProductView?.onFailureCatchResultImageFromGalleryView(e)
+    override fun onFailureResponseAddProduct(msg: String) {
+        addProductView?.onFailureResponseAddProduct(msg)
     }
 
 }
