@@ -18,7 +18,7 @@
 
 
         <!-- text color -->
-        <item name="android:textColor">@color/text_color_default</item>
+        <item name="android:textColor">@color/font_color_default</item>
 
         <!--    Use Bottomsheet dialog custom    -->
         <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.MyApp.LargeComponent

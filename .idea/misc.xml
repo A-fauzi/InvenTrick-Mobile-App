@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/MY-PROJECT/Warehouse-Project/app/src/main/res/drawable-v24/component_steps_circle_disable.xml" value="0.1405" />
         <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/MY-PROJECT/Warehouse-Project/app/src/main/res/drawable-v24/dialog_round_corner_24_white.xml" value="0.149" />
+        <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/MY-PROJECT/Warehouse-Project/app/src/main/res/drawable/component_steps_circle.xml" value="0.1405" />
         <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/MY-PROJECT/Warehouse-Project/app/src/main/res/drawable/dialog_round_corner.xml" value="0.116" />
         <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/MY-PROJECT/Warehouse-Project/app/src/main/res/drawable/ic_apps.xml" value="0.2185" />
         <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/MY-PROJECT/Warehouse-Project/app/src/main/res/drawable/ic_badge_check.xml" value="0.149" />
@@ -14,6 +16,7 @@
         <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/MY-PROJECT/Warehouse-Project/app/src/main/res/drawable/ic_time_past.xml" value="0.2185" />
         <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/MY-PROJECT/Warehouse-Project/app/src/main/res/drawable/ic_user.xml" value="0.149" />
         <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/MY-PROJECT/Warehouse-Project/app/src/main/res/drawable/pop_up_menu_bg.xml" value="0.1405" />
+        <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/MY-PROJECT/Warehouse-Project/app/src/main/res/drawable/progressbar_steps.xml" value="0.1405" />
         <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/MY-PROJECT/Warehouse-Project/app/src/main/res/drawable/qr_code_reader_square.xml" value="0.1405" />
         <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/MY-PROJECT/Warehouse-Project/app/src/main/res/drawable/spreading_shadow.xml" value="0.1405" />
         <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/MY-PROJECT/Warehouse-Project/app/src/main/res/drawable/trash_24.xml" value="0.116" />
@@ -22,7 +25,8 @@
         <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/MY-PROJECT/Warehouse-Project/app/src/main/res/layout-v28/items_sub_category.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/MY-PROJECT/Warehouse-Project/app/src/main/res/layout/activity_account_update.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/MY-PROJECT/Warehouse-Project/app/src/main/res/layout/activity_add_prod_step1.xml" value="0.22447916666666667" />
-        <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/MY-PROJECT/Warehouse-Project/app/src/main/res/layout/activity_add_product.xml" value="0.22" />
+        <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/MY-PROJECT/Warehouse-Project/app/src/main/res/layout/activity_add_product.xml" value="0.25" />
+        <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/MY-PROJECT/Warehouse-Project/app/src/main/res/layout/activity_add_product_step.xml" value="0.25" />
         <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/MY-PROJECT/Warehouse-Project/app/src/main/res/layout/activity_detail_product.xml" value="0.25" />
         <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/MY-PROJECT/Warehouse-Project/app/src/main/res/layout/activity_example_main.xml" value="0.1" />
         <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/MY-PROJECT/Warehouse-Project/app/src/main/res/layout/activity_login.xml" value="0.22447916666666667" />
@@ -37,9 +41,12 @@
         <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/MY-PROJECT/Warehouse-Project/app/src/main/res/layout/activity_stock_out.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/MY-PROJECT/Warehouse-Project/app/src/main/res/layout/component_button.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/MY-PROJECT/Warehouse-Project/app/src/main/res/layout/fragment_account.xml" value="0.25" />
+        <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/MY-PROJECT/Warehouse-Project/app/src/main/res/layout/fragment_add_product_step1.xml" value="0.25" />
         <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/MY-PROJECT/Warehouse-Project/app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/MY-PROJECT/Warehouse-Project/app/src/main/res/layout/fragment_image_capture.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/MY-PROJECT/Warehouse-Project/app/src/main/res/layout/fragment_scan.xml" value="0.22" />
+        <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/MY-PROJECT/Warehouse-Project/app/src/main/res/layout/item_add_product_choose_category.xml" value="0.19953703703703704" />
+        <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/MY-PROJECT/Warehouse-Project/app/src/main/res/layout/item_add_product_steps.xml" value="0.33" />
         <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/MY-PROJECT/Warehouse-Project/app/src/main/res/layout/item_create_category.xml" value="0.22" />
         <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/MY-PROJECT/Warehouse-Project/app/src/main/res/layout/item_data_history.xml" value="0.25" />
         <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/MY-PROJECT/Warehouse-Project/app/src/main/res/layout/item_data_product.xml" value="0.25" />

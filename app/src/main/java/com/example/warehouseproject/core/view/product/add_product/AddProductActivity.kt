@@ -144,7 +144,7 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
                 name = "${name.text}",
                 user = modelUser,
                 qty = "${qty.text}",
-                price = price.text.toString(),
+                price = price.text.toString().toInt(),
                 category = "${category.text}",
                 sub_category = "${subCategory.text}",
                 specification = "${spec.text}",
@@ -353,7 +353,7 @@ class AddProductActivity : AppCompatActivity(), AddProductView {
         val refStorage =
             firebaseStorage.reference.child("/image_product/${code.text}/${name.text}_${nameFile}.jpg")
 
-//        // Compress image
+        // Compress image
         val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, fillPath)
         val byteArrayOutputStream = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, 10, byteArrayOutputStream)

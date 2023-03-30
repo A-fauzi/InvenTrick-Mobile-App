@@ -37,6 +37,16 @@ class SignInActivity : AppCompatActivity(), SignInView {
     private lateinit var btnLogin: Button
     private var id = "null"
 
+    /**
+
+    Fungsi initView digunakan untuk inisialisasi tampilan dan presenter pada kelas SignInActivity.
+
+    Fungsi ini memanggil beberapa fungsi, yaitu:
+
+    Menginisialisasi tombol login dan mengubah teksnya menjadi "login".
+    Menginisialisasi Paper (library untuk menyimpan data sederhana di Android).
+    Menginisialisasi presenter SignInPresenter dengan parameter this (activity yang akan menjadi view), UserApiService() (kelas yang digunakan untuk melakukan request ke server), dan SignInInteractor() (kelas yang berisi logika bisnis terkait validasi sign in).
+     */
     private fun initView() {
         btnLogin = binding.btnComponentLogin.btnComponent
         btnLogin.text = getString(R.string.login)
@@ -44,6 +54,7 @@ class SignInActivity : AppCompatActivity(), SignInView {
         Paper.init(this)
         presenter = SignInPresenter(this, UserApiService(), SignInInteractor())
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
 
@@ -68,6 +79,11 @@ class SignInActivity : AppCompatActivity(), SignInView {
 
     }
 
+
+    /**
+     * Fungsi checkCurrentUser digunakan untuk memeriksa apakah pengguna sudah login sebelumnya.
+    Fungsi ini akan memeriksa nilai dari variabel id, jika nilainya bukan "null", maka aktivitas MainActivity akan dibuka dan aktivitas saat ini akan diakhiri.
+     */
     private fun checkCurrentUser() {
         if (id != "null") {
             startActivity(Intent(this, MainActivity::class.java))
@@ -75,11 +91,22 @@ class SignInActivity : AppCompatActivity(), SignInView {
         }
     }
 
+
+    /**
+     * Fungsi editTextSetTextWatcher digunakan untuk menambahkan TextWatcher pada EditText etEmail dan etPassword di layout.
+    TextWatcher digunakan untuk memantau perubahan pada teks yang dimasukkan pada EditText.
+     */
     private fun editTextSetTextWatcher() {
         binding.etEmail.addTextChangedListener(textWatcher(binding.etEmail))
         binding.etPassword.addTextChangedListener(textWatcher(binding.etPassword))
     }
 
+
+    /**
+     * Fungsi buttonAction digunakan untuk menambahkan aksi pada tombol login dan tombol tvBtnDirectOpenwa.
+    Jika tombol login ditekan, maka akan dibuat sebuah objek request dari UserRequest dengan username dan password yang diambil dari EditText etEmail dan etPassword, kemudian akan memanggil presenter.validateFormSignIn dengan parameter request.
+    Jika tombol tvBtnDirectOpenwa ditekan, maka akan memanggil fungsi openWa dengan parameter nomor telepon admin dan pesan yang ingin dikirimkan.
+     */
     private fun buttonAction() {
         btnLogin.setOnClickListener {
             val request = UserRequest(binding.etEmail.text.toString(), binding.etPassword.text.toString())
@@ -146,6 +173,15 @@ class SignInActivity : AppCompatActivity(), SignInView {
         presenter.signInUser(userRequest)
     }
 
+
+    /**
+
+    Fungsi textWatcher() digunakan untuk menambahkan TextWatcher pada EditText.
+    TextWatcher digunakan untuk melakukan aksi tertentu saat input pada EditText berubah.
+    Fungsi ini menerima input berupa EditText dan mengembalikan sebuah objek TextWatcher yang akan diterapkan pada EditText tersebut.
+    Jika EditText yang diinputkan adalah binding.etEmail, maka fungsi akan memeriksa apakah teks yang diinputkan kosong atau tidak. Jika kosong, maka fungsi akan menampilkan pesan error dan menonaktifkan EditText password dan tombol login.
+    Jika EditText yang diinputkan adalah binding.etPassword, maka fungsi akan menonaktifkan tombol login jika teks yang diinputkan kosong.
+     */
     private fun textWatcher(input: EditText) = object : android.text.TextWatcher {
         override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}

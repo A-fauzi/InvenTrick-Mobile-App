@@ -15,6 +15,7 @@ import com.example.warehouseproject.core.view.main.detail_product.DetailProductA
 import com.example.warehouseproject.core.view.main.home_fragment.HomePresenter
 import com.example.warehouseproject.core.view.main.home_fragment.product_list_all.paging.api.ApiService
 import com.example.warehouseproject.core.view.product.add_product.AddProductActivity
+import com.example.warehouseproject.core.view.product.add_product.steps.AddProductStepActivity
 import com.example.warehouseproject.databinding.ActivityProductListAllBinding
 import io.paperdb.Paper
 import kotlinx.coroutines.launch
@@ -49,7 +50,7 @@ class ProductListAllActivity : AppCompatActivity(), ProductsAdapterPaging.Produc
 
         binding.btnAddProduct.btnComponent.setOnClickListener {
             binding.btnAddProduct.btnComponent.startAnimation(AnimationUtils.loadAnimation(this, R.anim.animation_button))
-            startActivity(Intent(this, AddProductActivity::class.java))
+            startActivity(Intent(this, AddProductStepActivity::class.java))
         }
     }
 

@@ -11,6 +11,11 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import com.example.warehouseproject.R
+import com.example.warehouseproject.core.constant.Constant.User.DIVISION
+import com.example.warehouseproject.core.constant.Constant.User.EMAIL
+import com.example.warehouseproject.core.constant.Constant.User.FULLNAME
+import com.example.warehouseproject.core.constant.Constant.User.PROFILE_PHOTO
+import com.example.warehouseproject.core.constant.Constant.User.USERNAME
 import com.example.warehouseproject.core.view.authentication.SignInActivity
 import com.example.warehouseproject.databinding.ActivityAccountUpdateBinding
 import com.google.android.material.textfield.TextInputLayout
@@ -18,16 +23,6 @@ import com.squareup.picasso.Picasso
 import io.paperdb.Paper
 
 class AccountUpdateActivity : AppCompatActivity() {
-    companion object {
-        private const val ID = "id"
-        private const val USERNAME = "username"
-        private const val FULLNAME = "fullname"
-        private const val EMAIL = "email"
-        private const val TOKEN = "token"
-        private const val STORAGE_PATH_PROFILE = "path"
-        private const val PROFILE_PHOTO = "photo"
-        private const val DIVISION = "division"
-    }
 
     private lateinit var binding: ActivityAccountUpdateBinding
 
@@ -42,6 +37,7 @@ class AccountUpdateActivity : AppCompatActivity() {
         etFullName = binding.etFullname
         etPassword = binding.etPassword
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAccountUpdateBinding.inflate(layoutInflater)
@@ -68,6 +64,7 @@ class AccountUpdateActivity : AppCompatActivity() {
         etFullName.addTextChangedListener(textWatcher(etFullName))
         etPassword.addTextChangedListener(textWatcher(etPassword))
     }
+
 
     private fun topAppBar() {
         binding.newTxtTopbar.viewStart.visibility = View.GONE

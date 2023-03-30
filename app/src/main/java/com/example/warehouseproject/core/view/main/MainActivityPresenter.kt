@@ -13,12 +13,20 @@ import com.example.warehouseproject.core.model.user.UserRequest
 import com.example.warehouseproject.core.model.user.UserResponse
 import com.example.warehouseproject.core.service.user.UserApiService
 
+/**
+ * Ini adalah kelas MainActivityPresenter yang digunakan untuk mengatur logika bisnis dan komunikasi dengan API untuk tampilan MainActivity
+ */
 class MainActivityPresenter(
     private val context: Context,
     private val activity: Activity,
     private val view: MainView,
     private val userApiService: UserApiService
 ): UserApiService.OnFinishedStatusRequest {
+
+    /**
+     * Method ini digunakan untuk memeriksa apakah aplikasi memiliki izin untuk mengakses penyimpanan dan kamera.
+     * Jika salah satu dari izin-izin tersebut tidak diberikan, method akan meminta izin tersebut kepada pengguna melalui
+     */
     fun checkPermission() {
         when (PackageManager.PERMISSION_DENIED) {
             checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) -> {
@@ -45,6 +53,12 @@ class MainActivityPresenter(
         }
     }
 
+
+    /**
+     * Method ini digunakan untuk memperbarui status aktivitas pengguna pada server.
+     * Method ini membutuhkan tiga parameter: token yang akan digunakan sebagai otorisasi untuk mengakses API, userId sebagai ID pengguna yang status aktivitasnya akan diubah, dan reqStatus sebagai status aktivitas pengguna yang baru.
+     * Method ini akan mengirimkan permintaan ke API melalui objek userApiService dan menunggu respon dari server.
+     */
     fun updateStatusActivityUser(token: String, userId: String, reqStatus: UserRequest.StatusActivity) {
         userApiService.updateStatusUser(token, userId, reqStatus, this)
     }

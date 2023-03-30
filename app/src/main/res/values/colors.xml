@@ -23,4 +23,5 @@
     <color name="purple_soft_200">#EDCCE4</color>
     <color name="blue_soft">#DAE9EE</color>
     <color name="blue_soft_toska">#D3F3F1</color>
+    <color name="font_color_default">#00255E</color>
 </resources>

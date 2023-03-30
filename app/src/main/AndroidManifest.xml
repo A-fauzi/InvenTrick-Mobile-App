@@ -55,6 +55,9 @@
             android:name=".core.view.main.home_fragment.category.ProductCategoryActivity"
             android:exported="false" />
         <activity
+            android:name=".core.view.product.add_product.steps.AddProductStepActivity"
+            android:exported="false" />
+        <activity
             android:name=".core.view.main.home_fragment.stock_out_product.StockOutActivity"
             android:exported="false" />
         <activity

@@ -11,7 +11,7 @@ data class ProductRequest(
     val category: String,
     val sub_category: String,
     val specification: String,
-    var price: String,
+    var price: Int,
     val location: String,
     val status: String,
     val model: String,

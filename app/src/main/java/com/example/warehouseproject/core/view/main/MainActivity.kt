@@ -25,13 +25,31 @@ import io.paperdb.Paper
 
 class MainActivity : AppCompatActivity(), MainView {
 
+    /**
+     * realtimeDatabase yang merupakan objek dari kelas RealtimeDatabase
+     */
     private lateinit var realtimeDatabase: RealtimeDatabase
+
+    /**
+     * navController yang merupakan objek dari kelas NavController
+     */
     private lateinit var navController: NavController
 
+    /**
+     * binding yang merupakan objek dari kelas ActivityMainBinding
+     */
     private lateinit var binding: ActivityMainBinding
 
+    /**
+     * presenter yang merupakan objek dari kelas MainActivityPresenter
+     */
     private lateinit var presenter: MainActivityPresenter
 
+
+    /**
+     *  terdapat fungsi initView() yang dipanggil pada saat onCreate() dijalankan.
+     *  Fungsi ini bertugas melakukan inisialisasi objek-objek yang diperlukan pada activity ini.
+     */
     private fun initView() {
         Paper.init(this)
 
@@ -54,6 +72,18 @@ class MainActivity : AppCompatActivity(), MainView {
         checkInternetConnection()
     }
 
+
+    /**
+     * Fungsi ini bertujuan untuk memeriksa koneksi internet.
+     * Jika perangkat terhubung ke internet, maka akan melakukan pembaruan status aktivitas pengguna menjadi "online" pada database server. Kemudian, fungsi ini akan menyiapkan navigasi menuju halaman utama aplikasi.
+     * Namun, jika perangkat tidak terhubung ke internet, maka akan menampilkan halaman pemutusan koneksi internet dan menutup aplikasi.
+     * Fungsi ini menggunakan kelas InternetConnect untuk memeriksa koneksi internet.
+     * Jika koneksi internet tersedia, fungsi akan memanggil fungsi updateStatusActivityUser() pada presenter dengan parameter token, userId, dan data status pengguna.
+     * Fungsi tersebut akan mengirim permintaan ke server untuk memperbarui status aktivitas pengguna.
+     * Kemudian, fungsi ini menggunakan kelas Paper untuk menulis status aktivitas pengguna ke penyimpanan lokal dan menyiapkan navigasi menuju halaman utama aplikasi.
+     * Namun, jika perangkat tidak terhubung ke internet, fungsi akan menampilkan halaman ItemDisconnectActivity dan menutup aplikasi.
+
+     */
     private fun checkInternetConnection() {
         if (InternetConnect.checkInternetConnect(this)) {
 
@@ -72,6 +102,12 @@ class MainActivity : AppCompatActivity(), MainView {
     }
 
 
+    /**
+     * Fungsi setUpNavigation() digunakan untuk melakukan pengaturan navigasi antara bottom navigation dengan fragment yang terkait di dalam aplikasi.
+     * Pertama, kita dapat menemukan NavHostFragment yang terkait dengan R.id.fragment_container.
+     * Kemudian kita dapat mengambil instance dari NavController yang terkait dengan NavHostFragment.
+     * Selanjutnya, bottom navigation di inisialisasi dan diatur dengan menggunakan setupWithNavController untuk menentukan navigasi ketika item bottom navigation di klik.
+     */
     private fun setUpNavigation() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment

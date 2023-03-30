@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.chip.Chip
+    android:id="@+id/tv_item_category"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="category"
+    android:layout_marginEnd="8dp"
+    android:textSize="@dimen/text_size_12">
+
+</com.google.android.material.chip.Chip>

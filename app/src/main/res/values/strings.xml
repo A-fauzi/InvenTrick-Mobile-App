@@ -21,7 +21,7 @@
     <string name="upload_image">Upload Image</string>
     <string name="upload_helper_text">Upload max 5mb</string>
     <string name="code_product">code product</string>
-    <string name="product_name">product name</string>
+    <string name="product_name">Indomie Goreng</string>
     <string name="product_quantity">product quantity</string>
     <string name="quantity_default_text">0</string>
     <string name="category_product">category</string>
@@ -39,7 +39,7 @@
     <string name="textview_example">TextView</string>
     <string name="susu_beruang">Susu beruang</string>
     <string name="code_example">PX0001</string>
-    <string name="specification_example">Specification</string>
+    <string name="specification_example">Specification Product</string>
     <string name="expired_date_example">expired date:</string>
     <string name="exp_example">exp</string>
     <string name="quantity_example">quantity:</string>
@@ -94,6 +94,7 @@
     <string name="products_is_empty">0 Products</string>
     <string name="product_is_avail">Product is avail</string>
     <string name="product_is_not_avail">Product not avail</string>
+    <string name="upload">Upload</string>
     <string-array name="default_items">
         <item>Tambahkan nanti</item>
     </string-array>
