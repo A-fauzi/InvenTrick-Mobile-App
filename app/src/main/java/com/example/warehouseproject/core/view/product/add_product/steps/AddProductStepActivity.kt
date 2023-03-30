@@ -76,6 +76,8 @@ class AddProductStepActivity : AppCompatActivity(),
         binding.baseCardview3.isEnabled = false
         binding.baseCardview3.setStrokeColor(getColorStateList(com.google.android.material.R.color.material_on_surface_disabled))
 
+        autoCompleteStatusProduct()
+
     }
 
     override fun onStart() {
@@ -106,7 +108,6 @@ class AddProductStepActivity : AppCompatActivity(),
         )
 
         cardViewUploadImage()
-        autoCompleteStatusProduct()
 
         productCategoryService.getCategories {
             adapterCategory.setData(it)
@@ -307,7 +308,7 @@ class AddProductStepActivity : AppCompatActivity(),
      */
     private fun autoCompleteStatusProduct() {
         // Deklarasi dan inisialisasi array list yang berisi status produk
-        val array = arrayListOf("active", "in-progress")
+        val array = arrayListOf("in-progress","active")
 
         // Deklarasi dan inisialisasi array adapter untuk menampilkan array list pada dropdown
         val arrayAdapter = ArrayAdapter(this, R.layout.item_dropdown_category, array)

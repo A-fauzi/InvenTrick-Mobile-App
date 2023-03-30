@@ -66,8 +66,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/inter_bold"
-                        android:text="@string/code_example"
-                        android:textColor="@color/black" />
+                        android:text="@string/code_example" />
 
                     <TextView
                         android:id="@+id/tv_name"
@@ -76,8 +75,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="16dp"
                         android:fontFamily="@font/inter_semibold"
-                        android:text="@string/lorem"
-                        android:textColor="@color/black"/>
+                        android:text="@string/lorem" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"

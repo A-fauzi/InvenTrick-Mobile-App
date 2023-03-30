@@ -63,11 +63,12 @@
                                     android:orientation="vertical">
 
                                     <TextView
+                                        android:id="@+id/tv_count_all_product"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="25k"
+                                        android:text="Count..."
                                         android:fontFamily="@font/inter_bold"
-                                        android:textSize="24sp"/>
+                                        android:textSize="@dimen/text_size_12"/>
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
@@ -83,15 +84,16 @@
                                     android:orientation="vertical">
 
                                     <TextView
+                                        android:id="@+id/tv_count_on_progress"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="10k"
+                                        android:text="Count..."
                                         android:fontFamily="@font/inter_bold"
-                                        android:textSize="24sp"/>
+                                        android:textSize="@dimen/text_size_12"/>
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="On progres"
+                                        android:text="In progres"
                                         android:fontFamily="@font/inter_semibold"/>
                                 </LinearLayout>
                                 <Space
@@ -103,11 +105,12 @@
                                     android:orientation="vertical">
 
                                     <TextView
+                                        android:id="@+id/tv_count_active"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="15k"
+                                        android:text="Count..."
                                         android:fontFamily="@font/inter_bold"
-                                        android:textSize="24sp"/>
+                                        android:textSize="@dimen/text_size_12"/>
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"

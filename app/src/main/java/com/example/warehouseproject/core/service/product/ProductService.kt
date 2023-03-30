@@ -21,6 +21,12 @@ interface ProductService {
     @GET("product/")
     fun getProductByCode(@Query("code_items") codeItem: String): Call<Product>
 
+    @GET("product-status")
+    fun getProductByStatus(
+        @Query("status")
+        status: String
+    ): Call<ProductResponses>
+
     @PUT("product/{id}")
     fun updateProductQty(@Path("id") id: String, @Body productRequestQty: ProductRequest.RequestQtyOnly): Call<ProductResponses.SingleResponse>
 

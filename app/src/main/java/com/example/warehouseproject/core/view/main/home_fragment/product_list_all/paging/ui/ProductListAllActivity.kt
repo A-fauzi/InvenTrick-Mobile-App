@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.model.product.Product
+import com.example.warehouseproject.core.service.product.ProductApiService
 import com.example.warehouseproject.core.utils.DataBundle
 import com.example.warehouseproject.core.view.main.detail_product.DetailProductActivity
 import com.example.warehouseproject.core.view.main.home_fragment.HomePresenter
@@ -20,7 +22,8 @@ import com.example.warehouseproject.databinding.ActivityProductListAllBinding
 import io.paperdb.Paper
 import kotlinx.coroutines.launch
 
-class ProductListAllActivity : AppCompatActivity(), ProductsAdapterPaging.ProductsListenerPaging {
+class ProductListAllActivity : AppCompatActivity(), ProductsAdapterPaging.ProductsListenerPaging,
+    ProductApiService.OnFinishedGetProductByStatus {
 
     private lateinit var binding: ActivityProductListAllBinding
     private lateinit var viewModel: ProductViewModel
@@ -43,13 +46,22 @@ class ProductListAllActivity : AppCompatActivity(), ProductsAdapterPaging.Produc
         setupViewModel()
         setupList()
         setupView()
+
+        ProductApiService(token).getProductByStatus("active", { data ->
+            binding.tvCountActive.text = data.totalCount.toString()
+            binding.tvCountActive.textSize = 24f
+        }, this)
+
+        ProductApiService(token).getProductByStatus("in-progress", { data ->
+            binding.tvCountOnProgress.text = data.totalCount.toString()
+            binding.tvCountOnProgress.textSize = 24f
+        }, this)
     }
 
     override fun onStart() {
         super.onStart()
 
         binding.btnAddProduct.btnComponent.setOnClickListener {
-            binding.btnAddProduct.btnComponent.startAnimation(AnimationUtils.loadAnimation(this, R.anim.animation_button))
             startActivity(Intent(this, AddProductStepActivity::class.java))
         }
     }
@@ -85,6 +97,8 @@ class ProductListAllActivity : AppCompatActivity(), ProductsAdapterPaging.Produc
                         // data is not empty
                         binding.progressBarListProduct.visibility = View.GONE
                         val dataCount = productListAdapter.itemCount.toString()
+                        binding.tvCountAllProduct.text = dataCount
+                        binding.tvCountAllProduct.textSize = 24f
                     }
                 }
             }
@@ -107,5 +121,13 @@ class ProductListAllActivity : AppCompatActivity(), ProductsAdapterPaging.Produc
             intent.putExtras(bundle)
             startActivity(intent)
         }
+    }
+
+    override fun onErrorGetProductByStatus(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onFailureResponseGetProductByStatus(msg: String) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 }

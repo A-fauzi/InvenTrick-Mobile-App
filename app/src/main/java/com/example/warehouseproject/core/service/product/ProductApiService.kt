@@ -196,32 +196,33 @@ class ProductApiService(private val token: String) {
             })
     }
 
-    fun getStockHistories(onResponseSuccessBody: (msg: String, data: List<StockHistory>, count: String) -> Unit) {
+    interface OnFinishedGetProductByStatus {
+        fun onErrorGetProductByStatus(message: String)
+        fun onFailureResponseGetProductByStatus(msg: String)
+    }
+
+    fun getProductByStatus(status: String, onResponseSuccessBody: (productResponse: ProductResponses) -> Unit, listener: OnFinishedGetProductByStatus) {
         NetworkConfig(Constant.BASE_URL, token)
             .productService()
-            .getStockHistories()
-            .enqueue(object : Callback<StockHistory.StockHistoryAllResponse> {
-                override fun onResponse(
-                    call: Call<StockHistory.StockHistoryAllResponse>,
-                    response: Response<StockHistory.StockHistoryAllResponse>
-                ) {
+            .getProductByStatus(status)
+            .enqueue(object : Callback<ProductResponses>{
+                override fun onResponse(call: Call<ProductResponses>, response: Response<ProductResponses>) {
                     if (response.isSuccessful) {
-                       response.body()?.let {
-                           onResponseSuccessBody(it.message, it.data, it.count)
-                       }
+                        response.body()?.let {
+                            onResponseSuccessBody(it)
+                        }
                     } else {
-                        Log.d("Histories", response.message())
+                        // convert json to String
+                        val gson = Gson()
+                        val msg = gson.fromJson(response.errorBody()?.string(), ProductResponses.SingleResponse::class.java)
+                        listener.onErrorGetProductByStatus(msg.message)
                     }
                 }
 
-                override fun onFailure(
-                    call: Call<StockHistory.StockHistoryAllResponse>,
-                    t: Throwable
-                ) {
-                    Log.d("Histories", t.message.toString())
+                override fun onFailure(call: Call<ProductResponses>, t: Throwable) {
+                    listener.onFailureResponseGetProductByStatus(t.message.toString())
                 }
 
             })
     }
-
 }
