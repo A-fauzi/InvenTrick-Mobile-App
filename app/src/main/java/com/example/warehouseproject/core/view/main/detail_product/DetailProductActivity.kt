@@ -112,8 +112,8 @@ class DetailProductActivity : AppCompatActivity(), DetailProductView {
                 .setContext(this)
                 .fromViewSource()
                 .fromView(barcode)
-                .setFileName("BARCODE_PRODUCT")
-                .setFolderNameOrPath("warehouse_barcode/")
+                .setFileName(code)
+                .setFolderNameOrPath("barcode_product/")
                 .actionAfterPDFGeneration(PdfGenerator.ActionAfterPDFGeneration.NONE)
                 .build(object : PdfGeneratorListener(){
                     override fun onStartPDFGeneration() {
@@ -129,7 +129,7 @@ class DetailProductActivity : AppCompatActivity(), DetailProductView {
 
                     override fun onSuccess(response: SuccessResponse?) {
                         super.onSuccess(response)
-                        Toast.makeText(this@DetailProductActivity, "Success ${response?.path}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@DetailProductActivity, "Barcode successfully saved in \n${response?.path}", Toast.LENGTH_SHORT).show()
                     }
 
                 })
