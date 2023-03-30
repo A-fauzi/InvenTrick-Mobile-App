@@ -1,6 +1,10 @@
 package com.example.warehouseproject.core.view.authentication
 
+import android.text.Editable
+import android.widget.EditText
+import com.example.warehouseproject.R
 import com.example.warehouseproject.core.model.user.UserRequest
+import com.google.android.material.textfield.TextInputLayout
 
 /**
  * Kelas SignInInteractor memiliki satu fungsi signInValidation yang akan memvalidasi masukan dari pengguna.
@@ -42,5 +46,18 @@ class SignInInteractor {
             input.password.isEmpty() -> listener.onInputPasswordError()
             else -> listener.onSuccessValidationSignIn(input)
         }
+    }
+
+
+    interface OnFinishedTextWatcher {
+        fun onInputTextWatcher(text: String, input: EditText)
+    }
+    fun textWatcher(input: EditText, listener: OnFinishedTextWatcher) = object : android.text.TextWatcher {
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+        override fun afterTextChanged(p0: Editable?) {
+            listener.onInputTextWatcher(p0.toString(), input)
+        }
+
     }
 }

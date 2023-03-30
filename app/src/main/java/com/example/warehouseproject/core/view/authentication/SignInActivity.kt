@@ -52,30 +52,28 @@ class SignInActivity : AppCompatActivity(), SignInView {
         btnLogin.text = getString(R.string.login)
 
         Paper.init(this)
+        id = Paper.book().read<String>(ID).toString()
         presenter = SignInPresenter(this, UserApiService(), SignInInteractor())
+        checkCurrentUser()
+        Picasso.get().load("https://i.pinimg.com/originals/ed/0a/a7/ed0aa728d861d69cdce28fb3055f9fd9.gif").into(binding.ivContent)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val splashScreen = installSplashScreen()
+        installSplashScreen()
 
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         initView()
-
-        id = Paper.book().read<String>(ID).toString()
 
     }
 
     override fun onStart() {
         super.onStart()
 
-        checkCurrentUser()
         buttonAction()
-        editTextSetTextWatcher()
-
-        Picasso.get().load("https://i.pinimg.com/originals/ed/0a/a7/ed0aa728d861d69cdce28fb3055f9fd9.gif").into(binding.ivContent)
+        editTextSetTextWatcher(binding.etEmail)
+        editTextSetTextWatcher(binding.etPassword)
 
     }
 
@@ -96,9 +94,31 @@ class SignInActivity : AppCompatActivity(), SignInView {
      * Fungsi editTextSetTextWatcher digunakan untuk menambahkan TextWatcher pada EditText etEmail dan etPassword di layout.
     TextWatcher digunakan untuk memantau perubahan pada teks yang dimasukkan pada EditText.
      */
-    private fun editTextSetTextWatcher() {
-        binding.etEmail.addTextChangedListener(textWatcher(binding.etEmail))
-        binding.etPassword.addTextChangedListener(textWatcher(binding.etPassword))
+    private fun editTextSetTextWatcher(editText: EditText) {
+
+        editText.addTextChangedListener(SignInInteractor().textWatcher(editText, object : SignInInteractor.OnFinishedTextWatcher{
+
+            override fun onInputTextWatcher(text: String, input: EditText) {
+                when(input) {
+                    binding.etEmail -> {
+                        if (text.isNotEmpty()) {
+                            binding.outlinedTextFieldEmail.endIconMode = TextInputLayout.END_ICON_CUSTOM
+                            binding.outlinedTextFieldEmail.isHelperTextEnabled = false
+                            binding.outlinedTextFieldPassword.isEnabled = true
+                        } else {
+                            binding.outlinedTextFieldPassword.isEnabled = false
+                            binding.outlinedTextFieldEmail.helperText = "Username gaboleh kosong!"
+                            binding.outlinedTextFieldEmail.setHelperTextColor(getColorStateList(R.color.red_smooth))
+                            binding.outlinedTextFieldEmail.endIconMode = TextInputLayout.END_ICON_NONE
+                        }
+                    }
+                    binding.etPassword -> {
+                        btnLogin.isEnabled = text.isNotEmpty()
+                    }
+                }
+            }
+
+        }))
     }
 
 
@@ -171,41 +191,6 @@ class SignInActivity : AppCompatActivity(), SignInView {
 
     override fun onSuccessValidationSignIn(userRequest: UserRequest) {
         presenter.signInUser(userRequest)
-    }
-
-
-    /**
-
-    Fungsi textWatcher() digunakan untuk menambahkan TextWatcher pada EditText.
-    TextWatcher digunakan untuk melakukan aksi tertentu saat input pada EditText berubah.
-    Fungsi ini menerima input berupa EditText dan mengembalikan sebuah objek TextWatcher yang akan diterapkan pada EditText tersebut.
-    Jika EditText yang diinputkan adalah binding.etEmail, maka fungsi akan memeriksa apakah teks yang diinputkan kosong atau tidak. Jika kosong, maka fungsi akan menampilkan pesan error dan menonaktifkan EditText password dan tombol login.
-    Jika EditText yang diinputkan adalah binding.etPassword, maka fungsi akan menonaktifkan tombol login jika teks yang diinputkan kosong.
-     */
-    private fun textWatcher(input: EditText) = object : android.text.TextWatcher {
-        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-        override fun afterTextChanged(p0: Editable?) {
-            val text = p0.toString()
-            when(input) {
-                binding.etEmail -> {
-                    if (text.isNotEmpty()) {
-                        binding.outlinedTextFieldEmail.endIconMode = TextInputLayout.END_ICON_CUSTOM
-                        binding.outlinedTextFieldEmail.isHelperTextEnabled = false
-                        binding.outlinedTextFieldPassword.isEnabled = true
-                    } else {
-                        binding.outlinedTextFieldPassword.isEnabled = false
-                        binding.outlinedTextFieldEmail.helperText = "Username gaboleh kosong!"
-                        binding.outlinedTextFieldEmail.setHelperTextColor(getColorStateList(R.color.red_smooth))
-                        binding.outlinedTextFieldEmail.endIconMode = TextInputLayout.END_ICON_NONE
-                    }
-                }
-                binding.etPassword -> {
-                    btnLogin.isEnabled = text.isNotEmpty()
-                }
-            }
-        }
-
     }
 
 }
