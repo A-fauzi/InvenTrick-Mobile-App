@@ -5,8 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.activity.ComponentActivity
-import androidx.navigation.findNavController
 import coil.load
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.constant.Constant
@@ -116,7 +114,7 @@ class DetailProductActivity : AppCompatActivity(), DetailProductView {
                 .fromView(barcode)
                 .setFileName("BARCODE_PRODUCT")
                 .setFolderNameOrPath("warehouse_barcode/")
-                .actionAfterPDFGeneration(PdfGenerator.ActionAfterPDFGeneration.OPEN)
+                .actionAfterPDFGeneration(PdfGenerator.ActionAfterPDFGeneration.NONE)
                 .build(object : PdfGeneratorListener(){
                     override fun onStartPDFGeneration() {
                     }
