@@ -330,33 +330,97 @@
                         android:layout_width="match_parent"
                         android:layout_height="16dp"/>
 
-                    <ImageView
-                        android:id="@+id/ivQrCode"
-                        android:layout_width="300dp"
-                        android:layout_height="300dp"
-                        android:layout_gravity="center"
-                        android:contentDescription="@string/content_desc_todo"/>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/cv_content_barcode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp">
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btn_prod_in"
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <Space
+                                android:layout_width="wrap_content"
+                                android:layout_height="30dp" />
+
+                            <ImageView
+                                android:id="@+id/ivQrCode"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:adjustViewBounds="true"
+                                android:contentDescription="@string/content_desc_todo"/>
+
+                            <TextView
+                                android:id="@+id/tv_code_item"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                tools:text="PX001"
+                                android:textSize="24sp"
+                                android:fontFamily="@font/inter_bold"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Scan QR code to find product" />
+
+                            <!--       Logo below here        -->
+                        </LinearLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cv_btn_print_barcode"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Product IN"
-                        android:fontFamily="@font/inter_semibold"
-                        android:textAllCaps="false"
-                        android:layout_gravity="center"
-                        app:cornerRadius="15dp"/>
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackground"
+                        app:cardCornerRadius="15dp"
+                        app:cardElevation="0dp"
+                        android:layout_gravity="center">
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btn_prod_out"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Product OUT"
-                        android:fontFamily="@font/inter_semibold"
-                        android:textAllCaps="false"
-                        android:layout_gravity="center"
-                        app:cornerRadius="15dp"
-                        android:backgroundTint="@color/red_smooth"/>
+                        <TextView
+                            android:id="@+id/tv_print_barcode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:fontFamily="@font/inter_semibold"
+                            android:text="Print Barcode"/>
+                    </androidx.cardview.widget.CardView>
+
+                   <RelativeLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content">
+
+                       <com.google.android.material.button.MaterialButton
+                           android:id="@+id/btn_prod_in"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_centerVertical="true"
+                           android:fontFamily="@font/inter_semibold"
+                           android:text="Product IN"
+                           android:textAllCaps="false"
+                           app:cornerRadius="15dp"
+                           android:padding="@dimen/padding_btn_20"/>
+
+                       <com.google.android.material.button.MaterialButton
+                           android:id="@+id/btn_prod_out"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_alignParentEnd="true"
+                           android:layout_centerVertical="true"
+                           android:backgroundTint="@color/red_smooth"
+                           android:fontFamily="@font/inter_semibold"
+                           android:text="Product OUT"
+                           android:textAllCaps="false"
+                           app:cornerRadius="15dp"
+                           android:padding="@dimen/padding_btn_20"/>
+                   </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -390,7 +454,6 @@
                             android:layout_alignParentEnd="true"
                             android:fontFamily="@font/inter_semibold"
                             android:text="@string/update_item"
-                            android:textColor="@color/blue_ocean"
                             tools:ignore="RelativeOverlap" />
                     </RelativeLayout>
 

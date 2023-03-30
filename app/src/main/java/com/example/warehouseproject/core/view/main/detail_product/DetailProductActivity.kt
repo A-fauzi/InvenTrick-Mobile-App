@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.ComponentActivity
 import androidx.navigation.findNavController
 import coil.load
 import com.example.warehouseproject.R
@@ -17,6 +18,10 @@ import com.example.warehouseproject.core.view.main.MainActivity
 import com.example.warehouseproject.core.view.main.home_fragment.stock_in_product.StockInActivity
 import com.example.warehouseproject.core.view.main.home_fragment.stock_out_product.StockOutActivity
 import com.example.warehouseproject.databinding.ActivityDetailProductBinding
+import com.gkemon.XMLtoPDF.PdfGenerator
+import com.gkemon.XMLtoPDF.PdfGeneratorListener
+import com.gkemon.XMLtoPDF.model.FailureResponse
+import com.gkemon.XMLtoPDF.model.SuccessResponse
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.storage.FirebaseStorage
 import io.paperdb.Paper
@@ -87,6 +92,8 @@ class DetailProductActivity : AppCompatActivity(), DetailProductView {
             QrCode.generate(code, binding.ivQrCode)
         }
 
+        binding.tvCodeItem.text = code
+
         if (price != null) {
             binding.tvPriceDetail.text = Currency.format(price.toDouble(), "id", "ID")
         }
@@ -98,6 +105,37 @@ class DetailProductActivity : AppCompatActivity(), DetailProductView {
         checkingUserPosition()
 
         onClickButton(code, pathStorage, productId)
+
+        binding.tvPrintBarcode.setOnClickListener {
+
+            val barcode = binding.cvContentBarcode
+
+            PdfGenerator.getBuilder()
+                .setContext(this)
+                .fromViewSource()
+                .fromView(barcode)
+                .setFileName("BARCODE_PRODUCT")
+                .setFolderNameOrPath("warehouse_barcode/")
+                .actionAfterPDFGeneration(PdfGenerator.ActionAfterPDFGeneration.OPEN)
+                .build(object : PdfGeneratorListener(){
+                    override fun onStartPDFGeneration() {
+                    }
+
+                    override fun onFinishPDFGeneration() {
+                    }
+
+                    override fun onFailure(failureResponse: FailureResponse?) {
+                        super.onFailure(failureResponse)
+                        Toast.makeText(this@DetailProductActivity, "onFailure: " + failureResponse?.errorMessage, Toast.LENGTH_SHORT).show()
+                    }
+
+                    override fun onSuccess(response: SuccessResponse?) {
+                        super.onSuccess(response)
+                        Toast.makeText(this@DetailProductActivity, "Success ${response?.path}", Toast.LENGTH_SHORT).show()
+                    }
+
+                })
+        }
 
     }
 
