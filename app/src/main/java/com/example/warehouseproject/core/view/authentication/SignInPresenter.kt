@@ -64,7 +64,7 @@ class SignInPresenter(private val view: SignInView, private val service: UserApi
      */
     override fun onFailure(message: String) {
         view.onResponseErrorView()
-        view.showResponseMessageError(msg = message)
+        view.onResponseSignInFailure(msg = message)
     }
 
 

@@ -1,6 +1,7 @@
 package com.example.warehouseproject.core.view.main.history_product
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.warehouseproject.core.constant.Constant
 import com.example.warehouseproject.core.model.product.StockHistory
+import com.example.warehouseproject.core.model.user.User
 import com.example.warehouseproject.databinding.FragmentStockHistoriesBinding
 import io.paperdb.Paper
 import kotlinx.coroutines.launch
@@ -61,6 +63,8 @@ class HistoryProductFragment: Fragment(),  StockHistoryAdapterPaging.StockHistor
             adapter = stockHistoryAdapter
 
             stockHistoryAdapter.addLoadStateListener { loadState ->
+                binding.progressBar.visibility = View.VISIBLE
+                binding.contentContainer.visibility = View.GONE
 
                 if (loadState.append.endOfPaginationReached) {
                     if (stockHistoryAdapter.itemCount < 1) {
@@ -69,6 +73,9 @@ class HistoryProductFragment: Fragment(),  StockHistoryAdapterPaging.StockHistor
                     } else {
                         // data is not empty
                         val dataCount = stockHistoryAdapter.itemCount.toString()
+
+                        binding.progressBar.visibility = View.GONE
+                        binding.contentContainer.visibility = View.VISIBLE
                     }
                 }
             }
@@ -84,6 +91,10 @@ class HistoryProductFragment: Fragment(),  StockHistoryAdapterPaging.StockHistor
     }
 
     override fun onClickItemHistory(data: StockHistory) {
-        Toast.makeText(requireActivity(), data.user_id, Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireActivity(), data.name, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onCLickUserProfile(user: User?) {
+        Toast.makeText(requireActivity(), user?.username, Toast.LENGTH_SHORT).show()
     }
 }

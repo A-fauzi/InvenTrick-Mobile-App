@@ -51,4 +51,5 @@ interface SignInView {
      * @param userRequest data user yang akan digunakan untuk sign in.
      */
     fun onSuccessValidationSignIn(userRequest: UserRequest)
+    fun onResponseSignInFailure(msg: String)
 }

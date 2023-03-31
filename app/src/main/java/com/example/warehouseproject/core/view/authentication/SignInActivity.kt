@@ -193,4 +193,13 @@ class SignInActivity : AppCompatActivity(), SignInView {
         presenter.signInUser(userRequest)
     }
 
+    override fun onResponseSignInFailure(msg: String) {
+        MaterialAlertDialogBuilder(this, R.style.ThemeOverlay_App_MaterialAlertDialog)
+            .setTitle("Uppss!")
+            .setMessage("Ada kesalahan, Tidak dapat terhubung ke jaringan!")
+            .setCancelable(true)
+            .setPositiveButton("Retry") {_, _ ->}
+            .show()
+    }
+
 }

@@ -4,14 +4,13 @@ import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
 import com.bumptech.glide.Glide
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.model.product.StockHistory
+import com.example.warehouseproject.core.model.user.User
 import com.example.warehouseproject.core.service.product.ProductApiService
 import com.example.warehouseproject.core.service.user.UserApiService
 import com.example.warehouseproject.databinding.ItemDataHistoryBinding
@@ -70,24 +69,30 @@ class StockHistoryAdapterPaging(
                 val token = Paper.book().read<String>("token").toString()
                 ProductApiService(token).getProductByCode(this?.code_items ?: "", {}, {
                     binding.tvDataNotFound.text = context.getString(R.string.product_is_avail)
-                    binding.tvDataNotFound.setTextColor(context.resources.getColor(com.example.warehouseproject.R.color.blue)) }, {
+                    binding.tvDataNotFound.setTextColor(context.resources.getColor(R.color.blue)) }, {
                     binding.tvDataNotFound.text = context.getString(R.string.product_is_not_avail)
-                    binding.tvDataNotFound.setTextColor(context.resources.getColor(com.example.warehouseproject.R.color.red_smooth))}
+                    binding.tvDataNotFound.setTextColor(context.resources.getColor(R.color.red_smooth))}
                 )
 
-                this?.user_id?.let {
-                    UserApiService().getUserById(token, it, { onSuccess ->
-                        if (onSuccess != null) {
-                            binding.tvItemUsername.text = onSuccess.username
-                            Picasso.get().load(onSuccess.profile_image).placeholder(R.drawable.ic_people).error(R.drawable.img_example).into(binding.ivItemUserPhoto)
-
+                UserApiService().getUserById(token, this?.user_id ?: "null", { onSuccess ->
+                    if (onSuccess != null) {
+                        binding.tvItemUsername.text = onSuccess.username
+                        Glide
+                            .with(context)
+                            .load(onSuccess.profile_image)
+                            .error(R.drawable.img_example)
+                            .into(binding.ivItemUserPhoto)
+                        binding.ivItemUserPhoto.setOnClickListener {
+                            listener.onCLickUserProfile(onSuccess)
                         }
-                    }, { onError->
-                        Log.d("USER", onError)
-                    }, {onFailure ->
-                        Log.d("USER", onFailure)
-                    })
-                }
+
+                        Log.d("USER", onSuccess.toString())
+                    }
+                }, { onError->
+                    Log.d("USER", onError)
+                }, {onFailure ->
+                    Log.d("USER", onFailure)
+                })
 
             }
         }
@@ -100,5 +105,6 @@ class StockHistoryAdapterPaging(
 
     interface StockHistoriesListener {
         fun onClickItemHistory(data: StockHistory)
+        fun onCLickUserProfile(user: User?)
     }
 }

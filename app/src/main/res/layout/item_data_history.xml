@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/tv_item_month_year"
@@ -25,8 +24,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="16dp">
+        android:orientation="horizontal">
 
         <com.google.android.material.divider.MaterialDivider
             android:layout_width="2dp"
@@ -130,7 +128,7 @@
                                        android:id="@+id/iv_item_user_photo"
                                        android:layout_width="30dp"
                                        android:layout_height="30dp"
-                                       tools:src="@drawable/example_user"/>
+                                       android:src="@drawable/img_example"/>
 
                                    <Space
                                        android:layout_width="8dp"
@@ -140,7 +138,7 @@
                                        android:id="@+id/tv_item_username"
                                        android:layout_width="wrap_content"
                                        android:layout_height="wrap_content"
-                                       tools:text="afauzi"
+                                       android:text="load..."
                                        android:fontFamily="@font/inter_semibold"/>
                                </LinearLayout>
                             </LinearLayout>
@@ -151,5 +149,12 @@
             </androidx.cardview.widget.CardView>
         </RelativeLayout>
     </LinearLayout>
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="wrap_content"
+        android:layout_height="2dp"/>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="8dp"/>
 </LinearLayout>
 
