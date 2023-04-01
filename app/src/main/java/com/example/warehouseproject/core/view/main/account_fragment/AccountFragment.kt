@@ -27,6 +27,7 @@ import com.example.warehouseproject.core.view.authentication.SignInActivity
 import com.example.warehouseproject.core.view.main.MainActivityPresenter
 import com.example.warehouseproject.core.view.main.MainView
 import com.example.warehouseproject.core.view.main.account_fragment.account_update.AccountUpdateActivity
+import com.example.warehouseproject.core.view.main.account_fragment.privacy_police.PrivacyPoliceActivity
 import com.example.warehouseproject.core.view.main.account_fragment.product_upload_user.api.ProductsUserApiService
 import com.example.warehouseproject.core.view.main.account_fragment.product_upload_user.ui.ProductsUserActivity
 import com.example.warehouseproject.core.view.main.account_fragment.product_upload_user.ui.ProductsUserViewModel
@@ -135,7 +136,7 @@ class AccountFragment : Fragment(), MainView, ProductsAdapterPaging.ProductsList
             startActivity(Intent(requireActivity(), ProductsUserActivity::class.java))
         }
         binding.cvPrivacy.setOnClickListener {
-            Toast.makeText(requireActivity(), "Masih dalam pengembangan", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(requireActivity(), PrivacyPoliceActivity::class.java))
         }
     }
 
