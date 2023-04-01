@@ -310,12 +310,12 @@ class AddProductStepActivity : AppCompatActivity(), AdapterCategoryAddProduct.Ad
 
 
     override fun onClickItem(category: Category) {
-        this.category = category.name
-        category.sub_category.forEach {
-            this.subCategory = it.name
+        this.category = category.name.toString()
+        category.sub_category?.forEach {
+            this.subCategory = it.name.toString()
         }
 
-        adapterSubCategory.setData(category.sub_category)
+        category.sub_category?.let { adapterSubCategory.setData(it) }
 
         binding.rvSubCategory.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)

@@ -2,14 +2,15 @@ package com.example.warehouseproject.core.view.main.home_fragment.category
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.warehouseproject.core.constant.Constant
-import com.example.warehouseproject.core.utils.helper.HideKeyboardHelper
+import com.example.warehouseproject.core.model.product.category.Category
 import com.example.warehouseproject.core.utils.helper.SimpleDateFormat
-import com.example.warehouseproject.core.model.product.category.CategoryRequest
 import com.example.warehouseproject.core.service.product.category.ProductCategoryService
+import com.example.warehouseproject.core.utils.helper.HideKeyboardHelper
 import com.example.warehouseproject.databinding.ActivityProductCategoryBinding
 import com.example.warehouseproject.databinding.ItemCreateCategoryBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -19,9 +20,11 @@ class ProductCategoryActivity : AppCompatActivity() {
     companion object {
         const val TAG = "ProductCategoryActivity"
     }
+
     private lateinit var binding: ActivityProductCategoryBinding
 
     private lateinit var adapterCategory: AdapterCategory
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProductCategoryBinding.inflate(layoutInflater)
@@ -50,65 +53,79 @@ class ProductCategoryActivity : AppCompatActivity() {
 
     private fun showDialog() {
         val binding = ItemCreateCategoryBinding.inflate(layoutInflater)
-
         val dialog = BottomSheetDialog(this)
 
-        // Logic view
 
         binding.btnAddCategory.setOnClickListener {
-            if (binding.etCategory.text.toString().isEmpty()){
-                Toast.makeText(this, "colom is required", Toast.LENGTH_SHORT).show()
-            } else {
-                binding.tvResultCategory.text = binding.etCategory.text.toString()
+            binding.tvResultCategory.text = binding.etCategory.text.toString()
+            binding.etSubCategoryProduct.requestFocus()
+            binding.outlinedTextCategory.isEnabled = false
+        }
 
-                // container sub category visible
-                binding.rlContainerSubCategory.visibility = View.VISIBLE
-                binding.etSubCategory.requestFocus()
-                binding.btnAddSubCategory.setOnClickListener {
-                    if (binding.etSubCategory.text.toString().isEmpty()) {
-                        Toast.makeText(this, "sub category is required", Toast.LENGTH_SHORT).show()
-                    } else {
-                        binding.tvResultSubCategory.text = binding.etSubCategory.text.toString()
-                        binding.etCategory.text.clear()
-                        binding.etSubCategory.text.clear()
-                        HideKeyboardHelper.hideSoftKeyBoard(this, binding.root)
-                        binding.llContainerForm.visibility = View.GONE
-                        binding.tvContainerResult.visibility = View.VISIBLE
-                        binding.btnSubmitCategory.visibility = View.VISIBLE
-                        binding.btnSubmitCategory.setOnClickListener {
-                            binding.progressBar.visibility = View.VISIBLE
+        // Logic view
+        val getInputArray = arrayListOf<String>()
+        var arraySubCategory: List<Category.SubCategory> = subCategory(arrayListOf())
 
-                            // get text result
-                            Toast.makeText(this, "${binding.tvResultCategory.text} | ${binding.tvResultSubCategory.text}", Toast.LENGTH_SHORT).show()
+        binding.btnAddSubCategory.setOnClickListener {
+            // Ambil input dari EditText dan masukkan ke dalam array
+            val input = binding.etSubCategoryProduct.text.toString()
 
-                            // Store in server
-                            val dataSubCategory1 = CategoryRequest.SubCategoryRequest("${binding.tvResultSubCategory.text}", SimpleDateFormat.generate())
-                            val arraySub = arrayListOf(dataSubCategory1)
-                            val dataCategory1 = CategoryRequest("${binding.tvResultCategory.text}", arraySub)
+            getInputArray.add(input)
 
-                            val token = Paper.book().read<String>("token").toString()
-                            ProductCategoryService(token).createCategory(dataCategory1,
-                                {
-                                    Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
-                                    dialog.dismiss()
-                                },
-                                {
-                                    Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-                                    binding.progressBar.visibility = View.GONE
-                                },
-                                {
-                                    Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-                                    binding.progressBar.visibility = View.GONE
-                                })
-                        }
+            arraySubCategory = subCategory(getInputArray)
 
-                    }
-                }
+            binding.rvSubCategoryView.apply {
+                val mAdapter = AdapterSubCategory(
+                    this@ProductCategoryActivity,
+                    arraySubCategory as ArrayList<Category.SubCategory>
+                )
+                layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                adapter = mAdapter
             }
+
+
+
+            binding.etSubCategoryProduct.text?.clear()
+            HideKeyboardHelper.hideSoftKeyBoard(this, binding.root)
+
+        }
+
+        binding.btnSaveCategory.setOnClickListener {
+            binding.btnSaveCategory.visibility = View.GONE
+            binding.progressBar.visibility = View.VISIBLE
+
+            val category = Category(name = binding.tvResultCategory.text.toString(), sub_category = arraySubCategory)
+
+            val token = Paper.book().read<String>("token").toString()
+
+            ProductCategoryService(token).createCategory(category, {onSuccess ->
+                Toast.makeText(this, onSuccess.message, Toast.LENGTH_SHORT).show()
+                dialog.dismiss()
+            }, {onError ->
+                Toast.makeText(this, onError, Toast.LENGTH_SHORT).show()
+                binding.progressBar.visibility = View.GONE
+                binding.btnSaveCategory.visibility = View.VISIBLE
+            }, {onFailure ->
+                Toast.makeText(this, onFailure, Toast.LENGTH_SHORT).show()
+                binding.progressBar.visibility = View.GONE
+                binding.btnSaveCategory.visibility = View.VISIBLE
+            })
         }
 
         dialog.setContentView(binding.root)
         dialog.setCancelable(true)
         dialog.show()
+    }
+
+    private fun subCategory(listSub: ArrayList<String>): List<Category.SubCategory> {
+        val subCategoryList = arrayListOf<Category.SubCategory>()
+        for (i in listSub) {
+            val subCategory = Category.SubCategory(
+                name = i,
+                created_at = SimpleDateFormat.generate()
+            )
+            subCategoryList.add(subCategory)
+        }
+        return subCategoryList
     }
 }

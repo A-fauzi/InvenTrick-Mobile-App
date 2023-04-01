@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.warehouseproject.core.model.product.category.Category
 import com.example.warehouseproject.databinding.ItemSubCategoryBinding
-import com.example.warehouseproject.databinding.ItemsCategoryBinding
 
 class AdapterSubCategory(
     private val context: Context,

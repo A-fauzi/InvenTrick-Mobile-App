@@ -1,6 +1,5 @@
 package com.example.warehouseproject.core.view.main.home_fragment.category
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -27,10 +26,12 @@ class AdapterCategory(
                 binding.tvItemCategory.text = name
                 adapterSubCategory = AdapterSubCategory(context, arrayListOf())
                 binding.rvSubCategory.apply {
-                    layoutManager = LinearLayoutManager(context)
+                    layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                     adapter = adapterSubCategory
                 }
-                adapterSubCategory.setData(sub_category)
+                if (sub_category != null) {
+                    adapterSubCategory.setData(sub_category)
+                }
             }
         }
     }

@@ -1,132 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="16dp"
     android:background="@color/white">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp">
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="vertical"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:id="@+id/ll_container_form"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+           <com.google.android.material.textfield.TextInputLayout
+               android:id="@+id/outlinedTextCategory"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               app:boxCornerRadiusBottomEnd="15dp"
+               app:boxCornerRadiusBottomStart="15dp"
+               app:boxCornerRadiusTopEnd="15dp"
+               app:boxCornerRadiusTopStart="15dp"
+               app:boxStrokeWidth="0dp"
+               app:boxStrokeWidthFocused="0dp"
+               app:endIconDrawable="@drawable/ic_badge_check"
+               app:endIconMode="none"
+               app:endIconTint="@color/blue_ocean"
+               app:hintEnabled="false"
+               android:layout_toStartOf="@id/btn_add_category">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
 
-                    <EditText
-                        android:id="@+id/et_category"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_toStartOf="@id/btn_add_category"
-                        android:hint="@string/create_category_hint"
-                        android:inputType="text"
-                        android:fontFamily="@font/inter_semibold"/>
+               <com.google.android.material.textfield.TextInputEditText
+                   android:id="@+id/et_category"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:hint="Outdoor"
+                   android:inputType="text"
+                   android:fontFamily="@font/inter_medium"
+                   android:padding="16dp" />
 
-                    <Button
-                        android:id="@+id/btn_add_category"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:fontFamily="@font/inter_semibold"
-                        android:text="@string/add"
-                        android:textAllCaps="false" />
-                </RelativeLayout>
+           </com.google.android.material.textfield.TextInputLayout>
 
-                <RelativeLayout
-                    android:id="@+id/rl_container_sub_category"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone">
+           <com.google.android.material.button.MaterialButton
+               android:id="@+id/btn_add_category"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignParentEnd="true"
+               android:text="Add category"
+               android:textAllCaps="false"
+               android:layout_centerVertical="true"
+               app:cornerRadius="@dimen/radius_card_15" />
 
-                    <EditText
-                        android:id="@+id/et_sub_category"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="text"
-                        android:layout_toStartOf="@id/btn_add_sub_category"
-                        android:hint="@string/create_sub_category" />
+       </RelativeLayout>
+       <Space
+           android:layout_width="match_parent"
+           android:layout_height="8dp"/>
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
 
-                    <Button
-                        android:id="@+id/btn_add_sub_category"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/add"
-                        android:textAllCaps="false"
-                        android:layout_alignParentEnd="true"/>
-                </RelativeLayout>
-            </LinearLayout>
+           <com.google.android.material.textfield.TextInputLayout
+               android:id="@+id/outlinedTextSubCategory"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               app:boxCornerRadiusBottomEnd="15dp"
+               app:boxCornerRadiusBottomStart="15dp"
+               app:boxCornerRadiusTopEnd="15dp"
+               app:boxCornerRadiusTopStart="15dp"
+               app:boxStrokeWidth="0dp"
+               app:boxStrokeWidthFocused="0dp"
+               app:endIconDrawable="@drawable/ic_badge_check"
+               app:endIconMode="none"
+               app:endIconTint="@color/blue_ocean"
+               app:hintEnabled="false"
+               android:layout_toStartOf="@id/btn_add_sub_category">
 
-            <LinearLayout
-                android:id="@+id/tv_container_result"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
 
-                <TextView
-                    android:id="@+id/tv_result_category"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/travel"
-                    android:fontFamily="@font/inter_semibold"
-                    android:textColor="@color/black"/>
+               <com.google.android.material.textfield.TextInputEditText
+                   android:id="@+id/et_sub_category_product"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:hint="Mountain"
+                   android:inputType="text"
+                   android:fontFamily="@font/inter_medium"
+                   android:padding="16dp" />
 
-                <com.google.android.material.divider.MaterialDivider
-                    android:layout_width="2dp"
-                    android:layout_height="25dp"/>
+           </com.google.android.material.textfield.TextInputLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+           <com.google.android.material.button.MaterialButton
+               android:id="@+id/btn_add_sub_category"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignParentEnd="true"
+               android:text="Add sub category"
+               android:textAllCaps="false"
+               android:layout_centerVertical="true"
+               app:cornerRadius="@dimen/radius_card_15" />
 
-                    <com.google.android.material.divider.MaterialDivider
-                        android:layout_width="25dp"
-                        android:layout_height="2dp"/>
+       </RelativeLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+       <Space
+           android:layout_width="match_parent"
+           android:layout_height="16dp"/>
 
-                        <com.google.android.material.divider.MaterialDivider
-                            android:layout_width="2dp"
-                            android:layout_height="5dp"/>
-                        <TextView
-                            android:id="@+id/tv_result_sub_category"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/mountain"/>
-                    </LinearLayout>
-                </LinearLayout>
-            </LinearLayout>
+       <TextView
+           android:id="@+id/tv_result_category"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           tools:text="Outdoor"
+           android:fontFamily="@font/inter_semibold"/>
+       <androidx.recyclerview.widget.RecyclerView
+           android:id="@+id/rv_sub_category_view"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           tools:listitem="@layout/item_sub_category"
+           android:orientation="horizontal"
+           app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
-            <Button
-                android:id="@+id/btn_submit_category"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/btn_submit_text"
-                android:textAllCaps="false"
-                android:visibility="gone"/>
-            <ProgressBar
-                android:id="@+id/progress_bar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:visibility="gone"/>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+      <RelativeLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content">
 
-</RelativeLayout>
+          <com.google.android.material.button.MaterialButton
+              android:id="@+id/btn_save_category"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="save"
+              android:textAllCaps="false"
+              app:cornerRadius="@dimen/radius_card_15"/>
+
+          <ProgressBar
+              android:id="@+id/progress_bar"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_centerHorizontal="true"
+              android:layout_centerVertical="true"
+              android:visibility="gone"/>
+
+      </RelativeLayout>
+
+   </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

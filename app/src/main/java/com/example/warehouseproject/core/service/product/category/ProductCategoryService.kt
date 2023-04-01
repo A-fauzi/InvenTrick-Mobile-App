@@ -1,18 +1,16 @@
 package com.example.warehouseproject.core.service.product.category
 
-import android.os.Handler
 import android.util.Log
 import com.example.warehouseproject.core.config.NetworkConfig
 import com.example.warehouseproject.core.constant.Constant
 import com.example.warehouseproject.core.model.product.category.Category
-import com.example.warehouseproject.core.model.product.category.CategoryRequest
 import com.example.warehouseproject.core.model.product.category.CategoryResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class ProductCategoryService(private val token: String) {
-    fun createCategory(categoryRequest: CategoryRequest, onResponseSuccessBody: (response: CategoryResponse.SingleResponse) -> Unit, onResponseErrorBody: (msg: String) -> Unit, onFailure: (msg: String) -> Unit) {
+    fun createCategory(categoryRequest: Category, onResponseSuccessBody: (response: CategoryResponse.SingleResponse) -> Unit, onResponseErrorBody: (msg: String) -> Unit, onFailure: (msg: String) -> Unit) {
         NetworkConfig(Constant.BASE_URL, token)
             .productService()
             .createCategory(categoryRequest)
