@@ -28,7 +28,7 @@
                 app:contentScrim="?attr/colorPrimary"
                 app:expandedTitleTextColor="@color/white"
                 app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
-                app:title="Product">
+                app:title="Product detail">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -79,7 +79,7 @@
                         android:layout_marginEnd="8dp"
                         android:text="@string/chip_example_text"
                         android:textColor="@color/white"/>
-                    
+
                     <Space
                         android:layout_width="match_parent"
                         android:layout_height="16dp"/>
@@ -330,6 +330,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="16dp"/>
 
+                    <TextView
+                        android:id="@+id/tv_product_in_progress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Barcode akan tersedia jika status product active"
+                        android:layout_gravity="center"
+                        android:visibility="visible"
+                        android:fontFamily="@font/inter_semibold"
+                        android:textSize="@dimen/text_size_12"/>
+
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/cv_content_barcode"
                         android:layout_width="match_parent"
@@ -392,9 +402,12 @@
                         </LinearLayout>
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                   <RelativeLayout
-                       android:layout_width="match_parent"
-                       android:layout_height="wrap_content">
+                   <LinearLayout
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:orientation="vertical"
+                       android:layout_gravity="center"
+                       android:gravity="center">
 
                        <com.google.android.material.button.MaterialButton
                            android:id="@+id/btn_prod_in"
@@ -402,10 +415,10 @@
                            android:layout_height="wrap_content"
                            android:layout_centerVertical="true"
                            android:fontFamily="@font/inter_semibold"
+                           android:padding="@dimen/padding_btn_20"
                            android:text="Product IN"
                            android:textAllCaps="false"
-                           app:cornerRadius="15dp"
-                           android:padding="@dimen/padding_btn_20"/>
+                           app:cornerRadius="15dp" />
 
                        <com.google.android.material.button.MaterialButton
                            android:id="@+id/btn_prod_out"
@@ -419,7 +432,7 @@
                            android:textAllCaps="false"
                            app:cornerRadius="15dp"
                            android:padding="@dimen/padding_btn_20"/>
-                   </RelativeLayout>
+                   </LinearLayout>
 
                     <RelativeLayout
                         android:layout_width="match_parent"

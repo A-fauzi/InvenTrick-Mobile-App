@@ -90,6 +90,9 @@ class DetailProductActivity : AppCompatActivity(), DetailProductView {
             binding.btnProdIn.visibility = View.GONE
             binding.btnProdOut.visibility = View.GONE
             binding.cvContentBarcode.visibility = View.GONE
+            binding.tvProductInProgress.visibility = View.VISIBLE
+        } else {
+            binding.tvProductInProgress.visibility = View.GONE
         }
 
         // Encoder qrcode
