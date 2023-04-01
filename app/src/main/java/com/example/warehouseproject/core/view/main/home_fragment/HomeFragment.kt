@@ -95,10 +95,12 @@ class HomeFragment : Fragment(), ProductListAdapter.CallClickListener, HomeView 
         popupMenu.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.category -> {
-                    startActivity(Intent(activity, ProductCategoryActivity::class.java))
+                    val intent = Intent(activity, ProductCategoryActivity::class.java)
+                    startActivity(intent)
                 }
                 R.id.webView -> {
-                    startActivity(Intent(requireActivity(), NewsActivity::class.java))
+                    val intent = Intent(activity, NewsActivity::class.java)
+                    startActivity(intent)
                 }
             }
 
@@ -113,13 +115,16 @@ class HomeFragment : Fragment(), ProductListAdapter.CallClickListener, HomeView 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         binding.tvListMoreAll.setOnClickListener {
-            startActivity(Intent(activity, ProductListAllActivity::class.java))
+            val intent = Intent(activity, ProductListAllActivity::class.java)
+            startActivity(intent)
         }
 
         setUpTopBar()
         startShimmerView()
 
     }
+
+
 
     private fun userStatusNetwork() {
         when (val status = Paper.book().read<String>("status").toString()) {
