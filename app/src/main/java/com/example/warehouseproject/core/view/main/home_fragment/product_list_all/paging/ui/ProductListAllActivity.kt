@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -31,7 +32,6 @@ class ProductListAllActivity : AppCompatActivity(), ProductsAdapterPaging.Produc
     private fun initView() {
         Paper.init(this)
         binding.btnAddProduct.btnComponent.text = getString(R.string.add_product)
-        binding.btnAddProduct.btnComponent.isEnabled = true
         productListAdapter = ProductsAdapterPaging(applicationContext, this)
     }
 
@@ -44,14 +44,18 @@ class ProductListAllActivity : AppCompatActivity(), ProductsAdapterPaging.Produc
         setupList()
         setupView()
 
-        ProductApiService(token).getProductByStatus("active", { data ->
-            binding.tvCountActive.text = data.totalCount.toString()
-            binding.tvCountActive.textSize = 24f
-        }, this)
+        getProductByStatus("in-progress", binding.tvCountOnProgress) { binding.btnAddProduct.btnComponent.isEnabled = true }
+        getProductByStatus("active", binding.tvCountActive, null)
 
-        ProductApiService(token).getProductByStatus("in-progress", { data ->
-            binding.tvCountOnProgress.text = data.totalCount.toString()
-            binding.tvCountOnProgress.textSize = 24f
+    }
+
+    private fun getProductByStatus(status: String, textCount: TextView, onSuccessAction: (() -> Unit)?) {
+        ProductApiService(token).getProductByStatus(status, { data ->
+            textCount.text = data.totalCount.toString()
+            textCount.textSize = 24f
+            if (onSuccessAction != null) {
+                onSuccessAction()
+            }
         }, this)
     }
 
@@ -85,7 +89,7 @@ class ProductListAllActivity : AppCompatActivity(), ProductsAdapterPaging.Produc
             productListAdapter.addLoadStateListener { loadState ->
                 binding.progressBarListProduct.visibility = View.VISIBLE
 
-                if (loadState.append.endOfPaginationReached) {
+                if (loadState.prepend.endOfPaginationReached) {
                     if (productListAdapter.itemCount < 1) {
                         // data empty state
                         binding.progressBarListProduct.visibility = View.GONE
