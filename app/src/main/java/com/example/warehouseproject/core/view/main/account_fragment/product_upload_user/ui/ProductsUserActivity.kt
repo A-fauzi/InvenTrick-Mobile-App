@@ -1,5 +1,6 @@
 package com.example.warehouseproject.core.view.main.account_fragment.product_upload_user.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -10,7 +11,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.warehouseproject.core.constant.Constant.User.TOKEN
 import com.example.warehouseproject.core.model.product.Product
+import com.example.warehouseproject.core.utils.DataBundle
 import com.example.warehouseproject.core.view.main.account_fragment.product_upload_user.api.ProductsUserApiService
+import com.example.warehouseproject.core.view.main.detail_product.DetailProductActivity
 import com.example.warehouseproject.core.view.main.home_fragment.product_list_all.paging.api.ApiService
 import com.example.warehouseproject.core.view.main.home_fragment.product_list_all.paging.ui.ProductViewModel
 import com.example.warehouseproject.core.view.main.home_fragment.product_list_all.paging.ui.ProductViewModelFactory
@@ -27,6 +30,7 @@ class ProductsUserActivity : AppCompatActivity(), ProductsAdapterPaging.Products
     private lateinit var productsAdapterPaging: ProductsAdapterPaging
 
     private val token = Paper.book().read<String>(TOKEN).toString()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProductsUserBinding.inflate(layoutInflater)
@@ -71,8 +75,6 @@ class ProductsUserActivity : AppCompatActivity(), ProductsAdapterPaging.Products
                        binding.tvDataIsEmpty.visibility = View.GONE
                        binding.progressBar.visibility = View.GONE
                        binding.rvProductsUser.visibility = View.VISIBLE
-
-                       Paper.book().write("product_count_user", productsAdapterPaging.itemCount.toString())
                    }
                }
            }
@@ -91,6 +93,11 @@ class ProductsUserActivity : AppCompatActivity(), ProductsAdapterPaging.Products
     }
 
     override fun onClickItem(data: Product?) {
-        Toast.makeText(this, data?.user?.username, Toast.LENGTH_SHORT).show()
+        if (data != null) {
+            val bundle = DataBundle.putProductData(data)
+            val intent = Intent(this, DetailProductActivity::class.java)
+            intent.putExtras(bundle)
+            startActivity(intent)
+        }
     }
 }

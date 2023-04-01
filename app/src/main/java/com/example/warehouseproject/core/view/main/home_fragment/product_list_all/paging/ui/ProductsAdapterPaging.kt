@@ -9,10 +9,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.warehouseproject.R
+import com.example.warehouseproject.core.constant.Constant
 import com.example.warehouseproject.core.model.product.Product
 import com.example.warehouseproject.core.view.main.home_fragment.ProductListAdapter
 import com.example.warehouseproject.databinding.ItemDataProductBinding
 import com.squareup.picasso.Picasso
+import io.paperdb.Paper
 
 class ProductsAdapterPaging(
     private val context: Context,
@@ -35,14 +37,25 @@ class ProductsAdapterPaging(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         with(holder) {
             with(getItem(position)) {
+
                 Glide.with(context).load(this?.image).into(binding.ivItemProduct)
+
                 binding.tvItemCodeProduct.text = this?.code_items
                 binding.chipStatus.text = this?.status
                 binding.tvNameProduct.text = this?.name
                 binding.tvSpecProduct.text = this?.specification
                 binding.tvQuantityProduct.text = "quantity: ${this?.qty}"
-                binding.itemUserName.text = this?.user?.username
+
+                val currentUser = Paper.book().read<String>(Constant.User.USERNAME).toString()
+
+                if (currentUser == this?.user?.username) {
+                    binding.itemUserName.text = "Anda"
+                } else {
+                    binding.itemUserName.text  = this?.user?.username
+                }
+
                 Picasso.get().load(this?.user?.profile_image).placeholder(R.drawable.ic_people).error(R.drawable.img_example).into(binding.itemUserPhoto)
+
                 binding.tvDetailProduct.setOnClickListener {
                     listenerPaging.onClickItem(getItem(position))
                 }
