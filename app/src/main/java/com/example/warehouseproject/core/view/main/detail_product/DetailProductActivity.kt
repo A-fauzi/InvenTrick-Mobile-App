@@ -85,6 +85,13 @@ class DetailProductActivity : AppCompatActivity(), DetailProductView {
             placeholder(R.drawable.ic_people)
         }
 
+        // view visibility
+        if (status == "in-progress"){
+            binding.btnProdIn.visibility = View.GONE
+            binding.btnProdOut.visibility = View.GONE
+            binding.cvContentBarcode.visibility = View.GONE
+        }
+
         // Encoder qrcode
         if (code != null) {
             QrCode.generate(code, binding.ivQrCode)

@@ -369,29 +369,28 @@
                                 android:layout_height="wrap_content"
                                 android:text="Scan QR code to find product" />
 
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/cv_btn_print_barcode"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:foreground="?attr/selectableItemBackground"
+                                app:cardCornerRadius="15dp"
+                                app:cardElevation="0dp"
+                                android:layout_gravity="center">
+
+                                <TextView
+                                    android:id="@+id/tv_print_barcode"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="8dp"
+                                    android:fontFamily="@font/inter_semibold"
+                                    android:text="Print Barcode"/>
+                            </androidx.cardview.widget.CardView>
                             <!--       Logo below here        -->
                         </LinearLayout>
                     </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/cv_btn_print_barcode"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:foreground="?attr/selectableItemBackground"
-                        app:cardCornerRadius="15dp"
-                        app:cardElevation="0dp"
-                        android:layout_gravity="center">
-
-                        <TextView
-                            android:id="@+id/tv_print_barcode"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="8dp"
-                            android:fontFamily="@font/inter_semibold"
-                            android:text="Print Barcode"/>
-                    </androidx.cardview.widget.CardView>
 
                    <RelativeLayout
                        android:layout_width="match_parent"
