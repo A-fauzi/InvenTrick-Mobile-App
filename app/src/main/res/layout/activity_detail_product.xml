@@ -119,14 +119,6 @@
                             android:fontFamily="@font/inter_semibold"
                             android:text="@string/chip_example_text" />
 
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/chip_sub_category"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_toEndOf="@id/chip_catgory"
-                            android:text="@string/chip_example_text"
-                            android:fontFamily="@font/inter_semibold"/>
                     </RelativeLayout>
 
                     <Space

@@ -52,6 +52,8 @@ class HistoryProductFragment: Fragment(),  StockHistoryAdapterPaging.StockHistor
     }
     private fun setupList() {
 
+        binding.progressBar.visibility = View.VISIBLE
+
         binding.rvHistories.apply {
             layoutManager = LinearLayoutManager(context)
 
@@ -63,19 +65,15 @@ class HistoryProductFragment: Fragment(),  StockHistoryAdapterPaging.StockHistor
             adapter = stockHistoryAdapter
 
             stockHistoryAdapter.addLoadStateListener { loadState ->
-                binding.progressBar.visibility = View.VISIBLE
-                binding.contentContainer.visibility = View.GONE
 
-                if (loadState.append.endOfPaginationReached) {
+                if (loadState.prepend.endOfPaginationReached) {
                     if (stockHistoryAdapter.itemCount < 1) {
                         // data empty state
                         // Set text in bellow
                     } else {
                         // data is not empty
                         val dataCount = stockHistoryAdapter.itemCount.toString()
-
                         binding.progressBar.visibility = View.GONE
-                        binding.contentContainer.visibility = View.VISIBLE
                     }
                 }
             }

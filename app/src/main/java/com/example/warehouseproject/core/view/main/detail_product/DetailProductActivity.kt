@@ -247,7 +247,6 @@ class DetailProductActivity : AppCompatActivity(), DetailProductView {
         binding.chipCodeItemDetail.text = code
         binding.tvNameProductDetail.text = name
         binding.chipCatgory.text = category
-        binding.chipSubCategory.text = subCat
         binding.tvSpecProductDetail.text = spec
         binding.tvLotDetail.text = lot
         binding.tvModelDetail.text = model
