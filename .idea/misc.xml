@@ -3,16 +3,33 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/LEARNING/Warehouse-Project-Mobile/app/src/main/res/drawable/ic_baseline_lock_24.xml" value="0.139" />
+        <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/LEARNING/Warehouse-Project-Mobile/app/src/main/res/drawable/ic_baseline_warning_amber_24.xml" value="0.139" />
+        <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/LEARNING/Warehouse-Project-Mobile/app/src/main/res/drawable/ic_boxes.xml" value="0.139" />
+        <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/LEARNING/Warehouse-Project-Mobile/app/src/main/res/drawable/ic_shield_check.xml" value="0.139" />
+        <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/LEARNING/Warehouse-Project-Mobile/app/src/main/res/drawable/ic_time_past.xml" value="0.139" />
         <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/LEARNING/Warehouse-Project-Mobile/app/src/main/res/layout-v28/fragment_home.xml" value="0.21481481481481482" />
+        <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/LEARNING/Warehouse-Project-Mobile/app/src/main/res/layout/activity_account_update.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/LEARNING/Warehouse-Project-Mobile/app/src/main/res/layout/activity_add_product.xml" value="0.21481481481481482" />
+        <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/LEARNING/Warehouse-Project-Mobile/app/src/main/res/layout/activity_add_product_step.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/LEARNING/Warehouse-Project-Mobile/app/src/main/res/layout/activity_detail_product.xml" value="0.21" />
+        <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/LEARNING/Warehouse-Project-Mobile/app/src/main/res/layout/activity_example_main.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/LEARNING/Warehouse-Project-Mobile/app/src/main/res/layout/activity_main.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/LEARNING/Warehouse-Project-Mobile/app/src/main/res/layout/activity_news.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/LEARNING/Warehouse-Project-Mobile/app/src/main/res/layout/activity_privacy_police.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/LEARNING/Warehouse-Project-Mobile/app/src/main/res/layout/activity_product_category.xml" value="0.22447916666666667" />
-        <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/LEARNING/Warehouse-Project-Mobile/app/src/main/res/layout/activity_product_list_all.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/LEARNING/Warehouse-Project-Mobile/app/src/main/res/layout/activity_product_list_all.xml" value="0.25" />
+        <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/LEARNING/Warehouse-Project-Mobile/app/src/main/res/layout/activity_products_user.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/LEARNING/Warehouse-Project-Mobile/app/src/main/res/layout/activity_sign_in.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/LEARNING/Warehouse-Project-Mobile/app/src/main/res/layout/activity_stock_in.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/LEARNING/Warehouse-Project-Mobile/app/src/main/res/layout/activity_stock_out.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/LEARNING/Warehouse-Project-Mobile/app/src/main/res/layout/component_button.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/LEARNING/Warehouse-Project-Mobile/app/src/main/res/layout/component_item_dashboard.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/LEARNING/Warehouse-Project-Mobile/app/src/main/res/layout/fragment_account.xml" value="0.21481481481481482" />
         <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/LEARNING/Warehouse-Project-Mobile/app/src/main/res/layout/fragment_stock_histories.xml" value="0.25" />
         <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/LEARNING/Warehouse-Project-Mobile/app/src/main/res/layout/item_create_category.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/LEARNING/Warehouse-Project-Mobile/app/src/main/res/layout/item_data_history.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/LEARNING/Warehouse-Project-Mobile/app/src/main/res/layout/item_label_chart.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/LEARNING/Warehouse-Project-Mobile/app/src/main/res/layout/item_sub_category.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/LEARNING/Warehouse-Project-Mobile/app/src/main/res/layout/top_bar_layout.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/akhma/DEVELOPMENT/ANDROID/MY-PROJECT/Warehouse-Project/app/src/main/res/drawable-v24/component_steps_circle_disable.xml" value="0.1405" />

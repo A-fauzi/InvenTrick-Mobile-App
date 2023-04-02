@@ -1,6 +1,7 @@
 package com.example.warehouseproject.core.view.main.account_fragment
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.Gravity
 import androidx.fragment.app.Fragment
@@ -8,12 +9,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.warehouseproject.R
-import com.example.warehouseproject.core.constant.Constant
 import com.example.warehouseproject.core.constant.Constant.User.FULLNAME
 import com.example.warehouseproject.core.constant.Constant.User.ID
 import com.example.warehouseproject.core.constant.Constant.User.PROFILE_PHOTO
@@ -33,67 +34,28 @@ import com.example.warehouseproject.core.view.main.account_fragment.product_uplo
 import com.example.warehouseproject.core.view.main.account_fragment.product_upload_user.ui.ProductsUserViewModel
 import com.example.warehouseproject.core.view.main.account_fragment.product_upload_user.ui.ProductsUserViewModelFactory
 import com.example.warehouseproject.core.view.main.home_fragment.product_list_all.paging.ui.ProductsAdapterPaging
+import com.example.warehouseproject.databinding.ComponentItemDashboardBinding
 import com.example.warehouseproject.databinding.FragmentAccountBinding
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.squareup.picasso.Picasso
 import io.paperdb.Paper
 import kotlinx.coroutines.launch
 
 class AccountFragment : Fragment(), MainView, ProductsAdapterPaging.ProductsListenerPaging {
 
+    private lateinit var componentProductUpload: ComponentItemDashboardBinding
+    private lateinit var componentActivity: ComponentItemDashboardBinding
+    private lateinit var componentPrivacy: ComponentItemDashboardBinding
+    private lateinit var productsAdapterPaging: ProductsAdapterPaging
     private lateinit var realtimeDatabase: RealtimeDatabase
-
+    private lateinit var viewModel: ProductsUserViewModel
+    private lateinit var presenter: MainActivityPresenter
     private lateinit var binding: FragmentAccountBinding
 
-    private lateinit var presenter: MainActivityPresenter
-
-    private lateinit var viewModel: ProductsUserViewModel
-    private lateinit var productsAdapterPaging: ProductsAdapterPaging
-
     private val profileImg = Paper.book().read<String>(PROFILE_PHOTO).toString()
-    private val fullname = Paper.book().read<String>(FULLNAME).toString()
     private val division = Paper.book().read<String>("division").toString()
+    private val fullName = Paper.book().read<String>(FULLNAME).toString()
     private val token = Paper.book().read<String>(TOKEN).toString()
 
-    private fun initView() {
-        presenter = MainActivityPresenter(requireActivity(), requireActivity(), this, UserApiService())
-
-        realtimeDatabase = RealtimeDatabase(requireActivity())
-
-        productsAdapterPaging = ProductsAdapterPaging(requireActivity(), this)
-
-        // Belom kelar
-        viewModel = ViewModelProvider(this, ProductsUserViewModelFactory(ProductsUserApiService.create(token)))[ProductsUserViewModel::class.java]
-
-        lifecycleScope.launch {
-            viewModel.listDataProductsUser.collect {
-                productsAdapterPaging.submitData(it)
-            }
-        }
-
-        // Untuk mengecek data count pada paging first
-        productsAdapterPaging.addLoadStateListener { loadState ->
-            if (loadState.append.endOfPaginationReached) {
-                if (productsAdapterPaging.itemCount < 1) {
-                    // data empty state
-                    binding.chipProductUpload.text = productsAdapterPaging.itemCount.toString() + " " + "Products"
-                } else {
-                    // data is not empty
-                    binding.chipProductUpload.text = productsAdapterPaging.itemCount.toString() + " " + "Products"
-                }
-            }
-        }
-
-        Paper.init(requireActivity())
-
-        // Set TopBar
-        topAppBar()
-
-        binding.tvProfileFullname.text = fullname
-        binding.tvDivision.text = division
-        Picasso.get().load(profileImg).placeholder(R.drawable.ic_people).error(R.drawable.img_example).into(binding.ivProfile)
-
-    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -104,6 +66,60 @@ class AccountFragment : Fragment(), MainView, ProductsAdapterPaging.ProductsList
         initView()
 
         return binding.root
+    }
+
+    private fun initView() {
+        viewModel = ViewModelProvider(this, ProductsUserViewModelFactory(ProductsUserApiService.create(token)))[ProductsUserViewModel::class.java]
+        presenter = MainActivityPresenter(requireActivity(), requireActivity(), this, UserApiService())
+        productsAdapterPaging = ProductsAdapterPaging(requireActivity(), this)
+        realtimeDatabase = RealtimeDatabase(requireActivity())
+
+        componentActivity = binding.viewIncludeActivity
+        componentProductUpload = binding.viewIncludeProductUpload
+        componentPrivacy = binding.viewIncludePrivacy
+        viewComponentDashboard(componentActivity, R.color.green, R.drawable.ic_time_past, getString(R.string.activity), "news")
+        viewComponentDashboard(componentProductUpload, R.color.yellow, R.drawable.ic_folder_upload, "Product Upload", "news")
+        viewComponentDashboard(componentPrivacy, R.color.red_smooth, R.drawable.ic_shield_check, "Privacy Police", "action")
+
+        Picasso.get().load(profileImg).placeholder(R.drawable.ic_people).error(R.drawable.img_example).into(binding.ivProfile)
+        binding.tvProfileFullname.text = fullName
+        binding.tvDivision.text = division
+
+        Paper.init(requireActivity())
+        setViewModel()
+        setAdapter()
+        topAppBar()
+
+    }
+
+    private fun setAdapter() {
+        productsAdapterPaging.addLoadStateListener { loadState ->
+            val productCount = productsAdapterPaging.itemCount
+            if (loadState.append.endOfPaginationReached) {
+                if (productsAdapterPaging.itemCount < 1) {
+                    // data empty state
+                    componentProductUpload.tvChip.text = "$productCount Products"
+                } else {
+                    // data is not empty
+                    componentProductUpload.tvChip.text = "$productCount Products"
+                }
+            }
+        }
+    }
+
+    private fun setViewModel() {
+        lifecycleScope.launch {
+            viewModel.listDataProductsUser.collect {
+                productsAdapterPaging.submitData(it)
+            }
+        }
+    }
+
+    private fun viewComponentDashboard(bindingView: ComponentItemDashboardBinding, bgColorStateList: Int, ivIcon: Int, txtComponent: String, textChip: String? = null) {
+        bindingView.cvIcon.setCardBackgroundColor(context?.getColorStateList(bgColorStateList))
+        bindingView.ivIcon.setImageResource(ivIcon)
+        bindingView.tvComponent.text = txtComponent
+        bindingView.tvChip.text = textChip
     }
 
 
@@ -129,13 +145,13 @@ class AccountFragment : Fragment(), MainView, ProductsAdapterPaging.ProductsList
             logOut()
         }
 
-        binding.cvActivityUser.setOnClickListener {
+        componentActivity.cvActivityUser.setOnClickListener {
             Toast.makeText(requireActivity(), "Masih dalam pengembangan", Toast.LENGTH_SHORT).show()
         }
-        binding.cvProductUploads.setOnClickListener {
+        componentProductUpload.cvActivityUser .setOnClickListener {
             startActivity(Intent(requireActivity(), ProductsUserActivity::class.java))
         }
-        binding.cvPrivacy.setOnClickListener {
+        componentPrivacy.cvActivityUser.setOnClickListener {
             startActivity(Intent(requireActivity(), PrivacyPoliceActivity::class.java))
         }
     }
@@ -187,12 +203,14 @@ class AccountFragment : Fragment(), MainView, ProductsAdapterPaging.ProductsList
     }
 
     private fun logOut() {
+        Paper.book().destroy()
+
         val data = UserRequest.StatusActivity("offline")
         val token = Paper.book().read<String>(TOKEN).toString()
         val userId = Paper.book().read<String>(ID).toString()
+
         presenter.updateStatusActivityUser(token, userId, data)
 
-        Paper.book().destroy()
         val intent = Intent(activity, SignInActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)

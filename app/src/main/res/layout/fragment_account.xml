@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -102,177 +103,17 @@
                 android:fontFamily="@font/inter_semibold"/>
 
             <!--Component dashboard-->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cv_activity_user"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:cardElevation="0dp"
-                android:layout_marginTop="8dp"
-                android:clickable="true"
-                android:focusable="true"
-                app:cardCornerRadius="16dp"
-                android:foreground="?attr/selectableItemBackground">
+           <include
+               android:id="@+id/view_include_activity"
+               layout="@layout/component_item_dashboard"/>
+            <include
+               android:id="@+id/view_include_product_upload"
+               layout="@layout/component_item_dashboard"/>
+            <include
+               android:id="@+id/view_include_privacy"
+               layout="@layout/component_item_dashboard"/>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp">
 
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/icon_activity"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/green"
-                        app:cardCornerRadius="50dp"
-                        android:layout_marginBottom="8dp">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="16dp"
-                            android:src="@drawable/ic_time_past"
-                            app:tint="@color/white" />
-                    </androidx.cardview.widget.CardView>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Activity"
-                        android:layout_toEndOf="@id/icon_activity"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="8dp"
-                        android:fontFamily="@font/inter_bold"
-                        android:textSize="16sp"/>
-
-                    <com.google.android.material.chip.Chip
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layoutDirection="rtl"
-                        android:text="2 news"
-                        android:fontFamily="@font/inter_semibold"
-                        android:textColor="@color/white"
-                        app:chipBackgroundColor="@color/blue_ocean"
-                        app:chipIcon="@drawable/ic_angle_small_right"
-                        app:chipIconEnabled="true"
-                        app:chipIconTint="@color/white" />
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cv_product_uploads"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:cardElevation="0dp"
-                android:layout_marginTop="8dp"
-                android:clickable="true"
-                android:focusable="true"
-                app:cardCornerRadius="16dp"
-                android:foreground="?attr/selectableItemBackground">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp">
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/icon_activity2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/yellow"
-                        app:cardCornerRadius="50dp"
-                        android:layout_marginBottom="8dp">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="16dp"
-                            android:src="@drawable/ic_folder_upload"
-                            app:tint="@color/white" />
-                    </androidx.cardview.widget.CardView>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="8dp"
-                        android:layout_toEndOf="@id/icon_activity2"
-                        android:fontFamily="@font/inter_bold"
-                        android:text="Product upload"
-                        android:textSize="16sp" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chip_product_upload"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:fontFamily="@font/inter_semibold"
-                        android:layoutDirection="rtl"
-                        android:textColor="@color/white"
-                        app:chipBackgroundColor="@color/blue_ocean"
-                        app:chipIcon="@drawable/ic_angle_small_right"
-                        app:chipIconEnabled="true"
-                        app:chipIconTint="@color/white"
-                        android:text="load data..." />
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cv_privacy"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:cardElevation="0dp"
-                android:layout_marginTop="8dp"
-                android:clickable="true"
-                android:focusable="true"
-                app:cardCornerRadius="16dp"
-                android:foreground="?attr/selectableItemBackground">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp">
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/icon_activity3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/gray"
-                        app:cardCornerRadius="50dp"
-                        android:layout_marginBottom="8dp">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="16dp"
-                            android:src="@drawable/ic_shield_check"
-                            app:tint="@color/white" />
-                    </androidx.cardview.widget.CardView>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="8dp"
-                        android:layout_toEndOf="@id/icon_activity3"
-                        android:fontFamily="@font/inter_bold"
-                        android:text="Privacy"
-                        android:textSize="16sp" />
-
-                    <com.google.android.material.chip.Chip
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layoutDirection="rtl"
-                        android:text="Action needed"
-                        android:fontFamily="@font/inter_semibold"
-                        android:textColor="@color/white"
-                        app:chipBackgroundColor="@color/orange"
-                        app:chipIcon="@drawable/ic_angle_small_right"
-                        app:chipIconEnabled="true"
-                        app:chipIconTint="@color/white" />
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
         </LinearLayout>
     </LinearLayout>
 

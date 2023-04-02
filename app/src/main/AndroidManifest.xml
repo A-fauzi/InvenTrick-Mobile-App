@@ -67,9 +67,6 @@
             android:name=".core.view.main.home_fragment.stock_in_product.StockInActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.warehouseproject.core.view.product.add_product.AddProductActivity"
-            android:exported="false" />
-        <activity
             android:name="com.example.warehouseproject.core.view.main.MainActivity"
             android:exported="false" />
         <activity

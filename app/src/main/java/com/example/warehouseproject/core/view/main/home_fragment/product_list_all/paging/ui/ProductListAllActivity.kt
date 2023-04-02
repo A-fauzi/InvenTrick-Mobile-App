@@ -1,6 +1,7 @@
 package com.example.warehouseproject.core.view.main.home_fragment.product_list_all.paging.ui
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
@@ -17,8 +18,8 @@ import com.example.warehouseproject.core.service.product.ProductApiService
 import com.example.warehouseproject.core.utils.DataBundle
 import com.example.warehouseproject.core.view.main.detail_product.DetailProductActivity
 import com.example.warehouseproject.core.view.main.home_fragment.product_list_all.paging.api.ApiService
-import com.example.warehouseproject.core.view.product.add_product.steps.AddProductStepActivity
 import com.example.warehouseproject.databinding.ActivityProductListAllBinding
+import com.example.warehouseproject.databinding.ItemLabelChartBinding
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
@@ -41,8 +42,21 @@ class ProductListAllActivity : AppCompatActivity(), ProductsAdapterPaging.Produc
 
     private fun initView() {
         Paper.init(this)
-        binding.btnAddProduct.btnComponent.text = getString(R.string.add_product)
+//        binding.btnAddProduct.btnComponent.text = getString(R.string.add_product)
         productListAdapter = ProductsAdapterPaging(applicationContext, this)
+
+        // Label chart
+        val includeItemLabelAll = binding.tvLabelAll
+        val includeItemLabelActive = binding.tvLabelActive
+        val includeItemLabelProgress = binding.tvLabelOnProgress
+        viewLabelChart(includeItemLabelAll, getString(R.string.all), getColorStateList(R.color.blue_ocean))
+        viewLabelChart(includeItemLabelActive, getString(R.string.active), getColorStateList(R.color.green))
+        viewLabelChart(includeItemLabelProgress, getString(R.string.on_progress), getColorStateList(R.color.yellow))
+    }
+
+    private fun viewLabelChart(includeView: ItemLabelChartBinding, setTextLabel: String, bgColorView: ColorStateList?) {
+        includeView.tvLabelChart.text = setTextLabel
+        includeView.cvCircleColorChartLabel.setCardBackgroundColor(bgColorView)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,12 +68,10 @@ class ProductListAllActivity : AppCompatActivity(), ProductsAdapterPaging.Produc
         setupList()
         setupView()
 
-        getProductByStatus("in-progress", binding.tvCountOnProgress) {
-            binding.btnAddProduct.btnComponent.isEnabled = true
-
-            dataChart()
-        }
-        getProductByStatus("active", binding.tvCountActive, null)
+//        getProductByStatus("in-progress", binding.tvCountOnProgress) {
+//            binding.btnAddProduct.btnComponent.isEnabled = true
+//        }
+//        getProductByStatus("active", binding.tvCountActive, null)
 
     }
 
@@ -76,9 +88,9 @@ class ProductListAllActivity : AppCompatActivity(), ProductsAdapterPaging.Produc
     override fun onStart() {
         super.onStart()
 
-        binding.btnAddProduct.btnComponent.setOnClickListener {
-            startActivity(Intent(this, AddProductStepActivity::class.java))
-        }
+//        binding.btnAddProduct.btnComponent.setOnClickListener {
+//            startActivity(Intent(this, AddProductStepActivity::class.java))
+//        }
     }
 
     private fun setupView() {
@@ -112,8 +124,9 @@ class ProductListAllActivity : AppCompatActivity(), ProductsAdapterPaging.Produc
                         // data is not empty
                         binding.progressBarListProduct.visibility = View.GONE
                         val dataCount = productListAdapter.itemCount.toString()
-                        binding.tvCountAllProduct.text = dataCount
-                        binding.tvCountAllProduct.textSize = 24f
+                        dataChart()
+//                        binding.tvCountAllProduct.text = dataCount
+//                        binding.tvCountAllProduct.textSize = 24f
                     }
                 }
             }

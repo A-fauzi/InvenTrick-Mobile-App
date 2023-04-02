@@ -13,9 +13,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        android:contentDescription="TODO"
         app:srcCompat="@drawable/ic_plus"
-        app:tint="@color/white"/>
+        app:tint="@color/white"
+        android:contentDescription="@string/content_desc_todo" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_category"

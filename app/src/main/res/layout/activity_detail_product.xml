@@ -43,7 +43,8 @@
                         android:scaleType="centerCrop"
                         android:src="@drawable/ic_people"
                         app:layout_collapseMode="parallax"
-                        android:alpha=".50"/>
+                        android:alpha=".50"
+                        android:contentDescription="@string/content_desc_todo"/>
 
                 </RelativeLayout>
                 <androidx.appcompat.widget.Toolbar
@@ -326,7 +327,7 @@
                         android:id="@+id/tv_product_in_progress"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Barcode akan tersedia jika status product active"
+                        android:text="@string/txt_no_barcode"
                         android:layout_gravity="center"
                         android:visibility="visible"
                         android:fontFamily="@font/inter_semibold"
@@ -369,7 +370,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Scan QR code to find product" />
+                                android:text="@string/txt_scan_qr" />
 
                             <androidx.cardview.widget.CardView
                                 android:id="@+id/cv_btn_print_barcode"
@@ -388,7 +389,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_margin="8dp"
                                     android:fontFamily="@font/inter_semibold"
-                                    android:text="Print Barcode"/>
+                                    android:text="@string/print_barcode"/>
                             </androidx.cardview.widget.CardView>
                             <!--       Logo below here        -->
                         </LinearLayout>
@@ -405,10 +406,9 @@
                            android:id="@+id/btn_prod_in"
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
-                           android:layout_centerVertical="true"
                            android:fontFamily="@font/inter_semibold"
                            android:padding="@dimen/padding_btn_20"
-                           android:text="Product IN"
+                           android:text="@string/product_in"
                            android:textAllCaps="false"
                            app:cornerRadius="15dp" />
 
@@ -416,11 +416,9 @@
                            android:id="@+id/btn_prod_out"
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
-                           android:layout_alignParentEnd="true"
-                           android:layout_centerVertical="true"
                            android:backgroundTint="@color/red_smooth"
                            android:fontFamily="@font/inter_semibold"
-                           android:text="Product OUT"
+                           android:text="@string/product_out"
                            android:textAllCaps="false"
                            app:cornerRadius="15dp"
                            android:padding="@dimen/padding_btn_20"/>
