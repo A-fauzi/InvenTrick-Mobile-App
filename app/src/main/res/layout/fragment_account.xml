@@ -291,16 +291,6 @@
            android:layout_marginLeft="8dp"
            android:fontFamily="@font/inter_semibold"/>
 
-       <TextView
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="Switch to another account"
-           android:fontFamily="@font/inter_semibold"
-           android:textSize="16sp"
-           android:textColor="@color/blue_ocean"
-           android:layout_marginBottom="8dp"
-           android:layout_marginLeft="8dp"/>
-
        <androidx.cardview.widget.CardView
            android:id="@+id/cv_btn_logout"
            android:layout_width="wrap_content"

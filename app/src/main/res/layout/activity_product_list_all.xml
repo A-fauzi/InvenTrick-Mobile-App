@@ -51,11 +51,85 @@
                             android:gravity="center"
                             android:orientation="vertical">
 
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:layout_centerVertical="true">
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:gravity="center_vertical">
+
+                                        <androidx.cardview.widget.CardView
+                                            android:layout_width="12dp"
+                                            android:layout_height="12dp"
+                                            android:backgroundTint="@color/blue_ocean"
+                                            app:cardCornerRadius="50dp"/>
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="all"
+                                            android:layout_marginStart="8dp"/>
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:gravity="center_vertical">
+
+                                        <androidx.cardview.widget.CardView
+                                            android:layout_width="12dp"
+                                            android:layout_height="12dp"
+                                            android:backgroundTint="@color/yellow"
+                                            app:cardCornerRadius="50dp"/>
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="on progress"
+                                            android:layout_marginStart="8dp"/>
+                                    </LinearLayout>
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:gravity="center_vertical">
+
+                                        <androidx.cardview.widget.CardView
+                                            android:layout_width="12dp"
+                                            android:layout_height="12dp"
+                                            android:backgroundTint="@color/green"
+                                            app:cardCornerRadius="50dp"/>
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="active"
+                                            android:layout_marginStart="8dp"/>
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                                <com.github.mikephil.charting.charts.PieChart
+                                    android:id="@+id/pie_chart"
+                                    android:layout_width="250dp"
+                                    android:layout_height="250dp"
+                                    android:layout_alignParentEnd="true"/>
+                            </RelativeLayout>
+
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal"
-                                android:gravity="center">
+                                android:gravity="center"
+                                android:visibility="gone">
 
                                 <LinearLayout
                                     android:layout_width="wrap_content"
@@ -121,7 +195,8 @@
 
                             <include
                                 android:id="@+id/btn_add_product"
-                                layout="@layout/component_button"/>
+                                layout="@layout/component_button"
+                                android:visibility="gone"/>
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
                 </RelativeLayout>

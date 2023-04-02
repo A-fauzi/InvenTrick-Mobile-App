@@ -1,6 +1,8 @@
 package com.example.warehouseproject.core.view.main.home_fragment.product_list_all.paging.ui
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -17,6 +19,13 @@ import com.example.warehouseproject.core.view.main.detail_product.DetailProductA
 import com.example.warehouseproject.core.view.main.home_fragment.product_list_all.paging.api.ApiService
 import com.example.warehouseproject.core.view.product.add_product.steps.AddProductStepActivity
 import com.example.warehouseproject.databinding.ActivityProductListAllBinding
+import com.github.mikephil.charting.animation.Easing
+import com.github.mikephil.charting.charts.PieChart
+import com.github.mikephil.charting.data.PieData
+import com.github.mikephil.charting.data.PieDataSet
+import com.github.mikephil.charting.data.PieEntry
+import com.github.mikephil.charting.formatter.PercentFormatter
+import com.github.mikephil.charting.utils.MPPointF
 import io.paperdb.Paper
 import kotlinx.coroutines.launch
 
@@ -26,6 +35,7 @@ class ProductListAllActivity : AppCompatActivity(), ProductsAdapterPaging.Produc
     private lateinit var binding: ActivityProductListAllBinding
     private lateinit var viewModel: ProductViewModel
     private lateinit var productListAdapter: ProductsAdapterPaging
+    private lateinit var pieChart: PieChart
 
     private val token = Paper.book().read<String>("token").toString()
 
@@ -44,7 +54,11 @@ class ProductListAllActivity : AppCompatActivity(), ProductsAdapterPaging.Produc
         setupList()
         setupView()
 
-        getProductByStatus("in-progress", binding.tvCountOnProgress) { binding.btnAddProduct.btnComponent.isEnabled = true }
+        getProductByStatus("in-progress", binding.tvCountOnProgress) {
+            binding.btnAddProduct.btnComponent.isEnabled = true
+
+            dataChart()
+        }
         getProductByStatus("active", binding.tvCountActive, null)
 
     }
@@ -130,5 +144,68 @@ class ProductListAllActivity : AppCompatActivity(), ProductsAdapterPaging.Produc
 
     override fun onFailureResponseGetProductByStatus(msg: String) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun dataChart() {
+        pieChart = binding.pieChart
+        pieChart.setUsePercentValues(true)
+        pieChart.description.isEnabled = false
+        pieChart.setExtraOffsets(5f, 10f, 5f, 5f)
+
+        pieChart.dragDecelerationFrictionCoef = 0.95f
+
+        pieChart.isDrawHoleEnabled = true
+        pieChart.setHoleColor(Color.WHITE)
+
+        pieChart.setTransparentCircleColor(Color.WHITE)
+        pieChart.setTransparentCircleAlpha(110)
+
+        pieChart.holeRadius = 58f
+        pieChart.transparentCircleRadius = 61f
+
+        pieChart.setDrawCenterText(true)
+
+        pieChart.rotationAngle = 0f
+
+        pieChart.isRotationEnabled = true
+        pieChart.isHighlightPerTapEnabled = true
+
+        pieChart.animateY(1000, Easing.EaseInOutQuad)
+
+        pieChart.legend.isEnabled = false
+        pieChart.setEntryLabelColor(Color.WHITE)
+        pieChart.setEntryLabelTextSize(12f)
+
+        val entries: ArrayList<PieEntry> = arrayListOf()
+        entries.add(PieEntry(7f))
+        entries.add(PieEntry(1f))
+        entries.add(PieEntry(2f))
+
+        val dataSet = PieDataSet(entries, "Warehouse count")
+
+        dataSet.setDrawIcons(false)
+
+        dataSet.sliceSpace = 3f
+        dataSet.iconsOffset = MPPointF(0f, 40f)
+        dataSet.selectionShift = 5f
+
+        val colors: ArrayList<Int> = arrayListOf()
+        colors.add(resources.getColor(R.color.blue_ocean))
+        colors.add(resources.getColor(R.color.yellow))
+        colors.add(resources.getColor(R.color.green))
+
+        dataSet.colors = colors
+
+        val data = PieData(dataSet)
+        data.setValueFormatter(PercentFormatter())
+        data.setValueTextSize(15f)
+        data.setValueTypeface(Typeface.DEFAULT_BOLD)
+        data.setValueTextColor(Color.WHITE)
+
+        pieChart.data = data
+
+        pieChart.highlightValues(null)
+
+        pieChart.invalidate()
     }
 }

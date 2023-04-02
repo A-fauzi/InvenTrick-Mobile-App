@@ -4,57 +4,54 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/view_start_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_centerVertical="true">
 
-        <RelativeLayout
-            android:id="@+id/view_start_container"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/view_start"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/example_user" />
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/view_start"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_centerVertical="true"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/example_user" />
-
-            <ImageView
-                android:id="@+id/view_start_arrow_back"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:padding="5dp"
-                android:src="@drawable/ic_baseline_arrow_back_ios_new_24"
-                android:visibility="gone"/>
-
-        </RelativeLayout>
+        <ImageView
+            android:id="@+id/view_start_arrow_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="5dp"
+            android:src="@drawable/ic_baseline_arrow_back_ios_new_24"
+            android:visibility="gone" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center">
+            android:layout_centerVertical="true"
+            android:layout_marginStart="8dp"
+            android:gravity="center"
+            android:layout_toEndOf="@id/view_start">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cv_status_activity_user"
                 android:layout_width="10dp"
                 android:layout_height="10dp"
-                app:cardCornerRadius="50dp"/>
+                app:cardCornerRadius="50dp" />
 
             <TextView
                 android:id="@+id/tv_status_activity_user"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="online"
                 android:layout_marginStart="8dp"
-                android:fontFamily="@font/inter_semibold"/>
+                android:fontFamily="@font/inter_semibold"
+                android:text="online"/>
         </LinearLayout>
-    </LinearLayout>
+
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/txt_top_bar"
