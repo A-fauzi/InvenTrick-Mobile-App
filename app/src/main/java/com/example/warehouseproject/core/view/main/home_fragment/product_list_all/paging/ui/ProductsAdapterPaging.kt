@@ -62,7 +62,7 @@ class ProductsAdapterPaging(
 
                 when(this?.status) {
                     "active" -> {
-                        binding.chipStatus.chipBackgroundColor = context.getColorStateList(R.color.green_cendol)
+                        binding.chipStatus.chipBackgroundColor = context.getColorStateList(R.color.green)
                     }
                     "in-progress" -> {
                         binding.chipStatus.chipBackgroundColor = context.getColorStateList(R.color.red_smooth)

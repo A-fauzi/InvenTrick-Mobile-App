@@ -6,9 +6,7 @@ import android.graphics.Color
 import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -20,6 +18,7 @@ import com.example.warehouseproject.core.utils.CustomPieChart
 import com.example.warehouseproject.core.utils.DataBundle
 import com.example.warehouseproject.core.view.main.detail_product.DetailProductActivity
 import com.example.warehouseproject.core.view.main.home_fragment.product_list_all.paging.api.ApiService
+import com.example.warehouseproject.core.view.product.add_product.steps.AddProductStepActivity
 import com.example.warehouseproject.databinding.ActivityProductListAllBinding
 import com.example.warehouseproject.databinding.ItemLabelChartBinding
 import com.github.mikephil.charting.animation.Easing
@@ -27,9 +26,7 @@ import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
-import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.formatter.ValueFormatter
-import com.github.mikephil.charting.utils.MPPointF
 import io.paperdb.Paper
 import kotlinx.coroutines.launch
 import java.text.NumberFormat
@@ -44,30 +41,30 @@ class ProductListAllActivity : AppCompatActivity(), ProductsAdapterPaging.Produc
 
     private val token = Paper.book().read<String>("token").toString()
 
-    private var all = 0
-    private var active = 0
-    private var progres = 0
-
     private fun initView() {
         Paper.init(this)
 //        binding.btnAddProduct.btnComponent.text = getString(R.string.add_product)
         productListAdapter = ProductsAdapterPaging(applicationContext, this)
 
+        // Pie chart
+        pieChart = binding.pieChart
+        pieChart.setNoDataText("Sedang memuat data chart")
+        pieChart.setNoDataTextColor(resources.getColor(R.color.font_color_default))
+        pieChart.setNoDataTextTypeface(Typeface.DEFAULT_BOLD)
+
         // Label chart
         val includeItemLabelActive = binding.tvLabelActive
         val includeItemLabelProgress = binding.tvLabelOnProgress
         viewLabelChart(includeItemLabelActive, getString(R.string.active), getColorStateList(R.color.green))
-        viewLabelChart(includeItemLabelProgress, getString(R.string.on_progress), getColorStateList(R.color.yellow))
+        viewLabelChart(includeItemLabelProgress, getString(R.string.on_progress), getColorStateList(R.color.red_smooth))
+    }
 
+    private fun getCountByStatus(dataActive: (count: Int) -> Unit, dataOnProgress: (count: Int) -> Unit) {
         getProductByStatus("active"){
-            active = it
-
-            dataChart(active.toFloat(), progres.toFloat())
+            dataActive(it)
         }
         getProductByStatus("in-progress"){
-            progres = it
-
-            dataChart(active.toFloat(), progres.toFloat())
+            dataOnProgress(it)
         }
     }
 
@@ -97,9 +94,9 @@ class ProductListAllActivity : AppCompatActivity(), ProductsAdapterPaging.Produc
     override fun onStart() {
         super.onStart()
 
-//        binding.btnAddProduct.btnComponent.setOnClickListener {
-//            startActivity(Intent(this, AddProductStepActivity::class.java))
-//        }
+        binding.fabAddProduct.setOnClickListener {
+            startActivity(Intent(this, AddProductStepActivity::class.java))
+        }
     }
 
     private fun setupView() {
@@ -134,7 +131,18 @@ class ProductListAllActivity : AppCompatActivity(), ProductsAdapterPaging.Produc
                         binding.progressBarListProduct.visibility = View.GONE
                         val dataAllCount = productListAdapter.itemCount
 
-                        all = dataAllCount
+                        var act = 0
+                        var prog = 0
+
+
+                        getCountByStatus(
+                            { active ->
+                                act = active
+                                dataChart(act.toFloat(), prog.toFloat(), dataAllCount.toString())
+                            }, { progress ->
+                                prog = progress
+                                dataChart(act.toFloat(), prog.toFloat(), dataAllCount.toString())
+                            })
 
                     }
                 }
@@ -166,8 +174,7 @@ class ProductListAllActivity : AppCompatActivity(), ProductsAdapterPaging.Produc
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 
-    private fun dataChart(active: Float, onProgress: Float) {
-        pieChart = binding.pieChart
+    private fun dataChart(active: Float, onProgress: Float, allProduct: String) {
         pieChart.setExtraOffsets(40f, 0f, 40f, 0f)
 
         // Custom renderer used to add dots at the end of value lines
@@ -181,7 +188,7 @@ class ProductListAllActivity : AppCompatActivity(), ProductsAdapterPaging.Produc
         // Chart colors
         val colors = listOf(
             resources.getColor(R.color.green),
-            resources.getColor(R.color.yellow)
+            resources.getColor(R.color.red_smooth)
         )
         dataSet.colors = colors
         dataSet.setValueTextColors(colors)
@@ -217,7 +224,7 @@ class ProductListAllActivity : AppCompatActivity(), ProductsAdapterPaging.Produc
         pieChart.setCenterTextSize(20f)
         pieChart.setCenterTextTypeface(Typeface.DEFAULT_BOLD)
         pieChart.setCenterTextColor(Color.parseColor("#222222"))
-        pieChart.centerText = "Data"
+        pieChart.centerText = "$allProduct\nProduct"
 
         // animation in
         pieChart.animateY(1400, Easing.EaseInOutQuad)
