@@ -3,6 +3,7 @@ package com.example.warehouseproject.core.view.main.account_fragment
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -78,7 +79,7 @@ class AccountFragment : Fragment(), MainView, ProductsAdapterPaging.ProductsList
         componentProductUpload = binding.viewIncludeProductUpload
         componentPrivacy = binding.viewIncludePrivacy
         viewComponentDashboard(componentActivity, R.color.green, R.drawable.ic_time_past, getString(R.string.activity), "news")
-        viewComponentDashboard(componentProductUpload, R.color.yellow, R.drawable.ic_folder_upload, "Product Upload", "news")
+        viewComponentDashboard(componentProductUpload, R.color.yellow, R.drawable.ic_folder_upload, "Product Upload", "load...")
         viewComponentDashboard(componentPrivacy, R.color.red_smooth, R.drawable.ic_shield_check, "Privacy Police", "action")
 
         Picasso.get().load(profileImg).placeholder(R.drawable.ic_people).error(R.drawable.img_example).into(binding.ivProfile)
@@ -179,11 +180,11 @@ class AccountFragment : Fragment(), MainView, ProductsAdapterPaging.ProductsList
     }
 
     override fun onErrorBodyReqStatusView(message: String) {
-        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
+        Log.d("AccountFragment", message)
     }
 
     override fun onFailureView(message: String) {
-        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
+        Log.d("AccountFragment", message)
     }
 
     private fun popUpMenu() {

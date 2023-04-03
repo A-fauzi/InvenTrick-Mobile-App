@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.model.product.Product
 import com.example.warehouseproject.core.service.product.ProductApiService
+import com.example.warehouseproject.core.utils.CustomPieChart
 import com.example.warehouseproject.core.utils.DataBundle
 import com.example.warehouseproject.core.view.main.detail_product.DetailProductActivity
 import com.example.warehouseproject.core.view.main.home_fragment.product_list_all.paging.api.ApiService
@@ -26,9 +28,11 @@ import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
+import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.utils.MPPointF
 import io.paperdb.Paper
 import kotlinx.coroutines.launch
+import java.text.NumberFormat
 
 class ProductListAllActivity : AppCompatActivity(), ProductsAdapterPaging.ProductsListenerPaging,
     ProductApiService.OnFinishedGetProductByStatus {
@@ -40,18 +44,31 @@ class ProductListAllActivity : AppCompatActivity(), ProductsAdapterPaging.Produc
 
     private val token = Paper.book().read<String>("token").toString()
 
+    private var all = 0
+    private var active = 0
+    private var progres = 0
+
     private fun initView() {
         Paper.init(this)
 //        binding.btnAddProduct.btnComponent.text = getString(R.string.add_product)
         productListAdapter = ProductsAdapterPaging(applicationContext, this)
 
         // Label chart
-        val includeItemLabelAll = binding.tvLabelAll
         val includeItemLabelActive = binding.tvLabelActive
         val includeItemLabelProgress = binding.tvLabelOnProgress
-        viewLabelChart(includeItemLabelAll, getString(R.string.all), getColorStateList(R.color.blue_ocean))
         viewLabelChart(includeItemLabelActive, getString(R.string.active), getColorStateList(R.color.green))
         viewLabelChart(includeItemLabelProgress, getString(R.string.on_progress), getColorStateList(R.color.yellow))
+
+        getProductByStatus("active"){
+            active = it
+
+            dataChart(active.toFloat(), progres.toFloat())
+        }
+        getProductByStatus("in-progress"){
+            progres = it
+
+            dataChart(active.toFloat(), progres.toFloat())
+        }
     }
 
     private fun viewLabelChart(includeView: ItemLabelChartBinding, setTextLabel: String, bgColorView: ColorStateList?) {
@@ -67,20 +84,12 @@ class ProductListAllActivity : AppCompatActivity(), ProductsAdapterPaging.Produc
         setupViewModel()
         setupList()
         setupView()
-
-//        getProductByStatus("in-progress", binding.tvCountOnProgress) {
-//            binding.btnAddProduct.btnComponent.isEnabled = true
-//        }
-//        getProductByStatus("active", binding.tvCountActive, null)
-
     }
 
-    private fun getProductByStatus(status: String, textCount: TextView, onSuccessAction: (() -> Unit)?) {
+    private fun getProductByStatus(status: String, onSuccessAction: ((count: Int) -> Unit)?) {
         ProductApiService(token).getProductByStatus(status, { data ->
-            textCount.text = data.totalCount.toString()
-            textCount.textSize = 24f
             if (onSuccessAction != null) {
-                onSuccessAction()
+                onSuccessAction(data.totalCount)
             }
         }, this)
     }
@@ -123,15 +132,13 @@ class ProductListAllActivity : AppCompatActivity(), ProductsAdapterPaging.Produc
                     } else {
                         // data is not empty
                         binding.progressBarListProduct.visibility = View.GONE
-                        val dataCount = productListAdapter.itemCount.toString()
-                        dataChart()
-//                        binding.tvCountAllProduct.text = dataCount
-//                        binding.tvCountAllProduct.textSize = 24f
+                        val dataAllCount = productListAdapter.itemCount
+
+                        all = dataAllCount
+
                     }
                 }
             }
-//            setHasFixedSize(true) --> Todo : jika ini di aktifkan, list tidak akan tampil saat initialisasi pertama kali (emang bangsat!)
-//            adapter = productListAdapter
         }
     }
 
@@ -159,66 +166,66 @@ class ProductListAllActivity : AppCompatActivity(), ProductsAdapterPaging.Produc
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 
-    private fun dataChart() {
+    private fun dataChart(active: Float, onProgress: Float) {
         pieChart = binding.pieChart
-        pieChart.setUsePercentValues(true)
-        pieChart.description.isEnabled = false
-        pieChart.setExtraOffsets(5f, 10f, 5f, 5f)
+        pieChart.setExtraOffsets(40f, 0f, 40f, 0f)
 
-        pieChart.dragDecelerationFrictionCoef = 0.95f
+        // Custom renderer used to add dots at the end of value lines
+        pieChart.renderer = CustomPieChart(pieChart, 10f)
 
-        pieChart.isDrawHoleEnabled = true
-        pieChart.setHoleColor(Color.WHITE)
+        val dataSet = PieDataSet(listOf(
+            PieEntry(active),
+            PieEntry(onProgress)
+        ), "Pie Chart")
 
-        pieChart.setTransparentCircleColor(Color.WHITE)
-        pieChart.setTransparentCircleAlpha(110)
-
-        pieChart.holeRadius = 58f
-        pieChart.transparentCircleRadius = 61f
-
-        pieChart.setDrawCenterText(true)
-
-        pieChart.rotationAngle = 0f
-
-        pieChart.isRotationEnabled = true
-        pieChart.isHighlightPerTapEnabled = true
-
-        pieChart.animateY(1000, Easing.EaseInOutQuad)
-
-        pieChart.legend.isEnabled = false
-        pieChart.setEntryLabelColor(Color.WHITE)
-        pieChart.setEntryLabelTextSize(12f)
-
-        val entries: ArrayList<PieEntry> = arrayListOf()
-        entries.add(PieEntry(7f))
-        entries.add(PieEntry(1f))
-        entries.add(PieEntry(2f))
-
-        val dataSet = PieDataSet(entries, "Warehouse count")
-
-        dataSet.setDrawIcons(false)
-
-        dataSet.sliceSpace = 3f
-        dataSet.iconsOffset = MPPointF(0f, 40f)
-        dataSet.selectionShift = 5f
-
-        val colors: ArrayList<Int> = arrayListOf()
-        colors.add(resources.getColor(R.color.blue_ocean))
-        colors.add(resources.getColor(R.color.yellow))
-        colors.add(resources.getColor(R.color.green))
-
+        // Chart colors
+        val colors = listOf(
+            resources.getColor(R.color.green),
+            resources.getColor(R.color.yellow)
+        )
         dataSet.colors = colors
+        dataSet.setValueTextColors(colors)
 
-        val data = PieData(dataSet)
-        data.setValueFormatter(PercentFormatter())
-        data.setValueTextSize(15f)
-        data.setValueTypeface(Typeface.DEFAULT_BOLD)
-        data.setValueTextColor(Color.WHITE)
+        // Value lines
+        dataSet.valueLinePart1Length = 0.6f
+        dataSet.valueLinePart2Length = 0.3f
+        dataSet.valueLineWidth = 2f
+        dataSet.valueLinePart1OffsetPercentage = 115f // Line starts outside of chart
+        dataSet.isUsingSliceColorAsValueLineColor = true
 
-        pieChart.data = data
+        // Value text appearance
+        dataSet.yValuePosition = PieDataSet.ValuePosition.OUTSIDE_SLICE
+        dataSet.valueTextSize = 16f
+        dataSet.valueTypeface = Typeface.DEFAULT_BOLD
 
-        pieChart.highlightValues(null)
+        // Value Formatting
+        dataSet.valueFormatter = object : ValueFormatter() {
+            private val formatter = NumberFormat.getPercentInstance()
 
-        pieChart.invalidate()
+            override fun getFormattedValue(value: Float) = formatter.format(value / 100f)
+        }
+        pieChart.setUsePercentValues(true)
+
+        dataSet.selectionShift = 3f
+
+        // Hole
+        pieChart.isDrawHoleEnabled = true
+        pieChart.holeRadius = 50f
+
+        // Center text
+        pieChart.setDrawCenterText(true)
+        pieChart.setCenterTextSize(20f)
+        pieChart.setCenterTextTypeface(Typeface.DEFAULT_BOLD)
+        pieChart.setCenterTextColor(Color.parseColor("#222222"))
+        pieChart.centerText = "Data"
+
+        // animation in
+        pieChart.animateY(1400, Easing.EaseInOutQuad)
+
+        // Disable legend & description
+        pieChart.legend.isEnabled = false
+        pieChart.description = null
+
+        pieChart.data = PieData(dataSet)
     }
 }
