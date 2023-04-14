@@ -3,6 +3,7 @@ package com.example.warehouseproject.core.view.main.history_product
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -20,7 +21,7 @@ import io.paperdb.Paper
 class StockHistoryAdapterPaging(
     private val context: Context,
     private val listener: StockHistoriesListener
-): PagingDataAdapter<StockHistory, StockHistoryAdapterPaging.ViewHolder>(StockHistoryDiffComp) {
+) : PagingDataAdapter<StockHistory, StockHistoryAdapterPaging.ViewHolder>(StockHistoryDiffComp) {
     object StockHistoryDiffComp : DiffUtil.ItemCallback<StockHistory>() {
         override fun areItemsTheSame(oldItem: StockHistory, newItem: StockHistory): Boolean {
             return oldItem._id == newItem._id
@@ -32,74 +33,82 @@ class StockHistoryAdapterPaging(
 
     }
 
-    class ViewHolder(val binding: ItemDataHistoryBinding): RecyclerView.ViewHolder(binding.root)
+    class ViewHolder(val binding: ItemDataHistoryBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         with(holder) {
             with(getItem(position)) {
-                binding.tvName.text = this?.name
-
-                binding.chipStatus.text = this?.status
-                when(this?.status) {
-                    "IN" -> {
-                        binding.chipStatus.chipBackgroundColor = context.getColorStateList(com.example.warehouseproject.R.color.green_cendol)
-                    }
-                    "OUT" -> {
-                        binding.chipStatus.chipBackgroundColor = context.getColorStateList(com.example.warehouseproject.R.color.red_smooth)
-                    }
-                    else -> {
-                        binding.chipStatus.chipBackgroundColor = context.getColorStateList(com.example.warehouseproject.R.color.blue)
-                    }
-                }
-                binding.tvItemCode.text = this?.code_items
-                "Quantity: ${this?.qty?.toInt()}".also { binding.tvQuantity.text = it }
-
+                Paper.init(context)
+                val token = Paper.book().read<String>("token").toString()
                 val date = this?.created_at?.split(" ")
                 val monthYear = "${date?.get(1)} ${date?.get(2)} ${date?.get(3)}"
                 val dayTime = "${date?.get(0)} ${date?.get(5)}"
 
+                binding.tvName.text = this?.name
+                binding.chipStatus.text = this?.status
+                binding.tvItemCode.text = this?.code_items
+                "Quantity: ${this?.qty?.toInt()}".also { binding.tvQuantity.text = it }
                 binding.tvItemMonthYear.text = monthYear
                 binding.tvDayTime.text = dayTime
+                when (this?.status) {
+                    "IN" -> {
+                        binding.chipStatus.chipBackgroundColor =
+                            context.getColorStateList(com.example.warehouseproject.R.color.green_cendol)
+                    }
+                    "OUT" -> {
+                        binding.chipStatus.chipBackgroundColor =
+                            context.getColorStateList(com.example.warehouseproject.R.color.red_smooth)
+                    }
+                    else -> {
+                        binding.chipStatus.chipBackgroundColor =
+                            context.getColorStateList(com.example.warehouseproject.R.color.blue)
+                    }
+                }
 
                 binding.cardItem.setOnClickListener {
                     getItem(position)?.let { it1 -> listener.onClickItemHistory(it1) }
                 }
 
-                Paper.init(context)
-                val token = Paper.book().read<String>("token").toString()
                 ProductApiService(token).getProductByCode(this?.code_items ?: "", {}, {
                     binding.tvDataNotFound.text = context.getString(R.string.product_is_avail)
-                    binding.tvDataNotFound.setTextColor(context.resources.getColor(R.color.blue)) }, {
+                    binding.tvDataNotFound.setTextColor(context.resources.getColor(R.color.blue))
+                }, {
                     binding.tvDataNotFound.text = context.getString(R.string.product_is_not_avail)
-                    binding.tvDataNotFound.setTextColor(context.resources.getColor(R.color.red_smooth))}
-                )
-
-                UserApiService().getUserById(token, this?.user_id ?: "null", { onSuccess ->
-                    if (onSuccess != null) {
-                        binding.tvItemUsername.text = onSuccess.username
-                        Glide
-                            .with(context)
-                            .load(onSuccess.profile_image)
-                            .error(R.drawable.img_example)
-                            .into(binding.ivItemUserPhoto)
-                        binding.ivItemUserPhoto.setOnClickListener {
-                            listener.onCLickUserProfile(onSuccess)
-                        }
-
-                        Log.d("USER", onSuccess.toString())
-                    }
-                }, { onError->
-                    Log.d("USER", onError)
-                }, {onFailure ->
-                    Log.d("USER", onFailure)
+                    binding.tvDataNotFound.setTextColor(context.resources.getColor(R.color.red_smooth))
                 })
 
+                if (this?.user_id == null) {
+                    binding.tvItemUsername.visibility = View.GONE
+                    binding.ivItemUserPhoto.visibility = View.GONE
+                } else {
+                    UserApiService()
+                        .getUserById(token, this.user_id, { onSuccess ->
+                            binding.tvItemUsername.visibility = View.VISIBLE
+                            binding.ivItemUserPhoto.visibility = View.VISIBLE
+                            binding.tvItemUsername.text = onSuccess?.username
+                            Glide
+                                .with(context)
+                                .load(onSuccess?.profile_image)
+                                .error(R.drawable.img_example)
+                                .into(binding.ivItemUserPhoto)
+                            binding.ivItemUserPhoto.setOnClickListener {
+                                listener.onCLickUserProfile(onSuccess)
+                            }
+                        }, {
+                            binding.tvItemUsername.visibility = View.GONE
+                            binding.ivItemUserPhoto.visibility = View.GONE
+                        }, {
+                            binding.tvItemUsername.visibility = View.GONE
+                            binding.ivItemUserPhoto.visibility = View.GONE
+                        })
+                }
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemDataHistoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemDataHistoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 

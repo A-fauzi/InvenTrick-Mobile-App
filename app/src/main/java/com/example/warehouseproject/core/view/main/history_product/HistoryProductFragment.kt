@@ -89,7 +89,10 @@ class HistoryProductFragment: Fragment(),  StockHistoryAdapterPaging.StockHistor
     }
 
     override fun onClickItemHistory(data: StockHistory) {
-        Toast.makeText(requireActivity(), data.name, Toast.LENGTH_SHORT).show()
+        if (data.user_id != null) {
+            Toast.makeText(requireActivity(), data.user_id, Toast.LENGTH_SHORT).show()
+            Log.d("DATAAAAA", data.user_id)
+        }
     }
 
     override fun onCLickUserProfile(user: User?) {
