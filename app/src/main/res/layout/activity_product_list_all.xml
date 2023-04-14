@@ -26,7 +26,6 @@
                 app:contentScrim="?attr/colorPrimary"
                 app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
                 app:title="Products"
-                app:expandedTitleTextColor="@color/black"
                 app:collapsedTitleTextColor="@color/white"
                 android:id="@+id/collapsing_toolbar">
 
@@ -66,7 +65,7 @@
                             <com.github.mikephil.charting.charts.PieChart
                                 android:id="@+id/pie_chart"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"/>
+                                android:layout_height="match_parent" />
 
                         </RelativeLayout>
                     </androidx.cardview.widget.CardView>

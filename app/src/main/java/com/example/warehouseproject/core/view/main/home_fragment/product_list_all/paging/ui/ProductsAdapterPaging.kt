@@ -37,24 +37,22 @@ class ProductsAdapterPaging(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         with(holder) {
             with(getItem(position)) {
-
-                Glide.with(context).load(this?.image).into(binding.ivItemProduct)
-
-                binding.tvItemCodeProduct.text = this?.code_items
-                binding.chipStatus.text = this?.status
-                binding.tvNameProduct.text = this?.name
-                binding.tvSpecProduct.text = this?.specification
-                binding.tvQuantityProduct.text = "quantity: ${this?.qty}"
-
                 val currentUser = Paper.book().read<String>(Constant.User.USERNAME).toString()
+                if (currentUser == this?.user?.username) { binding.itemUserName.text = "Anda" } else { binding.itemUserName.text  = this?.user?.username }
 
-                if (currentUser == this?.user?.username) {
-                    binding.itemUserName.text = "Anda"
-                } else {
-                    binding.itemUserName.text  = this?.user?.username
-                }
-
-                Picasso.get().load(this?.user?.profile_image).placeholder(R.drawable.ic_people).error(R.drawable.img_example).into(binding.itemUserPhoto)
+                binding.tvTimeDiffCalculate.text = "Upload time: \n${this?.created_at} WIB"
+                Glide.with(context).load(this?.image).into(binding.ivItemProduct)
+                binding.tvQuantityProduct.text = "quantity: ${this?.qty}"
+                binding.tvItemCodeProduct.text = this?.code_items
+                binding.tvSpecProduct.text = this?.specification
+                binding.tvNameProduct.text = this?.name
+                binding.chipStatus.text = this?.status
+                Picasso
+                    .get()
+                    .load(this?.user?.profile_image)
+                    .placeholder(R.drawable.ic_people)
+                    .error(R.drawable.img_example)
+                    .into(binding.itemUserPhoto)
 
                 binding.tvDetailProduct.setOnClickListener {
                     listenerPaging.onClickItem(getItem(position))

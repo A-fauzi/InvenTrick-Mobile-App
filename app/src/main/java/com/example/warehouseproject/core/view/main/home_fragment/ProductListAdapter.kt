@@ -29,11 +29,11 @@ class ProductListAdapter(
 
                 Picasso.get().load(image).centerCrop().resize(500, 500).placeholder(R.drawable.ic_people).error(R.drawable.img_example).into(binding.ivItemProduct)
                 binding.tvNameProduct.text = name
-
+                binding.tvTimeDiffCalculate.text = "Upload time: \n$created_at WIB"
                 binding.chipStatus.text = status
                 when(status) {
                     "active" -> {
-                        binding.chipStatus.chipBackgroundColor = context.getColorStateList(R.color.green_cendol)
+                        binding.chipStatus.chipBackgroundColor = context.getColorStateList(R.color.green)
                     }
                     "in-progress" -> {
                         binding.chipStatus.chipBackgroundColor = context.getColorStateList(R.color.red_smooth)

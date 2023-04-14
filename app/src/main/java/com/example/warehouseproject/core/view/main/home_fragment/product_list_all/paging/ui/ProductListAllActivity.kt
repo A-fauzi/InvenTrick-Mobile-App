@@ -27,6 +27,7 @@ import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.ValueFormatter
+import com.google.android.material.appbar.AppBarLayout
 import io.paperdb.Paper
 import kotlinx.coroutines.launch
 import java.text.NumberFormat
@@ -81,6 +82,21 @@ class ProductListAllActivity : AppCompatActivity(), ProductsAdapterPaging.Produc
         setupViewModel()
         setupList()
         setupView()
+
+        var isShow = true
+        var scrollRange = -1
+        binding.appBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { barLayout, verticalOffset ->
+            if (scrollRange == -1){
+                scrollRange = barLayout?.totalScrollRange!!
+            }
+            if (scrollRange + verticalOffset == 0){
+                binding.collapsingToolbar.title = "Products"
+                isShow = true
+            } else if (isShow){
+                binding.collapsingToolbar.title = " " //careful there should a space between double quote otherwise it wont work
+                isShow = false
+            }
+        })
     }
 
     private fun getProductByStatus(status: String, onSuccessAction: ((count: Int) -> Unit)?) {
