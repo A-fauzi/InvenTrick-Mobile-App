@@ -1,6 +1,6 @@
-package com.example.warehouseproject.core.model.product
+package com.example.warehouseproject.domain.modelentities.product
 
-import com.example.warehouseproject.core.model.user.User
+import com.example.warehouseproject.domain.modelentities.user.User
 
 data class ProductRequest(
     var image: String,

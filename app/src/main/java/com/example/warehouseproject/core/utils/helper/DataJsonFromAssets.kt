@@ -1,7 +1,7 @@
 package com.example.warehouseproject.core.utils.helper
 
 import android.content.Context
-import com.example.warehouseproject.core.model.product.ProductModelAssets
+import com.example.warehouseproject.domain.modelentities.product.ProductModelAssets
 import com.example.warehouseproject.core.utils.DataFromAssets
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken

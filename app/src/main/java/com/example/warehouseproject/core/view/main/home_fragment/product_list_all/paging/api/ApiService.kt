@@ -1,7 +1,7 @@
 package com.example.warehouseproject.core.view.main.home_fragment.product_list_all.paging.api
 
 import com.example.warehouseproject.core.constant.Constant
-import com.example.warehouseproject.core.model.product.ProductResponses
+import com.example.warehouseproject.domain.modelentities.product.ProductResponses
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

@@ -1,11 +1,11 @@
 package com.example.warehouseproject.core.service.product
 
-import com.example.warehouseproject.core.model.product.Product
-import com.example.warehouseproject.core.model.product.ProductRequest
-import com.example.warehouseproject.core.model.product.ProductResponses
-import com.example.warehouseproject.core.model.product.StockHistory
-import com.example.warehouseproject.core.model.product.category.Category
-import com.example.warehouseproject.core.model.product.category.CategoryResponse
+import com.example.warehouseproject.domain.modelentities.product.Product
+import com.example.warehouseproject.domain.modelentities.product.ProductRequest
+import com.example.warehouseproject.domain.modelentities.product.ProductResponses
+import com.example.warehouseproject.domain.modelentities.product.StockHistory
+import com.example.warehouseproject.domain.modelentities.product.category.Category
+import com.example.warehouseproject.domain.modelentities.product.category.CategoryResponse
 import retrofit2.Call
 import retrofit2.http.*
 

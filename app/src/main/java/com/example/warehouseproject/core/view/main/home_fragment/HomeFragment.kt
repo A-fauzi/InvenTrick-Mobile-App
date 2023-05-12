@@ -17,8 +17,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.constant.Constant.User.PROFILE_PHOTO
 import com.example.warehouseproject.core.constant.Constant.User.TOKEN
-import com.example.warehouseproject.core.model.product.Product
-import com.example.warehouseproject.core.model.product.ProductResponses
+import com.example.warehouseproject.domain.modelentities.product.Product
+import com.example.warehouseproject.domain.modelentities.product.ProductResponses
 import com.example.warehouseproject.core.service.product.ProductApiService
 import com.example.warehouseproject.core.utils.DataBundle
 import com.example.warehouseproject.core.view.authentication.SignInActivity

@@ -17,6 +17,8 @@
 
     <color name="text_color_default">#52515b</color>
 
+    <color name="color_disabled">#60000000</color>
+
 <!--  soft scheme  -->
     <color name="purple_soft_700">#EDCCE4</color>
     <color name="purple_soft_500">#E7D6E7</color>

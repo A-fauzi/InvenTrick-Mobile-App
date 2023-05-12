@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.warehouseproject.core.model.product.category.Category
+import com.example.warehouseproject.domain.modelentities.product.category.Category
 import com.example.warehouseproject.databinding.ItemsCategoryBinding
 
 class AdapterCategory(

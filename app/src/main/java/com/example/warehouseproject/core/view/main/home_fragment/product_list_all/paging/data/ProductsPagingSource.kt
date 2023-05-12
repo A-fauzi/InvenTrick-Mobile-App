@@ -2,12 +2,8 @@ package com.example.warehouseproject.core.view.main.home_fragment.product_list_a
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.warehouseproject.core.model.product.Product
-import com.example.warehouseproject.core.model.product.ProductResponses
-import com.example.warehouseproject.core.service.product.ProductApiService
+import com.example.warehouseproject.domain.modelentities.product.Product
 import com.example.warehouseproject.core.view.main.home_fragment.product_list_all.paging.api.ApiService
-import kotlinx.coroutines.delay
-import kotlin.math.max
 
 class ProductsPagingSource(private val apiService: ApiService): PagingSource<Int, Product>() {
     override fun getRefreshKey(state: PagingState<Int, Product>): Int? {

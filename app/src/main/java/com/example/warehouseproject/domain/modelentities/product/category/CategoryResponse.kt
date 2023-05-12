@@ -1,4 +1,4 @@
-package com.example.warehouseproject.core.model.product.category
+package com.example.warehouseproject.domain.modelentities.product.category
 
 data class CategoryResponse(
     val message: String,

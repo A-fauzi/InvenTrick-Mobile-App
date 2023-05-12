@@ -1,6 +1,6 @@
 package com.example.warehouseproject.core.view.main.home_fragment.stock_in_product
 
-import com.example.warehouseproject.core.model.product.Product
+import com.example.warehouseproject.domain.modelentities.product.Product
 
 interface StockInView {
     fun getResultDataOnRest(data: Product)

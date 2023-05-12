@@ -1,7 +1,7 @@
 package com.example.warehouseproject.core.service.user
 
-import com.example.warehouseproject.core.model.user.UserRequest
-import com.example.warehouseproject.core.model.user.UserResponse
+import com.example.warehouseproject.domain.modelentities.user.UserRequest
+import com.example.warehouseproject.domain.modelentities.user.UserResponse
 import retrofit2.Call
 import retrofit2.http.*
 

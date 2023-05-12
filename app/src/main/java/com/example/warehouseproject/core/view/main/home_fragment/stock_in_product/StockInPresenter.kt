@@ -1,9 +1,8 @@
 package com.example.warehouseproject.core.view.main.home_fragment.stock_in_product
 
 import android.content.Context
-import com.example.warehouseproject.core.model.product.Product
-import com.example.warehouseproject.core.model.product.ProductRequest
-import com.example.warehouseproject.core.service.product.ProductApiService
+import com.example.warehouseproject.domain.modelentities.product.Product
+import com.example.warehouseproject.domain.modelentities.product.ProductRequest
 
 class StockInPresenter(private val view: StockInView, private val interactor: StockInInteractor): StockInInteractor.InteractorListener {
     fun searchProduct(context: Context, codeProduct: String) {

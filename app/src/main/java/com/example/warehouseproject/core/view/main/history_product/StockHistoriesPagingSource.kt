@@ -2,7 +2,7 @@ package com.example.warehouseproject.core.view.main.history_product
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.warehouseproject.core.model.product.StockHistory
+import com.example.warehouseproject.domain.modelentities.product.StockHistory
 
 class StockHistoriesPagingSource(private val apiService: ApiService): PagingSource<Int, StockHistory>() {
     override fun getRefreshKey(state: PagingState<Int, StockHistory>): Int? {

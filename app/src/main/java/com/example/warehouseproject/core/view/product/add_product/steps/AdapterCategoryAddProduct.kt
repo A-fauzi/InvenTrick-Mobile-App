@@ -2,12 +2,10 @@ package com.example.warehouseproject.core.view.product.add_product.steps
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.warehouseproject.R
-import com.example.warehouseproject.core.model.product.category.Category
+import com.example.warehouseproject.domain.modelentities.product.category.Category
 import com.example.warehouseproject.databinding.ItemAddProductChooseCategoryBinding
 
 class AdapterCategoryAddProduct(

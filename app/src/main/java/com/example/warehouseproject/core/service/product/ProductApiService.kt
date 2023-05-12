@@ -5,10 +5,10 @@ import android.util.Log
 import android.widget.Toast
 import com.example.warehouseproject.core.config.NetworkConfig
 import com.example.warehouseproject.core.constant.Constant
-import com.example.warehouseproject.core.model.product.Product
-import com.example.warehouseproject.core.model.product.ProductRequest
-import com.example.warehouseproject.core.model.product.ProductResponses
-import com.example.warehouseproject.core.model.product.StockHistory
+import com.example.warehouseproject.domain.modelentities.product.Product
+import com.example.warehouseproject.domain.modelentities.product.ProductRequest
+import com.example.warehouseproject.domain.modelentities.product.ProductResponses
+import com.example.warehouseproject.domain.modelentities.product.StockHistory
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback

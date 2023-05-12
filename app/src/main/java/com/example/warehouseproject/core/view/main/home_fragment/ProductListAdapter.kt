@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.warehouseproject.R
-import com.example.warehouseproject.core.model.product.Product
+import com.example.warehouseproject.domain.modelentities.product.Product
 import com.example.warehouseproject.databinding.ItemDataProductBinding
 import com.squareup.picasso.Picasso
 

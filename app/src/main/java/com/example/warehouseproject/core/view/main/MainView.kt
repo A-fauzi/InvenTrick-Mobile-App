@@ -1,6 +1,6 @@
 package com.example.warehouseproject.core.view.main
 
-import com.example.warehouseproject.core.model.user.UserResponse
+import com.example.warehouseproject.domain.modelentities.user.UserResponse
 
 interface MainView {
 

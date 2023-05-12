@@ -2,7 +2,7 @@ package com.example.warehouseproject.core.view.main.account_fragment.product_upl
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.warehouseproject.core.model.product.Product
+import com.example.warehouseproject.domain.modelentities.product.Product
 import com.example.warehouseproject.core.view.main.account_fragment.product_upload_user.api.ProductsUserApiService
 import io.paperdb.Paper
 import okio.IOException

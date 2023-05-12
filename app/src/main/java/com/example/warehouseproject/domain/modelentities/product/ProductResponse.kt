@@ -1,4 +1,4 @@
-package com.example.warehouseproject.core.model.product
+package com.example.warehouseproject.domain.modelentities.product
 
 data class ProductResponses(
     val message: String,

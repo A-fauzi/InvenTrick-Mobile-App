@@ -1,6 +1,5 @@
 package com.example.warehouseproject.core.view.product.add_product.steps
 
-import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -8,13 +7,13 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.ui.text.toUpperCase
 import androidx.constraintlayout.widget.Group
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
@@ -22,10 +21,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.constant.Constant
-import com.example.warehouseproject.core.model.product.Product
-import com.example.warehouseproject.core.model.product.ProductRequest
-import com.example.warehouseproject.core.model.product.category.Category
-import com.example.warehouseproject.core.model.user.User
+import com.example.warehouseproject.domain.modelentities.product.Product
+import com.example.warehouseproject.domain.modelentities.product.ProductRequest
+import com.example.warehouseproject.domain.modelentities.product.category.Category
+import com.example.warehouseproject.domain.modelentities.user.User
 import com.example.warehouseproject.core.service.product.ProductApiService
 import com.example.warehouseproject.core.service.product.category.ProductCategoryService
 import com.example.warehouseproject.core.utils.helper.Currency
@@ -81,9 +80,9 @@ class AddProductStepActivity : AppCompatActivity(), AdapterCategoryAddProduct.Ad
         initView()
 
         binding.baseCardview2.isEnabled = false
-        binding.baseCardview2.setStrokeColor(getColorStateList(com.google.android.material.R.color.material_on_surface_disabled))
+        binding.baseCardview2.setStrokeColor(getColorStateList(R.color.color_disabled))
         binding.baseCardview3.isEnabled = false
-        binding.baseCardview3.setStrokeColor(getColorStateList(com.google.android.material.R.color.material_on_surface_disabled))
+        binding.baseCardview3.setStrokeColor(getColorStateList(R.color.color_disabled))
 
         autoCompleteStatusProduct()
 
@@ -159,7 +158,11 @@ class AddProductStepActivity : AppCompatActivity(), AdapterCategoryAddProduct.Ad
         }
 
 
-        binding.tvChipCode.text = RandomCodeProduct.generate()
+        // Code generate otomatis
+//        binding.tvChipCode.text = RandomCodeProduct.generate()
+        addTextCangedListener(binding.etProductCode) {
+            binding.tvChipCode.text = it.toString().uppercase()
+        }
 
         addTextCangedListener(binding.etProductPrice) {
             inputPriceInteractor(it)

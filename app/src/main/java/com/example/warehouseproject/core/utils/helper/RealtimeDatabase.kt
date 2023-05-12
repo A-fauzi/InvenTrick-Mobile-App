@@ -3,7 +3,7 @@ package com.example.warehouseproject.core.utils.helper
 import android.content.Context
 import android.widget.Toast
 import com.example.warehouseproject.core.utils.helper.FirebaseInstance.database
-import com.example.warehouseproject.core.model.user.UserRequest
+import com.example.warehouseproject.domain.modelentities.user.UserRequest
 
 class RealtimeDatabase(private val context: Context) {
     fun write(uid: String, userActivity: UserRequest.StatusActivity) {

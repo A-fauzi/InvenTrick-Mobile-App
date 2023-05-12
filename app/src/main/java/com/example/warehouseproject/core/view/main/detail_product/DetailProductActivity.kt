@@ -8,7 +8,7 @@ import android.widget.Toast
 import coil.load
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.constant.Constant
-import com.example.warehouseproject.core.model.product.Product
+import com.example.warehouseproject.domain.modelentities.product.Product
 import com.example.warehouseproject.core.service.product.ProductApiService
 import com.example.warehouseproject.core.utils.helper.Currency
 import com.example.warehouseproject.core.utils.helper.QrCode

@@ -2,9 +2,7 @@ package com.example.warehouseproject.core.view.authentication
 
 import android.text.Editable
 import android.widget.EditText
-import com.example.warehouseproject.R
-import com.example.warehouseproject.core.model.user.UserRequest
-import com.google.android.material.textfield.TextInputLayout
+import com.example.warehouseproject.domain.modelentities.user.UserRequest
 
 /**
  * Kelas SignInInteractor memiliki satu fungsi signInValidation yang akan memvalidasi masukan dari pengguna.

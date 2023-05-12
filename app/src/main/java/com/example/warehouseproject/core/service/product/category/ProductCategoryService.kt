@@ -3,8 +3,8 @@ package com.example.warehouseproject.core.service.product.category
 import android.util.Log
 import com.example.warehouseproject.core.config.NetworkConfig
 import com.example.warehouseproject.core.constant.Constant
-import com.example.warehouseproject.core.model.product.category.Category
-import com.example.warehouseproject.core.model.product.category.CategoryResponse
+import com.example.warehouseproject.domain.modelentities.product.category.Category
+import com.example.warehouseproject.domain.modelentities.product.category.CategoryResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

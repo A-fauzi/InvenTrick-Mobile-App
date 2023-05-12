@@ -16,9 +16,9 @@ import com.example.awesomedialog.*
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.constant.Constant
 import com.example.warehouseproject.core.utils.helper.HideKeyboardHelper
-import com.example.warehouseproject.core.model.product.Product
-import com.example.warehouseproject.core.model.product.ProductRequest
-import com.example.warehouseproject.core.model.product.StockHistory
+import com.example.warehouseproject.domain.modelentities.product.Product
+import com.example.warehouseproject.domain.modelentities.product.ProductRequest
+import com.example.warehouseproject.domain.modelentities.product.StockHistory
 import com.example.warehouseproject.core.service.product.ProductApiService
 import com.example.warehouseproject.core.view.main.MainActivity
 import com.example.warehouseproject.databinding.ActivityStockInBinding

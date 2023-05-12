@@ -15,12 +15,11 @@ import com.example.warehouseproject.core.constant.Constant.User.ID
 import com.example.warehouseproject.core.constant.Constant.User.TOKEN
 import com.example.warehouseproject.core.utils.helper.InternetConnect
 import com.example.warehouseproject.core.utils.helper.RealtimeDatabase
-import com.example.warehouseproject.core.model.user.UserRequest
-import com.example.warehouseproject.core.model.user.UserResponse
+import com.example.warehouseproject.domain.modelentities.user.UserRequest
+import com.example.warehouseproject.domain.modelentities.user.UserResponse
 import com.example.warehouseproject.core.service.user.UserApiService
 import com.example.warehouseproject.core.view.not_internet_connect.ItemDisconnectActivity
 import com.example.warehouseproject.databinding.ActivityMainBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.paperdb.Paper
 
 class MainActivity : AppCompatActivity(), MainView {

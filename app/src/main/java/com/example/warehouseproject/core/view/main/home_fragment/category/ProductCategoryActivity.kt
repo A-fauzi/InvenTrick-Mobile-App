@@ -2,12 +2,11 @@ package com.example.warehouseproject.core.view.main.home_fragment.category
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.warehouseproject.core.constant.Constant
-import com.example.warehouseproject.core.model.product.category.Category
+import com.example.warehouseproject.domain.modelentities.product.category.Category
 import com.example.warehouseproject.core.utils.helper.SimpleDateFormat
 import com.example.warehouseproject.core.service.product.category.ProductCategoryService
 import com.example.warehouseproject.core.utils.helper.HideKeyboardHelper

@@ -1,9 +1,7 @@
 package com.example.warehouseproject.core.view.authentication
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.text.Editable
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -18,10 +16,9 @@ import com.example.warehouseproject.core.constant.Constant.User.PROFILE_PHOTO
 import com.example.warehouseproject.core.constant.Constant.User.STORAGE_PATH_PROFILE
 import com.example.warehouseproject.core.constant.Constant.User.TOKEN
 import com.example.warehouseproject.core.constant.Constant.User.USERNAME
-import com.example.warehouseproject.core.model.user.UserRequest
-import com.example.warehouseproject.core.model.user.UserResponse
+import com.example.warehouseproject.domain.modelentities.user.UserRequest
+import com.example.warehouseproject.domain.modelentities.user.UserResponse
 import com.example.warehouseproject.core.service.user.UserApiService
-import com.example.warehouseproject.core.utils.helper.ZiHelper
 import com.example.warehouseproject.core.utils.helper.ZiHelper.openWa
 import com.example.warehouseproject.core.view.main.MainActivity
 import com.example.warehouseproject.databinding.ActivitySignInBinding

@@ -1,7 +1,6 @@
 package com.example.warehouseproject.core.view.main.history_product
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,12 +9,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.warehouseproject.R
-import com.example.warehouseproject.core.model.product.StockHistory
-import com.example.warehouseproject.core.model.user.User
+import com.example.warehouseproject.domain.modelentities.product.StockHistory
+import com.example.warehouseproject.domain.modelentities.user.User
 import com.example.warehouseproject.core.service.product.ProductApiService
 import com.example.warehouseproject.core.service.user.UserApiService
 import com.example.warehouseproject.databinding.ItemDataHistoryBinding
-import com.squareup.picasso.Picasso
 import io.paperdb.Paper
 
 class StockHistoryAdapterPaging(

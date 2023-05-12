@@ -2,9 +2,9 @@ package com.example.warehouseproject.core.service.user
 
 import com.example.warehouseproject.core.config.NetworkConfig
 import com.example.warehouseproject.core.constant.Constant
-import com.example.warehouseproject.core.model.user.User
-import com.example.warehouseproject.core.model.user.UserRequest
-import com.example.warehouseproject.core.model.user.UserResponse
+import com.example.warehouseproject.domain.modelentities.user.User
+import com.example.warehouseproject.domain.modelentities.user.UserRequest
+import com.example.warehouseproject.domain.modelentities.user.UserResponse
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
@@ -30,10 +30,15 @@ class UserApiService {
                             listener.onSuccessBody(it)
                         }
                     } else {
-                        // convert json to String
-                        val gson = Gson()
-                        val mNanu = gson.fromJson(response.errorBody()?.string(), UserResponse::class.java)
-                        listener.onErrorBody(mNanu.message)
+
+                        if (response.code() == 503) {
+                            listener.onErrorBody("Server Error")
+                        } else {
+                            // convert json to String
+                            val gson = Gson()
+                            val mNanu = gson.fromJson(response.errorBody()?.string(), UserResponse::class.java)
+                            listener.onErrorBody(mNanu.message)
+                        }
                     }
                 }
 
@@ -62,10 +67,14 @@ class UserApiService {
                     if (response.isSuccessful) {
                         response.body()?.let { listener.onSuccessBodyReqStatus(it) }
                     } else {
-                        // convert json to String
-                        val gson = Gson()
-                        val msg = gson.fromJson(response.errorBody()?.string(), UserResponse::class.java)
-                        listener.onErrorBodyReqStatus(msg.message)
+                        if (response.code() == 503) {
+                            listener.onErrorBodyReqStatus("Server Error")
+                        } else {
+                            // convert json to String
+                            val gson = Gson()
+                            val mNanu = gson.fromJson(response.errorBody()?.string(), UserResponse::class.java)
+                            listener.onErrorBodyReqStatus(mNanu.message)
+                        }
                     }
                 }
 
@@ -90,10 +99,14 @@ class UserApiService {
                             onSuccessBody(it)
                         }
                     } else {
-                        // convert json to String
-                        val gson = Gson()
-                        val msg = gson.fromJson(response.errorBody()?.string(), UserResponse::class.java)
-                        onErrorBody(msg.message)
+                        if (response.code() == 503) {
+                            onErrorBody("Server Error")
+                        } else {
+                            // convert json to String
+                            val gson = Gson()
+                            val mNanu = gson.fromJson(response.errorBody()?.string(), UserResponse::class.java)
+                            onErrorBody(mNanu.message)
+                        }
                     }
                 }
 

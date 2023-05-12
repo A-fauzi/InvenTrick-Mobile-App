@@ -1,10 +1,7 @@
 package com.example.warehouseproject.core.view.main.home_fragment
 
-import android.app.Activity
-import android.content.Context
-import android.view.LayoutInflater
-import com.example.warehouseproject.core.model.product.Product
-import com.example.warehouseproject.core.model.product.ProductResponses
+import com.example.warehouseproject.domain.modelentities.product.Product
+import com.example.warehouseproject.domain.modelentities.product.ProductResponses
 import com.example.warehouseproject.core.service.product.ProductApiService
 
 

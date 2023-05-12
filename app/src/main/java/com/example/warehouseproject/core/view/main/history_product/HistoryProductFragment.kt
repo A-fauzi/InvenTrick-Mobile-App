@@ -11,8 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.warehouseproject.core.constant.Constant
-import com.example.warehouseproject.core.model.product.StockHistory
-import com.example.warehouseproject.core.model.user.User
+import com.example.warehouseproject.domain.modelentities.product.StockHistory
+import com.example.warehouseproject.domain.modelentities.user.User
 import com.example.warehouseproject.databinding.FragmentStockHistoriesBinding
 import io.paperdb.Paper
 import kotlinx.coroutines.launch

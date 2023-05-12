@@ -248,11 +248,39 @@
                               android:text="Code generate automatically"
                               android:textSize="@dimen/text_size_12" />
 
+                          <com.google.android.material.textfield.TextInputLayout
+                              android:id="@+id/outline_textfield_product_code"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              app:boxCornerRadiusBottomEnd="15dp"
+                              app:boxCornerRadiusBottomStart="15dp"
+                              app:boxCornerRadiusTopEnd="15dp"
+                              app:boxCornerRadiusTopStart="15dp"
+                              app:boxStrokeWidth="0dp"
+                              app:boxStrokeWidthFocused="0dp"
+                              app:endIconDrawable="@drawable/ic_badge_check"
+                              app:endIconMode="none"
+                              app:endIconTint="@color/blue_ocean"
+                              app:hintEnabled="false">
+
+
+                              <com.google.android.material.textfield.TextInputEditText
+                                  android:id="@+id/et_product_code"
+                                  android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:hint="code product"
+                                  android:inputType="text"
+                                  android:fontFamily="@font/inter_medium"
+                                  android:padding="16dp"
+                                  android:maxLength="6"/>
+
+                          </com.google.android.material.textfield.TextInputLayout>
+
                           <com.google.android.material.chip.Chip
                               android:id="@+id/tv_chip_code"
                               android:layout_width="wrap_content"
                               android:layout_height="wrap_content"
-                              android:text="PX001"
+                              tools:text="PX001"
                               android:textSize="@dimen/text_size_12" />
 
                           <Space

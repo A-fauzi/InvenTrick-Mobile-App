@@ -1,9 +1,7 @@
 package com.example.warehouseproject.core.utils
 
-import android.content.Intent
 import android.os.Bundle
-import com.example.warehouseproject.core.model.product.Product
-import com.example.warehouseproject.core.view.main.detail_product.DetailProductActivity
+import com.example.warehouseproject.domain.modelentities.product.Product
 
 object DataBundle {
     fun putProductData(data: Product): Bundle {

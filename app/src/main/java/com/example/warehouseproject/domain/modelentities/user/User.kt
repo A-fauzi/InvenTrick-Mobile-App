@@ -1,4 +1,4 @@
-package com.example.warehouseproject.core.model.user
+package com.example.warehouseproject.domain.modelentities.user
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

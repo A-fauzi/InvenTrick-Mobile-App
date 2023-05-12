@@ -1,7 +1,6 @@
 package com.example.warehouseproject.core.view.main.account_fragment
 
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -10,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
@@ -20,10 +18,10 @@ import com.example.warehouseproject.core.constant.Constant.User.FULLNAME
 import com.example.warehouseproject.core.constant.Constant.User.ID
 import com.example.warehouseproject.core.constant.Constant.User.PROFILE_PHOTO
 import com.example.warehouseproject.core.constant.Constant.User.TOKEN
-import com.example.warehouseproject.core.model.product.Product
+import com.example.warehouseproject.domain.modelentities.product.Product
 import com.example.warehouseproject.core.utils.helper.RealtimeDatabase
-import com.example.warehouseproject.core.model.user.UserRequest
-import com.example.warehouseproject.core.model.user.UserResponse
+import com.example.warehouseproject.domain.modelentities.user.UserRequest
+import com.example.warehouseproject.domain.modelentities.user.UserResponse
 import com.example.warehouseproject.core.service.user.UserApiService
 import com.example.warehouseproject.core.view.authentication.SignInActivity
 import com.example.warehouseproject.core.view.main.MainActivityPresenter

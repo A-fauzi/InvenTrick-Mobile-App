@@ -1,8 +1,7 @@
 package com.example.warehouseproject.core.view.main.history_product
 
 import com.example.warehouseproject.core.constant.Constant
-import com.example.warehouseproject.core.model.product.ProductResponses
-import com.example.warehouseproject.core.model.product.StockHistory
+import com.example.warehouseproject.domain.modelentities.product.StockHistory
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
