@@ -73,13 +73,53 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/status_detail"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:text="@string/chip_example_text"
-                        android:textColor="@color/white"/>
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/status_detail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:text="@string/chip_example_text"
+                            android:textColor="@color/white"/>
+
+                        <com.github.angads25.toggle.widget.LabeledSwitch
+                            android:id="@+id/switch_toogle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="12sp"
+                            app:colorBorder="@color/green"
+                            app:colorOff="@color/white"
+                            app:colorOn="@color/green"
+                            app:on="false"
+                            app:textOff="Activated"
+                            app:textOn="Active"/>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/tv_save_status"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            app:cardCornerRadius="15dp"
+                            app:cardElevation="0dp"
+                            android:layout_marginStart="8dp"
+                            android:visibility="invisible">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="8dp"
+                                android:fontFamily="@font/inter_semibold"
+                                android:text="save"
+                                android:textSize="12sp"/>
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
 
                     <Space
                         android:layout_width="match_parent"

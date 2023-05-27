@@ -3,26 +3,22 @@ package com.example.warehouseproject.domain.modelentities.product
 import com.example.warehouseproject.domain.modelentities.user.User
 
 data class ProductRequest(
-    var image: String,
-    val code_items: String,
-    val name: String,
-    val user: User,
-    val qty: String,
-    val category: String,
-    val sub_category: String,
-    val specification: String,
-    var price: Int,
-    val location: String,
-    val status: String,
-    val model: String,
-    val lot: String,
-    val exp: String,
-    var path_storage: String,
+    var image: String? = null,
+    val code_items: String? = null,
+    val name: String? = null,
+    val user: User? = null,
+    val qty: String? = null,
+    val category: String? = null,
+    val sub_category: String? = null,
+    val specification: String? = null,
+    var price: Int? = null,
+    val location: String? = null,
+    val status: String? = null,
+    val model: String? = null,
+    val lot: String? = null,
+    val exp: String? = null,
+    var path_storage: String? = null,
     val created_at: String? = null,
     val updated_at: String? = null
-) {
-    data class RequestQtyOnly(
-        val qty: String
-    )
-}
+)
 

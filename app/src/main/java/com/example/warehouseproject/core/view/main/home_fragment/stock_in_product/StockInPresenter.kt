@@ -9,8 +9,8 @@ class StockInPresenter(private val view: StockInView, private val interactor: St
         interactor.productByCode(context, codeProduct, this)
     }
 
-    fun updateProductQty(context: Context, id: String, qtyOnly: ProductRequest.RequestQtyOnly) {
-        interactor.productUpdateQty(context, id, qtyOnly, this)
+    fun updateProduct(context: Context, id: String, productRequest: ProductRequest) {
+        interactor.productUpdate(context, id, productRequest, this)
     }
 
     override fun onResultData(data: Product) {

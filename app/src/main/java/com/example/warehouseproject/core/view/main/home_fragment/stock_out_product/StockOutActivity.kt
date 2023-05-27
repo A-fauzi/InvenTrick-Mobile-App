@@ -119,12 +119,12 @@ class StockOutActivity : AppCompatActivity() {
 
                 val resultCalculate = beforeQty - qtyInput.toInt()
 
-                val qty = ProductRequest.RequestQtyOnly(resultCalculate.toString())
+                val qty = ProductRequest(qty = resultCalculate.toString())
 
 
                 val token = Paper.book().read<String>("token").toString()
                 val currentUid = Paper.book().read<String>(Constant.User.ID).toString()
-                ProductApiService(token).updateProductQty(this, binding.stockOut.tvIdProduct.text.toString(), qty,  { message, data ->
+                ProductApiService(token).updateProduct(this, binding.stockOut.tvIdProduct.text.toString(), qty,  { message, data ->
 
 
                     val dataRequest = StockHistory.StockHistoryRequest(data.code_items, data.name, qtyInput, "OUT", currentUid)

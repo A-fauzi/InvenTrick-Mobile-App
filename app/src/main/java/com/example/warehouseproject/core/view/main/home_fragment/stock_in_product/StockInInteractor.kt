@@ -27,10 +27,10 @@ class StockInInteractor {
         })
     }
 
-    fun productUpdateQty(context: Context, id: String, qtyOnly: ProductRequest.RequestQtyOnly, listener: InteractorListener) {
+    fun productUpdate(context: Context, id: String, productRequest: ProductRequest, listener: InteractorListener) {
         Paper.init(context)
         val token = Paper.book().read<String>("token").toString()
-        ProductApiService(token).updateProductQty(context, id, qtyOnly, { msg, data ->
+        ProductApiService(token).updateProduct(context, id, productRequest, { msg, data ->
             listener.onSuccessUpdateQty(data)
         }, {
             listener.onErrorUpdateQty(it)

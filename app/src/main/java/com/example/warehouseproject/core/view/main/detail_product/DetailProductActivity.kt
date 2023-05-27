@@ -1,5 +1,6 @@
 package com.example.warehouseproject.core.view.main.detail_product
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,6 +17,7 @@ import com.example.warehouseproject.core.view.main.MainActivity
 import com.example.warehouseproject.core.view.main.home_fragment.stock_in_product.StockInActivity
 import com.example.warehouseproject.core.view.main.home_fragment.stock_out_product.StockOutActivity
 import com.example.warehouseproject.databinding.ActivityDetailProductBinding
+import com.example.warehouseproject.domain.modelentities.product.ProductRequest
 import com.gkemon.XMLtoPDF.PdfGenerator
 import com.gkemon.XMLtoPDF.PdfGeneratorListener
 import com.gkemon.XMLtoPDF.model.FailureResponse
@@ -145,6 +147,52 @@ class DetailProductActivity : AppCompatActivity(), DetailProductView {
                 })
         }
 
+
+        binding.switchToogle.setOnToggledListener { toggleableView, isOn ->
+            if (isOn) {
+                binding.statusDetail.text = "active"
+                binding.statusDetail.chipBackgroundColor = getColorStateList(R.color.green)
+                binding.tvSaveStatus.visibility = View.VISIBLE
+            } else {
+                binding.statusDetail.text = "in-progress"
+                binding.statusDetail.chipBackgroundColor = getColorStateList(R.color.red_smooth)
+                binding.tvSaveStatus.visibility = View.GONE
+            }
+        }
+
+        binding.tvSaveStatus.setOnClickListener {
+            MaterialAlertDialogBuilder(this, R.style.ThemeOverlay_App_MaterialAlertDialog)
+                .setTitle("Change status")
+                .setMessage("Yakin ingin merubah status?")
+                .setCancelable(false)
+                .setNegativeButton("Cancel") { dialog, which ->
+                    // Respond to negative button press
+                }
+                .setPositiveButton("Accept") { dialog, which ->
+                    MaterialAlertDialogBuilder(this, R.style.ThemeOverlay_App_MaterialAlertDialog)
+                        .setTitle("Wait Change status")
+                        .setMessage("Mohon tunggu")
+                        .setCancelable(false)
+                        .show()
+
+                    val mStatus = ProductRequest(status = binding.statusDetail.text.toString())
+                    if (productId != null) {
+                        ProductApiService(token).updateProduct(this, productId, mStatus, { msg, data ->
+                            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+                            startActivity(Intent(this, MainActivity::class.java))
+                            finish()
+                        }, {
+                            MaterialAlertDialogBuilder(this, R.style.ThemeOverlay_App_MaterialAlertDialog)
+                                .setTitle("Uups!!")
+                                .setMessage(it)
+                                .setCancelable(true)
+                                .show()
+                        })
+                    }
+                }
+                .show()
+        }
+
     }
 
     private fun onClickButton(
@@ -257,8 +305,8 @@ class DetailProductActivity : AppCompatActivity(), DetailProductView {
         binding.statusDetail.text = status
         when (status) {
             "active" -> {
-                binding.statusDetail.chipBackgroundColor =
-                    getColorStateList(R.color.green_cendol)
+                binding.statusDetail.chipBackgroundColor = getColorStateList(R.color.green)
+                binding.switchToogle.visibility = View.GONE
             }
             "in-progress" -> {
                 binding.statusDetail.chipBackgroundColor = getColorStateList(R.color.red_smooth)

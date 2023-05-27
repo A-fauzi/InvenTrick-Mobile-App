@@ -114,10 +114,10 @@ class StockInActivity : AppCompatActivity(), StockInView {
 
                 val resultCalculate = beforeQty + qtyInput.toInt()
 
-                val qty = ProductRequest.RequestQtyOnly(resultCalculate.toString())
+                val qty = ProductRequest(qty = resultCalculate.toString())
 
                 // call presenter update qty
-                presenter.updateProductQty(this, binding.stockIn.tvIdProduct.text.toString(), qty)
+                presenter.updateProduct(this, binding.stockIn.tvIdProduct.text.toString(), qty)
             }
 
         }

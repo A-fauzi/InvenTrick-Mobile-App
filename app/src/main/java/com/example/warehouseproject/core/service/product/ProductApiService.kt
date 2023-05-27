@@ -145,10 +145,10 @@ class ProductApiService(private val token: String) {
             })
     }
 
-    fun updateProductQty(context: Context, id: String, qtyOnly: ProductRequest.RequestQtyOnly, onResponseSuccessBody: (msg: String, data: Product) -> Unit, onResponseErrorBody: (msg: String) -> Unit) {
+    fun updateProduct(context: Context, id: String, productRequest: ProductRequest, onResponseSuccessBody: (msg: String, data: Product) -> Unit, onResponseErrorBody: (msg: String) -> Unit) {
         NetworkConfig(Constant.BASE_URL, token)
             .productService()
-            .updateProductQty(id, qtyOnly)
+            .updateProduct(id, productRequest)
             .enqueue(object : Callback<ProductResponses.SingleResponse> {
                 override fun onResponse(
                     call: Call<ProductResponses.SingleResponse>,

@@ -27,7 +27,7 @@ interface ProductService {
     ): Call<ProductResponses>
 
     @PUT("product/{id}")
-    fun updateProductQty(@Path("id") id: String, @Body productRequestQty: ProductRequest.RequestQtyOnly): Call<ProductResponses.SingleResponse>
+    fun updateProduct(@Path("id") id: String, @Body productRequest: ProductRequest): Call<ProductResponses.SingleResponse>
 
     @DELETE("product/{id}")
     fun deleteProduct(@Path("id") productId: String): Call<ProductResponses.SingleResponse>
