@@ -1,7 +1,7 @@
 package com.example.warehouseproject.core.config
 
 import com.example.warehouseproject.core.service.product.ProductService
-import com.example.warehouseproject.core.service.user.UserService
+import com.example.warehouseproject.data.remote.user.UserService
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

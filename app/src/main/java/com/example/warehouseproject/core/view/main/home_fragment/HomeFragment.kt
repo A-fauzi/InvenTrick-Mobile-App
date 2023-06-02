@@ -18,10 +18,10 @@ import com.example.warehouseproject.R
 import com.example.warehouseproject.core.constant.Constant.User.PROFILE_PHOTO
 import com.example.warehouseproject.core.constant.Constant.User.TOKEN
 import com.example.warehouseproject.domain.modelentities.product.Product
-import com.example.warehouseproject.domain.modelentities.product.ProductResponses
+import com.example.warehouseproject.domain.modelentities.product.response.ProductResponses
 import com.example.warehouseproject.core.service.product.ProductApiService
 import com.example.warehouseproject.core.utils.DataBundle
-import com.example.warehouseproject.core.view.authentication.SignInActivity
+import com.example.warehouseproject.presentation.view.authentication.SignInActivity
 import com.example.warehouseproject.core.view.main.MainActivity
 import com.example.warehouseproject.core.view.main.detail_product.DetailProductActivity
 import com.example.warehouseproject.core.view.main.home_fragment.category.ProductCategoryActivity

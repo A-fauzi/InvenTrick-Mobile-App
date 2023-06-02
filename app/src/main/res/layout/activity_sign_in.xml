@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".core.view.authentication.SignInActivity">
+    tools:context=".presentation.view.authentication.SignInActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

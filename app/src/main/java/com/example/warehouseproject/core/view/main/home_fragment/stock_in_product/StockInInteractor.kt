@@ -2,7 +2,6 @@ package com.example.warehouseproject.core.view.main.home_fragment.stock_in_produ
 
 import android.content.Context
 import com.example.warehouseproject.domain.modelentities.product.Product
-import com.example.warehouseproject.domain.modelentities.product.ProductRequest
 import com.example.warehouseproject.core.service.product.ProductApiService
 import io.paperdb.Paper
 
@@ -27,7 +26,7 @@ class StockInInteractor {
         })
     }
 
-    fun productUpdate(context: Context, id: String, productRequest: ProductRequest, listener: InteractorListener) {
+    fun productUpdate(context: Context, id: String, productRequest: Product, listener: InteractorListener) {
         Paper.init(context)
         val token = Paper.book().read<String>("token").toString()
         ProductApiService(token).updateProduct(context, id, productRequest, { msg, data ->

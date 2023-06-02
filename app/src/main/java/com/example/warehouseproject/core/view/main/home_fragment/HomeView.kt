@@ -1,7 +1,7 @@
 package com.example.warehouseproject.core.view.main.home_fragment
 
 import com.example.warehouseproject.domain.modelentities.product.Product
-import com.example.warehouseproject.domain.modelentities.product.ProductResponses
+import com.example.warehouseproject.domain.modelentities.product.response.ProductResponses
 
 interface HomeView {
     fun moveMainActivity()

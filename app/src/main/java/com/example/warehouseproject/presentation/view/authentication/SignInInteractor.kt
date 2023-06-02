@@ -1,8 +1,8 @@
-package com.example.warehouseproject.core.view.authentication
+package com.example.warehouseproject.presentation.view.authentication
 
 import android.text.Editable
 import android.widget.EditText
-import com.example.warehouseproject.domain.modelentities.user.UserRequest
+import com.example.warehouseproject.domain.modelentities.user.request.UserAuthRequestModel
 
 /**
  * Kelas SignInInteractor memiliki satu fungsi signInValidation yang akan memvalidasi masukan dari pengguna.
@@ -29,7 +29,7 @@ class SignInInteractor {
         /**
          * yang akan dipanggil jika masukan pengguna valid.
          */
-        fun onSuccessValidationSignIn(userRequest: UserRequest)
+        fun onSuccessValidationSignIn(userRequest: UserAuthRequestModel)
     }
 
     /**
@@ -38,7 +38,7 @@ class SignInInteractor {
      * Jika kata sandi kosong, maka akan dipanggil fungsi onInputPasswordError() dari objek listener.
      * Jika kedua-duanya tidak kosong, maka fungsi onSuccessValidationSignIn(input) akan dipanggil dengan argumen input yang diberikan.
      */
-    fun signInValidation(input: UserRequest, listener: onFinishedSignInListener) {
+    fun signInValidation(input: UserAuthRequestModel, listener: onFinishedSignInListener) {
         when {
             input.username.isEmpty() -> listener.onInputUsernameError()
             input.password.isEmpty() -> listener.onInputPasswordError()

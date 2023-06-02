@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.warehouseproject.R
 import com.example.warehouseproject.domain.modelentities.product.StockHistory
-import com.example.warehouseproject.domain.modelentities.user.User
+import com.example.warehouseproject.domain.modelentities.user.request.UserRequestModel
 import com.example.warehouseproject.core.service.product.ProductApiService
 import com.example.warehouseproject.core.service.user.UserApiService
 import com.example.warehouseproject.databinding.ItemDataHistoryBinding
@@ -112,6 +112,6 @@ class StockHistoryAdapterPaging(
 
     interface StockHistoriesListener {
         fun onClickItemHistory(data: StockHistory)
-        fun onCLickUserProfile(user: User?)
+        fun onCLickUserProfile(user: UserRequestModel?)
     }
 }

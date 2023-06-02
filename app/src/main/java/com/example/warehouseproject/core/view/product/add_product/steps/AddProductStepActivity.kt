@@ -13,7 +13,6 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.ui.text.toUpperCase
 import androidx.constraintlayout.widget.Group
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
@@ -22,14 +21,12 @@ import com.bumptech.glide.Glide
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.constant.Constant
 import com.example.warehouseproject.domain.modelentities.product.Product
-import com.example.warehouseproject.domain.modelentities.product.ProductRequest
 import com.example.warehouseproject.domain.modelentities.product.category.Category
-import com.example.warehouseproject.domain.modelentities.user.User
+import com.example.warehouseproject.domain.modelentities.user.request.UserRequestModel
 import com.example.warehouseproject.core.service.product.ProductApiService
 import com.example.warehouseproject.core.service.product.category.ProductCategoryService
 import com.example.warehouseproject.core.utils.helper.Currency
 import com.example.warehouseproject.core.utils.helper.DatePickerDialog
-import com.example.warehouseproject.core.utils.helper.RandomCodeProduct
 import com.example.warehouseproject.core.utils.helper.TextWatcher.addTextCangedListener
 import com.example.warehouseproject.core.view.main.MainActivity
 import com.example.warehouseproject.core.view.product.add_product.AddProductPresenter
@@ -51,8 +48,8 @@ class AddProductStepActivity : AppCompatActivity(), AdapterCategoryAddProduct.Ad
     private lateinit var productCategoryService: ProductCategoryService
     private lateinit var fillPath: Uri
     private lateinit var firebaseStorage: FirebaseStorage
-    private lateinit var modelRequestAddProduct: ProductRequest
-    private lateinit var modelUser: User
+    private lateinit var modelRequestAddProduct: Product
+    private lateinit var modelUser: UserRequestModel
     private lateinit var presenter: AddProductPresenter
 
     private var category = "null"
@@ -470,13 +467,13 @@ class AddProductStepActivity : AppCompatActivity(), AdapterCategoryAddProduct.Ad
                 val division = Paper.book().read<String>(Constant.User.DIVISION).toString()
                 val storagePath = Paper.book().read<String>(Constant.User.STORAGE_PATH_PROFILE).toString()
 
-                modelUser = User(
+                modelUser = UserRequestModel(
                     _id = uid, username =  uName, profile_image =  profileImg,
                     fullName =  fullName, email =  email, roles = arrayListOf(),
                     position = division, status_activity = "null", jwt_token = token,
                     path_storage = storagePath
                 )
-                modelRequestAddProduct = ProductRequest(
+                modelRequestAddProduct = Product(
                     image = "null", code_items = code, name = name,
                     user = modelUser, qty = quantity, price = price,
                     category = category, sub_category = subCategory, specification = spec,

@@ -6,8 +6,8 @@ import android.content.Context
 import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat.requestPermissions
 import androidx.core.content.ContextCompat.checkSelfPermission
-import com.example.warehouseproject.domain.modelentities.user.UserRequest
-import com.example.warehouseproject.domain.modelentities.user.UserResponse
+import com.example.warehouseproject.domain.modelentities.user.request.UserAuthRequestModel
+import com.example.warehouseproject.domain.modelentities.user.response.UserResponseModel
 import com.example.warehouseproject.core.service.user.UserApiService
 
 /**
@@ -56,11 +56,11 @@ class MainActivityPresenter(
      * Method ini membutuhkan tiga parameter: token yang akan digunakan sebagai otorisasi untuk mengakses API, userId sebagai ID pengguna yang status aktivitasnya akan diubah, dan reqStatus sebagai status aktivitas pengguna yang baru.
      * Method ini akan mengirimkan permintaan ke API melalui objek userApiService dan menunggu respon dari server.
      */
-    fun updateStatusActivityUser(token: String, userId: String, reqStatus: UserRequest.StatusActivity) {
+    fun updateStatusActivityUser(token: String, userId: String, reqStatus: UserAuthRequestModel.StatusActivity) {
         userApiService.updateStatusUser(token, userId, reqStatus, this)
     }
 
-    override fun onSuccessBodyReqStatus(response: UserResponse.SingleResponse) {
+    override fun onSuccessBodyReqStatus(response: UserResponseModel.SingleResponse) {
         view.onSuccessBodyReqStatusView(response)
     }
 

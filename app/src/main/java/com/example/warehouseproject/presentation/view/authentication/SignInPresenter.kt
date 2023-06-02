@@ -1,7 +1,7 @@
-package com.example.warehouseproject.core.view.authentication
+package com.example.warehouseproject.presentation.view.authentication
 
-import com.example.warehouseproject.domain.modelentities.user.UserRequest
-import com.example.warehouseproject.domain.modelentities.user.UserResponse
+import com.example.warehouseproject.domain.modelentities.user.request.UserAuthRequestModel
+import com.example.warehouseproject.domain.modelentities.user.response.UserResponseModel
 import com.example.warehouseproject.core.service.user.UserApiService
 
 
@@ -13,7 +13,8 @@ import com.example.warehouseproject.core.service.user.UserApiService
  * @param service objek untuk mengirimkan permintaan sign in ke server.
  * @param interactor objek untuk memvalidasi data sign in.
  */
-class SignInPresenter(private val view: SignInView, private val service: UserApiService, private val interactor: SignInInteractor): UserApiService.OnFinishedRequestUser, SignInInteractor.onFinishedSignInListener {
+class SignInPresenter(private val view: SignInView, private val service: UserApiService, private val interactor: SignInInteractor): UserApiService.OnFinishedRequestUser,
+    SignInInteractor.onFinishedSignInListener {
 
 
     /**
@@ -21,7 +22,7 @@ class SignInPresenter(private val view: SignInView, private val service: UserApi
      * Fungsi ini akan mengirimkan permintaan sign in ke server menggunakan objek service.
      * @param userRequest data user yang akan digunakan untuk sign in.
      */
-    fun signInUser(userRequest: UserRequest) {
+    fun signInUser(userRequest: UserAuthRequestModel) {
         service.signInUser(userRequest, this)
         view.onClickBtnLoginView()
     }
@@ -32,7 +33,7 @@ class SignInPresenter(private val view: SignInView, private val service: UserApi
      * Fungsi ini akan mengirimkan data user yang akan digunakan untuk sign in ke interactor untuk divalidasi.
      * @param userRequest data user yang akan digunakan untuk sign in.
      */
-    fun validateFormSignIn(userRequest: UserRequest) {
+    fun validateFormSignIn(userRequest: UserAuthRequestModel) {
         interactor.signInValidation(userRequest, this)
     }
 
@@ -42,7 +43,7 @@ class SignInPresenter(private val view: SignInView, private val service: UserApi
      * Fungsi ini akan memanggil fungsi view.moveToMainActivity() dan view.showResponseMessageSuccess(data: UserResponse.SingleResponse).
      * @param response respon dari server yang berisi data user.
      */
-    override fun onSuccessBody(response: UserResponse.SingleResponse) {
+    override fun onSuccessBody(response: UserResponseModel.SingleResponse) {
         view.moveToMainActivity()
         view.showResponseMessageSuccess(response)
     }
@@ -92,7 +93,7 @@ class SignInPresenter(private val view: SignInView, private val service: UserApi
     Fungsi ini akan memanggil fungsi view.onSuccessValidationSignIn(userRequest: UserRequest).
     @param userRequest data user yang sudah divalidasi dan valid.
      */
-    override fun onSuccessValidationSignIn(userRequest: UserRequest) {
+    override fun onSuccessValidationSignIn(userRequest: UserAuthRequestModel) {
         view.onSuccessValidationSignIn(userRequest)
     }
 }

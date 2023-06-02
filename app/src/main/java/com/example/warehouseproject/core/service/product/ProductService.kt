@@ -1,8 +1,7 @@
 package com.example.warehouseproject.core.service.product
 
 import com.example.warehouseproject.domain.modelentities.product.Product
-import com.example.warehouseproject.domain.modelentities.product.ProductRequest
-import com.example.warehouseproject.domain.modelentities.product.ProductResponses
+import com.example.warehouseproject.domain.modelentities.product.response.ProductResponses
 import com.example.warehouseproject.domain.modelentities.product.StockHistory
 import com.example.warehouseproject.domain.modelentities.product.category.Category
 import com.example.warehouseproject.domain.modelentities.product.category.CategoryResponse
@@ -12,7 +11,7 @@ import retrofit2.http.*
 interface ProductService {
 
     @POST("product/create")
-    fun addProduct(@Body productRequest: ProductRequest): Call<ProductResponses.SingleResponse>
+    fun addProduct(@Body product: Product): Call<ProductResponses.SingleResponse>
 
     @GET("product/all")
     fun getProducts(@Query("page") page: Int): Call<ProductResponses>
@@ -27,7 +26,7 @@ interface ProductService {
     ): Call<ProductResponses>
 
     @PUT("product/{id}")
-    fun updateProduct(@Path("id") id: String, @Body productRequest: ProductRequest): Call<ProductResponses.SingleResponse>
+    fun updateProduct(@Path("id") id: String, @Body product: Product): Call<ProductResponses.SingleResponse>
 
     @DELETE("product/{id}")
     fun deleteProduct(@Path("id") productId: String): Call<ProductResponses.SingleResponse>

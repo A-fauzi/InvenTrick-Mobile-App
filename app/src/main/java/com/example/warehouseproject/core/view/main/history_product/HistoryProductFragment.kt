@@ -12,7 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.warehouseproject.core.constant.Constant
 import com.example.warehouseproject.domain.modelentities.product.StockHistory
-import com.example.warehouseproject.domain.modelentities.user.User
+import com.example.warehouseproject.domain.modelentities.user.request.UserRequestModel
 import com.example.warehouseproject.databinding.FragmentStockHistoriesBinding
 import io.paperdb.Paper
 import kotlinx.coroutines.launch
@@ -95,7 +95,7 @@ class HistoryProductFragment: Fragment(),  StockHistoryAdapterPaging.StockHistor
         }
     }
 
-    override fun onCLickUserProfile(user: User?) {
+    override fun onCLickUserProfile(user: UserRequestModel?) {
         Toast.makeText(requireActivity(), user?.username, Toast.LENGTH_SHORT).show()
     }
 }

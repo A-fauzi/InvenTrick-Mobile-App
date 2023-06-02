@@ -16,7 +16,7 @@ import com.example.warehouseproject.core.constant.Constant.User.EMAIL
 import com.example.warehouseproject.core.constant.Constant.User.FULLNAME
 import com.example.warehouseproject.core.constant.Constant.User.PROFILE_PHOTO
 import com.example.warehouseproject.core.constant.Constant.User.USERNAME
-import com.example.warehouseproject.core.view.authentication.SignInActivity
+import com.example.warehouseproject.presentation.view.authentication.SignInActivity
 import com.example.warehouseproject.databinding.ActivityAccountUpdateBinding
 import com.google.android.material.textfield.TextInputLayout
 import com.squareup.picasso.Picasso

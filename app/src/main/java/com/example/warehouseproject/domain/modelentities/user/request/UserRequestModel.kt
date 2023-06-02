@@ -1,10 +1,10 @@
-package com.example.warehouseproject.domain.modelentities.user
+package com.example.warehouseproject.domain.modelentities.user.request
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class User(
+data class UserRequestModel(
     val _id: String,
     val username: String,
     val profile_image: String,

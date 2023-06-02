@@ -11,11 +11,11 @@ import com.airbnb.lottie.LottieAnimationView
 import com.example.warehouseproject.R
 import com.example.warehouseproject.core.constant.Constant
 import com.example.warehouseproject.core.utils.helper.HideKeyboardHelper
-import com.example.warehouseproject.domain.modelentities.product.ProductRequest
 import com.example.warehouseproject.domain.modelentities.product.StockHistory
 import com.example.warehouseproject.core.service.product.ProductApiService
 import com.example.warehouseproject.core.view.main.MainActivity
 import com.example.warehouseproject.databinding.ActivityStockOutBinding
+import com.example.warehouseproject.domain.modelentities.product.Product
 import com.squareup.picasso.Picasso
 import io.paperdb.Paper
 
@@ -68,7 +68,7 @@ class StockOutActivity : AppCompatActivity() {
             val token = Paper.book().read<String>("token").toString()
             ProductApiService(token).getProductByCode( code, {
 
-                beforeQty = it.qty.toInt()
+                beforeQty = it.qty?.toInt() ?: 0
 
                 Picasso.get().load(it.image).centerCrop().resize(500, 500).error(R.drawable.img_example).into(binding.stockOut.ivItemProduct)
                 binding.stockOut.tvIdProduct.text = it._id
@@ -119,7 +119,7 @@ class StockOutActivity : AppCompatActivity() {
 
                 val resultCalculate = beforeQty - qtyInput.toInt()
 
-                val qty = ProductRequest(qty = resultCalculate.toString())
+                val qty = Product(qty = resultCalculate.toString())
 
 
                 val token = Paper.book().read<String>("token").toString()
@@ -127,8 +127,15 @@ class StockOutActivity : AppCompatActivity() {
                 ProductApiService(token).updateProduct(this, binding.stockOut.tvIdProduct.text.toString(), qty,  { message, data ->
 
 
-                    val dataRequest = StockHistory.StockHistoryRequest(data.code_items, data.name, qtyInput, "OUT", currentUid)
-                    ProductApiService(token).createStockHistory( dataRequest)
+                    val dataRequest = data.code_items?.let { it1 ->
+                        data.name?.let { it2 ->
+                            StockHistory.StockHistoryRequest(
+                                it1, it2, qtyInput, "OUT", currentUid)
+                        }
+                    }
+                    if (dataRequest != null) {
+                        ProductApiService(token).createStockHistory( dataRequest)
+                    }
 
                     binding.stockOut.containerSearchView.visibility = View.GONE
                     binding.stockOut.tvDescInputCode.visibility = View.GONE

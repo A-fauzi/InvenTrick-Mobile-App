@@ -6,8 +6,7 @@ import android.widget.Toast
 import com.example.warehouseproject.core.config.NetworkConfig
 import com.example.warehouseproject.core.constant.Constant
 import com.example.warehouseproject.domain.modelentities.product.Product
-import com.example.warehouseproject.domain.modelentities.product.ProductRequest
-import com.example.warehouseproject.domain.modelentities.product.ProductResponses
+import com.example.warehouseproject.domain.modelentities.product.response.ProductResponses
 import com.example.warehouseproject.domain.modelentities.product.StockHistory
 import com.google.gson.Gson
 import retrofit2.Call
@@ -22,7 +21,7 @@ class ProductApiService(private val token: String) {
         fun onResponseErrorBodyAddProduct(msg: String)
         fun onFailureResponseAddProduct(msg: String)
     }
-    fun addProductApiService(requestAddProduct: ProductRequest, listener :OnFinishedAddProduct) {
+    fun addProductApiService(requestAddProduct: Product, listener :OnFinishedAddProduct) {
         // request api
         NetworkConfig(Constant.BASE_URL, token)
             .productService()
@@ -145,7 +144,7 @@ class ProductApiService(private val token: String) {
             })
     }
 
-    fun updateProduct(context: Context, id: String, productRequest: ProductRequest, onResponseSuccessBody: (msg: String, data: Product) -> Unit, onResponseErrorBody: (msg: String) -> Unit) {
+    fun updateProduct(context: Context, id: String, productRequest: Product, onResponseSuccessBody: (msg: String, data: Product) -> Unit, onResponseErrorBody: (msg: String) -> Unit) {
         NetworkConfig(Constant.BASE_URL, token)
             .productService()
             .updateProduct(id, productRequest)

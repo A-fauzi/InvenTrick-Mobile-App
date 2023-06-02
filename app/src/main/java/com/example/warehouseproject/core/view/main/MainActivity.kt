@@ -15,8 +15,8 @@ import com.example.warehouseproject.core.constant.Constant.User.ID
 import com.example.warehouseproject.core.constant.Constant.User.TOKEN
 import com.example.warehouseproject.core.utils.helper.InternetConnect
 import com.example.warehouseproject.core.utils.helper.RealtimeDatabase
-import com.example.warehouseproject.domain.modelentities.user.UserRequest
-import com.example.warehouseproject.domain.modelentities.user.UserResponse
+import com.example.warehouseproject.domain.modelentities.user.request.UserAuthRequestModel
+import com.example.warehouseproject.domain.modelentities.user.response.UserResponseModel
 import com.example.warehouseproject.core.service.user.UserApiService
 import com.example.warehouseproject.core.view.not_internet_connect.ItemDisconnectActivity
 import com.example.warehouseproject.databinding.ActivityMainBinding
@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity(), MainView {
     private fun checkInternetConnection() {
         if (InternetConnect.checkInternetConnect(this)) {
 
-            val data = UserRequest.StatusActivity("online")
+            val data = UserAuthRequestModel.StatusActivity("online")
             val token = Paper.book().read<String>(TOKEN).toString()
             val userId = Paper.book().read<String>(ID).toString()
             presenter.updateStatusActivityUser(token, userId, data)
@@ -147,7 +147,7 @@ class MainActivity : AppCompatActivity(), MainView {
     override fun onStart() {
         super.onStart()
 
-        val data = UserRequest.StatusActivity("online")
+        val data = UserAuthRequestModel.StatusActivity("online")
         val token = Paper.book().read<String>(TOKEN).toString()
         val userId = Paper.book().read<String>(ID).toString()
         presenter.updateStatusActivityUser(token, userId, data)
@@ -158,7 +158,7 @@ class MainActivity : AppCompatActivity(), MainView {
     override fun onDestroy() {
         super.onDestroy()
 
-        val data = UserRequest.StatusActivity("offline")
+        val data = UserAuthRequestModel.StatusActivity("offline")
         val token = Paper.book().read<String>(TOKEN).toString()
         val userId = Paper.book().read<String>(ID).toString()
 
@@ -167,8 +167,8 @@ class MainActivity : AppCompatActivity(), MainView {
         Paper.book().write("status", data.status_activity)
     }
 
-    override fun onSuccessBodyReqStatusView(response: UserResponse.SingleResponse) {
-        realtimeDatabase.write(response.data._id, UserRequest.StatusActivity(response.data.status_activity))
+    override fun onSuccessBodyReqStatusView(response: UserResponseModel.SingleResponse) {
+        realtimeDatabase.write(response.data._id, UserAuthRequestModel.StatusActivity(response.data.status_activity))
     }
 
     override fun onErrorBodyReqStatusView(message: String) {

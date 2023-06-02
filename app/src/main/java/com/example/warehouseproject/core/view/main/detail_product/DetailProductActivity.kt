@@ -17,7 +17,6 @@ import com.example.warehouseproject.core.view.main.MainActivity
 import com.example.warehouseproject.core.view.main.home_fragment.stock_in_product.StockInActivity
 import com.example.warehouseproject.core.view.main.home_fragment.stock_out_product.StockOutActivity
 import com.example.warehouseproject.databinding.ActivityDetailProductBinding
-import com.example.warehouseproject.domain.modelentities.product.ProductRequest
 import com.gkemon.XMLtoPDF.PdfGenerator
 import com.gkemon.XMLtoPDF.PdfGeneratorListener
 import com.gkemon.XMLtoPDF.model.FailureResponse
@@ -175,7 +174,7 @@ class DetailProductActivity : AppCompatActivity(), DetailProductView {
                         .setCancelable(false)
                         .show()
 
-                    val mStatus = ProductRequest(status = binding.statusDetail.text.toString())
+                    val mStatus = Product(status = binding.statusDetail.text.toString())
                     if (productId != null) {
                         ProductApiService(token).updateProduct(this, productId, mStatus, { msg, data ->
                             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()

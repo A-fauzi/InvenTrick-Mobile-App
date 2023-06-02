@@ -1,6 +1,6 @@
-package com.example.warehouseproject.domain.modelentities.user
+package com.example.warehouseproject.domain.modelentities.user.request
 
-data class UserRequest(
+data class UserAuthRequestModel(
     val username: String,
     val password: String
 ) {

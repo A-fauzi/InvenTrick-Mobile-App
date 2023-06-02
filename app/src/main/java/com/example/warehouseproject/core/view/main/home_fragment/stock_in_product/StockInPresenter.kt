@@ -2,14 +2,13 @@ package com.example.warehouseproject.core.view.main.home_fragment.stock_in_produ
 
 import android.content.Context
 import com.example.warehouseproject.domain.modelentities.product.Product
-import com.example.warehouseproject.domain.modelentities.product.ProductRequest
 
 class StockInPresenter(private val view: StockInView, private val interactor: StockInInteractor): StockInInteractor.InteractorListener {
     fun searchProduct(context: Context, codeProduct: String) {
         interactor.productByCode(context, codeProduct, this)
     }
 
-    fun updateProduct(context: Context, id: String, productRequest: ProductRequest) {
+    fun updateProduct(context: Context, id: String, productRequest: Product) {
         interactor.productUpdate(context, id, productRequest, this)
     }
 

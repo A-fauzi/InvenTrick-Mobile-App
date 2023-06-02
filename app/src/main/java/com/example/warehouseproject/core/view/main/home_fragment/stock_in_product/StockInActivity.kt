@@ -17,7 +17,6 @@ import com.example.warehouseproject.R
 import com.example.warehouseproject.core.constant.Constant
 import com.example.warehouseproject.core.utils.helper.HideKeyboardHelper
 import com.example.warehouseproject.domain.modelentities.product.Product
-import com.example.warehouseproject.domain.modelentities.product.ProductRequest
 import com.example.warehouseproject.domain.modelentities.product.StockHistory
 import com.example.warehouseproject.core.service.product.ProductApiService
 import com.example.warehouseproject.core.view.main.MainActivity
@@ -114,7 +113,7 @@ class StockInActivity : AppCompatActivity(), StockInView {
 
                 val resultCalculate = beforeQty + qtyInput.toInt()
 
-                val qty = ProductRequest(qty = resultCalculate.toString())
+                val qty = Product(qty = resultCalculate.toString())
 
                 // call presenter update qty
                 presenter.updateProduct(this, binding.stockIn.tvIdProduct.text.toString(), qty)
@@ -124,7 +123,7 @@ class StockInActivity : AppCompatActivity(), StockInView {
     }
 
     override fun getResultDataOnRest(data: Product) {
-        beforeQty = data.qty.toInt()
+        beforeQty = data.qty?.toInt() ?: 0
 
         Picasso.get().load(data.image).centerCrop().resize(500, 500).error(R.drawable.img_example).into(binding.stockIn.ivItemProduct)
         binding.stockIn.tvIdProduct.text = data._id
@@ -161,8 +160,13 @@ class StockInActivity : AppCompatActivity(), StockInView {
     override fun showViewOnSuccessUpdateQty(data: Product) {
         val token = Paper.book().read<String>("token").toString()
         val currentUid = Paper.book().read<String>(Constant.User.ID).toString()
-        val dataRequest = StockHistory.StockHistoryRequest(data.code_items, data.name, inputQtyProduct.text.toString(), "IN", currentUid)
-        ProductApiService(token).createStockHistory( dataRequest)
+        val dataRequest = data.code_items?.let { data.name?.let { it1 ->
+            StockHistory.StockHistoryRequest(it,
+                it1, inputQtyProduct.text.toString(), "IN", currentUid)
+        } }
+        if (dataRequest != null) {
+            ProductApiService(token).createStockHistory( dataRequest)
+        }
 
         binding.stockIn.containerSearchView.visibility = View.GONE
         binding.stockIn.tvDescInputCode.visibility = View.GONE

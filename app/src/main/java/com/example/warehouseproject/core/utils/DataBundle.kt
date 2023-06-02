@@ -13,7 +13,7 @@ object DataBundle {
         bundle.putString("spec", data.specification)
         bundle.putString("exp", data.exp)
         bundle.putString("qty", data.qty)
-        bundle.putString("price", data.price)
+        bundle.putString("price", data.price.toString())
         bundle.putString("location", data.location)
         bundle.putString("model", data.model)
         bundle.putString("lot", data.lot)
@@ -22,7 +22,7 @@ object DataBundle {
         bundle.putString("category", data.category)
         bundle.putString("subcat", data.sub_category)
         bundle.putString("status", data.status)
-        bundle.putString("uid", data.user._id)
+        bundle.putString("uid", data.user?._id)
         bundle.putString("path", data.path_storage)
 
         return bundle

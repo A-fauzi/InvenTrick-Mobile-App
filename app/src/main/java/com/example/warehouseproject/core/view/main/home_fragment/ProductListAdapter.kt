@@ -44,10 +44,10 @@ class ProductListAdapter(
                 }
                 binding.tvItemCodeProduct.text = code_items
                 binding.tvSpecProduct.text = specification
-                "Stock quantity: ${qty.toInt()}".also { binding.tvQuantityProduct.text = it }
+                "Stock quantity: ${qty?.toInt()}".also { binding.tvQuantityProduct.text = it }
 
-                binding.itemUserName.text = user.username
-                Picasso.get().load(user.profile_image).placeholder(R.drawable.ic_people).error(R.drawable.img_example).into(binding.itemUserPhoto)
+                binding.itemUserName.text = user?.username
+                Picasso.get().load(user?.profile_image).placeholder(R.drawable.ic_people).error(R.drawable.img_example).into(binding.itemUserPhoto)
 
                 binding.tvDetailProduct.setOnClickListener {
                     callClickListener.onClickListenerProduct(items[position])

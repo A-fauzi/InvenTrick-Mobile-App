@@ -1,7 +1,7 @@
-package com.example.warehouseproject.core.view.authentication
+package com.example.warehouseproject.presentation.view.authentication
 
-import com.example.warehouseproject.domain.modelentities.user.UserRequest
-import com.example.warehouseproject.domain.modelentities.user.UserResponse
+import com.example.warehouseproject.domain.modelentities.user.request.UserAuthRequestModel
+import com.example.warehouseproject.domain.modelentities.user.response.UserResponseModel
 
 /**
  * Interface SignInView digunakan sebagai kontrak antara presenter dan view untuk
@@ -28,7 +28,7 @@ interface SignInView {
      * Fungsi showResponseMessageSuccess dipanggil ketika user berhasil sign in.
      * @param data respon dari server yang berisi data user.
      */
-    fun showResponseMessageSuccess(data: UserResponse.SingleResponse)
+    fun showResponseMessageSuccess(data: UserResponseModel.SingleResponse)
 
     /**
      * Fungsi showResponseMessageError dipanggil ketika terjadi kesalahan saat sign in.
@@ -50,6 +50,6 @@ interface SignInView {
      * Fungsi onSuccessValidationSignIn dipanggil ketika validasi sign in berhasil.
      * @param userRequest data user yang akan digunakan untuk sign in.
      */
-    fun onSuccessValidationSignIn(userRequest: UserRequest)
+    fun onSuccessValidationSignIn(userRequest: UserAuthRequestModel)
     fun onResponseSignInFailure(msg: String)
 }

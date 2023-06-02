@@ -2,11 +2,10 @@ package com.example.warehouseproject.core.view.product.add_product
 
 import com.example.warehouseproject.domain.modelentities.product.Product
 import com.example.warehouseproject.core.service.product.ProductApiService
-import com.example.warehouseproject.domain.modelentities.product.ProductRequest
 
 class AddProductPresenter(var addProductView: AddProductView?, private val productApiService: ProductApiService): ProductApiService.OnFinishedAddProduct {
 
-    fun addProductRequest(request: ProductRequest) {
+    fun addProductRequest(request: Product) {
         productApiService.addProductApiService(request, this)
     }
 
