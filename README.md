@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is the README file for the InvenTrick mobile application. The app is developed using Kotlin and integrated with the backend API mentioned in the previous section. The development environment used is Android Studio, and the architecture follows the MVP (Model-View-Presenter) pattern. The app utilizes various libraries such as Retrofit, Picasso, Paging 3, etc. One of the key features of the app is the ability to scan barcode products.
+This is the README file for the InvenTrick mobile application. The app is developed using Kotlin and integrated with the backend API InvenTrick Service . The development environment used is Android Studio, and the architecture follows the MVP (Model-View-Presenter) pattern. The app utilizes various libraries such as Retrofit, Picasso, Paging 3, etc. One of the key features of the app is the ability to scan barcode products.
 
 ## Technologies Used
 
