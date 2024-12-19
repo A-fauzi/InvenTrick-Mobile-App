@@ -3,7 +3,7 @@ name: Android Build
 on:
   push:
     branches:
-      - master
+      - master  # Ganti 'main' dengan 'master'
 
 jobs:
   build:
@@ -16,6 +16,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '11'
+          distribution: 'adoptopenjdk'  # Pastikan distribusi Java sudah ditentukan
 
       - name: Set up Gradle
         uses: gradle/gradle-build-action@v2
