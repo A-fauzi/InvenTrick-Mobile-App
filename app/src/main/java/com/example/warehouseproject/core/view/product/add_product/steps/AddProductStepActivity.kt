@@ -555,7 +555,7 @@ class AddProductStepActivity : AppCompatActivity(), AdapterCategoryAddProduct.Ad
     override fun onResponseErrorBodyAddProduct(msg: String) {
         // Harus nya hapus image di firestore
 
-        alertDialogErrAddItem(msg)
+        alertDialogErrAddItem("onResponseErrorBodyAddProduct: $msg")
         binding.btnNextForm.visibility = View.VISIBLE
         binding.progressBar.visibility = View.INVISIBLE
     }
@@ -563,7 +563,7 @@ class AddProductStepActivity : AppCompatActivity(), AdapterCategoryAddProduct.Ad
     override fun onFailureResponseAddProduct(msg: String) {
         // Harus nya hapus image di firestore
 
-        alertDialogErrAddItem(msg)
+        alertDialogErrAddItem("onFailureResponseAddProduct: $msg")
         binding.btnNextForm.visibility = View.VISIBLE
         binding.progressBar.visibility = View.INVISIBLE
     }

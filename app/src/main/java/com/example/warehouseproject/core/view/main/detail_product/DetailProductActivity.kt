@@ -246,7 +246,7 @@ class DetailProductActivity : AppCompatActivity(), DetailProductView {
         binding.tvLocationDetail.text = location
         binding.chipCodeItemDetail.text = code
         binding.tvNameProductDetail.text = name
-        binding.chipCatgory.text = category
+//        binding.chipCatgory.text = category
         binding.tvSpecProductDetail.text = spec
         binding.tvLotDetail.text = lot
         binding.tvModelDetail.text = model

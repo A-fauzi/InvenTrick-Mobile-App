@@ -1,37 +1,46 @@
 {
   "project_info": {
-    "project_number": "1056650495160",
-    "firebase_url": "https://warehouse-api-ffc58-default-rtdb.firebaseio.com",
-    "project_id": "warehouse-api-ffc58",
-    "storage_bucket": "warehouse-api-ffc58.appspot.com"
+    "project_number": "655995349539",
+    "firebase_url": "https://inventrick-f2ee0-default-rtdb.firebaseio.com",
+    "project_id": "inventrick-f2ee0",
+    "storage_bucket": "inventrick-f2ee0.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1056650495160:android:1c03856bddf114ba54e04d",
+        "mobilesdk_app_id": "1:655995349539:android:e10cf9143edf3f4e301f96",
         "android_client_info": {
-          "package_name": "com.example.warehouseproject"
+          "package_name": "com.afauzi.adminwarehouse"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "1056650495160-76b335hgg24iic8uuorv7m0us7mfa318.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAmIOB95toFC7PyLkhc0NLMT45ODp5KogE"
+          "current_key": "AIzaSyCz8YQgOokkGWyalqJpivTXh_kunxsHdf0"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "1056650495160-76b335hgg24iic8uuorv7m0us7mfa318.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:655995349539:android:fc85d054ee40dffd301f96",
+        "android_client_info": {
+          "package_name": "com.example.warehouseproject"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCz8YQgOokkGWyalqJpivTXh_kunxsHdf0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
         }
       }
     }
