@@ -21,7 +21,10 @@ jobs:
       - name: Set up Gradle
         uses: gradle/gradle-build-action@v2
         with:
-          gradle-version: '7.0'
+          gradle-version: '8.9'  # Menggunakan versi Gradle 8.9
+
+      - name: Give execute permission to gradlew
+        run: chmod +x ./gradlew  # Memberikan izin eksekusi pada gradlew
 
       - name: Build APK
-        run: ./gradlew assembleRelease
+        run: ./gradlew assembleRelease  # Jalankan gradlew untuk build APK
