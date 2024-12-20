@@ -51,12 +51,12 @@ class MainActivity : AppCompatActivity(), MainView {
      *  Fungsi ini bertugas melakukan inisialisasi objek-objek yang diperlukan pada activity ini.
      */
     private fun initView() {
-        Paper.init(this)
-
-        realtimeDatabase = RealtimeDatabase(this)
 
         presenter = MainActivityPresenter(applicationContext, this, this, UserApiService())
-        presenter.checkPermission()
+//        presenter.checkPermission()
+        Paper.init(this)
+        realtimeDatabase = RealtimeDatabase(this)
+
 
 
     }
