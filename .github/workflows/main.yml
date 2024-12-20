@@ -21,9 +21,12 @@ jobs:
 
       - name: Berikan izin eksekusi untuk gradlew
         run: chmod +x gradlew
+        
+      - name: Clean project
+        run: ./gradlew clean
 
       - name: Build APK Debug
-        run: ./gradlew assembleDebug
+        run: ./gradlew assembleDebug --stacktrace
 
       - name: Upload APK Debug
         uses: actions/upload-artifact@v3
