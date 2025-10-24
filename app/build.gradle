@@ -26,6 +26,15 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+
+        debug {
+            // Di sini kita custom nama APK-nya
+            applicationVariants.all { variant ->
+                variant.outputs.all {
+                    outputFileName = "inventory-app.apk"
+                }
+            }
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
