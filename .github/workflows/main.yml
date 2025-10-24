@@ -4,17 +4,18 @@ on:
   push:
     branches:
       - master
-  workflow_dispatch:  # Tambahkan ini biar bisa trigger manual
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout kode
-        uses: actions/checkout@v4  # Update ke v4
+        uses: actions/checkout@v4
 
       - name: Setup JDK 17
-        uses: actions/setup-java@v4  # Update ke v4
+        uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
@@ -29,9 +30,14 @@ jobs:
       - name: Build APK Debug
         run: ./gradlew assembleDebug --stacktrace
 
+      # 👇 Step tambahan biar tahu isi folder build di log GitHub Actions
+      - name: Debug check files
+        run: ls -R app/build/outputs/apk/
+
+      # 👇 Upload APK hasil build
       - name: Upload APK Debug
-        uses: actions/upload-artifact@v4  # Update ke v4
+        uses: actions/upload-artifact@v4
         with:
           name: inventory-app
-          path: app/build/outputs/apk/debug/inventory-app.apk
-          retention-days: 90  # APK disimpan 90 hari
+          path: app/build/outputs/apk/debug/*.apk
+          retention-days: 90
