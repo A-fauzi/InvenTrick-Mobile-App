@@ -3,7 +3,7 @@ package com.example.warehouseproject.core.constant
 object Constant {
     const val REQUEST_CODE = 101
 
-        const val BASE_URL = "https://30c5-2404-c0-2020-00-cf-4e03.ngrok-free.app"
+        const val BASE_URL = "https://ea42cdd57e6b.ngrok-free.app"
 //        const val BASE_URL = "http://192.168.254.123:80/"
 //    const val BASE_URL = "https://warehouse-system-production.up.railway.app/"
 
